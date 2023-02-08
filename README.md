@@ -2,7 +2,7 @@
 
 ## Docker Buildx
 
-### Windows / macOS Users
+### Windows & macOS Users
 
 - [Docker Buildx is included in Docker Desktop](https://github.com/docker/buildx#windows-and-macos)
 
@@ -14,7 +14,7 @@
 
 #### Arch based distros
 
-- In addition to the docker package, arch-based distros require the [dcoker-buildx](https://archlinux.org/packages/community/x86_64/docker-buildx/) package as well.
+- In addition to the docker package, arch-based distros require the [docker-buildx](https://archlinux.org/packages/community/x86_64/docker-buildx/) package as well.
 
 ### (All Users) Change default builder
 
