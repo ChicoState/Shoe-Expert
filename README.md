@@ -1,5 +1,7 @@
 # Shoe-Expert
 
+[![Docker Image CI](https://github.com/ChicoState/Shoe-Expert/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ChicoState/Shoe-Expert/actions/workflows/docker-image.yml)
+
 ## Docker Buildx
 
 ### Windows & macOS Users
