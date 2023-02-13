@@ -8,11 +8,30 @@ on:
 
 jobs:
 
-  build:
+  build-ubuntu:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker buildx install && docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build Docker Image on Ubuntu
+      run: docker buildx install && docker build . --file Dockerfile --tag ubuntu:$(date +%s)
+
+  build-macos:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker Image on Mac
+      run: docker buildx install && docker build . --file Dockerfile --tag macos:$(date +%s)
+  
+  build-windows:
+    
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker Image on Windows
+      run: docker buildx install && docker build . --file Dockerfile --tag windows:$(date +%s)
+
