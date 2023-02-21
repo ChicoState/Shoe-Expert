@@ -85,9 +85,9 @@ This will use the Dockerfile to build an image tagged as `shoe`.
 In this step it is important to be in the root of the repo. Otherwise, the mounted directory will become misplaced on your native host. On my system, I've cloned the repo to `/home/mkapral/GitHub/Shoe-Expert`, but yours will be different. I recommend creating an environment variable and adding this to your shell's rc file for convenience.
 
 ```bash
-cd /path/to/repo/root 						# change the path to your clone's root
+cd /path/to/repo/root # change the path to your clone's root
 echo "export SHOE_ROOT=$(pwd)" >> ~/.bashrc # replace with shell's rc file (e.g. ~/.zshrc for zsh)
-source ~/.bashrc							# replace with shell's rc file (e.g. ~/.zshrc for zsh)
+source ~/.bashrc # replace with shell's rc file (e.g. ~/.zshrc for zsh)
 ```
 
 Next, you can create the container with:
