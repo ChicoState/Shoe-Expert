@@ -29,12 +29,10 @@ RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shell
 RUN useradd -m docker && \
     usermod -aG sudo docker && \
     echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
-    cp /root/.bashrc /home/docker/ && \
-    mkdir /home/docker/data && \
-    chown -R --from=root docker /home/docker
+    cp /root/.bashrc /home/docker/
 
-WORKDIR /home/docker/data
-ADD . /home/docker/data/
+WORKDIR /home/docker/
+ADD requirements.txt /home/docker/.requirements.txt
 ENV HOME /home/docker
 ENV USER docker
 USER docker
@@ -42,8 +40,6 @@ ENV PATH /home/docker/.local/bin:$PATH
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
 RUN pip install --upgrade pip
-
 # Note: add any new PyPi packages to requirements.txt 
-RUN pip install -r requirements.txt 
-
+RUN pip install -r .requirements.txt
 CMD [ "/bin/bash" ]
