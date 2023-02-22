@@ -5,5 +5,5 @@ from django.http import HttpResponse, HttpResponseRedirect
 def home(request):
     return render(request, 'app1/home.html')
 
-def about(request)
+def about(request):
     return render(request, 'app1/about.html')
