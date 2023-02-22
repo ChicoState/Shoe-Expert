@@ -80,7 +80,7 @@ docker build -t shoe .
 
 This will use the Dockerfile to build an image tagged as `shoe`.
 
-## Creating the Container
+## Creating the Container (with Network Binding)
 
 In this step it is important to be in the root of the repo. Otherwise, the mounted directory will become misplaced on your native host. On my system, I've cloned the repo to `/home/mkapral/GitHub/Shoe-Expert`, but yours will be different. I recommend creating an environment variable and adding this to your shell's rc file for convenience.
 
@@ -94,6 +94,7 @@ Next, you can create the container with:
 
 ```bash
 docker run -dit \
+-p 8000:8000/tcp
 --name shoe-container \
 -v ${SHOE_ROOT}/data:/home/docker/data \
 shoe
@@ -102,8 +103,10 @@ shoe
 or as a one-liner:
 
 ```bash
-docker run -dit --name shoe-container -v ${SHOE_ROOT}/data:/home/docker/data shoe
+docker run -dit -p 8000:8000/tcp --name shoe-container -v ${SHOE_ROOT}/data:/home/docker/data shoe
 ```
+
+*The `-p` argument creates a network bind allowing tcp port 8000 to pass through to your native host. This is useful for when running `python manage.py runserver 0.0.0.0:8000`*
 
 *Only the contents within the `data` directory is shared between your native host and the container.*
 
@@ -116,27 +119,6 @@ To use it you need to exec into like so:
 ```bash
 docker exec -it shoe-container /bin/bash
 ```
-## Taking Ownership of `data` Directory (Only If Necessary)
-
-On some systems, it may be the case that the `data` directory is locked to the root user only.
-
-![png](png/dataPermissions.png)
-
-To change this, run (inside the container):
-
-```bash
-sudo chown -R docker:root data
-```
-
-This should only be necessary to execute once after creating container, not every time you `exec` into the container. On my macOS system, this was not necessary as permissions defaulted to `docker:docker`, and I assume that that will be the most common case. The reason for changing ownership to `docker:root` and not `docker:docker` if you experience this is because on your native host, the ownership id's will likely change to some garbage values:
-
-![png](png/garbageOwnership.png)
-
-By using `docker:root`, then at least you'll have access to the directory through group permissions when not inside the container:
-
-![png](png/semiGarbageOwnership.png)
-
-In any case, it will easiest to only modify the contents of `data` when inside the container.
 
 ## Stopping & Starting the Container
 
