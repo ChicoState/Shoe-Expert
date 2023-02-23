@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1 import views as app1_views
-from app2 import views as app2_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
