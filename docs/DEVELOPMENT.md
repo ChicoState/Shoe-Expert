@@ -153,7 +153,7 @@ docker build -t shoe ${SHOE_ROOT}
 Create the container:
 
 ```bash
-docker run -dit --name shoe-container -v ${SHOE_ROOT}/data:/home/docker/data shoe
+docker run -dit -p 8000:8000/tcp --name shoe-container -v ${SHOE_ROOT}/data:/home/docker/data shoe
 ```
 
 Run the container:
