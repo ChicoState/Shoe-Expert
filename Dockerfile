@@ -26,7 +26,7 @@ RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shell
     unset SED_RANGE
 
 # Create user "docker" with sudo powers
-RUN useradd -m docker && \
+RUN useradd -m -s /bin/bash docker && \
     usermod -aG sudo docker && \
     echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     cp /root/.bashrc /home/docker/
@@ -43,15 +43,9 @@ RUN pip install --upgrade pip
 # Note: add any new PyPi packages to requirements.txt 
 RUN pip install -r .requirements.txt
 
-# Uhhhhh what is this 
-# RUN echo 'printf "SECRET_KEY='\''%s'\''\n" "$(python -c '\''from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'\'')" > /home/docker/.env' >> ~/.bashrc"
+RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
 
-RUN echo 'sudo chown -R docker:root /home/docker/data && sudo chmod -R g+w /home/docker/data' >> /home/docker/.bashrc
-
-# CMD [ "/bin/bash" ]
-ENTRYPOINT ["python3"] 
+ENTRYPOINT ["python"]
 WORKDIR /home/docker/data/ShoeExpert
 
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
-
-
