@@ -39,9 +39,19 @@ USER docker
 ENV PATH /home/docker/.local/bin:$PATH
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade pip
 # Note: add any new PyPi packages to requirements.txt 
-    pip install -r .requirements.txt && \
-    echo 'printf "SECRET_KEY='\''%s'\''\n" "$(python -c '\''from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'\'')" > /home/docker/.env' >> ~/.bashrc
+RUN pip install -r .requirements.txt
+
+# Uhhhhh what is this 
+# RUN echo 'printf "SECRET_KEY='\''%s'\''\n" "$(python -c '\''from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'\'')" > /home/docker/.env' >> ~/.bashrc"
+
 RUN echo 'sudo chown -R docker:root /home/docker/data && sudo chmod -R g+w /home/docker/data' >> /home/docker/.bashrc
-CMD [ "/bin/bash" ]
+
+# CMD [ "/bin/bash" ]
+ENTRYPOINT ["python3"] 
+WORKDIR /home/docker/data/ShoeExpert
+
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
+
