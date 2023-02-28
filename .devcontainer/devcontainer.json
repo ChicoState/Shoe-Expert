@@ -1,10 +1,8 @@
-{
+
     "name": "Shoe Expert Container",
-    
     "dockerComposeFile": "../compose.yml",
     "service": "web",
-	"workspaceFolder": "/home/docker/data/ShoeExpert",
-	
+    "workspaceFolder": "/home/docker/data/ShoeExpert",
     // These are the recommended extensions for developing this container
     "customizations": {
         "vscode": {
@@ -16,10 +14,10 @@
                 "njpwerner.autodocstring",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "KevinRose.vsc-python-indent"
-			]
-		}  
-	},
+            ]
+        }
+    },
     // Optional depending on your workflow
-    "shutdownAction": "stopCompose"
-    
+    "shutdownAction": "stopCompose",
+    "postCreateCommand": "sudo chown -R docker:root /home/docker/data && sudo chmod -R g+w /home/docker/data"
 }
