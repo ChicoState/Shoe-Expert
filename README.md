@@ -15,9 +15,9 @@
 
 - This guide assumes you have installed [vscode](https://code.visualstudio.com/) on your system
 
-1. Install Microsoft's [Dev Container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension for vscode
+1. Install Microsoft's [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) extension for vscode
 
-2. You will also need the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) vscode extension if not already installed
+2. You may also need the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) vscode extension if not already installed
 
 3. After reloading vscode, you should be prompted to open this repo in a dev-container after opening the Shoe-Expert folder in vscode
 
@@ -25,4 +25,4 @@
 
 4. The container will automatically spawn a site running on port 8000 that you can access in the browser at [localhost:8000](http://127.0.0.1:8000)
 
-If you have a more complicated docker set-up, such as using docker in rootless mode, you can refer to the discussion in pr #28 or open up an issue in this repo.
+If you have a more complicated docker set-up, such as using docker in rootless mode, you can refer to the discussion in pr #28 or open up an issue in this repo if this workflow is not working correctly on your system.
