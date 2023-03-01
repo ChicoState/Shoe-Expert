@@ -26,7 +26,7 @@ RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shell
     unset SED_RANGE
 
 # Create user "docker" with sudo powers
-RUN useradd -m docker && \
+RUN useradd -m -s /bin/bash docker && \
     usermod -aG sudo docker && \
     echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     cp /root/.bashrc /home/docker/
@@ -39,9 +39,13 @@ USER docker
 ENV PATH /home/docker/.local/bin:$PATH
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade pip
 # Note: add any new PyPi packages to requirements.txt 
-    pip install -r .requirements.txt && \
-    echo 'printf "SECRET_KEY='\''%s'\''\n" "$(python -c '\''from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'\'')" > /home/docker/.env' >> ~/.bashrc
-RUN echo 'sudo chown -R docker:root /home/docker/data && sudo chmod -R g+w /home/docker/data' >> /home/docker/.bashrc
-CMD [ "/bin/bash" ]
+RUN pip install -r .requirements.txt
+
+RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
+
+ENTRYPOINT ["python"]
+WORKDIR /home/docker/data/ShoeExpert
+
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]

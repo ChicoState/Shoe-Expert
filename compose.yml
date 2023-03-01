@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - '8000:8000'
+    # This Is for development only so you dont have to rebuild the image every time you make a change
+    volumes:
+      - ./data:/home/docker/data
+    working_dir: /home/docker/data/ShoeExpert
