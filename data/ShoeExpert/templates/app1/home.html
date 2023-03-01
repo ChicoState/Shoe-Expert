@@ -7,7 +7,14 @@
 
 <body>
 	{%include "app1/navigation.html" %}
-	<h1> Test: SHOE HOME </h1>
+	<h1> SHOE RECS </h1>
+	{% block content %}
+	<ul> 
+		{% for shoe in shoes %}
+			<li> {{shoe.name}} - {{shoe.price }} </li>
+		{% endfor%}
+	</ul>
+	{%endblock%}
 </body>
 
 </html>
