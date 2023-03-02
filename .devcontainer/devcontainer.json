@@ -10,6 +10,7 @@
                 "ms-python.python",
                 // "ms-python.pylint",
                 // "ms-python.vscode-pylance",
+                "alexcvzz.vscode-sqlite",
                 "batisteo.vscode-django",
                 "njpwerner.autodocstring",
                 "VisualStudioExptTeam.vscodeintellicode",
