@@ -11,6 +11,7 @@ RUN apt-get -qq -y update && \
     curl \
     git \
     sudo \
+    sqlite3 \
     bash-completion \
     tree \
     vim \
@@ -42,9 +43,7 @@ RUN touch $HOME/.sudo_as_admin_successful
 RUN pip install --upgrade pip
 # Note: add any new PyPi packages to requirements.txt 
 RUN pip install -r .requirements.txt
-
 RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
-
 ENTRYPOINT ["python"]
 WORKDIR /home/docker/data/ShoeExpert
 
