@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PROC_SCHED=/proc/1/sched
+if ! [ -f $PROC_SCHED ] || [ "$(awk 'FNR == 1 {print $1}' "$PROC_SCHED")" != "python" ]; then
+    echo >&2 "Docker Container Not Detected, Exiting..."
+    exit 1
+fi
+
+cd /home/docker/data/ShoeExpert
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc" -delete
+find . -path "*.sqlite3" -delete
+python manage.py makemigrations
+python manage.py migrate
