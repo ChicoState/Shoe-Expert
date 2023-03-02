@@ -5,7 +5,8 @@ WORKDIR /root
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get -qq -y update && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y upgrade && \
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y install \
     wget \
     curl \
@@ -37,15 +38,16 @@ ENV HOME /home/docker
 ENV USER docker
 USER docker
 ENV PATH /home/docker/.local/bin:$PATH
+ADD .scripts /home/docker/.local/bin/
+RUN sudo chown -R docker:root /home/docker/.local/ && \
+    chmod -R 775 /home/docker/.local/
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
-RUN pip install --upgrade pip
+RUN pip install --user -U pip
 # Note: add any new PyPi packages to requirements.txt 
-RUN pip install -r .requirements.txt
-
+RUN pip install --user -r .requirements.txt
 RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
 
-ENTRYPOINT ["python"]
 WORKDIR /home/docker/data/ShoeExpert
-
+ENTRYPOINT ["python"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
