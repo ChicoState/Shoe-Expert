@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update && \
     curl \
     git \
     sudo \
+    sqlite3 \
     bash-completion \
     tree \
     vim \
@@ -47,7 +48,6 @@ RUN pip install --user -U pip
 # Note: add any new PyPi packages to requirements.txt 
 RUN pip install --user -r .requirements.txt
 RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
-
 WORKDIR /home/docker/data/ShoeExpert
 ENTRYPOINT ["python"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]

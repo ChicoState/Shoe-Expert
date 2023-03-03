@@ -11,6 +11,7 @@
             },
             "extensions": [
                 "ms-python.python",
+                "alexcvzz.vscode-sqlite",
                 "batisteo.vscode-django",
                 "njpwerner.autodocstring",
                 "VisualStudioExptTeam.vscodeintellicode",
