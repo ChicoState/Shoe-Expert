@@ -3,13 +3,14 @@
     "dockerComposeFile": "../compose.yml",
     "service": "web",
     "workspaceFolder": "/home/docker/data/ShoeExpert",
-    // These are the recommended extensions for developing this container
     "customizations": {
         "vscode": {
+            "settings": {
+                "editor.formatOnSave": true,
+                "files.insertFinalNewline": true
+            },
             "extensions": [
                 "ms-python.python",
-                // "ms-python.pylint",
-                // "ms-python.vscode-pylance",
                 "alexcvzz.vscode-sqlite",
                 "batisteo.vscode-django",
                 "njpwerner.autodocstring",
@@ -18,7 +19,8 @@
             ]
         }
     },
-    // Optional depending on your workflow
     "shutdownAction": "stopCompose",
-    "postCreateCommand": "sudo chown -R docker:root /home/docker/data && sudo chmod -R g+w /home/docker/data"
+    "postCreateCommand": [
+        "/home/docker/.local/bin/postCreate.bash"
+    ]
 }
