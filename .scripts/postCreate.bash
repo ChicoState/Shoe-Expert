@@ -19,7 +19,7 @@ if User.objects.filter(username = 'docker').exists():
     User.objects.get(username = 'docker').delete()
 User.objects.create_superuser('docker', 'docker@docker.local', 'docker')
 EOF
-#                                ^user          ^email            ^pass
+        #                                ^user          ^email            ^pass
     then
         return 1
     else
@@ -32,4 +32,10 @@ createDockerAdminUser
 if [ $? -ne 0 ]; then
     clear_models
     createDockerAdminUser
+else
+    LOCAL_DIR="$(pwd)"
+    cd /home/docker/data/ShoeExpert
+    python manage.py makemigrations
+    python manage.py migrate
+    cd $LOCAL_DIR
 fi
