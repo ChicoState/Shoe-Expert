@@ -32,4 +32,10 @@ createDockerAdminUser
 if [ $? -ne 0 ]; then
     clear_models
     createDockerAdminUser
+else
+    LOCAL_DIR="$(pwd)"
+    cd /home/docker/data/ShoeExpert
+    python manage.py makemigrations
+    python manage.py migrate
+    cd $LOCAL_DIR
 fi
