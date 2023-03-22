@@ -12,15 +12,14 @@ sudo chmod -R g+w /home/docker/data
 function createDockerAdminUser {
     # forcibly creates super user with username & password: docker
     # This should be removed before the app is deployed
-    if ! cat <<EOF | python /home/docker/data/ShoeExpert/manage.py shell
+    if ! cat <<EOF | python /home/docker/data/ShoeExpert/manage.py shell; then
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if User.objects.filter(username = 'docker').exists():
     User.objects.get(username = 'docker').delete()
 User.objects.create_superuser('docker', 'docker@docker.local', 'docker')
 EOF
-#                                ^user          ^email            ^pass
-    then
+        #                                ^user          ^email            ^pass
         return 1
     else
         return 0
@@ -32,4 +31,10 @@ createDockerAdminUser
 if [ $? -ne 0 ]; then
     clear_models
     createDockerAdminUser
+else
+    LOCAL_DIR="$(pwd)"
+    cd /home/docker/data/ShoeExpert
+    python manage.py makemigrations
+    python manage.py migrate
+    cd $LOCAL_DIR
 fi
