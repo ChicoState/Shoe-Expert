@@ -101,18 +101,22 @@ class ScraperSingleton:
             super().__init__(value)
             self.available = available
 
-        # set availability to false for a list of enumeration members
         @classmethod
-        def __exclude(cls, exclude):
-            if not isinstance(exclude, list):
-                raise TypeError(f"Expected exclude to be a list, but recieved {type(exclude)}")
-            for member in exclude:
-                if isinstance(member, cls) and member.available:
-                    member.available = False
+        def __reset_availability(cls, val=True):
+            if not isinstance(val, bool):
+                raise TypeError(f"Expected bool for val, but received {type(val)}")
+            for member in cls:
+                member.available = val
 
-        @staticmethod
-        def __reset_availability():
-            for member in
+        # set availability to false for all enumeration members except those in include list
+        @classmethod
+        def __includeOnly(cls, include):
+            if not isinstance(include, list):
+                raise TypeError(f"Expected include to be a list, but recieved {type(include)}")
+            cls.__reset_availability(val=False)
+            for member in include:
+                if isinstance(member, cls):
+                    member.available = True
 
         @classmethod
         def get_full_list(cls, exclude=None):
@@ -189,12 +193,13 @@ class ScraperSingleton:
             WOMEN = ()
 
         def get_url_path(self, gender=Gender.NONE):
+            prefix = "/catalog/"
             if gender is ScraperSingleton.Url_Paths.Gender.NONE:
-                return f"/catalog/{self.value}"
+                return f"{prefix}{self.value}"
             elif gender is ScraperSingleton.Url_Paths.Gender.MEN:
-                return f"/catalog/mens-{self.value}"
+                return f"{prefix}mens-{self.value}"
             elif gender is ScraperSingleton.Url_Paths.Gender.WOMEN:
-                return f"/catalog/womens-{self.value}"
+                return f"{prefix}womens-{self.value}"
             else:
                 raise TypeError("gender must be an enumeration member of ScraperSingleton.Url_Paths.Gender")
 
@@ -202,620 +207,335 @@ class ScraperSingleton:
     def __setColumnSelectorAvailability(cls, url_path):
         if not isinstance(url_path, cls.Url_Paths):
             raise TypeError("url_path must be an enumeration member of ScraperSingleton.Url_Paths")
-        match url_path:
-            case cls.Url_Paths.APPROACH_SHOES:
-                # TODO:
-            case cls.Url_Paths.BASKETBALL_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.MATERIAL,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.USE,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.WIDTH,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.CLIMBING_SHOES:
-                # TODO:
-            case cls.Url_Paths.CROSSFIT_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.MATERIAL,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.CYCLING_SHOES:
-                # TODO:
-            case cls.Url_Paths.FOOTBALL_CLEATS:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.USE,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-            case cls.Url_Paths.GOLF_SHOES:
-                # TODO:
-            case cls.Url_Paths.HIKING_BOOTS:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.HIKING_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.RUNNING_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.SNEAKERS:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.USE,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.WIDTH,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.SOCCER_CLEATS:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FEATURES,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.MATERIAL,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.USE,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.WIDTH,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.TENNIS_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.USE,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.TRACK_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.MATERIAL,
-                    cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOEBOX,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.WIDTH,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.TRAINING_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_SUPPORT,
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.MATERIAL,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.TRAIL_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.CLOSURE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONDITION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.SURFACE,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
-            case cls.Url_Paths.WALKING_SHOES:
-                exclude_list = [
-                    cls.ColumnSelector.ARCH_TYPE,
-                    cls.ColumnSelector.COLLABORATION,
-                    cls.ColumnSelector.CONSTRUCTION,
-                    cls.ColumnSelector.CUSHIONING,
-                    cls.ColumnSelector.CUT,
-                    cls.ColumnSelector.DESIGNED_BY,
-                    cls.ColumnSelector.DISTANCE,
-                    cls.ColumnSelector.EMBELLISHMENT,
-                    cls.ColumnSelector.EVENT,
-                    cls.ColumnSelector.FEATURE,
-                    cls.ColumnSelector.FIT,
-                    cls.ColumnSelector.FLEXIBILITY,
-                    cls.ColumnSelector.FOOT_CONDITION,
-                    cls.ColumnSelector.FOREFOOT_HEIGHT,
-                    cls.ColumnSelector.GRAM_INSULATION,
-                    cls.ColumnSelector.HEEL_HEIGHT,
-                    cls.ColumnSelector.HEEL_TOE_DROP,
-                    cls.ColumnSelector.INSPIRED_FROM,
-                    cls.ColumnSelector.LACE_TYPE,
-                    cls.ColumnSelector.LACING_SYSTEM,
-                    cls.ColumnSelector.LOCKDOWN,
-                    cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                    cls.ColumnSelector.ORIGIN,
-                    cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                    cls.ColumnSelector.PACE,
-                    cls.ColumnSelector.PRICE_TIER,
-                    cls.ColumnSelector.PRINT,
-                    cls.ColumnSelector.PRONATION,
-                    cls.ColumnSelector.PROTECTION,
-                    cls.ColumnSelector.SEASON,
-                    cls.ColumnSelector.SHOE_TYPE,
-                    cls.ColumnSelector.SIGNATURE,
-                    cls.ColumnSelector.SPIKE_SIZE,
-                    cls.ColumnSelector.SPIKE_TYPE,
-                    cls.ColumnSelector.STRIKE_PATTERN,
-                    cls.ColumnSelector.STUD_TYPE,
-                    cls.ColumnSelector.STYLE,
-                    cls.ColumnSelector.SUMMER,
-                    cls.ColumnSelector.SUPPORT,
-                    cls.ColumnSelector.TECHNOLOGY,
-                    cls.ColumnSelector.TERRAIN,
-                    cls.ColumnSelector.TOP,
-                    cls.ColumnSelector.TYPE,
-                    cls.ColumnSelector.ULTRA_RUNNING,
-                    cls.ColumnSelector.WATERPROOFING,
-                    cls.ColumnSelector.WIDTH,
-                    cls.ColumnSelector.ZERO_DROP
-                ]
-                cls.ColumnSelector.__exclude(exclude=exclude_list)
+        include_lists = {
+            #TODO:
+            cls.Url_Paths.APPROACH_SHOES: [],
+            cls.Url_Paths.BASKETBALL_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.LOCKDOWN,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SIGNATURE,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ],
+            #TODO:
+            cls.Url_Paths.CLIMBING_SHOES: [],
+            cls.Url_Paths.CROSSFIT_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FOREFOOT_HEIGHT,
+                cls.ColumnSelector.HEEL_HEIGHT,
+                cls.ColumnSelector.HEEL_TOE_DROP,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.TOEBOX,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            #TODO:
+            cls.Url_Paths.CYCLING_SHOES: [],
+            cls.Url_Paths.FOOTBALL_CLEATS: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.STRIKE_PATTERN,
+                cls.ColumnSelector.STUD_TYPE,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            #TODO:
+            cls.Url_Paths.GOLF_SHOES: [],
+            cls.Url_Paths.HIKING_BOOTS: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CONSTRUCTION,
+                cls.ColumnSelector.CUT,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FIT,
+                cls.ColumnSelector.FOOT_CONDITION,
+                cls.ColumnSelector.GRAM_INSULATION,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.ORIGIN,
+                cls.ColumnSelector.ORTHOTIC_FRIENDLY,
+                cls.ColumnSelector.PRONATION,
+                cls.ColumnSelector.PROTECTION,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SEASON,
+                cls.ColumnSelector.SUPPORT,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.ULTRA_RUNNING,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH,
+                cls.ColumnSelector.ZERO_DROP
+            ],
+            cls.Url_Paths.HIKING_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CONSTRUCTION,
+                cls.ColumnSelector.CUT,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FIT,
+                cls.ColumnSelector.FOOT_CONDITION,
+                cls.ColumnSelector.GRAM_INSULATION,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.ORIGIN,
+                cls.ColumnSelector.PRONATION,
+                cls.ColumnSelector.PROTECTION,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SEASON,
+                cls.ColumnSelector.SUPPORT,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            cls.Url_Paths.RUNNING_SHOES: [
+                cls.ColumnSelector.ARCH_SUPPORT,
+                cls.ColumnSelector.ARCH_TYPE,
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CUSHIONING,
+                cls.ColumnSelector.DISTANCE,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FLEXIBILITY,
+                cls.ColumnSelector.FOOT_CONDITION,
+                cls.ColumnSelector.FOREFOOT_HEIGHT,
+                cls.ColumnSelector.HEEL_HEIGHT,
+                cls.ColumnSelector.HEEL_TOE_DROP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.PACE,
+                cls.ColumnSelector.PRONATION,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SEASON,
+                cls.ColumnSelector.STRIKE_PATTERN,
+                cls.ColumnSelector.SUMMER,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.TERRAIN,
+                cls.ColumnSelector.TOEBOX,
+                cls.ColumnSelector.TYPE,
+                cls.ColumnSelector.ULTRA_RUNNING,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            cls.Url_Paths.SNEAKERS: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLABORATION,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.DESIGNED_BY,
+                cls.ColumnSelector.EMBELLISHMENT,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.INSPIRED_FROM,
+                cls.ColumnSelector.LACE_TYPE,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.ORIGIN,
+                cls.ColumnSelector.PRINT,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SEASON,
+                cls.ColumnSelector.STYLE,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ],
+            cls.Url_Paths.SOCCER_CLEATS: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.LACING_SYSTEM,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.PRICE_TIER,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SIGNATURE,
+                cls.ColumnSelector.SURFACE,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ],
+            cls.Url_Paths.TENNIS_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLABORATION,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CONSTRUCTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURE,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SHOE_TYPE,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            cls.Url_Paths.TRACK_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EVENT,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURE,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SPIKE_SIZE,
+                cls.ColumnSelector.SPIKE_TYPE,
+                cls.ColumnSelector.SURFACE,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ],
+            cls.Url_Paths.TRAINING_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FOREFOOT_HEIGHT,
+                cls.ColumnSelector.HEEL_HEIGHT,
+                cls.ColumnSelector.HEEL_TOE_DROP,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.TOEBOX,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            cls.Url_Paths.TRAIL_SHOES: [
+                cls.ColumnSelector.ARCH_SUPPORT,
+                cls.ColumnSelector.ARCH_TYPE,
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CUSHIONING,
+                cls.ColumnSelector.DISTANCE,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FLEXIBILITY,
+                cls.ColumnSelector.FOOT_CONDITION,
+                cls.ColumnSelector.FOREFOOT_HEIGHT,
+                cls.ColumnSelector.HEEL_HEIGHT,
+                cls.ColumnSelector.HEEL_TOE_DROP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.NUMBER_OF_REVIEWS,
+                cls.ColumnSelector.PACE,
+                cls.ColumnSelector.PRONATION,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SEASON,
+                cls.ColumnSelector.STRIKE_PATTERN,
+                cls.ColumnSelector.SUMMER,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.TERRAIN,
+                cls.ColumnSelector.TOEBOX,
+                cls.ColumnSelector.TYPE,
+                cls.ColumnSelector.ULTRA_RUNNING,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WIDTH
+            ],
+            cls.Url_Paths.WALKING_SHOES: [
+                cls.ColumnSelector.ARCH_SUPPORT,
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CONDITION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SURFACE,
+                cls.ColumnSelector.TOEBOX,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ]
+        }
+        cls.ColumnSelector.__includeOnly(include=include_lists.get(url_path))
 
     # Set up the browser
     @classmethod
@@ -893,7 +613,7 @@ class ScraperSingleton:
     @classmethod
     def __scroll_and_click(cls, selector):
         element = WebDriverWait(cls.__browser, cls.__wait).until(EC.presence_of_element_located(selector))
-        browser.execute_script("arguments[0].click();", element)
+        cls.__browser.execute_script("arguments[0].click();", element)
 
     # Change view to table
     @classmethod
@@ -940,7 +660,7 @@ class ScraperSingleton:
         page = 1
         shoe_names = []
         while True:
-            browser.get(cls.__url + "?page=" + str(page))
+            cls.__browser.get(cls.__url + "?page=" + str(page))
             shoe_elements = cls.__browser.find_elements(By.CSS_SELECTOR, "a.catalog-list-slim__names")
             if len(shoe_elements) < 1:
                 break
@@ -960,7 +680,7 @@ class ScraperSingleton:
                 inner_list = []
                 cls.__browser.get(cls.__url + "?page=" + str(page))
                 cls.__getColumnsView([list[idx]])
-                elements = browser.find_elements(By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
+                elements = cls.__browser.find_elements(By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
                 if len(elements) < 1:
                     break
                 for element in elements:
@@ -988,25 +708,23 @@ class ScraperSingleton:
         return csv_data
 
     @classmethod
-    def scrape(cls, list, filename):
+    def scrape(cls, list, filename, url_path=Url_Paths.RUNNING_SHOES.get_url_path()):
         if not isinstance(filename, str):
             raise TypeError("filename must be a string")
         if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
             raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        filedata = cls.__getCsvStructure(list)
-
-
+        filedata = cls.__getCsvStructure(list) # TODO:
 
 def main():
-    global browser
-    initBrowser(options=getChromiumOptions())
-    browser.get(url)
-    getSlimListView()
-    getColumnData()
+    scraper = ScraperSingleton()
+    # initBrowser(options=getChromiumOptions())
+    # browser.get(url)
+    # getSlimListView()
+    # getColumnData()
 
     # Close the browser
-    browser.quit()
+    # browser.quit()
 
 if __name__ == "__main__":
     main()
