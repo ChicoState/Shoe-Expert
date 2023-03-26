@@ -1,663 +1,727 @@
+import atexit
+import csv
 from enum import Enum, EnumMeta
 import os
 import platform
 from pprint import PrettyPrinter
 import re
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
+import sys
 import tempfile
 import time
 
-class ScraperSingleton:
-    __browser = None
-    __chromium_location = "/usr/bin/chromium"
-    __column_filter_dict = None
-    __domain = "runrepeat.com"
-    __driver_path = "/usr/bin/chromedriver"
-    __sleep = 1
-    __url = "https://" + __domain
-    __wait = 15
+class Gender(Enum):
+    MEN = ()
+    NONE = ()
+    WOMEN = ()
 
-    class __AvailableEnumMeta(EnumMeta):
-        def __call__(cls, value, *args, **kwargs):
-            member = super().__call__(value, *args, **kwargs)
-            if not member.available:
-                raise ValueError(f"{member.name} is not available")
-            return member
+class ColumnSelectorEnumMeta(EnumMeta):
+    def __new__(metacls, cls, bases, classdict):
+        enum_class = super().__new__(metacls, cls, bases, classdict)
+        for _, member in enum_class.__members__.items():
+            value, available = member._value_
+            member._value_ = value
+            member.available = available
+        return enum_class
 
-    class ColumnSelector(Enum, metaclass=__AvailableEnumMeta):
-        ARCH_SUPPORT = ("fact-arch-support", True)
-        ARCH_TYPE = ("fact-arch-type", True)
-        BRAND = ("fact-brand", True)
-        CLEAT_DESIGN = ("fact-cleat-design", True)
-        CLOSURE = ("fact-closure", True)
-        COLLABORATION = ("fact-collaboration", True)
-        COLLECTION = ("fact-collection", True)
-        CONDITION = ("fact-condition", True)
-        CONSTRUCTION = ("fact-construction", True)
-        CUSHIONING = ("fact-cushioning", True)
-        CUT = ("fact-cut", True)
-        DESIGNED_BY = ("fact-designed-by", True)
-        DISTANCE = ("fact-distance", True)
-        DOWNTURN = ("fact-downturn", True)
-        EMBELLISHMENT = ("fact-embellishment", True)
-        ENVIRONMENT = ("fact-environment", True)
-        EVENT = ("fact-event", True)
-        EXPERT_RATING = ("fact-expert_score", True)
-        FEATURE = ("fact-feature", True)
-        FEATURES = ("fact-features", True)
-        FIT = ("fact-fit", True)
-        FOOT_CONDITION = ("fact-foot-condition", True)
-        FOREFOOT_HEIGHT = ("fact-forefoot-height", True)
-        FLEXIBILITY = ("fact-flexibility", True)
-        GRAM_INSULATION = ("fact-gram-insulation", True)
-        HEEL_HEIGHT = ("fact-heel-height", True)
-        HEEL_TOE_DROP = ("fact-heel-to-toe-drop", True)
-        INSPIRED_FROM = ("fact-inspired-from", True)
-        LACE_TYPE = ("fact-lace-type", True)
-        LACING_SYSTEM = ("fact-lacing-system", True)
-        LAST_SHAPE = ("fact-last-shape", True)
-        LEVEL = ("fact-level", True)
-        LINING = ("fact-lining", True)
-        LOCKDOWN = ("fact-lockdown", True)
-        MSRP = ("fact-msrp_formatted", True)
-        MATERIAL = ("fact-material", True)
-        MIDSOLE = ("fact-midsole", True)
-        NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True)
-        ORIGIN = ("fact-origin", True)
-        ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True)
-        OUTSOLE = ("fact-outsole", True)
-        PACE = ("fact-pace", True)
-        PRICE_TIER = ("fact-features", True) # Intentionally Duplicating FEATURES
-        PRINT = ("fact-print", True)
-        PRONATION = ("fact-pronation", True)
-        PROTECTION = ("fact-protection", True)
-        RANDING = ("fact-randing", True)
-        RELEASE_DATE = ("fact-release-date", True)
-        REVIEW_TYPE = ("fact-review-type", True)
-        RIGIDITY = ("fact-rigidity", True)
-        SALES_PRICE = ("fact-price", True)
-        SCORE = ("fact-score", True)
-        SEASON = ("fact-season", True)
-        SENSITIVITY = ("fact-sensitivity", True)
-        SHOE_TYPE = ("fact-shoe-type", True)
-        SIGNATURE = ("fact-signature", True)
-        SPIKE_SIZE = ("fact-spike-size", True)
-        SPIKE_TYPE = ("fact-spike-type", True)
-        STIFFNESS = ("fact-stiffness", True)
-        STRETCH = ("fact-stretch", True)
-        STRIKE_PATTERN = ("fact-strike-pattern", True)
-        STUD_TYPE = ("fact-stud-type", True)
-        STYLE = ("fact-style", True)
-        SUMMER = ("fact-summer", True)
-        SURFACE = ("fact-surface", True)
-        SUPPORT = ("fact-support", True)
-        TERRAIN = ("fact-terrain", True)
-        TECHNOLOGY = ("fact-technology", True)
-        THICKNESS = ("fact-thickness", True)
-        TOEBOX = ("fact-toebox", True)
-        TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True)
-        TOP = ("fact-top", True)
-        TYPE = ("fact-type", True)
-        ULTRA_RUNNING = ("fact-ultra-running", True)
-        USE = ("fact-use", True)
-        USER_RATING = ("fact-users_score", True)
-        WATERPROOFING = ("fact-waterproofing", True)
-        WEIGHT = ("fact-weight", True)
-        WIDTH = ("fact-width", True)
-        WORN_BY = ("fact-worn-by", True)
-        ZERO_DROP = ("fact-zero-drop", True)
-
-        def __init__(self, value, available):
-            super().__init__(value)
-            self.available = available
-
-        @classmethod
-        def __reset_availability(cls, val=True):
-            if not isinstance(val, bool):
-                raise TypeError(f"Expected bool for val, but received {type(val)}")
-            for member in cls:
-                member.available = val
-
-        # set availability to false for all enumeration members except those in include list
-        @classmethod
-        def __includeOnly(cls, include):
-            if not isinstance(include, list):
-                raise TypeError(f"Expected include to be a list, but recieved {type(include)}")
-            cls.__reset_availability(val=False)
-            for member in include:
-                if isinstance(member, cls):
-                    member.available = True
-
-        @classmethod
-        def get_full_list(cls, exclude=None):
-            if exclude is None:
-                exclude = []
-            return [member.name for member in cls if member not in exclude and member.available]
-
-        @classmethod
-        def get_empty_list(cls, include=None):
-            if include is None:
-                include = []
-            return [member.name for member in include if isinstance(member, cls) and member.available]
-
-        def __get_selector(self):
-            return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
-
-        @classmethod
-        def __get_full_selector_list(cls, exclude=None):
-            if exclude is None:
-                exclude = []
-            return [column_selector.__get_selector() for column_selector in cls if column_selector not in exclude and column_selector.available]
-
-        @classmethod
-        def __get_empty_selector_list(cls, include=None):
-            if include is None:
-                include = []
-            return [column_selector.__get_selector() for column_selector in include if isinstance(column_selector, cls) and column_selector.available]
-
-        @classmethod
-        def __get_default_map(cls):
-            default_map = {}
-            for member in cls:
-                if member.available:
-                    default_map[member] = False
-            default_map[cls.MSRP] = True
-            return default_map
-
-        @classmethod
-        def __get_false_map(cls):
-            false_map = cls.__get_default_map()
-            if cls.MSRP.available:
-                false_map[cls.MSRP] = False
-            return false_map
-
-        @classmethod
-        def __get_true_map(cls):
-            true_map = cls.__get_false_map()
-            for key in true_map:
-                true_map[key] = True
-            return true_map
-
-    class Url_Paths(Enum):
-        APPROACH_SHOES = "approach-shoes"
-        BASKETBALL_SHOES = "basketball-shoes"
-        CLIMBING_SHOES = "climbing-shoes"
-        CROSSFIT_SHOES = "crossfit-shoes"
-        CYCLING_SHOES = "cycling-shoes"
-        FOOTBALL_CLEATS = "football-cleats"
-        GOLF_SHOES = "golf-shoes"
-        HIKING_BOOTS = "hiking-boots"
-        HIKING_SHOES = "hiking-shoes"
-        RUNNING_SHOES = "running-shoes"
-        SNEAKERS = "sneakers"
-        SOCCER_CLEATS = "soccer-cleats"
-        TENNIS_SHOES = "tennis-shoes"
-        TRACK_SHOES = "track-and-field-shoes"
-        TRAINING_SHOES = "training-shoes"
-        TRAIL_SHOES = "trail-running-shoes"
-        WALKING_SHOES = "walking-shoes"
-
-        class Gender(Enum):
-            MEN = ()
-            NONE = ()
-            WOMEN = ()
-
-        def get_url_path(self, gender=Gender.NONE):
-            prefix = "/catalog/"
-            if gender is ScraperSingleton.Url_Paths.Gender.NONE:
-                return f"{prefix}{self.value}"
-            elif gender is ScraperSingleton.Url_Paths.Gender.MEN:
-                return f"{prefix}mens-{self.value}"
-            elif gender is ScraperSingleton.Url_Paths.Gender.WOMEN:
-                return f"{prefix}womens-{self.value}"
-            else:
-                raise TypeError("gender must be an enumeration member of ScraperSingleton.Url_Paths.Gender")
+class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
+    ARCH_SUPPORT = ("fact-arch-support", True)
+    ARCH_TYPE = ("fact-arch-type", True)
+    BRAND = ("fact-brand", True)
+    CLEAT_DESIGN = ("fact-cleat-design", True)
+    CLOSURE = ("fact-closure", True)
+    COLLABORATION = ("fact-collaboration", True)
+    COLLECTION = ("fact-collection", True)
+    CONDITION = ("fact-condition", True)
+    CONSTRUCTION = ("fact-construction", True)
+    CUSHIONING = ("fact-cushioning", True)
+    CUT = ("fact-cut", True)
+    DESIGNED_BY = ("fact-designed-by", True)
+    DISTANCE = ("fact-distance", True)
+    DOWNTURN = ("fact-downturn", True)
+    EMBELLISHMENT = ("fact-embellishment", True)
+    ENVIRONMENT = ("fact-environment", True)
+    EVENT = ("fact-event", True)
+    EXPERT_RATING = ("fact-expert_score", True)
+    FEATURE = ("fact-feature", True)
+    FEATURES = ("fact-features", True)
+    FIT = ("fact-fit", True)
+    FOOT_CONDITION = ("fact-foot-condition", True)
+    FOREFOOT_HEIGHT = ("fact-forefoot-height", True)
+    FLEXIBILITY = ("fact-flexibility", True)
+    GRAM_INSULATION = ("fact-gram-insulation", True)
+    HEEL_HEIGHT = ("fact-heel-height", True)
+    HEEL_TOE_DROP = ("fact-heel-to-toe-drop", True)
+    INSPIRED_FROM = ("fact-inspired-from", True)
+    LACE_TYPE = ("fact-lace-type", True)
+    LACING_SYSTEM = ("fact-lacing-system", True)
+    LAST_SHAPE = ("fact-last-shape", True)
+    LEVEL = ("fact-level", True)
+    LINING = ("fact-lining", True)
+    LOCKDOWN = ("fact-lockdown", True)
+    MSRP = ("fact-msrp_formatted", True)
+    MATERIAL = ("fact-material", True)
+    MIDSOLE = ("fact-midsole", True)
+    NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True)
+    ORIGIN = ("fact-origin", True)
+    ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True)
+    OUTSOLE = ("fact-outsole", True)
+    PACE = ("fact-pace", True)
+    PRINT = ("fact-print", True)
+    PRONATION = ("fact-pronation", True)
+    PROTECTION = ("fact-protection", True)
+    RANDING = ("fact-randing", True)
+    RELEASE_DATE = ("fact-release-date", True)
+    REVIEW_TYPE = ("fact-review-type", True)
+    RIGIDITY = ("fact-rigidity", True)
+    SALES_PRICE = ("fact-price", True)
+    SCORE = ("fact-score", True)
+    SEASON = ("fact-season", True)
+    SENSITIVITY = ("fact-sensitivity", True)
+    SHOE_TYPE = ("fact-shoe-type", True)
+    SIGNATURE = ("fact-signature", True)
+    SPIKE_SIZE = ("fact-spike-size", True)
+    SPIKE_TYPE = ("fact-spike-type", True)
+    STIFFNESS = ("fact-stiffness", True)
+    STRETCH = ("fact-stretch", True)
+    STRIKE_PATTERN = ("fact-strike-pattern", True)
+    STUD_TYPE = ("fact-stud-type", True)
+    STYLE = ("fact-style", True)
+    SUMMER = ("fact-summer", True)
+    SURFACE = ("fact-surface", True)
+    SUPPORT = ("fact-support", True)
+    TERRAIN = ("fact-terrain", True)
+    TECHNOLOGY = ("fact-technology", True)
+    THICKNESS = ("fact-thickness", True)
+    TOEBOX = ("fact-toebox", True)
+    TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True)
+    TOP = ("fact-top", True)
+    TYPE = ("fact-type", True)
+    ULTRA_RUNNING = ("fact-ultra-running", True)
+    USE = ("fact-use", True)
+    USER_RATING = ("fact-users_score", True)
+    WATERPROOFING = ("fact-waterproofing", True)
+    WEIGHT = ("fact-weight", True)
+    WIDTH = ("fact-width", True)
+    WORN_BY = ("fact-worn-by", True)
+    ZERO_DROP = ("fact-zero-drop", True)
 
     @classmethod
-    def __setColumnSelectorAvailability(cls, url_path):
-        if not isinstance(url_path, cls.Url_Paths):
-            raise TypeError("url_path must be an enumeration member of ScraperSingleton.Url_Paths")
-        include_lists = {
-            cls.Url_Paths.APPROACH_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.PROTECTION,
-                cls.ColumnSelector.RANDING,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SENSITIVITY,
-                cls.ColumnSelector.SUPPORT,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.BASKETBALL_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.LOCKDOWN,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SIGNATURE,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.CLIMBING_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CONSTRUCTION,
-                cls.ColumnSelector.DOWNTURN,
-                cls.ColumnSelector.ENVIRONMENT,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FIT,
-                cls.ColumnSelector.LAST_SHAPE,
-                cls.ColumnSelector.LEVEL,
-                cls.ColumnSelector.LINING,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MIDSOLE,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.STIFFNESS,
-                cls.ColumnSelector.STRETCH,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.THICKNESS,
-                cls.ColumnSelector.TONGUE_PULL_LOOP,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WORN_BY
-            ],
-            cls.Url_Paths.CROSSFIT_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FOREFOOT_HEIGHT,
-                cls.ColumnSelector.HEEL_HEIGHT,
-                cls.ColumnSelector.HEEL_TOE_DROP,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.TOEBOX,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.CYCLING_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLEAT_DESIGN,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURE,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.RIGIDITY,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.FOOTBALL_CLEATS: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.STRIKE_PATTERN,
-                cls.ColumnSelector.STUD_TYPE,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.GOLF_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.OUTSOLE,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.STYLE,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.HIKING_BOOTS: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CONSTRUCTION,
-                cls.ColumnSelector.CUT,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FIT,
-                cls.ColumnSelector.FOOT_CONDITION,
-                cls.ColumnSelector.GRAM_INSULATION,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.ORIGIN,
-                cls.ColumnSelector.ORTHOTIC_FRIENDLY,
-                cls.ColumnSelector.PRONATION,
-                cls.ColumnSelector.PROTECTION,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SEASON,
-                cls.ColumnSelector.SUPPORT,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.ULTRA_RUNNING,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH,
-                cls.ColumnSelector.ZERO_DROP
-            ],
-            cls.Url_Paths.HIKING_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CONSTRUCTION,
-                cls.ColumnSelector.CUT,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FIT,
-                cls.ColumnSelector.FOOT_CONDITION,
-                cls.ColumnSelector.GRAM_INSULATION,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.ORIGIN,
-                cls.ColumnSelector.PRONATION,
-                cls.ColumnSelector.PROTECTION,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SEASON,
-                cls.ColumnSelector.SUPPORT,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.RUNNING_SHOES: [
-                cls.ColumnSelector.ARCH_SUPPORT,
-                cls.ColumnSelector.ARCH_TYPE,
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CUSHIONING,
-                cls.ColumnSelector.DISTANCE,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FLEXIBILITY,
-                cls.ColumnSelector.FOOT_CONDITION,
-                cls.ColumnSelector.FOREFOOT_HEIGHT,
-                cls.ColumnSelector.HEEL_HEIGHT,
-                cls.ColumnSelector.HEEL_TOE_DROP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.PACE,
-                cls.ColumnSelector.PRONATION,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SEASON,
-                cls.ColumnSelector.STRIKE_PATTERN,
-                cls.ColumnSelector.SUMMER,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.TERRAIN,
-                cls.ColumnSelector.TOEBOX,
-                cls.ColumnSelector.TYPE,
-                cls.ColumnSelector.ULTRA_RUNNING,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.SNEAKERS: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLABORATION,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.DESIGNED_BY,
-                cls.ColumnSelector.EMBELLISHMENT,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.INSPIRED_FROM,
-                cls.ColumnSelector.LACE_TYPE,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.ORIGIN,
-                cls.ColumnSelector.PRINT,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SEASON,
-                cls.ColumnSelector.STYLE,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.SOCCER_CLEATS: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.LACING_SYSTEM,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.PRICE_TIER,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SIGNATURE,
-                cls.ColumnSelector.SURFACE,
-                cls.ColumnSelector.TOP,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.TENNIS_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLABORATION,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CONSTRUCTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURE,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SHOE_TYPE,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.TRACK_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EVENT,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURE,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SPIKE_SIZE,
-                cls.ColumnSelector.SPIKE_TYPE,
-                cls.ColumnSelector.SURFACE,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ],
-            cls.Url_Paths.TRAINING_SHOES: [
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FOREFOOT_HEIGHT,
-                cls.ColumnSelector.HEEL_HEIGHT,
-                cls.ColumnSelector.HEEL_TOE_DROP,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.TOEBOX,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.TRAIL_SHOES: [
-                cls.ColumnSelector.ARCH_SUPPORT,
-                cls.ColumnSelector.ARCH_TYPE,
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CUSHIONING,
-                cls.ColumnSelector.DISTANCE,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.FLEXIBILITY,
-                cls.ColumnSelector.FOOT_CONDITION,
-                cls.ColumnSelector.FOREFOOT_HEIGHT,
-                cls.ColumnSelector.HEEL_HEIGHT,
-                cls.ColumnSelector.HEEL_TOE_DROP,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.NUMBER_OF_REVIEWS,
-                cls.ColumnSelector.PACE,
-                cls.ColumnSelector.PRONATION,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SEASON,
-                cls.ColumnSelector.STRIKE_PATTERN,
-                cls.ColumnSelector.SUMMER,
-                cls.ColumnSelector.TECHNOLOGY,
-                cls.ColumnSelector.TERRAIN,
-                cls.ColumnSelector.TOEBOX,
-                cls.ColumnSelector.TYPE,
-                cls.ColumnSelector.ULTRA_RUNNING,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WATERPROOFING,
-                cls.ColumnSelector.WEIGHT,
-                cls.ColumnSelector.WIDTH
-            ],
-            cls.Url_Paths.WALKING_SHOES: [
-                cls.ColumnSelector.ARCH_SUPPORT,
-                cls.ColumnSelector.BRAND,
-                cls.ColumnSelector.CLOSURE,
-                cls.ColumnSelector.COLLECTION,
-                cls.ColumnSelector.CONDITION,
-                cls.ColumnSelector.EXPERT_RATING,
-                cls.ColumnSelector.FEATURES,
-                cls.ColumnSelector.MATERIAL,
-                cls.ColumnSelector.MSRP,
-                cls.ColumnSelector.RELEASE_DATE,
-                cls.ColumnSelector.REVIEW_TYPE,
-                cls.ColumnSelector.SALES_PRICE,
-                cls.ColumnSelector.SCORE,
-                cls.ColumnSelector.SURFACE,
-                cls.ColumnSelector.TOEBOX,
-                cls.ColumnSelector.USE,
-                cls.ColumnSelector.USER_RATING,
-                cls.ColumnSelector.WEIGHT
-            ]
-        }
-        cls.ColumnSelector.__includeOnly(include=include_lists.get(url_path))
+    def _reset_availability(cls, val=True):
+        if not isinstance(val, bool):
+            raise TypeError(f"Expected bool for val, but received {type(val)}")
+        for member in cls:
+            member.available = val
+
+    # set availability to false for all enumeration members except those in include list
+    @classmethod
+    def includeOnly(cls, include):
+        if not isinstance(include, list):
+            raise TypeError(f"Expected include to be a list, but recieved {type(include)}")
+        cls._reset_availability(val=False)
+        for member in include:
+            if isinstance(member, cls):
+                member.available = True
+
+    @classmethod
+    def get_full_list(cls, exclude=None):
+        if exclude is None:
+            exclude = []
+        return [member.name for member in cls if member not in exclude and member.available]
+
+    @classmethod
+    def get_empty_list(cls, include=None):
+        if include is None:
+            include = []
+        return [member.name for member in include if isinstance(member, cls) and member.available]
+
+    def get_selector(self):
+        return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
+
+    @classmethod
+    def get_full_selector_list(cls, exclude=None):
+        if exclude is None:
+            exclude = []
+        return [column_selector.get_selector() for column_selector in cls if column_selector not in exclude and column_selector.available]
+
+    @classmethod
+    def get_empty_selector_list(cls, include=None):
+        if include is None:
+            include = []
+        return [column_selector.get_selector() for column_selector in include if isinstance(column_selector, cls) and column_selector.available]
+
+    @classmethod
+    def get_default_map(cls):
+        default_map = {}
+        for member in cls:
+            if member.available:
+                default_map[member] = True
+        if cls.MSRP.available:
+            default_map[cls.MSRP] = False
+        return default_map
+
+    @classmethod
+    def get_false_map(cls):
+        false_map = cls.get_default_map()
+        if cls.MSRP.available:
+            false_map[cls.MSRP] = False
+        return false_map
+
+    @classmethod
+    def get_true_map(cls):
+        true_map = cls.get_false_map()
+        for key in true_map:
+            true_map[key] = True
+        return true_map
+
+class Url_PathsEnumMeta(EnumMeta):
+    def __new__(metacls, cls, bases, classdict):
+        enum_class = super().__new__(metacls, cls, bases, classdict)
+        for _, member in enum_class.__members__.items():
+            value, filterlist = member._value_
+            member._value_ = value
+            member.filterlist = filterlist
+        return enum_class
+
+class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
+    APPROACH_SHOES = (
+        "approach-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MSRP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.PROTECTION,
+            ColumnSelector.RANDING,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SENSITIVITY,
+            ColumnSelector.SUPPORT,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.TOP,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    BASKETBALL_SHOES = (
+        "basketball-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.LOCKDOWN,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SIGNATURE,
+            ColumnSelector.TOP,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    CLIMBING_SHOES = (
+        "climbing-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CONSTRUCTION,
+            ColumnSelector.DOWNTURN,
+            ColumnSelector.ENVIRONMENT,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FIT,
+            ColumnSelector.LAST_SHAPE,
+            ColumnSelector.LEVEL,
+            ColumnSelector.LINING,
+            ColumnSelector.MSRP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MIDSOLE,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.STIFFNESS,
+            ColumnSelector.STRETCH,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.THICKNESS,
+            ColumnSelector.TONGUE_PULL_LOOP,
+            ColumnSelector.TOP,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WORN_BY
+        ]
+    )
+    CROSSFIT_SHOES = (
+        "crossfit-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FOREFOOT_HEIGHT,
+            ColumnSelector.HEEL_HEIGHT,
+            ColumnSelector.HEEL_TOE_DROP,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.TOEBOX,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    CYCLING_SHOES = (
+        "cycling-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLEAT_DESIGN,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURE,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MSRP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.RIGIDITY,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    FOOTBALL_CLEATS = (
+        "football-cleats",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.STRIKE_PATTERN,
+            ColumnSelector.STUD_TYPE,
+            ColumnSelector.TOP,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    GOLF_SHOES = (
+        "golf-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MSRP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.OUTSOLE,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.STYLE,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    HIKING_BOOTS = (
+        "hiking-boots",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CONSTRUCTION,
+            ColumnSelector.CUT,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FIT,
+            ColumnSelector.FOOT_CONDITION,
+            ColumnSelector.GRAM_INSULATION,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.ORIGIN,
+            ColumnSelector.ORTHOTIC_FRIENDLY,
+            ColumnSelector.PRONATION,
+            ColumnSelector.PROTECTION,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SEASON,
+            ColumnSelector.SUPPORT,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.ULTRA_RUNNING,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH,
+            ColumnSelector.ZERO_DROP
+        ]
+    )
+    HIKING_SHOES = (
+        "hiking-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CONSTRUCTION,
+            ColumnSelector.CUT,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FIT,
+            ColumnSelector.FOOT_CONDITION,
+            ColumnSelector.GRAM_INSULATION,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.ORIGIN,
+            ColumnSelector.PRONATION,
+            ColumnSelector.PROTECTION,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SEASON,
+            ColumnSelector.SUPPORT,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    RUNNING_SHOES = (
+        "running-shoes",
+        [
+            ColumnSelector.ARCH_SUPPORT,
+            ColumnSelector.ARCH_TYPE,
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CUSHIONING,
+            ColumnSelector.DISTANCE,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FLEXIBILITY,
+            ColumnSelector.FOOT_CONDITION,
+            ColumnSelector.FOREFOOT_HEIGHT,
+            ColumnSelector.HEEL_HEIGHT,
+            ColumnSelector.HEEL_TOE_DROP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.PACE,
+            ColumnSelector.PRONATION,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SEASON,
+            ColumnSelector.STRIKE_PATTERN,
+            ColumnSelector.SUMMER,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.TERRAIN,
+            ColumnSelector.TOEBOX,
+            ColumnSelector.TYPE,
+            ColumnSelector.ULTRA_RUNNING,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    SNEAKERS = (
+        "sneakers",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLABORATION,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.DESIGNED_BY,
+            ColumnSelector.EMBELLISHMENT,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.INSPIRED_FROM,
+            ColumnSelector.LACE_TYPE,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.ORIGIN,
+            ColumnSelector.PRINT,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SEASON,
+            ColumnSelector.STYLE,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.TOP,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    SOCCER_CLEATS = (
+        "soccer-cleats",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.LACING_SYSTEM,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.FEATURES,            # PRICE TIER
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SIGNATURE,
+            ColumnSelector.SURFACE,
+            ColumnSelector.TOP,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    TENNIS_SHOES = (
+        "tennis-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLABORATION,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CONSTRUCTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURE,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SHOE_TYPE,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    TRACK_SHOES = (
+        "track-and-field-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EVENT,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURE,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MSRP,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SPIKE_SIZE,
+            ColumnSelector.SPIKE_TYPE,
+            ColumnSelector.SURFACE,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+    TRAINING_SHOES = (
+        "training-shoes",
+        [
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FOREFOOT_HEIGHT,
+            ColumnSelector.HEEL_HEIGHT,
+            ColumnSelector.HEEL_TOE_DROP,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.TOEBOX,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    TRAIL_SHOES = (
+        "trail-running-shoes",
+        [
+            ColumnSelector.ARCH_SUPPORT,
+            ColumnSelector.ARCH_TYPE,
+            ColumnSelector.BRAND,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CUSHIONING,
+            ColumnSelector.DISTANCE,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.FLEXIBILITY,
+            ColumnSelector.FOOT_CONDITION,
+            ColumnSelector.FOREFOOT_HEIGHT,
+            ColumnSelector.HEEL_HEIGHT,
+            ColumnSelector.HEEL_TOE_DROP,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.NUMBER_OF_REVIEWS,
+            ColumnSelector.PACE,
+            ColumnSelector.PRONATION,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SEASON,
+            ColumnSelector.STRIKE_PATTERN,
+            ColumnSelector.SUMMER,
+            ColumnSelector.TECHNOLOGY,
+            ColumnSelector.TERRAIN,
+            ColumnSelector.TOEBOX,
+            ColumnSelector.TYPE,
+            ColumnSelector.ULTRA_RUNNING,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WATERPROOFING,
+            ColumnSelector.WEIGHT,
+            ColumnSelector.WIDTH
+        ]
+    )
+    WALKING_SHOES = (
+        "walking-shoes",
+        [
+            ColumnSelector.ARCH_SUPPORT,
+            ColumnSelector.BRAND,
+            ColumnSelector.CLOSURE,
+            ColumnSelector.COLLECTION,
+            ColumnSelector.CONDITION,
+            ColumnSelector.EXPERT_RATING,
+            ColumnSelector.FEATURES,
+            ColumnSelector.MATERIAL,
+            ColumnSelector.MSRP,
+            ColumnSelector.RELEASE_DATE,
+            ColumnSelector.REVIEW_TYPE,
+            ColumnSelector.SALES_PRICE,
+            ColumnSelector.SCORE,
+            ColumnSelector.SURFACE,
+            ColumnSelector.TOEBOX,
+            ColumnSelector.USE,
+            ColumnSelector.USER_RATING,
+            ColumnSelector.WEIGHT
+        ]
+    )
+
+    def get_url_path(self, gender=Gender.NONE):
+        prefix = "/catalog/"
+        if gender is Gender.NONE:
+            return f"{prefix}{self.value}"
+        elif gender is Gender.MEN:
+            return f"{prefix}mens-{self.value}"
+        elif gender is Gender.WOMEN:
+            return f"{prefix}womens-{self.value}"
+        else:
+            raise TypeError("gender must be an enumeration member of Gender")
+
+    @classmethod
+    def get_include_dict(cls):
+        include = {}
+        for member in cls:
+            include[member] = member.filterlist
+        return include
+
+class ScraperSingleton:
+    _browser = None
+    _chromium_location = "/usr/bin/chromium"
+    _column_filter_dict = None
+    _domain = "runrepeat.com"
+    _driver_path = "/usr/bin/chromedriver"
+    _sleep = 0.1
+    _url = f"https://{_domain}"
+    _wait = 10
+
+    @classmethod
+    def _setColumnSelectorAvailability(cls, url_path):
+        if not isinstance(url_path, Url_Paths):
+            raise TypeError("url_path must be an enumeration member of Url_Paths")
+        ColumnSelector.includeOnly(include=Url_Paths.get_include_dict()[url_path])
+
+    @classmethod
+    def _setUrl(cls, url_path, gender):
+        if not isinstance(url_path, Url_Paths):
+            raise TypeError("url_path must be an enumeration member of type Url_Paths")
+        if not isinstance(gender, Gender):
+            raise TypeError("url_path must be an enumeration member of type Gender")
+        cls._url += url_path.get_url_path(gender=gender)
+        cls._setColumnSelectorAvailability(url_path=url_path)
 
     # Set up the browser
     @classmethod
-    def __initBrowser(cls):
-        service = Service(cls.__driver_path)
-        browser = webdriver.Chrome(service=service, options=cls.__getChromiumOptions())
+    def _initBrowser(cls):
+        service = Service(cls._driver_path)
+        browser = webdriver.Chrome(service=service, options=cls._getChromiumOptions())
         browser.delete_all_cookies()
-        cls.__browser = browser
+        cls._browser = browser
+        atexit.register(cls._cleanup)
 
-    @classmethod
     def __new__(cls):
         if platform.system() != "Linux":
             raise RuntimeError("ScraperSingleton is only intended for Linux-based OSes")
-        if cls.__browser is None:
-            cls.__initBrowser()
-        return cls.__browser
+        if cls._browser is None:
+            cls._initBrowser()
+        return cls
 
     def __init__(self):
         pass
 
+    @classmethod
+    def _cleanup(cls):
+        if cls._browser is not None:
+            cls._browser.quit()
+
     # Set up Chromium options
     @classmethod
-    def __getChromiumOptions(cls):
+    def _getChromiumOptions(cls):
         chromium_options = Options()
         chromium_options.add_argument("--headless")
         chromium_options.add_argument("--no-sandbox")
@@ -666,101 +730,110 @@ class ScraperSingleton:
         temp_profile_dir = tempfile.mkdtemp()
         # Add the user data directory argument
         chromium_options.add_argument(f"--user-data-dir={temp_profile_dir}")
-        chromium_options.binary_location = cls.__chromium_location
+        chromium_options.binary_location = cls._chromium_location
         return chromium_options
 
     @classmethod
-    def __getColumnFilterDict(cls):
-        if cls.__column_filter_dict is None:
-            cls.__column_filter_dict = cls.ColumnSelector.__get_default_map()
-        return cls.__column_filter_dict
+    def _getColumnFilterDict(cls):
+        if cls._column_filter_dict is None:
+            cls._column_filter_dict = ColumnSelector.get_default_map()
+        return cls._column_filter_dict
 
     @classmethod
-    def __setColumnFilterDict(cls, dict):
-        if cls.__column_filter_dict is None:
-            cls.__column_filter_dict = cls.ColumnSelector.__get_default_map()
+    def _setColumnFilterDict(cls, dict):
+        if cls._column_filter_dict is None:
+            cls._column_filter_dict = ColumnSelector.get_default_map()
         for key, value in dict.items():
-            if isinstance(key, cls.ColumnSelector):
+            if isinstance(key, ColumnSelector):
                 if isinstance(value, bool):
-                    cls.__column_filter_dict[key] = value
+                    cls._column_filter_dict[key] = value
                 else:
                     raise TypeError(f"Expected bool, but received {type(value)}")
             else:
-                raise TypeError(f"Expected ScraperSingleton.ColumnSelector enumeration member, but received {type(key)}")
+                raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
 
     # dev function to output page source
     @classmethod
     @PendingDeprecationWarning
-    def __outputPageSource(cls, filename):
+    def _outputPageSource(cls, filename):
         with open(filename, "w", encoding="utf-8") as file:
-            file.write(cls.__browser.page_source)
+            file.write(cls._browser.page_source)
 
     # dev function to check cookies
     @classmethod
     @PendingDeprecationWarning
-    def __printCookies(cls, cookie_name=""):
+    def _printCookies(cls, cookie_name=""):
         if cookie_name == "":
-            PrettyPrinter(indent=4).pprint(cls.__browser.get_cookies())
+            PrettyPrinter(indent=4).pprint(cls._browser.get_cookies())
         else:
-            PrettyPrinter(indent=4).pprint(cls.__browser.get_cookie(cookie_name))
+            PrettyPrinter(indent=4).pprint(cls._browser.get_cookie(cookie_name))
 
     @classmethod
-    def __wait_and_click(cls, selector):
-        element = WebDriverWait(cls.__browser, cls.__wait).until(EC.element_to_be_clickable(selector))
+    def _wait_and_click(cls, selector):
+        element = WebDriverWait(cls._browser, cls._wait).until(EC.element_to_be_clickable(selector))
         element.click()
+        time.sleep(cls._sleep)
 
     @classmethod
-    def __scroll_and_click(cls, selector):
-        element = WebDriverWait(cls.__browser, cls.__wait).until(EC.presence_of_element_located(selector))
-        cls.__browser.execute_script("arguments[0].click();", element)
+    def _scroll_and_click(cls, selector):
+        element = WebDriverWait(cls._browser, cls._wait).until(EC.presence_of_element_located(selector))
+        cls._browser.execute_script("arguments[0].click();", element)
+        time.sleep(cls._sleep)
 
     # Change view to table
     @classmethod
-    def __getSlimListView(cls):
-        cookie = cls.__browser.get_cookie("list_type")
+    def _getSlimListView(cls):
+        cls._browser.get(cls._url)
+        cookie = cls._browser.get_cookie("list_type")
         if cookie is None or cookie["value"] != "slim" or cookie["expiry"] < time.time():
-            cls.__wait_and_click(selector=(By.CSS_SELECTOR, "svg.slim-view-icon.catalog__list-tab-icon"))
+            cls._wait_and_click(selector=(By.CSS_SELECTOR, "svg.slim-view-icon.catalog__list-tab-icon"))
 
     @classmethod
-    def __applyColumns(cls):
-        cls.__wait_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button[data-v-795eb1ee]"))
+    def _applyColumns(cls):
+        cls._wait_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button[data-v-795eb1ee]"))
 
     @classmethod
-    def __editColumns(cls):
-        cls.__wait_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button.edit-columns__button"))
-        time.sleep(cls.__sleep)
+    def _editColumns(cls):
+        cls._wait_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button.edit-columns__button"))
+        time.sleep(cls._sleep)
 
     @classmethod
-    def __getEmptyView(cls):
-        cls.__editColumns()
+    def _getEmptyView(cls):
+        cls._editColumns()
         checkboxes = []
-        for key in cls.__getColumnFilterDict():
-            if cls.__getColumnFilterDict()[key]:
-                checkboxes.append(key.__get_selector())
+        for key in cls._getColumnFilterDict():
+            if cls._getColumnFilterDict()[key]:
+                checkboxes.append(key.get_selector())
         for selector in checkboxes:
-            cls.__scroll_and_click(selector=selector)
-        cls.__applyColumns()
-        cls.__setColumnFilterDict(cls.ColumnSelector.__get_false_map())
+            try:
+                cls._scroll_and_click(selector=selector)
+            except TimeoutException:
+                raise TimeoutException(msg=f"Timeout exceeded for selector {selector}")
+        cls._applyColumns()
+        cls._setColumnFilterDict(ColumnSelector.get_false_map())
 
     @classmethod
-    def __getColumnsView(cls, list):
-        cls.__getEmptyView()
-        cls.__editColumns()
-        for item in list:
-            if isinstance(item, cls.ColumnSelector):
-                cls.__scroll_and_click(selector=item.__get_selector())
-            else:
-                raise TypeError(f"Expected ScraperSingleton.ColumnSelector enumeration member, but received {type(item)}")
-        cls.__applyColumns()
-        cls.__setColumnFilterDict({k: True for k in list})
+    def _getSingleColumnView(cls, column):
+        if not isinstance(column, ColumnSelector):
+            raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(column)}")
+        cls._getEmptyView()
+        cls._editColumns()
+        try:
+            cls._scroll_and_click(selector=column.get_selector())
+        except TimeoutException:
+            raise TimeoutException(msg=f"Timeout exceeded for selector {column.get_selector()}")
+        cls._applyColumns()
+        map = ColumnSelector.get_false_map()
+        map[column] = True
+        cls._setColumnFilterDict(map)
 
     @classmethod
-    def __getShoeNames(cls):
+    def _getShoeNames(cls):
         page = 1
         shoe_names = []
         while True:
-            cls.__browser.get(cls.__url + "?page=" + str(page))
-            shoe_elements = cls.__browser.find_elements(By.CSS_SELECTOR, "a.catalog-list-slim__names")
+            cls._browser.get(cls._url + "?page=" + str(page))
+            shoe_elements = cls._browser.find_elements(By.CSS_SELECTOR, "a.catalog-list-slim__names")
             if len(shoe_elements) < 1:
                 break
             for title in shoe_elements:
@@ -769,17 +842,17 @@ class ScraperSingleton:
         return shoe_names
 
     @classmethod
-    def __getColumnData(cls, list):
+    def _getColumnData(cls, column_list):
         outer_list = None
-        for idx in range(len(list)):
-            if not isinstance(list[idx], cls.ColumnSelector):
-                raise TypeError(f"Expected ScraperSingleton.ColumnSelector enumeration member, but received {type(list[idx])}")
+        for idx in range(len(column_list)):
+            if not isinstance(column_list[idx], ColumnSelector):
+                raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(column_list[idx])}")
             page = 1
             while True:
                 inner_list = []
-                cls.__browser.get(cls.__url + "?page=" + str(page))
-                cls.__getColumnsView([list[idx]])
-                elements = cls.__browser.find_elements(By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
+                cls._browser.get(cls._url + "?page=" + str(page))
+                cls._getSingleColumnView(column_list[idx])
+                elements = cls._browser.find_elements(By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
                 if len(elements) < 1:
                     break
                 for element in elements:
@@ -791,39 +864,59 @@ class ScraperSingleton:
         return outer_list
 
     @classmethod
-    def __getCsvStructure(cls, list):
-        shoe_names = cls.__getShoeNames()
+    def _getCsvStructure(cls, columnlist):
+        shoe_names = cls._getShoeNames()
         csv_data = []
         for name in shoe_names:
             csv_data.append({"SHOE_NAME": name})
-        data_list = cls.__getColumnData(list=list)
+        data_list = cls._getColumnData(column_list=columnlist)
         for inner_list in data_list:
             if len(inner_list) != len(shoe_names):
                 raise ValueError(f"Incongruent Lists: names list has length {len(shoe_names)}, but a list in the data list has length {len(inner_list)}")
-            idx = 0
-            for item in inner_list:
-                csv_data[idx][list[idx].name] = item
-                idx += 1
+            csv_data_idx = 0
+            for columnlist_idx in range(len(columnlist)):
+                for item in inner_list:
+                    csv_data[csv_data_idx][columnlist[columnlist_idx].name] = item
+                    csv_data_idx += 1
         return csv_data
 
     @classmethod
-    def scrape(cls, list, filename, url_path=Url_Paths.RUNNING_SHOES.get_url_path()):
+    def _validateUserColumnList(cls, columnlist):
+        if not isinstance(columnlist, list):
+            raise TypeError(f"Expected list, but received {type(columnlist)}")
+        for member in columnlist:
+            if not isinstance(member, ColumnSelector):
+                raise TypeError(f"Expected ColumnSelector enumeration member in list, but received {type(member)}")
+            if not member.available:
+                raise ValueError(f"Column {member.name} not available for the current shoe-type")
+
+    @classmethod
+    def scrape(cls, columnlist, filename, url_path=Url_Paths.RUNNING_SHOES, gender=Gender.NONE):
         if not isinstance(filename, str):
             raise TypeError("filename must be a string")
         if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
             raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
+        cls._setUrl(url_path=url_path, gender=gender)
+        cls._validateUserColumnList(columnlist)
+        cls._getSlimListView()
+        filedata = cls._getCsvStructure(columnlist)
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        filedata = cls.__getCsvStructure(list) # TODO:
+        with open(filename, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=filedata[0].keys())
+            writer.writeheader()
+            for row in filedata:
+                writer.writerow(row)
+
 
 def main():
+    url = Url_Paths.RUNNING_SHOES
+    # try:
     scraper = ScraperSingleton()
-    # initBrowser(options=getChromiumOptions())
-    # browser.get(url)
-    # getSlimListView()
-    # getColumnData()
-
-    # Close the browser
-    # browser.quit()
+    scraper.scrape(columnlist=Url_Paths.get_include_dict()[url], filename="running_shoes.csv", url_path=url)
+    # except Exception as e:
+    #     print(e)
+    #     return 1
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
