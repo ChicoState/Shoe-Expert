@@ -1,4 +1,3 @@
-# TODO: continue adding exclude lists, start at CYCLING_SHOES
 from enum import Enum, EnumMeta
 import os
 import platform
@@ -34,6 +33,7 @@ class ScraperSingleton:
         ARCH_SUPPORT = ("fact-arch-support", True)
         ARCH_TYPE = ("fact-arch-type", True)
         BRAND = ("fact-brand", True)
+        CLEAT_DESIGN = ("fact-cleat-design", True)
         CLOSURE = ("fact-closure", True)
         COLLABORATION = ("fact-collaboration", True)
         COLLECTION = ("fact-collection", True)
@@ -43,7 +43,9 @@ class ScraperSingleton:
         CUT = ("fact-cut", True)
         DESIGNED_BY = ("fact-designed-by", True)
         DISTANCE = ("fact-distance", True)
+        DOWNTURN = ("fact-downturn", True)
         EMBELLISHMENT = ("fact-embellishment", True)
+        ENVIRONMENT = ("fact-environment", True)
         EVENT = ("fact-event", True)
         EXPERT_RATING = ("fact-expert_score", True)
         FEATURE = ("fact-feature", True)
@@ -58,26 +60,36 @@ class ScraperSingleton:
         INSPIRED_FROM = ("fact-inspired-from", True)
         LACE_TYPE = ("fact-lace-type", True)
         LACING_SYSTEM = ("fact-lacing-system", True)
+        LAST_SHAPE = ("fact-last-shape", True)
+        LEVEL = ("fact-level", True)
+        LINING = ("fact-lining", True)
         LOCKDOWN = ("fact-lockdown", True)
         MSRP = ("fact-msrp_formatted", True)
         MATERIAL = ("fact-material", True)
+        MIDSOLE = ("fact-midsole", True)
         NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True)
         ORIGIN = ("fact-origin", True)
         ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True)
+        OUTSOLE = ("fact-outsole", True)
         PACE = ("fact-pace", True)
-        PRICE_TIER = ("fact-features", True)
+        PRICE_TIER = ("fact-features", True) # Intentionally Duplicating FEATURES
         PRINT = ("fact-print", True)
         PRONATION = ("fact-pronation", True)
         PROTECTION = ("fact-protection", True)
+        RANDING = ("fact-randing", True)
         RELEASE_DATE = ("fact-release-date", True)
         REVIEW_TYPE = ("fact-review-type", True)
+        RIGIDITY = ("fact-rigidity", True)
         SALES_PRICE = ("fact-price", True)
         SCORE = ("fact-score", True)
         SEASON = ("fact-season", True)
+        SENSITIVITY = ("fact-sensitivity", True)
         SHOE_TYPE = ("fact-shoe-type", True)
         SIGNATURE = ("fact-signature", True)
         SPIKE_SIZE = ("fact-spike-size", True)
         SPIKE_TYPE = ("fact-spike-type", True)
+        STIFFNESS = ("fact-stiffness", True)
+        STRETCH = ("fact-stretch", True)
         STRIKE_PATTERN = ("fact-strike-pattern", True)
         STUD_TYPE = ("fact-stud-type", True)
         STYLE = ("fact-style", True)
@@ -86,7 +98,9 @@ class ScraperSingleton:
         SUPPORT = ("fact-support", True)
         TERRAIN = ("fact-terrain", True)
         TECHNOLOGY = ("fact-technology", True)
+        THICKNESS = ("fact-thickness", True)
         TOEBOX = ("fact-toebox", True)
+        TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True)
         TOP = ("fact-top", True)
         TYPE = ("fact-type", True)
         ULTRA_RUNNING = ("fact-ultra-running", True)
@@ -95,6 +109,7 @@ class ScraperSingleton:
         WATERPROOFING = ("fact-waterproofing", True)
         WEIGHT = ("fact-weight", True)
         WIDTH = ("fact-width", True)
+        WORN_BY = ("fact-worn-by", True)
         ZERO_DROP = ("fact-zero-drop", True)
 
         def __init__(self, value, available):
@@ -208,8 +223,28 @@ class ScraperSingleton:
         if not isinstance(url_path, cls.Url_Paths):
             raise TypeError("url_path must be an enumeration member of ScraperSingleton.Url_Paths")
         include_lists = {
-            #TODO:
-            cls.Url_Paths.APPROACH_SHOES: [],
+            cls.Url_Paths.APPROACH_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.PROTECTION,
+                cls.ColumnSelector.RANDING,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.SENSITIVITY,
+                cls.ColumnSelector.SUPPORT,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT
+            ],
             cls.Url_Paths.BASKETBALL_SHOES: [
                 cls.ColumnSelector.BRAND,
                 cls.ColumnSelector.COLLECTION,
@@ -227,8 +262,37 @@ class ScraperSingleton:
                 cls.ColumnSelector.USER_RATING,
                 cls.ColumnSelector.WEIGHT
             ],
-            #TODO:
-            cls.Url_Paths.CLIMBING_SHOES: [],
+            cls.Url_Paths.CLIMBING_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.CONSTRUCTION,
+                cls.ColumnSelector.DOWNTURN,
+                cls.ColumnSelector.ENVIRONMENT,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.FIT,
+                cls.ColumnSelector.LAST_SHAPE,
+                cls.ColumnSelector.LEVEL,
+                cls.ColumnSelector.LINING,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.MIDSOLE,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.STIFFNESS,
+                cls.ColumnSelector.STRETCH,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.THICKNESS,
+                cls.ColumnSelector.TONGUE_PULL_LOOP,
+                cls.ColumnSelector.TOP,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT,
+                cls.ColumnSelector.WORN_BY
+            ],
             cls.Url_Paths.CROSSFIT_SHOES: [
                 cls.ColumnSelector.BRAND,
                 cls.ColumnSelector.COLLECTION,
@@ -249,8 +313,26 @@ class ScraperSingleton:
                 cls.ColumnSelector.WEIGHT,
                 cls.ColumnSelector.WIDTH
             ],
-            #TODO:
-            cls.Url_Paths.CYCLING_SHOES: [],
+            cls.Url_Paths.CYCLING_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLEAT_DESIGN,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURE,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.RIGIDITY,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.USE,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WEIGHT
+            ],
             cls.Url_Paths.FOOTBALL_CLEATS: [
                 cls.ColumnSelector.BRAND,
                 cls.ColumnSelector.CLOSURE,
@@ -270,8 +352,25 @@ class ScraperSingleton:
                 cls.ColumnSelector.WEIGHT,
                 cls.ColumnSelector.WIDTH
             ],
-            #TODO:
-            cls.Url_Paths.GOLF_SHOES: [],
+            cls.Url_Paths.GOLF_SHOES: [
+                cls.ColumnSelector.BRAND,
+                cls.ColumnSelector.CLOSURE,
+                cls.ColumnSelector.COLLECTION,
+                cls.ColumnSelector.EXPERT_RATING,
+                cls.ColumnSelector.FEATURES,
+                cls.ColumnSelector.MSRP,
+                cls.ColumnSelector.MATERIAL,
+                cls.ColumnSelector.OUTSOLE,
+                cls.ColumnSelector.RELEASE_DATE,
+                cls.ColumnSelector.REVIEW_TYPE,
+                cls.ColumnSelector.SALES_PRICE,
+                cls.ColumnSelector.SCORE,
+                cls.ColumnSelector.STYLE,
+                cls.ColumnSelector.TECHNOLOGY,
+                cls.ColumnSelector.USER_RATING,
+                cls.ColumnSelector.WATERPROOFING,
+                cls.ColumnSelector.WEIGHT
+            ],
             cls.Url_Paths.HIKING_BOOTS: [
                 cls.ColumnSelector.BRAND,
                 cls.ColumnSelector.CLOSURE,
