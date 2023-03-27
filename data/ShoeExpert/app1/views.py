@@ -28,6 +28,9 @@ def user_login(request):
                 print("They used username: {} and password: {}".format(username, password))
     return render(request, 'app1/login.html', {"login_form":LoginForm})
 
+def about(request):
+    return HttpResponse("About Page")
+
 
 def join(request):
     if(request.method == "POST"):

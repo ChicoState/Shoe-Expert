@@ -20,7 +20,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update && \
     software-properties-common && \
     apt-get -y autoclean && \
     apt-get -y autoremove
-
 # Enable tab completion by uncommenting it from /etc/bash.bashrc
 # The relevant lines are those below the phrase "enable bash completion in interactive shells"
 RUN export SED_RANGE="$(($(sed -n '\|enable bash completion in interactive shells|=' /etc/bash.bashrc)+1)),$(($(sed -n '\|enable bash completion in interactive shells|=' /etc/bash.bashrc)+7))" && \
