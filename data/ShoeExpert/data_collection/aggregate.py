@@ -1,6 +1,7 @@
 import atexit
 import csv
 from enum import Enum, EnumMeta
+import itertools
 import os
 import platform
 import re
@@ -14,11 +15,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 import sys
 import tempfile
 import time
-
-class Gender(Enum):
-    MEN = ()
-    NONE = ()
-    WOMEN = ()
 
 class ColumnSelectorEnumMeta(EnumMeta):
     def __new__(metacls, cls, bases, classdict):
@@ -140,15 +136,6 @@ class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
             include = []
         return [member.name for member in include if isinstance(member, cls) and member.available]
 
-    def get_menu_selector(self):
-        return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
-
-    def get_data_selector(self):
-        if self == ColumnSelector.SCORE:
-            return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values.corescore__values div.corescore div.corescore__score.score_green")
-        else:
-            return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
-
     @classmethod
     def get_full_menu_selector_list(cls, exclude=None):
         if exclude is None:
@@ -184,6 +171,20 @@ class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
         for key in true_map:
             true_map[key] = False
         return true_map
+
+    def get_menu_selector(self):
+        return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
+
+    def get_data_selector(self):
+        if self == ColumnSelector.SCORE:
+            return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values.corescore__values div.corescore div.corescore__score.score_green")
+        else:
+            return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
+
+class Gender(Enum):
+    MEN = ()
+    NONE = ()
+    WOMEN = ()
 
 class Url_PathsEnumMeta(EnumMeta):
     def __new__(metacls, cls, bases, classdict):
@@ -657,6 +658,16 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         ]
     )
 
+    @classmethod
+    def get_include_dict(cls):
+        include = {}
+        for member in cls:
+            include[member] = member.filterlist
+        return include
+
+    def get_available_columns(self):
+        return self.get_include_dict()[self]
+
     def get_url_path(self, gender=Gender.NONE):
         prefix = "/catalog/"
         if gender is Gender.NONE:
@@ -668,113 +679,31 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         else:
             raise TypeError("gender must be an enumeration member of Gender")
 
-    @classmethod
-    def get_include_dict(cls):
-        include = {}
-        for member in cls:
-            include[member] = member.filterlist
-        return include
-
 class ScraperSingleton:
     _browser = None
     _chromium_location = "/usr/bin/chromium"
     _column_filter_dict = None
     _domain = "runrepeat.com"
     _driver_path = "/usr/bin/chromedriver"
-    _sleep = 0.1
+    _sleep = 0.5
+    _timeout = 10
     _url = f"https://{_domain}"
-    _wait = 10
-
-    @classmethod
-    def _setColumnSelectorAvailability(cls, url_path):
-        if not isinstance(url_path, Url_Paths):
-            raise TypeError("url_path must be an enumeration member of Url_Paths")
-        ColumnSelector.includeOnly(include=Url_Paths.get_include_dict()[url_path])
-
-    @classmethod
-    def _setUrl(cls, url_path, gender):
-        if not isinstance(url_path, Url_Paths):
-            raise TypeError("url_path must be an enumeration member of type Url_Paths")
-        if not isinstance(gender, Gender):
-            raise TypeError("url_path must be an enumeration member of type Gender")
-        cls._url += url_path.get_url_path(gender=gender)
-        cls._setColumnSelectorAvailability(url_path=url_path)
-
-    # Set up the browser
-    @classmethod
-    def _initBrowser(cls):
-        service = Service(cls._driver_path)
-        browser = webdriver.Chrome(service=service, options=cls._getChromiumOptions())
-        browser.delete_all_cookies()
-        cls._browser = browser
-        atexit.register(cls._cleanup)
-
-    def __new__(cls):
-        if platform.system() != "Linux":
-            raise RuntimeError("ScraperSingleton is only intended for Linux-based OSes")
-        if cls._browser is None:
-            cls._initBrowser()
-        return cls
-
-    def __init__(self):
-        pass
 
     @classmethod
     def _cleanup(cls):
         if cls._browser is not None:
             cls._browser.quit()
 
-    # Set up Chromium options
     @classmethod
-    def _getChromiumOptions(cls):
-        chromium_options = Options()
-        # chromium_options.add_argument("--headless")
-        chromium_options.add_argument("--no-sandbox")
-        chromium_options.add_argument("--disable-dev-shm-usage") # /dev/shm is generally a tmpfs directory
-        # Create a temporary directory for the user data
-        temp_profile_dir = tempfile.mkdtemp()
-        # Add the user data directory argument
-        chromium_options.add_argument(f"--user-data-dir={temp_profile_dir}")
-        chromium_options.binary_location = cls._chromium_location
-        return chromium_options
-
-    @classmethod
-    def _getColumnFilterDict(cls):
-        if cls._column_filter_dict is None:
-            cls._column_filter_dict = ColumnSelector.get_default_map()
-        return cls._column_filter_dict
-
-    @classmethod
-    def _setColumnFilterDict(cls, dict):
-        if cls._column_filter_dict is None:
-            cls._column_filter_dict = ColumnSelector.get_default_map()
-        for key, value in dict.items():
-            if isinstance(key, ColumnSelector):
-                if isinstance(value, bool):
-                    cls._column_filter_dict[key] = value
-                else:
-                    raise TypeError(f"Expected bool, but received {type(value)}")
-            else:
-                raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
-
-    @classmethod
-    def _scroll_and_click(cls, selector):
-        # Change the selector type if necessary, e.g., By.ID, By.NAME, By.XPATH, etc.
-        element = WebDriverWait(cls._browser, cls._wait).until(EC.visibility_of_element_located(selector))
-        # Scroll the element into view
-        cls._browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        # Wait for the element to be clickable, and then click it
-        WebDriverWait(cls._browser, cls._wait).until(EC.element_to_be_clickable(selector)).click()
-        # Sleep after clicking
-        time.sleep(cls._sleep)
-
-    # Change view to table
-    @classmethod
-    def _getSlimListView(cls):
-        cls._browser.get(cls._url)
-        cookie = cls._browser.get_cookie("list_type")
-        if cookie is None or cookie["value"] != "slim" or cookie["expiry"] < time.time():
-            cls._scroll_and_click(selector=(By.CSS_SELECTOR, "svg.slim-view-icon.catalog__list-tab-icon"))
+    def _getShoeNames(cls):
+        shoe_names = None
+        names = cls._browser.find_elements(By.CSS_SELECTOR, "a.catalog-list-slim__names")
+        if len(names) > 0:
+            if shoe_names is None:
+                shoe_names = []
+            for name in names:
+                shoe_names.append(name.text)
+        return shoe_names
 
     @classmethod
     def _applyColumns(cls):
@@ -783,6 +712,12 @@ class ScraperSingleton:
     @classmethod
     def _editColumns(cls):
         cls._scroll_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button.edit-columns__button"))
+
+    @classmethod
+    def _getColumnFilterDict(cls):
+        if cls._column_filter_dict is None:
+            cls._column_filter_dict = ColumnSelector.get_default_map()
+        return cls._column_filter_dict
 
     @classmethod
     def _getEmptyView(cls):
@@ -820,22 +755,29 @@ class ScraperSingleton:
         cls._setColumnFilterDict(map)
 
     @classmethod
-    def _getShoeNames(cls):
-        shoe_names = None
-        names = cls._browser.find_elements(By.CSS_SELECTOR, "a.catalog-list-slim__names")
-        if len(names) > 0:
-            if shoe_names is None:
-                shoe_names = []
-            for name in names:
-                shoe_names.append(name.text)
-        return shoe_names
+    def _setColumnFilterDict(cls, dict):
+        if cls._column_filter_dict is None:
+            cls._column_filter_dict = ColumnSelector.get_default_map()
+        for key, value in dict.items():
+            if isinstance(key, ColumnSelector):
+                if isinstance(value, bool):
+                    cls._column_filter_dict[key] = value
+                else:
+                    raise TypeError(f"Expected bool, but received {type(value)}")
+            else:
+                raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
 
     @classmethod
-    def _getColumnData(cls, column_list, pages=-1):
+    def _getColumnData(cls, column_list, pages=range(-1)):
+        if not isinstance(pages, range):
+            raise TypeError(f"Expected range for pages, but received {type(pages)}")
+        if pages.start < 1:
+            raise ValueError(f"Page range is restricted to [1, infinity), received range [{pages.start}, {pages.stop})")
+        if len(pages) == 0:
+            pages = itertools.count(start=1)
         outer_list = None
         names_list = None
-        page = 1
-        while True:
+        for page in pages:
             cls._browser.get(cls._url + "?page=" + str(page))
             cls._setColumnFilterDict(ColumnSelector.get_default_map())
             outer_list_idx = 0
@@ -860,14 +802,15 @@ class ScraperSingleton:
                 names_list = []
             for name in cls._getShoeNames():
                 names_list.append(name)
-            page += 1
-            if not pages < 0 and page > pages:
-                return (names_list, outer_list)
+        return (names_list, outer_list)
 
     @classmethod
-    def _getCsvStructure(cls, columnlist):
+    def _getCsvStructure(cls, columnlist, pages=None):
         csv_data = []
-        shoe_names, data_list = cls._getColumnData(column_list=columnlist, pages=2)
+        if pages is None:
+            shoe_names, data_list = cls._getColumnData(column_list=columnlist)
+        else:
+            shoe_names, data_list = cls._getColumnData(column_list=columnlist, pages=pages)
         for name in shoe_names:
             csv_data.append({"SHOE_NAME": name})
         columnlist_idx = 0
@@ -882,25 +825,8 @@ class ScraperSingleton:
         return csv_data
 
     @classmethod
-    def _validateUserColumnList(cls, columnlist):
-        if not isinstance(columnlist, list):
-            raise TypeError(f"Expected list, but received {type(columnlist)}")
-        for member in columnlist:
-            if not isinstance(member, ColumnSelector):
-                raise TypeError(f"Expected ColumnSelector enumeration member in list, but received {type(member)}")
-            if not member.available:
-                raise ValueError(f"Column {member.name} not available for the current shoe-type")
-
-    @classmethod
-    def scrape(cls, columnlist, filename, url_path=Url_Paths.RUNNING_SHOES, gender=Gender.NONE):
-        if not isinstance(filename, str):
-            raise TypeError("filename must be a string")
-        if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
-            raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
-        cls._setUrl(url_path=url_path, gender=gender)
-        cls._validateUserColumnList(columnlist)
-        cls._getSlimListView()
-        filedata = cls._getCsvStructure(columnlist)
+    def _writeCSV(cls, filename, columnlist, pages):
+        filedata = cls._getCsvStructure(columnlist=columnlist, pages=pages)
         directory = os.path.dirname(filename)
         if directory:
             os.makedirs(directory, exist_ok=True)
@@ -910,16 +836,171 @@ class ScraperSingleton:
             for row in filedata:
                 writer.writerow(row)
 
+    @classmethod
+    def _scroll_and_click(cls, selector):
+        # Change the selector type if necessary, e.g., By.ID, By.NAME, By.XPATH, etc.
+        element = WebDriverWait(driver=cls._browser, timeout=cls._timeout).until(EC.visibility_of_element_located(selector))
+        # Scroll the element into view
+        cls._browser.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", element)
+        # Wait for the element to be clickable, and then click it
+        WebDriverWait(driver=cls._browser, timeout=cls._timeout).until(EC.element_to_be_clickable(selector)).click()
+        # Sleep after clicking
+        time.sleep(cls._sleep)
+
+    # Change view to table
+    @classmethod
+    def _getSlimListView(cls):
+        cls._browser.get(cls._url)
+        cookie = cls._browser.get_cookie("list_type")
+        if cookie is None or cookie["value"] != "slim" or cookie["expiry"] < time.time():
+            cls._scroll_and_click(selector=(By.CSS_SELECTOR, "svg.slim-view-icon.catalog__list-tab-icon"))
+
+    @staticmethod
+    def _validateUserColumnList(columnlist):
+        if not isinstance(columnlist, list):
+            raise TypeError(f"Expected list, but received {type(columnlist)}")
+        for member in columnlist:
+            if not isinstance(member, ColumnSelector):
+                raise TypeError(f"Expected ColumnSelector enumeration member in list, but received {type(member)}")
+            if not member.available:
+                raise ValueError(f"Column {member.name} not available for the current shoe-type")
+
+    @classmethod
+    def _setTimeout(cls, timeout):
+        if not isinstance(timeout, (int, float)):
+            raise TypeError(f"Expected integer or floating-point for timeout, but received {type(timeout)}")
+        if timeout < 0:
+            raise ValueError(f"Expected non-negative value for timeout, but received {timeout}")
+        cls._timeout = timeout
+
+    @classmethod
+    def _setSleep(cls, sleep):
+        if not isinstance(sleep, (int, float)):
+            raise TypeError(f"Expected integer or floating-point for sleep, but received {type(sleep)}")
+        if sleep < 0:
+            raise ValueError(f"Expected non-negative value for sleep, but received {sleep}")
+        cls._sleep = sleep
+
+    @staticmethod
+    def _setColumnSelectorAvailability(url_path):
+        if not isinstance(url_path, Url_Paths):
+            raise TypeError("url_path must be an enumeration member of Url_Paths")
+        ColumnSelector.includeOnly(include=Url_Paths.get_include_dict()[url_path])
+
+    @classmethod
+    def _setUrl(cls, url_path, gender):
+        if not isinstance(url_path, Url_Paths):
+            raise TypeError("url_path must be an enumeration member of type Url_Paths")
+        if not isinstance(gender, Gender):
+            raise TypeError("url_path must be an enumeration member of type Gender")
+        cls._url += url_path.get_url_path(gender=gender)
+        cls._setColumnSelectorAvailability(url_path=url_path)
+
+    # PUBLIC INTERFACE METHOD
+    @classmethod
+    def scrape(cls, filename, columnlist=None, url_path=Url_Paths.RUNNING_SHOES, gender=Gender.NONE, pages=None, sleep=None, timeout=None):
+        if not isinstance(filename, str):
+            raise TypeError("filename must be a string")
+        if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
+            raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
+        cls._setUrl(url_path=url_path, gender=gender)
+        if columnlist is None:
+            columnlist = url_path.get_available_columns()
+        if sleep is not None:
+            cls._setSleep(sleep)
+        if timeout is not None:
+            cls._setTimeout(timeout)
+        cls._validateUserColumnList(columnlist)
+        cls._getSlimListView()
+        cls._writeCSV(filename=filename, columnlist=columnlist, pages=pages)
+
+    def __init__(self):
+        pass
+
+    # Set up Chromium options
+    @classmethod
+    def _getChromiumOptions(cls):
+        chromium_options = Options()
+        chromium_options.add_argument("--headless")
+        chromium_options.add_argument("--no-sandbox")
+        # /dev/shm is generally a tmpfs directory
+        chromium_options.add_argument("--disable-dev-shm-usage")
+        # Create a temporary directory for the user data
+        temp_profile_dir = tempfile.mkdtemp()
+        # Add the user data directory argument
+        chromium_options.add_argument(f"--user-data-dir={temp_profile_dir}")
+        chromium_options.binary_location = cls._chromium_location
+        return chromium_options
+
+    # Set up the browser
+    @classmethod
+    def _initBrowser(cls):
+        service = Service(cls._driver_path)
+        browser = webdriver.Chrome(service=service, options=cls._getChromiumOptions())
+        browser.delete_all_cookies()
+        cls._browser = browser
+        atexit.register(cls._cleanup)
+
+    def __new__(cls):
+        if platform.system() != "Linux":
+            raise RuntimeError("ScraperSingleton is only intended for Linux-based OSes")
+        if cls._browser is None:
+            cls._initBrowser()
+        return cls
+
+# END OF CLASSES DEFINITIONS
 
 def main():
-    url = Url_Paths.RUNNING_SHOES
+    # ScraperSingleton.scrape() has NO default value for filename
+        # must be user-specified
+        # can be either a full or relative path
+        # must have the `.csv` file extension
+    filename = "womens_track.csv"
+    # ScraperSingleton.scrape() defaults `url_path` to RUNNING_SHOES
+    url_path = Url_Paths.TRACK_SHOES
+    # ScraperSingleton.scrape() defaults `columnlist` to None (All Available Columns Included)
+        # Url_Paths defines an instance method get_available_columns():
+            # This method returns a list of all available columns
+            # Using TRACK_SHOES as an example: `Url_Paths.TRACK_SHOES.get_available_columns()`
+    # Note: Including a column in the `columnlist` that is NOT available is an exceptional case
+    columnlist = [
+        ColumnSelector.BRAND,
+        ColumnSelector.EVENT,
+        ColumnSelector.FEATURE,
+        ColumnSelector.FEATURES,
+        ColumnSelector.MSRP,
+        ColumnSelector.RELEASE_DATE,
+        ColumnSelector.SPIKE_SIZE,
+        ColumnSelector.SPIKE_TYPE,
+        ColumnSelector.SURFACE,
+        ColumnSelector.USE,
+        ColumnSelector.WEIGHT
+    ]
+    # ScraperSingleton.scrape() defaults `gender` to Gender.NONE (All Shoes)
+    gender = Gender.WOMEN
+    # ScraperSingleton.scrape() defaults `pages` to None (All Pages)
+    # Note: page range must start at 1
+    pages = range(1, 7, 2)
+    # ScraperSingleton.scrape() defaults `sleep` to 0.5 seconds (slow w/ many pages)
+    sleep = 0
+    # ScraperSingleton.scrape() defaults `timeout` to 10 seconds
+    timeout = 1
     try:
         scraper = ScraperSingleton()
-        scraper.scrape(columnlist=Url_Paths.get_include_dict()[url], filename="running_shoes.csv", url_path=url)
+        scraper.scrape(
+            filename=filename,
+            columnlist=columnlist,
+            url_path=url_path,
+            gender=gender,
+            pages=pages,
+            sleep=sleep,
+            timeout=timeout
+        )
     except Exception as e:
-        print(e)
+        print(e, file=sys.stderr)
         return 1
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
