@@ -544,8 +544,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.SHOE_TYPE,
             ColumnSelector.TECHNOLOGY,
             ColumnSelector.USER_RATING,
-            ColumnSelector.WEIGHT,
-            ColumnSelector.WIDTH
+            ColumnSelector.WEIGHT
         ]
     )
     TRACK_SHOES = (
@@ -666,7 +665,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         return include
 
     def get_available_columns(self):
-        return self.get_include_dict()[self]
+        return self.filterlist
 
     def get_url_path(self, gender=Gender.NONE):
         prefix = "/catalog/"
@@ -903,6 +902,8 @@ class ScraperSingleton:
             raise TypeError("filename must be a string")
         if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
             raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
+        if url_path == Url_Paths.SOCCER_CLEATS and ColumnSelector.FEATURES in columnlist:
+            print("INFO: FEATURES column for SOCCER_CLEATS contains Price-Tier data")
         cls._setUrl(url_path=url_path, gender=gender)
         if columnlist is None:
             columnlist = url_path.get_available_columns()
