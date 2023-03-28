@@ -45,8 +45,10 @@ ADD requirements.txt /home/docker/.requirements.txt
 ENV HOME /home/docker
 ENV USER docker
 USER docker
-ENV PATH /home/docker/.local/bin:$PATH
 ADD .scripts /home/docker/.local/bin/
+ENV PATH /home/docker/.local/bin:$PATH
+ADD .modules /home/docker/.local/custom_python_modules/
+ENV PYTHONPATH /home/docker/.local/custom_python_modules:$PYTHONPATH
 RUN sudo chown -R docker:root /home/docker/.local/ && \
     chmod -R 775 /home/docker/.local/
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
