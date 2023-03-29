@@ -45,14 +45,16 @@ ADD requirements.txt /home/docker/.requirements.txt
 ENV HOME /home/docker
 ENV USER docker
 USER docker
-ENV PATH /home/docker/.local/bin:$PATH
 ADD .scripts /home/docker/.local/bin/
+ENV PATH /home/docker/.local/bin:$PATH
+ADD .modules /home/docker/.local/custom_python_modules/
+ENV PYTHONPATH /home/docker/.local/custom_python_modules:$PYTHONPATH
 RUN sudo chown -R docker:root /home/docker/.local/ && \
     chmod -R 775 /home/docker/.local/
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
 RUN pip install --user --no-cache-dir -U pip
-# Note: add any new PyPi packages to requirements.txt 
+# Note: add any new PyPi packages to requirements.txt
 RUN pip install --user --no-cache-dir -r .requirements.txt
 RUN printf "SECRET_KEY='%s'\n" "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > /home/docker/.env
 WORKDIR /home/docker/data/ShoeExpert
