@@ -37,5 +37,6 @@ else
     cd /home/docker/data/ShoeExpert
     python manage.py makemigrations
     python manage.py migrate
+    python manage.py collectstatic # prereq for django-import-export
     cd $LOCAL_DIR
 fi

@@ -767,13 +767,13 @@ class ScraperSingleton:
                 raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
 
     @classmethod
-    def _getColumnData(cls, column_list, pages=range(-1)):
+    def _getColumnData(cls, column_list, pages=range(1, 1)):
         if not isinstance(pages, range):
             raise TypeError(f"Expected range for pages, but received {type(pages)}")
         if pages.start < 1:
             raise ValueError(f"Page range is restricted to [1, infinity), received range [{pages.start}, {pages.stop})")
         if len(pages) == 0:
-            pages = itertools.count(start=1)
+            pages = itertools.count(start=pages.start)
         outer_list = None
         names_list = None
         for page in pages:
@@ -792,7 +792,7 @@ class ScraperSingleton:
                     outer_list = []
                 for element in elements:
                     inner_list.append(element.text)
-                if page == 1:
+                if page == pages.start:
                     outer_list.append(inner_list)
                 else:
                     outer_list[outer_list_idx].extend(inner_list)
@@ -922,7 +922,7 @@ class ScraperSingleton:
     @classmethod
     def _getChromiumOptions(cls):
         chromium_options = Options()
-        chromium_options.add_argument("--headless")
+        # chromium_options.add_argument("--headless")
         chromium_options.add_argument("--no-sandbox")
         # /dev/shm is generally a tmpfs directory
         chromium_options.add_argument("--disable-dev-shm-usage")
