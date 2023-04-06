@@ -3,8 +3,12 @@
     {% include "app1/bootstrap.html" %} {% load static %}
   </head>
   <body>
-    {% include "app1/navigation.html" %} <div class="container">
-      <div class = "jumbotron">
+    {% include "app1/navigation.html" %}
+    <div class = "bg-image"
+    style="background-image: url(https://wallpaper.dog/large/10899445.jpg);
+    min-height: 100%; min-width: 100%; background-size: 100% 100%;">
+    <div class="container">
+      {% comment %} <div class = "jumbotron"> {% endcomment %}
         <h1>Login</h1>
         <form action="/login/" method="POST">{% csrf_token %}
           <table>
@@ -15,7 +19,8 @@
             <tr><td> Click <a href="/join">here</a> to join.</td></tr>
             </table>
          </form>
-       </div>
+       {% comment %} </div> {% endcomment %}
      </div>
+    </div>
    </body>
   </html>

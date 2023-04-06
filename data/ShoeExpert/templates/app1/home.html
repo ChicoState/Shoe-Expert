@@ -6,15 +6,46 @@
 </head>
 
 <body>
+	<div class = "bg-image"
+    style="background-image: url(https://wallpaper.dog/large/10899445.jpg);
+    min-height: 100%; min-width: 100%; background-size: 100% 100%;">
 	{%include "app1/navigation.html" %}
+	<div class="container">
 	<h1> SHOE RECS </h1>
+	<table class="table table-dark table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Shoe Name</th>
+				<th scope="col">Brand</th>
+				<th scope="col">Type</th>
+				<th scope="col">Size Range</th>
+			</tr>
+		</thead>
+		<tbody>
+      <tr>
+        <td>Run</td>
+        <td>Nike</td>
+        <td>Running</td>
+				<td>5-11</td>
+      </tr>
+			<tr>
+        <td>Run</td>
+        <td>Adidas</td>
+        <td>Gym</td>
+				<td>5-11</td>
+      </tr>
+    </tbody>
+	</table>
+
 	{% block content %}
-	<ul> 
+	<ul>
 		{% for shoe in shoes %}
 			<li> {{shoe.name}} - {{shoe.price }} </li>
 		{% endfor%}
 	</ul>
 	{%endblock%}
+</div>
+</div>
 </body>
 
 </html>
