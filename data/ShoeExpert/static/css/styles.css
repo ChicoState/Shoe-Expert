@@ -1,6 +1,8 @@
+html,
 body {
   background-image: url("../img/global_bg_img.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  height: 100%;
 }

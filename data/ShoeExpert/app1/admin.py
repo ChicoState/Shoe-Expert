@@ -34,6 +34,7 @@ class RunningShoeResource(resources.ModelResource):
     class Meta:
         model = RunningShoe
         skip_unchanged = True
+        use_transactions = True
         exclude = ('id')
         import_id_fields = ('shoe_name',)
 

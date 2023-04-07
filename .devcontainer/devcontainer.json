@@ -22,6 +22,6 @@
     },
     "shutdownAction": "stopCompose",
     "postCreateCommand": [
-        "/home/docker/.local/bin/postCreate.bash"
+        "/home/docker/.local/bin/postCreateScript"
     ]
 }
