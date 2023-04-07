@@ -1,14 +1,11 @@
 <html>
 
-<head>
-	{% load static %}
-	{% include "app1/bootstrap.html" %}
-</head>
+{% include "app1/head.html" %}
 
 <body>
-	{%include "app1/navigation.html" %}
+	<div class="container"></div>
 	<h1> Running Shoes </h1>
-	<table class="table table-striped">
+	<table class="table table-striped table-dark table-hover">
 		<thead>
 			<tr>
 				<th scope="col"></th>
@@ -37,35 +34,36 @@
 		</thead>
 		<tbody>
 			{% block content %}
-				{% for value in shoes %}
-					<tr>
-						<th scope="row">{{forloop.counter}}</th>
-						<td>{{value.shoe_name}}</td>
-						<td>{{value.arch_type}}</td>
-						<td>{{value.brand}}</td>
-						<td>{{value.cushioning}}</td>
-						<td>{{value.distance}}</td>
-						<td>{{value.features}}</td>
-						<td>{{value.flexibility}}</td>
-						<td>{{value.forefoot_height}}</td>
-						<td>{{value.heel_height}}</td>
-						<td>{{value.heel_toe_drop}}</td>
-						<td>{{value.msrp}}</td>
-						<td>{{value.pronation}}</td>
-						<td>{{value.release_date}}</td>
-						<td>{{value.strike_pattern}}</td>
-						<td>{{value.technology}}</td>
-						<td>{{value.terrain}}</td>
-						<td>{{value.toebox}}</td>
-						<td>{{value.use}}</td>
-						<td>{{value.waterproofing}}</td>
-						<td>{{value.weight}}</td>
-						<td>{{value.width}}</td>
-					</tr>
-				{% endfor %}
+			{% for value in shoes %}
+			<tr>
+				<th scope="row">{{forloop.counter}}</th>
+				<td>{{value.shoe_name}}</td>
+				<td>{{value.arch_type}}</td>
+				<td>{{value.brand}}</td>
+				<td>{{value.cushioning}}</td>
+				<td>{{value.distance}}</td>
+				<td>{{value.features}}</td>
+				<td>{{value.flexibility}}</td>
+				<td>{{value.forefoot_height}}</td>
+				<td>{{value.heel_height}}</td>
+				<td>{{value.heel_toe_drop}}</td>
+				<td>{{value.msrp}}</td>
+				<td>{{value.pronation}}</td>
+				<td>{{value.release_date}}</td>
+				<td>{{value.strike_pattern}}</td>
+				<td>{{value.technology}}</td>
+				<td>{{value.terrain}}</td>
+				<td>{{value.toebox}}</td>
+				<td>{{value.use}}</td>
+				<td>{{value.waterproofing}}</td>
+				<td>{{value.weight}}</td>
+				<td>{{value.width}}</td>
+			</tr>
+			{% endfor %}
 			{% endblock %}
 		</tbody>
 	</table>
+	</div>
 </body>
 
 </html>
