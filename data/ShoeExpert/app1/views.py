@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from app1.forms import JoinForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app1.models import Shoe
+from app1.models import RunningShoe
 # Create your views here.
 
 def user_logout(request):
@@ -48,7 +48,7 @@ def join(request):
 
 @login_required(login_url='/login/')
 def home(request):
-    shoes = Shoe.objects.all()
+    shoes = RunningShoe.objects.all()
     context = {'shoes': shoes}
     return render(request, 'app1/home.html', context)
 
