@@ -767,40 +767,55 @@ class ScraperSingleton:
                 raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
 
     @classmethod
-    def _getColumnData(cls, column_list, pages=range(-1)):
+    def _getColumnData(cls, column_list, pages=range(1, 1)):
         if not isinstance(pages, range):
             raise TypeError(f"Expected range for pages, but received {type(pages)}")
         if pages.start < 1:
             raise ValueError(f"Page range is restricted to [1, infinity), received range [{pages.start}, {pages.stop})")
         if len(pages) == 0:
-            pages = itertools.count(start=1)
+            pages = itertools.count(start=pages.start)
         outer_list = None
         names_list = None
         for page in pages:
-            cls._browser.get(cls._url + "?page=" + str(page))
-            cls._setColumnFilterDict(ColumnSelector.get_default_map())
-            outer_list_idx = 0
-            for item in column_list:
-                inner_list = []
-                if not isinstance(item, ColumnSelector):
-                    raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(item)}")
-                cls._getSingleColumnView(item)
-                elements = cls._browser.find_elements(*item.get_data_selector())
-                if len(elements) < 1:
-                    return (names_list, outer_list)
+            try:
+                tmp_outer_list = None
+                tmp_names_list = None
+                cls._browser.get(cls._url + "?page=" + str(page))
+                cls._setColumnFilterDict(ColumnSelector.get_default_map())
+                if tmp_names_list is None:
+                    tmp_names_list = []
+                for name in cls._getShoeNames():
+                    tmp_names_list.append(name)
+                # tmp_outer_list_idx = 0
+                for item in column_list:
+                    inner_list = []
+                    if not isinstance(item, ColumnSelector):
+                        raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(item)}")
+                    cls._getSingleColumnView(item)
+                    elements = cls._browser.find_elements(*item.get_data_selector())
+                    if len(elements) < 1:
+                        return (names_list, outer_list)
+                    if tmp_outer_list is None:
+                        tmp_outer_list = []
+                    for element in elements:
+                        inner_list.append(element.text)
+                    # if page == pages.start:
+                    tmp_outer_list.append(inner_list)
+                    # else:
+                    #     tmp_outer_list[tmp_outer_list_idx].extend(inner_list)
+                    # tmp_outer_list_idx += 1
+                if names_list is None:
+                    names_list = []
+                names_list.extend(tmp_names_list)
                 if outer_list is None:
-                    outer_list = []
-                for element in elements:
-                    inner_list.append(element.text)
-                if page == 1:
-                    outer_list.append(inner_list)
-                else:
-                    outer_list[outer_list_idx].extend(inner_list)
-                outer_list_idx += 1
-            if names_list is None:
-                names_list = []
-            for name in cls._getShoeNames():
-                names_list.append(name)
+                    outer_list = [[] for _ in range(len(tmp_outer_list))]
+                outer_list_idx = 0
+                for nested_list in tmp_outer_list:
+                    outer_list[outer_list_idx].extend(nested_list)
+                    outer_list_idx += 1
+            except TimeoutException as e:
+                print(e.msg, file=sys.stderr)
+                print(f"Skipping Page {page}", file=sys.stderr)
         return (names_list, outer_list)
 
     @classmethod
@@ -829,8 +844,8 @@ class ScraperSingleton:
         directory = os.path.dirname(filename)
         if directory:
             os.makedirs(directory, exist_ok=True)
-        with open(filename, "w", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=filedata[0].keys())
+        with open(filename, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=filedata[0].keys(), lineterminator="\n")
             writer.writeheader()
             for row in filedata:
                 writer.writerow(row)

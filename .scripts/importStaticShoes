@@ -1,0 +1,40 @@
+#!/bin/bash
+
+PROC_SCHED=/proc/1/sched
+if ! [ -f $PROC_SCHED ] || [ "$(awk 'FNR == 1 {print $1}' "$PROC_SCHED")" != "python" ]; then
+    echo >&2 "Docker Container Not Detected, Exiting..."
+    exit 1
+fi
+
+if [ -z "$1" ]; then
+    echo >&2 "needs *.csv file argument"
+    exit 2
+fi
+
+if ! cat <<EOF | python /home/docker/data/ShoeExpert/manage.py shell
+import sys
+import csv
+import tablib
+from import_export import resources
+from app1.models import RunningShoe
+from app1.admin import RunningShoeResource
+
+file_path = '$1'
+csv_file = open(file_path, 'r')
+csv_reader = csv.DictReader(csv_file)
+
+data = tablib.Dataset(headers=csv_reader.fieldnames)
+for row in csv_reader:
+    data.append(row.values())
+
+try:
+    dataset = RunningShoeResource().import_data(data, raise_errors=True)
+except Exception as e:
+    print(e, file=sys.stderr)
+    sys.exit(1)
+EOF
+then
+    exit 3
+else
+    exit 0
+fi

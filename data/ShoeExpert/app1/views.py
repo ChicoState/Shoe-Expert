@@ -1,14 +1,19 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from app1.forms import JoinForm, LoginForm
+from app1.models import RunningShoe
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app1.models import Shoe
+from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+
+
 # Create your views here.
+
 
 def user_logout(request):
     logout(request)
     return redirect("/")
+
 
 def user_login(request):
     if(request.method == 'POST'):
@@ -48,9 +53,13 @@ def join(request):
 
 @login_required(login_url='/login/')
 def home(request):
-    shoes = Shoe.objects.all()
-    context = {'shoes': shoes}
-    return render(request, 'app1/home.html', context)
+    shoes_per_page = 5
+    queryset = RunningShoe.objects.all().order_by('shoe_name')
+    paginator = Paginator(queryset, shoes_per_page)
+    page = request.GET.get('page')
+    shoes = paginator.get_page(page)
+    return render(request, 'app1/home.html', {'shoes': shoes})
+
 
 @login_required(login_url='/login/')
 def about(request):
