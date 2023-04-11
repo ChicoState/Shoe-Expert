@@ -61,7 +61,6 @@ def home(request):
     return render(request, 'app1/home.html', {'shoes': shoes})
 
 
-@login_required(login_url='/login/')
 def about(request):
     return render(request, 'app1/about.html')
 
