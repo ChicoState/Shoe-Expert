@@ -1,5 +1,5 @@
 Django==4.2
 python-dotenv==1.0.0
 django-bootstrap4==23.1
-django-import-export==3.1.0
+django-import-export==3.2.0
 selenium==4.8.3
