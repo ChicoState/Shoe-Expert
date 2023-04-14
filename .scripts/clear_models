@@ -11,10 +11,10 @@ cd /home/docker/data/ShoeExpert
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 find . -path "*/migrations/*.pyc" -delete
 find . -path "*.sqlite3" -delete
-python manage.py makemigrations
-python manage.py migrate
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
 python manage.py collectstatic --noinput -c -l -v 0 # prereq for django-import-export
-importStaticShoes static/shoe_data/running_shoes.csv
+# FIXME: importStaticShoes static/shoe_data/running_shoes.csv
 cd $LOCAL_DIR
 
 createDockerAdminUser

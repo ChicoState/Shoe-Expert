@@ -1,5 +1,8 @@
 import atexit
 import csv
+import datetime
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from enum import Enum, EnumMeta
 import itertools
 import os
@@ -20,92 +23,94 @@ class ColumnSelectorEnumMeta(EnumMeta):
     def __new__(metacls, cls, bases, classdict):
         enum_class = super().__new__(metacls, cls, bases, classdict)
         for _, member in enum_class.__members__.items():
-            value, available = member._value_
+            value, available, regex, django_model = member._value_
             member._value_ = value
             member.available = available
+            member.regex = regex
+            member.django_model = django_model
         return enum_class
 
 class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
-    ARCH_SUPPORT = ("fact-arch-support", True)
-    ARCH_TYPE = ("fact-arch-type", True)
-    BRAND = ("fact-brand", True)
-    CLEAT_DESIGN = ("fact-cleat-design", True)
-    CLOSURE = ("fact-closure", True)
-    COLLABORATION = ("fact-collaboration", True)
-    COLLECTION = ("fact-collection", True)
-    CONDITION = ("fact-condition", True)
-    CONSTRUCTION = ("fact-construction", True)
-    CUSHIONING = ("fact-cushioning", True)
-    CUT = ("fact-cut", True)
-    DESIGNED_BY = ("fact-designed-by", True)
-    DISTANCE = ("fact-distance", True)
-    DOWNTURN = ("fact-downturn", True)
-    EMBELLISHMENT = ("fact-embellishment", True)
-    ENVIRONMENT = ("fact-environment", True)
-    EVENT = ("fact-event", True)
-    EXPERT_RATING = ("fact-expert_score", True)
-    FEATURE = ("fact-feature", True)
-    FEATURES = ("fact-features", True)
-    FIT = ("fact-fit", True)
-    FOOT_CONDITION = ("fact-foot-condition", True)
-    FOREFOOT_HEIGHT = ("fact-forefoot-height", True)
-    FLEXIBILITY = ("fact-flexibility", True)
-    GRAM_INSULATION = ("fact-gram-insulation", True)
-    HEEL_HEIGHT = ("fact-heel-height", True)
-    HEEL_TOE_DROP = ("fact-heel-to-toe-drop", True)
-    INSPIRED_FROM = ("fact-inspired-from", True)
-    LACE_TYPE = ("fact-lace-type", True)
-    LACING_SYSTEM = ("fact-lacing-system", True)
-    LAST_SHAPE = ("fact-last-shape", True)
-    LEVEL = ("fact-level", True)
-    LINING = ("fact-lining", True)
-    LOCKDOWN = ("fact-lockdown", True)
-    MSRP = ("fact-msrp_formatted", True)
-    MATERIAL = ("fact-material", True)
-    MIDSOLE = ("fact-midsole", True)
-    NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True)
-    ORIGIN = ("fact-origin", True)
-    ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True)
-    OUTSOLE = ("fact-outsole", True)
-    PACE = ("fact-pace", True)
-    PRINT = ("fact-print", True)
-    PRONATION = ("fact-pronation", True)
-    PROTECTION = ("fact-protection", True)
-    RANDING = ("fact-randing", True)
-    RELEASE_DATE = ("fact-release-date", True)
-    REVIEW_TYPE = ("fact-review-type", True)
-    RIGIDITY = ("fact-rigidity", True)
-    SALES_PRICE = ("fact-price", True)
-    SCORE = ("fact-score", True)
-    SEASON = ("fact-season", True)
-    SENSITIVITY = ("fact-sensitivity", True)
-    SHOE_TYPE = ("fact-shoe-type", True)
-    SIGNATURE = ("fact-signature", True)
-    SPIKE_SIZE = ("fact-spike-size", True)
-    SPIKE_TYPE = ("fact-spike-type", True)
-    STIFFNESS = ("fact-stiffness", True)
-    STRETCH = ("fact-stretch", True)
-    STRIKE_PATTERN = ("fact-strike-pattern", True)
-    STUD_TYPE = ("fact-stud-type", True)
-    STYLE = ("fact-style", True)
-    SUMMER = ("fact-summer", True)
-    SURFACE = ("fact-surface", True)
-    SUPPORT = ("fact-support", True)
-    TERRAIN = ("fact-terrain", True)
-    TECHNOLOGY = ("fact-technology", True)
-    THICKNESS = ("fact-thickness", True)
-    TOEBOX = ("fact-toebox", True)
-    TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True)
-    TOP = ("fact-top", True)
-    TYPE = ("fact-type", True)
-    ULTRA_RUNNING = ("fact-ultra-running", True)
-    USE = ("fact-use", True)
-    USER_RATING = ("fact-users_score", True)
-    WATERPROOFING = ("fact-waterproofing", True)
-    WEIGHT = ("fact-weight", True)
-    WIDTH = ("fact-width", True)
-    WORN_BY = ("fact-worn-by", True)
-    ZERO_DROP = ("fact-zero-drop", True)
+    ARCH_SUPPORT = ("fact-arch-support", True, None, models.IntegerField(choices=((0, "Stability"), (1, "Neutral"), (2, "Motion control")), blank=True, null=True))
+    ARCH_TYPE = ("fact-arch-type", True, None, models.IntegerField(choices=((0, "Low"), (2, "High")), blank=True, null=True))
+    BRAND = ("fact-brand", True, None, models.CharField(max_length=32, blank=True, null=True))
+    CLEAT_DESIGN = ("fact-cleat-design", True, None, None)
+    CLOSURE = ("fact-closure", True, None, None)
+    COLLABORATION = ("fact-collaboration", True, None, None)
+    COLLECTION = ("fact-collection", True, None, None)
+    CONDITION = ("fact-condition", True, None, None)
+    CONSTRUCTION = ("fact-construction", True, None, None)
+    CUSHIONING = ("fact-cushioning", True, None, models.IntegerField(choices=((1, "Firm"), (2, "Balanced"), (3, "Plush")), blank=True, null=True))
+    CUT = ("fact-cut", True, None, None)
+    DESIGNED_BY = ("fact-designed-by", True, None, None)
+    DISTANCE = ("fact-distance", True, None, None)
+    DOWNTURN = ("fact-downturn", True, None, None)
+    EMBELLISHMENT = ("fact-embellishment", True, None, None)
+    ENVIRONMENT = ("fact-environment", True, None, None)
+    EVENT = ("fact-event", True, None, None)
+    EXPERT_RATING = ("fact-expert_score", True, None, None)
+    FEATURE = ("fact-feature", True, None, None)
+    FEATURES = ("fact-features", True, None, None)
+    FIT = ("fact-fit", True, None, None)
+    FOOT_CONDITION = ("fact-foot-condition", True, None, None)
+    FOREFOOT_HEIGHT = ("fact-forefoot-height", True, None, models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True))
+    FLEXIBILITY = ("fact-flexibility", True, None, models.IntegerField(choices=((1, "Very stiff"), (2, "Stiff"), (3, "Moderate"), (4, "Flexible"), (5, "Very flexible")), blank=True, null=True))
+    GRAM_INSULATION = ("fact-gram-insulation", True, None, None)
+    HEEL_HEIGHT = ("fact-heel-height", True, None, models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True))
+    HEEL_TOE_DROP = ("fact-heel-to-toe-drop", True, None, models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True))
+    INSPIRED_FROM = ("fact-inspired-from", True, None, None)
+    LACE_TYPE = ("fact-lace-type", True, None, None)
+    LACING_SYSTEM = ("fact-lacing-system", True, None, None)
+    LAST_SHAPE = ("fact-last-shape", True, None, None)
+    LEVEL = ("fact-level", True, None, None)
+    LINING = ("fact-lining", True, None, None)
+    LOCKDOWN = ("fact-lockdown", True, None, None)
+    MSRP = ("fact-msrp_formatted", True, None, models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True))
+    MATERIAL = ("fact-material", True, None, None)
+    MIDSOLE = ("fact-midsole", True, None, None)
+    NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True, None, None)
+    ORIGIN = ("fact-origin", True, None, None)
+    ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True, None, None)
+    OUTSOLE = ("fact-outsole", True, None, None)
+    PACE = ("fact-pace", True, None, None)
+    PRINT = ("fact-print", True, None, None)
+    PRONATION = ("fact-pronation", True, None, models.CharField(max_length=256, blank=True, null=True))
+    PROTECTION = ("fact-protection", True, None, None)
+    RANDING = ("fact-randing", True, None, None)
+    RELEASE_DATE = ("fact-release-date", True, None, models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(datetime.today().year + 1)], blank=True, null=True))
+    REVIEW_TYPE = ("fact-review-type", True, None, None)
+    RIGIDITY = ("fact-rigidity", True, None, None)
+    SALES_PRICE = ("fact-price", True, None, None)
+    SCORE = ("fact-score", True, None, None)
+    SEASON = ("fact-season", True, None, None)
+    SENSITIVITY = ("fact-sensitivity", True, None, None)
+    SHOE_TYPE = ("fact-shoe-type", True, None, None)
+    SIGNATURE = ("fact-signature", True, None, None)
+    SPIKE_SIZE = ("fact-spike-size", True, None, None)
+    SPIKE_TYPE = ("fact-spike-type", True, None, None)
+    STIFFNESS = ("fact-stiffness", True, None, None)
+    STRETCH = ("fact-stretch", True, None, None)
+    STRIKE_PATTERN = ("fact-strike-pattern", True, None, models.CharField(max_length=128, blank=True, null=True))
+    STUD_TYPE = ("fact-stud-type", True, None, None)
+    STYLE = ("fact-style", True, None, None)
+    SUMMER = ("fact-summer", True, None, None)
+    SURFACE = ("fact-surface", True, None, None)
+    SUPPORT = ("fact-support", True, None, None)
+    TERRAIN = ("fact-terrain", True, None, models.IntegerField(choices=((1, "Road"), (2, "Trail")), blank=True, null=True))
+    TECHNOLOGY = ("fact-technology", True, None, None)
+    THICKNESS = ("fact-thickness", True, None, models.IntegerField(choices=((1, "Narrow"), (2, "Medium"), (3, "Wide"), (4, "Extra Wide")), blank=True, null=True))
+    TOEBOX = ("fact-toebox", True, None, None)
+    TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True, None, None)
+    TOP = ("fact-top", True, None, None)
+    TYPE = ("fact-type", True, None, None)
+    ULTRA_RUNNING = ("fact-ultra-running", True, None, None)
+    USE = ("fact-use", True, None, None)
+    USER_RATING = ("fact-users_score", True, None, None)
+    WATERPROOFING = ("fact-waterproofing", True, None, None)
+    WEIGHT = ("fact-weight", True, None, models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True))
+    WIDTH = ("fact-width", True, None, models.CharField(max_length=128, blank=True, null=True))
+    WORN_BY = ("fact-worn-by", True, None, None)
+    ZERO_DROP = ("fact-zero-drop", True, None, None)
 
     @classmethod
     def _reset_availability(cls, val=True):
@@ -657,15 +662,15 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         ]
     )
 
+    def get_available_columns(self):
+        return self.filterlist
+
     @classmethod
     def get_include_dict(cls):
         include = {}
         for member in cls:
-            include[member] = member.filterlist
+            include[member] = member.get_available_columns()
         return include
-
-    def get_available_columns(self):
-        return self.filterlist
 
     def get_url_path(self, gender=Gender.NONE):
         prefix = "/catalog/"
@@ -677,6 +682,9 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             return f"{prefix}womens-{self.value}"
         else:
             raise TypeError("gender must be an enumeration member of Gender")
+
+    def setColumnSelectorAvailability(self):
+        ColumnSelector.includeOnly(include=self.get_available_columns())
 
 class ScraperSingleton:
     _browser = None
@@ -786,7 +794,6 @@ class ScraperSingleton:
                     tmp_names_list = []
                 for name in cls._getShoeNames():
                     tmp_names_list.append(name)
-                # tmp_outer_list_idx = 0
                 for item in column_list:
                     inner_list = []
                     if not isinstance(item, ColumnSelector):
@@ -799,11 +806,7 @@ class ScraperSingleton:
                         tmp_outer_list = []
                     for element in elements:
                         inner_list.append(element.text)
-                    # if page == pages.start:
                     tmp_outer_list.append(inner_list)
-                    # else:
-                    #     tmp_outer_list[tmp_outer_list_idx].extend(inner_list)
-                    # tmp_outer_list_idx += 1
                 if names_list is None:
                     names_list = []
                 names_list.extend(tmp_names_list)
@@ -895,12 +898,6 @@ class ScraperSingleton:
             raise ValueError(f"Expected non-negative value for sleep, but received {sleep}")
         cls._sleep = sleep
 
-    @staticmethod
-    def _setColumnSelectorAvailability(url_path):
-        if not isinstance(url_path, Url_Paths):
-            raise TypeError("url_path must be an enumeration member of Url_Paths")
-        ColumnSelector.includeOnly(include=Url_Paths.get_include_dict()[url_path])
-
     @classmethod
     def _setUrl(cls, url_path, gender):
         if not isinstance(url_path, Url_Paths):
@@ -908,7 +905,7 @@ class ScraperSingleton:
         if not isinstance(gender, Gender):
             raise TypeError("url_path must be an enumeration member of type Gender")
         cls._url += url_path.get_url_path(gender=gender)
-        cls._setColumnSelectorAvailability(url_path=url_path)
+        url_path.setColumnSelectorAvailability()
 
     # PUBLIC INTERFACE METHOD
     @classmethod
