@@ -88,10 +88,15 @@ WSGI_APPLICATION = 'ShoeExpert.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# TODO: Change before production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ShoeExpert',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': 'db',
+        'PORT': '',
     }
 }
 

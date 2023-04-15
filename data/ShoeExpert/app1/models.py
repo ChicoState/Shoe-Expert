@@ -9,9 +9,8 @@ def create_shoe_model(url_path = Url_Paths.RUNNING_SHOES):
         "shoe_name": models.CharField(max_length=128, primary_key=True),
         "__str__": lambda self: self.shoe_name,
     }
-    for col in url_path.get_available_columns():
-        if col.django_model is not None:
-            attrs[col.name.lower()] = col.django_model
+    for col in url_path.get_django_available_columns():
+        attrs[col.name.lower()] = col.django_model
     globals()[url_path.name.capitalize()] = type(url_path.name.capitalize(), (models.Model,), attrs)
 
 create_shoe_model()

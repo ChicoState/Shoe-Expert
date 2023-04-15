@@ -19,7 +19,7 @@ def create_model_resource(url_path = Url_Paths.RUNNING_SHOES):
     attrs = {
         '__module__': __name__,
         "shoe_name": Field(attribute='shoe_name', column_name='SHOE_NAME'),
-        'Meta': type('Meta', (object,), {'model': globals()[url_path.name.capitalize()], 'skip_unchanged': True, 'use_transactions': True, 'exclude': ('id'), 'import_id_fields': ('shoe_name')}),
+        'Meta': type('Meta', (object,), {'model': globals()[url_path.name.capitalize()], 'skip_unchanged': True, 'use_transactions': True, 'exclude': ('id'), 'import_id_fields': ('shoe_name',)}),
     }
     for col in url_path.get_available_columns():
         if col.django_model is not None:
