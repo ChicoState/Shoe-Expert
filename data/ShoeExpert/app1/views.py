@@ -16,7 +16,7 @@ def user_logout(request):
 
 
 def user_login(request):
-    if(request.method == 'POST'):
+    if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
@@ -30,14 +30,15 @@ def user_login(request):
                     return HttpResponse("Your account is not active.")
             else:
                 print("Someone tried to login and failed.")
-                print("They used username: {} and password: {}".format(username, password))
-    return render(request, 'app1/login.html', {"login_form":LoginForm})
+                print("They used username: {} and password: {}".format(
+                    username, password))
+    return render(request, 'app1/login.html', {"login_form": LoginForm})
 
 
 def join(request):
-    if(request.method == "POST"):
+    if (request.method == "POST"):
         join_form = JoinForm(request.POST)
-        if(join_form.is_valid()):
+        if (join_form.is_valid()):
             user = join_form.save()
             user.set_password(user.password)
             user.save()
@@ -47,7 +48,7 @@ def join(request):
             return render(request, 'app1/join.html', page_data)
     else:
         join_form = JoinForm()
-        page_data = {"join_form":join_form}
+        page_data = {"join_form": join_form}
     return render(request, 'app1/join.html', page_data)
 
 
@@ -64,3 +65,7 @@ def home(request):
 def about(request):
     return render(request, 'app1/about.html')
 
+
+@login_required(login_url='/login/')
+def blog(request):
+    return render(request, 'app1/blog.html')
