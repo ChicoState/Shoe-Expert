@@ -60,17 +60,26 @@ def join(request):
 
 @login_required(login_url='/login/')
 def home(request):
-    shoes_per_page = 5
-    queryset = globals()[Url_Paths.RUNNING_SHOES.name.capitalize()].objects.all().order_by('shoe_name')
+    url_path = Url_Paths.RUNNING_SHOES
+    page_sizes = [5, 10, 15, 20, 30, 40, 50]
+    shoes_per_page = int(request.GET.get('shoes_per_page', page_sizes[0]))
+    queryset = globals()[url_path.name.capitalize()].objects.all().order_by('shoe_name')
     paginator = Paginator(queryset, shoes_per_page)
     page = request.GET.get('page')
     shoes = paginator.get_page(page)
     headers = []
     fields = []
-    for column in Url_Paths.RUNNING_SHOES.get_django_available_columns():
-        headers.append(column.name.capitalize().replace('_', ' '))
-        fields.append(column.name.lower())
-    return render(request, 'app1/home.html', {'shoes': shoes, 'headers': headers, 'fields': fields})
+    for column in url_path.get_django_available_columns():
+        headers.append(url_path.get_column_name(column, display = True))
+        fields.append(url_path.get_column_name(column, attribute = True))
+    return render(request, 'app1/home.html', {
+        'shoes': shoes,
+        'headers': headers,
+        'fields': fields,
+        'shoes_per_page': shoes_per_page,
+        'page_sizes': page_sizes,
+        'title': url_path.name.replace('_', ' ').title()
+    })
 
 
 def about(request):

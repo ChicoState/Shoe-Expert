@@ -247,3 +247,4 @@ nginx/ssl/archive
 secret/
 obj/
 .~lock.*
+postgresql/
