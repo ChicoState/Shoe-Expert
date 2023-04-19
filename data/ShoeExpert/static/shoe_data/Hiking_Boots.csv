@@ -1,0 +1,266 @@
+SHOE_NAME,Brand,Cut,Fit,MSRP (USD),Origin,Orthotic Friendly,Release Date,Season,Use,Waterproofing,Weight (oz),Widths Available,Zero Drop
+Adidas Terrex Free Hiker,Adidas,Mid,{},200.00,,False,,{Summer},"{Day, Speed}",Water Repellent,13.5,{Standard},False
+Salomon Quest 4 GTX,Salomon,High,{},230.00,,True,2021,{},{Backpacking},Waterproof,23.1,{Standard},False
+Salomon X Ultra 4 Mid GTX,Salomon,Mid,{},165.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,15.0,"{Standard, Wide}",False
+Danner Mountain 600,Danner,Mid,{},200.00,,True,,{},{Day},Waterproof,19.5,"{Standard, Wide}",False
+Salomon X Ultra 3 Mid GTX,Salomon,Mid,{},165.00,,True,,{},{Day},Waterproof,15.8,"{Standard, Wide}",False
+Timberland Euro Hiker,Timberland,Mid,{},110.00,,True,,"{Winter, Summer}","{Day, Urban, Snow}",,17.1,"{Standard, Wide}",False
+Adidas Terrex Free Hiker GTX,Adidas,Mid,{},250.00,,True,2019,{},{Day},Waterproof,14.8,{Standard},False
+KEEN Revel IV High Polar,KEEN,High,{},190.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,,{Standard},False
+Altra Lone Peak Hiker,Altra,Mid,{Wide Toebox},140.00,,True,2021,{},"{Day, Urban}",,11.5,{Standard},True
+Hoka Anacapa Mid GTX,Hoka,Mid,{},170.00,,True,2021,{},{Day},Waterproof,16.0,{Standard},False
+Columbia Fairbanks Omni-Heat Boot,Columbia,Mid,{},130.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,15.7,"{Standard, Wide}",False
+Adidas Terrex Free Hiker 2,Adidas,Mid,{},200.00,,True,,{Summer},"{Day, Speed}",,15.0,{Standard},False
+Danner Jag,Danner,Mid,{},180.00,,True,,{},"{Day, Urban}",Waterproof,17.0,{Standard},False
+Merrell Moab 3 Mid,Merrell,Mid,{},120.00,,True,2022,{Summer},{Day},,17.6,"{Standard, Wide}",False
+Danner Mountain Light,Danner,Mid,{},380.00,USA,True,,{},{Backpacking},Waterproof,29.0,"{Standard, Wide}",False
+Merrell Moab 3 Mid Waterproof,Merrell,Mid,{},145.00,,True,2023,{},{Day},Waterproof,16.4,"{Standard, Wide}",False
+On Cloudrock Waterproof,On,Mid,{},230.00,,True,2019,{},{Speed},Waterproof,15.7,{Standard},False
+La Sportiva Ultra Raptor II Mid GTX,La Sportiva,Mid,{},175.00,,True,2021,{},"{Day, Backpacking}",Waterproof,16.6,"{Narrow, Standard, Wide}",False
+Columbia Bugaboot III,Columbia,High,{},115.00,,False,2020,{Winter},"{Day, Snow}",Waterproof,24.5,"{Narrow, Standard, Wide}",False
+KEEN Pyrenees,KEEN,High,{},150.00,,True,2019,{},{Day},Waterproof,20.2,{Standard},False
+Lowa Innox Pro GTX Mid,Lowa,Mid,{},235.00,European,True,2020,{},"{Day, Speed}",Waterproof,15.9,{Standard},False
+Hoka Kaha 2 GTX,Hoka,Mid,{},240.00,,True,2022,{},{},Waterproof,16.8,{Standard},False
+Salomon OUTline Mid GTX,Salomon,Mid,{},150.00,,True,,{},"{Day, Urban, Speed}",Waterproof,14.8,{Standard},False
+Salomon Quest Element GTX,Salomon,High,{},180.00,,True,2022,{},{Backpacking},Waterproof,19.2,{Standard},False
+Scarpa Terra GTX,Scarpa,High,{},200.00,Italian,True,,{},{Day},Waterproof,19.0,{Standard},False
+Columbia Trailstorm Mid Waterproof,Columbia,Mid,{},110.00,,True,2021,{},"{Day, Urban}",Waterproof,12.2,"{Standard, Wide}",False
+KEEN Targhee II Mid,KEEN,Mid,{Wide Toebox},140.00,,True,2019,{},{Day},Waterproof,17.4,"{Narrow, Standard, Wide}",False
+Cole Haan Zerogrand Hiker Boot,Cole Haan,Mid,{},320.00,,True,2021,{},"{Day, Urban}",Waterproof,25.0,"{Standard, Wide}",False
+Asolo Fugitive GTX,Asolo,Mid,{Wide Toebox},250.00,European,True,,"{Winter, Summer}","{Day, Snow}",Waterproof,24.3,"{Standard, Wide}",False
+Merrell Moab 2 Mid Waterproof,Merrell,Mid,{},130.00,,True,,{},{Day},Waterproof,17.8,"{Standard, Wide}",False
+Columbia Firecamp Boot,Columbia,Mid,{},100.00,,True,2020,{Winter},"{Day, Urban, Snow}",Waterproof,14.8,"{Standard, Wide}",False
+Salomon Cross Hike Mid GTX,Salomon,Mid,{},170.00,,True,2020,{},{Speed},Waterproof,14.0,{Standard},False
+Salomon Outpulse Mid GTX,Salomon,Mid,{},160.00,,True,2022,{},{Day},Waterproof,13.4,{Standard},False
+Timberland Euro Hiker Shell-Toe,Timberland,Mid,{},140.00,,True,2022,{},{Day},Water Repellent,,{Standard},False
+Scarpa Rush TRK GTX,Scarpa,Mid,{},239.00,European,True,2022,{},{Backpacking},Waterproof,19.6,{Standard},False
+Columbia Fairbanks Mid,Columbia,Mid,{},110.00,,True,2022,{},"{Day, Urban, Speed}",Waterproof,15.0,{Standard},False
+Timberland World Hiker,Timberland,Mid,{},280.00,,False,2023,{},{Day},Waterproof,,{Standard},False
+Asolo Falcon GV,Asolo,Mid,{},220.00,European,True,,{},{Day},Waterproof,17.3,{Standard},False
+Teva Grandview GTX,Teva,Mid,{Wide Toebox},175.00,,True,2020,{},"{Day, Backpacking}",Waterproof,16.9,{Standard},False
+Lowa Renegade GTX Mid,Lowa,Mid,{},240.00,European,True,,{},{Day},Waterproof,19.5,"{Narrow, Standard, Wide}",False
+Oboz Bridger Mid BDry,Oboz,Mid,{},180.00,,True,,{},{Day},Waterproof,19.0,"{Standard, Wide}",False
+Hanwag Alverstone II GTX,Hanwag,High,{},340.00,,True,2019,{},{Backpacking},Waterproof,25.7,"{Standard, Wide}",False
+The North Face Chilkat V 400,The North Face,High,{},159.00,,False,2023,{Winter},"{Day, Snow}",Waterproof,25.2,{Standard},False
+La Sportiva Nucleo High II GTX,La Sportiva,High,{},200.00,,True,2021,{},{Backpacking},Waterproof,16.8,"{Standard, Wide}",False
+Danner Panorama,Danner,Mid,{},160.00,,True,2022,{},{Day},Waterproof,18.5,"{Standard, Wide}",False
+The North Face Vectiv Fastpack Insulated Futurelight,The North Face,Mid,{},195.00,,True,2023,{Winter},"{Day, Snow}",Waterproof,16.8,{Standard},False
+Hoka Trail Code GTX,Hoka,Mid,{},185.00,,False,2023,{},{Day},Waterproof,15.3,{Standard},False
+KEEN Revel IV Mid Polar,KEEN,Mid,{},170.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,24.1,{Standard},False
+Lowa Zephyr GTX Mid,Lowa,Mid,{},210.00,European,True,2021,{},"{Day, Backpacking}",Waterproof,19.4,{Standard},False
+Danner Skyridge,Danner,Mid,{},150.00,,True,,{},"{Day, Urban}",Waterproof,17.5,{Standard},False
+Hanwag Tatra II GTX,Hanwag,Mid,{Wide Toebox},325.00,German,True,,{},{Backpacking},Waterproof,26.8,"{Narrow, Standard, Wide}",False
+Merrell Moab 2 Mid GTX,Merrell,Mid,{},150.00,,True,,{},{Day},Waterproof,16.5,"{Standard, Wide}",False
+KEEN Voyageur Mid,KEEN,Mid,{},125.00,,True,,{Summer},{Desert},Water Repellent,16.2,{Standard},False
+Hoka Kaha GTX,Hoka,Mid,{},220.00,,True,2020,{},{Backpacking},Waterproof,17.9,{Standard},False
+Timberland Euro Trekker,Timberland,Mid,{},120.00,,True,2022,{},"{Day, Urban}",,17.0,{Standard},False
+Vasque Breeze LT NTX,Vasque,Mid,{},180.00,,False,2021,{},{Day},Waterproof,14.7,{Standard},False
+Danner Mountain Pass,Danner,Mid,{},360.00,USA,True,,{},"{Urban, Light}",Waterproof,23.0,"{Standard, Wide}",False
+KEEN NXIS Speed Mid,KEEN,Mid,{Wide Toebox},155.00,,True,2022,{Summer},{Speed},,12.0,{Standard},False
+Danner South Rim 600,Danner,Mid,{},150.00,,True,,{Summer},"{Day, Desert}",,16.0,"{Standard, Wide}",False
+Adidas Terrex AX4 Mid GTX,Adidas,,{},140.00,,False,,{},{},,15.2,{Standard},False
+On Cloudridge,On,Mid,{},210.00,,True,2022,{Summer},{},,14.5,{Standard},False
+Danner Free Spirit,Danner,Mid,{},200.00,,True,2022,{},"{Day, Urban}",Waterproof,18.5,{Standard},False
+Salewa Dropline Mid,Salewa,Mid,{},180.00,,True,2021,{Summer},"{Alpine, Speed}",,13.1,{Standard},False
+Lowa Tibet GTX,Lowa,Mid,{},395.00,German,True,,{},{Backpacking},Waterproof,31.7,"{Standard, Wide}",False
+Merrell Alverstone Mid Waterproof,Merrell,Mid,{},110.00,,True,2019,{},{Day},Waterproof,14.6,"{Standard, Wide}",False
+Vasque Talus XT GTX,Vasque,Mid,{},220.00,,True,2020,{},{Backpacking},Waterproof,21.4,"{Standard, Wide}",False
+Timberland Euro Sprint Hiker,Timberland,Mid,{},110.00,,True,,{Summer},{Day},,17.0,{Standard},False
+Lowa Hunter GTX Evo Extreme,Lowa,High,{},460.00,German,True,,{Winter},"{Backpacking, Snow}",Waterproof,36.2,{Standard},False
+Timberland White Ledge Mid Waterproof,Timberland,Mid,{},110.00,,True,2019,{},{Day},Waterproof,18.0,"{Standard, Wide}",False
+Danner Arctic 600 Side-Zip,Danner,Mid,{},220.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,22.5,"{Standard, Wide}",False
+The North Face Vectiv Exploris Mid Futurelight,The North Face,Mid,{},169.00,,True,2022,{},"{Day, Speed}",Waterproof,14.7,{Standard},False
+Timberland Euro Hiker Waterproof,Timberland,Mid,{},150.00,,True,2020,{},{Day},Waterproof,,"{Narrow, Standard}",False
+On Cloudtrax,On,Mid,{},190.00,,False,2022,{Summer},"{Day, Urban}",Water Repellent,15.2,{Standard},False
+Hanwag Alaska GTX,Hanwag,High,{Wide Toebox},370.00,,False,,{},{Backpacking},Waterproof,30.9,"{Standard, Wide}",False
+Scarpa Maverick Mid GTX,Scarpa,Mid,{},199.00,,False,2020,{},{Speed},Waterproof,16.8,{Standard},False
+Asolo Landscape GV,Asolo,Mid,{},160.00,,True,2020,{},"{Day, Speed}",Waterproof,14.1,{Standard},False
+Danner Mountain Light II,Danner,Mid,{},380.00,USA,True,,{},{Backpacking},Waterproof,31.5,"{Standard, Wide}",False
+Arc'teryx Acrux TR GTX,Arc'teryx,Mid,{},240.00,,True,2020,{},"{Day, Backpacking}",Waterproof,19.4,{Standard},False
+Lowa Camino GTX,Lowa,Mid,{},300.00,German,True,,{},{Backpacking},Waterproof,27.3,"{Standard, Wide}",False
+Garmont Toubkal GTX,Garmont,Mid,{},300.00,European,True,2019,{},{Backpacking},Waterproof,22.9,{Standard},False
+Danner Light,Danner,High,{},380.00,USA,True,,{},{Backpacking},Waterproof,30.5,"{Standard, Wide}",False
+Ariat Terrain,Ariat,Mid,{},95.00,,True,,{},{Day},,20.0,"{Standard, Wide}",False
+Scarpa Mescalito TRK GTX,Scarpa,High,{},299.00,European,True,2022,{},{Backpacking},Waterproof,23.3,{Standard},False
+ECCO Track 25 Boot,ECCO,High,{},250.00,,True,2020,{Winter},{Snow},Waterproof,,{Standard},False
+Columbia Newton Ridge Plus II Waterproof,Columbia,Mid,{},80.00,,True,,{},{Day},Waterproof,15.9,"{Standard, Wide}",False
+Merrell Moab Speed Mid GTX,Merrell,Mid,{},160.00,,True,2021,{},"{Day, Speed}",Waterproof,10.6,{Standard},False
+Xero Shoes Alpine,Xero Shoes,High,{Wide Toebox},160.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,14.9,{Standard},True
+Vasque Breeze LT GTX,Vasque,Mid,{},180.00,,True,2019,{},{Day},Waterproof,13.3,"{Standard, Wide}",False
+Danner Crater Rim,Danner,Mid,{Wide Toebox},360.00,USA,True,,{},{Backpacking},Waterproof,29.0,"{Standard, Wide}",False
+Hanwag Tatra Light GTX,Hanwag,Mid,{},275.00,,True,2020,{},"{Day, Backpacking}",Waterproof,21.2,"{Standard, Wide}",False
+Columbia Crestwood Mid Waterproof,Columbia,Mid,{},90.00,,True,2020,{},{Day},Waterproof,,"{Standard, Wide}",False
+Salomon Predict Hike Mid GTX,Salomon,Mid,{},180.00,,True,2021,{},"{Day, Speed}",Waterproof,13.3,{Standard},False
+Scarpa Zodiac Plus GTX,Scarpa,Mid,{},270.00,,True,,{},{Backpacking},Waterproof,19.2,{Standard},False
+Altra Lone Peak Hiker 2,Altra,Mid,{},160.00,,True,2023,{},"{Day, Urban}",,12.8,{Standard},True
+KEEN Targhee III Waterproof Mid,KEEN,Mid,{},145.00,,True,,{},{Day},Waterproof,17.4,"{Standard, Wide}",False
+Adidas Terrex Swift R3 Mid GTX,Adidas,Mid,{},180.00,,True,2021,{},{Day},Waterproof,16.0,{Standard},False
+Kenetrek Corrie 3.2 Hiker,Kenetrek,High,{},300.00,European,False,2022,{},"{Day, Backpacking}",Waterproof,25.6,"{Standard, Wide}",False
+KEEN Revel III,KEEN,Mid,{},160.00,,True,2019,{Winter},"{Day, Snow}",Waterproof,20.4,"{Narrow, Standard}",False
+Zamberlan 1013 Leopard GTX,Zamberlan,Mid,"{Narrow Heel, Wide Toebox}",325.00,Italian,True,2020,{},{Backpacking},Waterproof,25.0,"{Standard, Wide}",False
+Vasque Torre AT GTX,Vasque,High,{},210.00,,False,2022,{},"{Day, Backpacking}",Waterproof,19.6,"{Standard, Wide}",False
+La Sportiva TX Hike Mid GTX,La Sportiva,Mid,{Wide Toebox},179.00,,True,2022,{},"{Day, Urban}",Waterproof,17.3,{Standard},False
+Merrell Ontario Mid Waterproof,Merrell,Mid,{},170.00,,True,2019,{},{Day},Waterproof,17.1,{Standard},False
+Topo Athletic Trailventure 2,Topo Athletic,Mid,{Wide Toebox},160.00,,False,2023,{Summer},"{Day, Speed}",,14.1,{Standard},False
+Skechers Relment Pelmo,Skechers,Mid,{Wide Toebox},90.00,,True,2019,{},{Day},Waterproof,22.0,"{Standard, Wide, Extra Wide}",False
+Hoka TenNine Hike GTX,Hoka,Mid,{},250.00,,True,2021,{},{Day},Waterproof,17.8,{Standard},False
+Timberland Sprint Trekker,Timberland,Mid,{},120.00,,True,2020,{},"{Day, Speed}",,15.9,{Standard},False
+Baffin Zone,Baffin,Mid,{},170.00,,True,2019,{Winter},"{Day, Snow}",Waterproof,23.0,"{Narrow, Standard}",False
+Salomon Quest 4D 3 GTX,Salomon,High,{},230.00,,True,,{},{Backpacking},Waterproof,22.6,{Standard},False
+Danner Light II,Danner,Mid,{},380.00,USA,True,,{},{Day},Waterproof,30.5,"{Narrow, Standard, Wide}",False
+KEEN Ridge Flex Mid WP,KEEN,Mid,"{Narrow Heel, Wide Toebox}",190.00,,True,2022,{},{Day},Waterproof,19.0,"{Standard, Wide}",False
+Salewa Ultra Flex 2 Mid GTX,Salewa,Mid,{},190.00,,True,2022,{},{Speed},Waterproof,14.7,{Standard},False
+Columbia Fairbanks Rover,Columbia,Mid,{},140.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,17.2,{Standard},False
+Adidas Terrex Trailmaker Mid GTX,Adidas,Mid,{},150.00,,True,2021,{},"{Day, Speed}",Waterproof,14.1,{Standard},False
+On Cloudrock 2 Waterproof,On,Mid,{},220.00,,False,,{},{Day},Waterproof,17.1,{Standard},False
+Xero Shoes Xcursion Fusion,Xero Shoes,Mid,{Wide Toebox},140.00,,True,2021,{},{Day},Waterproof,13.0,"{Standard, Wide}",True
+Merrell Zion Mid Waterproof,Merrell,Mid,{},150.00,,True,2019,{},{Day},Waterproof,14.4,{Standard},False
+KEEN Circadia Mid WP,KEEN,Mid,{Wide Toebox},145.00,,True,2022,{},{Day},Waterproof,22.0,"{Standard, Wide}",False
+Scarpa Rush Mid GTX,Scarpa,Mid,{},179.00,,True,2021,{},"{Day, Speed}",Waterproof,13.4,{Standard},False
+La Sportiva Trango TRK GTX,La Sportiva,High,{},220.00,,True,,{},{Backpacking},Waterproof,20.3,{Standard},False
+Inov-8 Rocfly G 390,Inov-8,Mid,{Wide Toebox},210.00,,True,2022,{Summer},"{Light, Speed}",,13.8,"{Standard, Wide}",False
+KEEN Targhee High Lace Waterproof Boot,KEEN,High,{},170.00,,True,2020,{Winter},"{Day, Urban, Snow}",Waterproof,,{Standard},False
+Merrell Erie Mid Waterproof,Merrell,Mid,{},120.00,,True,2020,{},{Day},Waterproof,15.7,"{Standard, Wide}",False
+Columbia Gunnison II Omni-Heat,Columbia,Mid,{},110.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,19.2,"{Standard, Wide}",False
+Xero Shoes Denver,Xero Shoes,Mid,{Wide Toebox},110.00,,True,2020,{Winter},"{Day, Urban, Snow}",Water Repellent,12.0,"{Standard, Wide}",True
+Danner Trail 2650 Mid GTX,Danner,Mid,{Wide Toebox},180.00,,True,2020,{},"{Day, Speed}",Waterproof,14.1,"{Standard, Wide}",False
+Oboz Sypes Mid Leather Waterproof,Oboz,Mid,{},165.00,,True,2021,{},"{Day, Urban}",Waterproof,16.6,"{Standard, Wide}",False
+Timberland Mt. Maddsen Mid Waterproof,Timberland,Mid,{},115.00,,True,,{},{Day},Waterproof,17.0,"{Standard, Wide}",False
+Lowa Taurus Pro GTX Mid,Lowa,Mid,{},180.00,European,True,2021,{},{Day},Waterproof,17.8,"{Narrow, Standard}",False
+Scarpa Boreas GTX,Scarpa,High,{},229.00,European,True,2023,{},"{Day, Backpacking}",Waterproof,20.6,{Standard},False
+Teva Ridgeview Mid,Teva,Mid,{},150.00,,True,2021,{},{Backpacking},Waterproof,16.6,{Standard},False
+Merrell MQM Flex 2 Mid GTX,Merrell,Mid,{},160.00,,True,2021,{},"{Day, Speed}",Waterproof,13.9,{Standard},False
+Lowa Tibet GTX Hi,Lowa,High,{},420.00,German,True,,{},{Backpacking},Waterproof,33.8,{Standard},False
+Aku Trekker Pro GTX,Aku,Mid,{},180.00,Italian,True,2020,{},"{Day, Backpacking}",Waterproof,21.2,{Standard},False
+La Sportiva TXS GTX,La Sportiva,Mid,{},179.00,,True,2020,{},"{Day, Backpacking}",Waterproof,17.8,{Standard},False
+Mammut Trovat Guide High GTX,Mammut,High,{},290.00,,True,2019,{},{Backpacking},Waterproof,27.5,{Standard},False
+KEEN Durand Evo Waterproof,KEEN,Mid,"{Narrow Heel, Wide Toebox}",210.00,USA,True,2022,{},{Day},Waterproof,,"{Standard, Wide}",False
+Salewa Mountain Trainer 2 Mid GTX,Salewa,Mid,{},290.00,,True,,{},{Backpacking},Waterproof,21.2,{Standard},False
+"Merrell Coldpack Ice+ 8"" Zip Polar Waterproof",Merrell,High,{},170.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,17.5,"{Standard, Wide}",False
+Salewa Alp Trainer 2 Mid GTX,Salewa,Mid,{},200.00,,True,2021,{},"{Day, Alpine}",Waterproof,19.5,{Standard},False
+Merrell Yokota 2 Mid Waterproof,Merrell,Mid,{},110.00,,True,2020,{},{Day},Waterproof,15.2,"{Standard, Wide}",False
+Timberland Chocorua Trail Mid Waterproof,Timberland,Mid,{},150.00,,True,2020,{},{Day},Waterproof,,"{Standard, Wide}",False
+Adidas Terrex Free Hiker XPL,Adidas,High,{},240.00,,False,2023,{},{Day},,,{Standard},False
+Vasque St. Elias FG GTX,Vasque,Mid,{},200.00,,True,2020,{},"{Day, Backpacking}",Waterproof,23.3,"{Standard, Wide}",False
+Asolo Greenwood GV,Asolo,High,{},310.00,European,True,,{},"{Day, Backpacking}",Waterproof,23.8,{Standard},False
+Hanwag Tatra Top GTX,Hanwag,High,{},400.00,,True,2019,{},{Backpacking},Waterproof,30.7,"{Standard, Wide}",False
+Astral Hiyak,Astral,Mid,{Wide Toebox},125.00,,True,2020,{},{Water},Water Repellent,9.6,{Standard},True
+The North Face Chilkat 400 II,The North Face,High,{},150.00,,False,2022,{Winter},"{Day, Snow}",Waterproof,27.1,{Standard},False
+Columbia Peakfreak X2 Mid Outdry,Columbia,Mid,{},120.00,,True,2021,{},"{Day, Urban}",Waterproof,13.2,"{Standard, Wide}",False
+Hoka Kaha,Hoka,Mid,{},220.00,,True,2019,{},{Backpacking},Waterproof,17.9,{Standard},False
+Asolo Arctic GV,Asolo,High,{},300.00,European,True,2021,{Winter},"{Day, Snow}",Waterproof,20.1,{Standard},False
+Adidas Terrex Swift R2 Mid GTX,Adidas,Mid,{},170.00,,True,,{},"{Day, Speed}",Waterproof,15.8,{Standard},False
+Scarpa Kailash Trek GTX,Scarpa,High,{Narrow Heel},289.00,Italian,True,2019,{},{Backpacking},Waterproof,21.5,"{Standard, Wide}",False
+Vasque Breeze AT GTX,Vasque,High,{},190.00,,True,2020,{},{Backpacking},Waterproof,21.5,"{Standard, Wide}",False
+Lowa Ranger III GTX,Lowa,Mid,{},325.00,German,True,,{},{Backpacking},Waterproof,29.9,"{Standard, Wide}",False
+Zamberlan 1996 Vioz Lux GTX RR,Zamberlan,Mid,"{Narrow Heel, Wide Toebox}",360.00,Italian,True,2019,{},{Backpacking},Waterproof,28.2,"{Standard, Wide}",False
+Merrell Thermo Chill Mid Waterproof,Merrell,Mid,{},110.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,,"{Standard, Wide}",False
+Oboz Sawtooth II Mid,Oboz,Mid,"{Narrow Heel, Wide Toebox}",135.00,,True,2021,{Summer},{Backpacking},,17.3,"{Standard, Wide}",False
+Altra Olympus 5 Hike Mid GTX,Altra,Mid,{Wide Toebox},220.00,,False,2022,{},{Day},Waterproof,18.6,{Standard},False
+Mammut Ducan High GTX,Mammut,High,{},200.00,,True,2019,{},"{Backpacking, Speed}",Waterproof,19.2,{Standard},False
+Merrell Forestbound Mid WP,Merrell,Mid,{},130.00,,True,2020,{},{Backpacking},Waterproof,16.1,{Standard},False
+Vasque Talus AT UltraDry,Vasque,Mid,{},150.00,,True,2020,{},{Day},Waterproof,17.6,"{Standard, Wide}",False
+Lems Waterproof Boulder Boot,Lems,Mid,{Wide Toebox},165.00,,True,2021,{},"{Urban, Light}",Waterproof,12.9,{Standard},True
+Scarpa Kailash Plus GTX,Scarpa,High,{},280.00,Italian,True,2019,{},{Backpacking},Waterproof,22.0,"{Standard, Wide}",False
+Danner Vital Trail,Danner,Mid,"{Narrow Heel, Wide Toebox}",140.00,,True,2020,{},{Day},Waterproof,21.0,"{Standard, Wide}",False
+Danner Explorer,Danner,Mid,{},380.00,USA,True,,{},{Day},Waterproof,30.5,"{Standard, Wide}",False
+Asolo Finder GV,Asolo,Mid,{},160.00,European,True,2019,{},{Day},Waterproof,19.3,{Standard},False
+Aku Slope GTX,Aku,High,{},165.00,Italian,True,2019,{},{Backpacking},Waterproof,18.5,{Standard},False
+Berghaus Expeditor Ridge 2.0,Berghaus,High,{},110.00,,True,2019,{},{Day},Waterproof,18.0,{Standard},False
+Meindl Vakuum GTX,Meindl,Mid,{},215.00,German,True,2020,{},{Backpacking},Waterproof,28.2,{Standard},False
+Lowa Baldo GTX,Lowa,Mid,{},260.00,German,True,2019,{},{Backpacking},Waterproof,23.8,{Standard},False
+The North Face Activist Mid Futurelight,The North Face,Mid,{},145.00,,True,2022,{},"{Day, Urban}",Waterproof,13.9,{Standard},False
+Under Armour Speedfit 2.0,Under Armour,Mid,{},130.00,,True,,{Summer},{Day},,11.0,{Standard},False
+Berghaus Expeditor Trek 2.0,Berghaus,High,{},100.00,,True,2019,{},{Day},Waterproof,17.8,{Standard},False
+Scarpa Mistral GTX,Scarpa,Mid,{},180.00,,True,,{},{Day},Waterproof,19.0,{Standard},False
+Mammut Trovat Advanced High GTX,Mammut,High,{},250.00,European,True,,{},"{Day, Backpacking, Alpine}",Waterproof,26.8,{Standard},False
+Aku Alterra GTX,Aku,High,{},250.00,Italian,True,,{},{Backpacking},Waterproof,23.6,{Standard},False
+Danner Radical 452,Danner,Mid,{},180.00,,True,,{},{Day},Waterproof,23.0,"{Standard, Wide}",False
+La Sportiva TX5 GTX,La Sportiva,High,{},210.00,,True,2019,{},"{Backpacking, Alpine}",Waterproof,18.6,{Standard},False
+Zamberlan 320 Trail Lite Evo GTX,Zamberlan,Mid,{},260.00,Italian,True,2019,{},"{Day, Backpacking}",Waterproof,19.0,{Standard},False
+Salomon OUTsnap CSWP,Salomon,Mid,{},130.00,,True,2020,{Winter},"{Day, Urban, Snow}",Waterproof,12.7,{Standard},False
+Asolo TPS 520 GV Evo,Asolo,Mid,{},320.00,European,True,,{},{Backpacking},Waterproof,29.3,"{Standard, Wide}",False
+Merrell Phaserbound 2 Tall Waterproof,Merrell,High,{},170.00,,True,2019,{},{Backpacking},Waterproof,23.5,{Standard},False
+Asolo Power Matic 200 GV,Asolo,Mid,{},330.00,European,True,,{},{Backpacking},Waterproof,27.7,{Standard},False
+Mammut Sapuen High GTX,Mammut,High,{},189.00,,False,2022,{},{Day},Waterproof,18.7,{Standard},False
+KEEN Durand II Mid WP,KEEN,Mid,{},190.00,USA,True,,{},{Day},Waterproof,22.1,"{Standard, Wide}",False
+Salomon OUTback 500 GTX,Salomon,Mid,{},210.00,,True,2019,{},{Backpacking},Waterproof,17.6,{Standard},False
+Topo Athletic Trailventure,Topo Athletic,Mid,{Wide Toebox},140.00,,True,2020,{Summer},"{Day, Speed}",,13.0,{Standard},False
+Lowa Explorer GTX Mid,Lowa,Mid,{},240.00,European,True,2020,{},{Backpacking},Waterproof,20.5,{Standard},False
+Scarpa R-Evolution GTX,Scarpa,High,{},240.00,,True,,{},"{Day, Backpacking}",Waterproof,23.2,{Standard},False
+Danner Explorer 650,Danner,Mid,{},190.00,,True,,{},{Day},Waterproof,16.5,{Standard},False
+Oboz Sawtooth Mid BDry,Oboz,Mid,{Wide Toebox},150.00,,True,,{},{Day},Waterproof,20.3,"{Standard, Wide}",False
+Meindl Bhutan MFS,Meindl,High,{},230.00,,True,,{},{Backpacking},Waterproof,28.2,"{Standard, Wide}",False
+Salomon Quest Prime GTX,Salomon,Mid,{},190.00,,True,,{},{Backpacking},Waterproof,20.1,{Standard},False
+Kenetrek Mountain Extreme NI,Kenetrek,High,{},465.00,Italian,True,2021,{},"{Backpacking, Alpine}",Waterproof,31.2,"{Narrow, Standard, Wide}",False
+Columbia Redmond Mid Waterproof,Columbia,Mid,{},100.00,,True,,{},{Day},Waterproof,14.0,"{Standard, Wide}",False
+Salewa Mountain Trainer Mid GTX,Salewa,Mid,{},250.00,,True,,{},"{Backpacking, Alpine}",Waterproof,23.6,{Standard},False
+Astral Rassler 2.0,Astral,Mid,{Wide Toebox},130.00,,True,2020,{},{Water},Water Repellent,8.3,{Standard},True
+"Oboz Bridger 10"" Insulated BDry",Oboz,High,{},200.00,,True,2019,{Winter},"{Day, Snow}",Waterproof,26.9,"{Standard, Wide}",False
+ECCO Exostrike Mid,ECCO,Mid,{},300.00,,True,2020,{},"{Day, Urban}",,18.9,{Standard},False
+Oboz Arete Mid BDry,Oboz,Mid,{},160.00,,True,2020,{},{Day},Waterproof,16.4,{Standard},False
+KEEN Targhee EXP Mid Waterproof,KEEN,Mid,{},140.00,,True,,{},{Day},Waterproof,18.3,{Standard},False
+Adidas Terrex AX3 Mid GTX,Adidas,Mid,{},140.00,,True,2019,{},{Day},Waterproof,15.0,{Standard},False
+Berghaus Explorer Trek GTX,Berghaus,Mid,{},167.00,,True,2020,{},{Day},Waterproof,22.0,{Standard},False
+Aku Superalp GTX,Aku,High,{},280.00,Italian,True,,{},{Backpacking},Waterproof,24.7,{Standard},False
+Scarpa Mojito Hike GTX,Scarpa,Mid,{},200.00,,True,,{},"{Day, Speed}",Waterproof,12.7,{Standard},False
+Timberland Flume Mid Waterproof,Timberland,Mid,{},110.00,,True,,{},{Day},Waterproof,17.0,"{Standard, Wide}",False
+Merrell Thermo Glacier Mid Waterproof,Merrell,Mid,{},180.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,20.7,{Standard},False
+Timberland Field Trekker Mid,Timberland,Mid,{},130.00,,True,2020,{},"{Day, Urban}",Water Repellent,25.0,{Standard},False
+Merrell Moab 2 Prime Mid Waterproof,Merrell,Mid,{},155.00,,True,2020,{},{Day},Waterproof,18.0,"{Standard, Wide}",False
+Kenetrek Hardscrabble Hiker,Kenetrek,High,{},420.00,Italian,True,,{},{Day},Waterproof,29.6,"{Narrow, Standard, Wide}",False
+Merrell Thermo Snowdrift Mid Shell Waterproof,Merrell,Mid,{},130.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,16.8,{Standard},False
+Hi-Tec Skamania Mid WP,Hi-Tec,Mid,{},80.00,,True,,{},{Day},Waterproof,24.0,"{Standard, Wide}",False
+KEEN Tempo Flex Mid WP,KEEN,Mid,{Narrow Heel},110.00,,True,2022,{},"{Day, Speed}",Waterproof,16.0,{Standard},False
+Adidas Terrex Free Hyperblue Mid,Adidas,Mid,{},220.00,,True,2022,{},"{Day, Urban}",,,{Standard},False
+Asolo TPS 535 LTH V Evo,Asolo,Mid,{Wide Toebox},275.00,European,True,,{},{Backpacking},Water Repellent,28.2,"{Standard, Wide}",False
+Meindl Journey Mid GTX,Meindl,Mid,{Wide Toebox},175.00,,True,,{},{Day},Waterproof,16.2,{Standard},False
+Danner 453,Danner,Mid,{},200.00,,True,,{},{Backpacking},Waterproof,25.0,"{Standard, Wide}",False
+Columbia Redmond V2 Mid Waterproof,Columbia,Mid,{},100.00,,True,2019,{},{Day},Waterproof,24.8,"{Standard, Wide}",False
+Mammut Mercury IV Mid GTX,Mammut,Mid,{},225.00,,False,2023,{},{Day},Waterproof,,{Standard},False
+Mammut Mercury Tour II High GTX,Mammut,High,{},199.00,German,True,2020,{},{Backpacking},Waterproof,21.2,{Standard},False
+Hoka Toa GTX,Hoka,Mid,{},170.00,,True,2021,{},{Speed},Waterproof,15.1,{Standard},False
+Teva Gateway Mid,Teva,Mid,{},110.00,,True,2021,{Summer},"{Day, Urban, Light}",Water Repellent,10.0,{Standard},False
+Astral Pisgah,Astral,Mid,{},150.00,,False,2022,{},"{Day, Urban}",Waterproof,12.8,{Standard},True
+Lems Boulder Boot Nylon,Lems,Mid,{Wide Toebox},125.00,,True,2019,{},{Light},Water Repellent,9.9,{Standard},True
+Columbia Bugaboot III XTM,Columbia,High,{},150.00,,True,2022,{Winter},"{Day, Snow}",Waterproof,27.2,{Standard},False
+Haglöfs Skuta Mid Proof Eco,Haglöfs,Mid,{Wide Toebox},120.00,,True,2020,{},{Backpacking},Waterproof,16.8,{Standard},False
+Eddie Bauer Cairn Mid,Eddie Bauer,Mid,{},180.00,,True,,{},{Day},Waterproof,17.0,{Standard},False
+Merrell Wilderness,Merrell,High,{},400.00,USA,True,,{},"{Backpacking, Alpine}",Waterproof,28.0,{Standard},False
+Timberland Euro Rock Hiker,Timberland,Mid,{},140.00,,True,2019,{},"{Day, Urban}",,12.0,{Standard},False
+Merrell Ontario Mid,Merrell,Mid,{},120.00,,True,2019,{Summer},{Day},,15.7,{Standard},False
+Merrell Accentor 2 Vent Mid,Merrell,Mid,{},100.00,,True,2020,{Summer},{Day},,15.0,{Standard},False
+Aku Trekker Lite III GTX,Aku,Mid,{},170.00,European,True,2020,{},{Day},Waterproof,20.1,"{Standard, Wide}",False
+Ariat Moresby,Ariat,High,{},210.00,,True,2022,{},{Day},Waterproof,,{Standard},False
+"Oboz Bridger 8"" Insulated BDry",Oboz,High,{},185.00,,True,2019,{Winter},"{Day, Snow}",Waterproof,24.6,"{Standard, Wide}",False
+Zamberlan 1025 Tofane NW GT RR,Zamberlan,Mid,{Narrow Heel},470.00,Italian,True,,{},{Backpacking},Waterproof,34.2,{Standard},False
+Berghaus Fellmaster GTX,Berghaus,High,{},180.00,,True,,{},{Day},Waterproof,23.8,{Standard},False
+Salewa Alp Trainer Mid GTX,Salewa,Mid,{},200.00,,True,,{},"{Backpacking, Alpine}",Waterproof,19.6,{Standard},False
+Aku Tengu Lite GTX,Aku,Mid,{},200.00,European,True,2020,{},{Backpacking},Waterproof,18.0,{Standard},False
+Scarpa ZG Lite GTX,Scarpa,High,{},200.00,,True,2020,{},"{Backpacking, Speed}",Waterproof,21.3,{Standard},False
+Hi-Tec Altitude VI I WP,Hi-Tec,Mid,{},80.00,,True,2020,{},{Day},Waterproof,17.6,"{Standard, Extra Wide}",False
+Inov-8 Roclite 335,Inov-8,Mid,{},150.00,,True,2019,{Winter},{Snow},,11.8,{Standard},False
+Vivobarefoot Tracker II FG,Vivobarefoot,Mid,{Wide Toebox},260.00,,True,2022,{Winter},"{Day, Urban, Snow}",Waterproof,11.6,"{Standard, Wide}",False
+KEEN Durand Mid Waterproof,KEEN,Mid,{},180.00,USA,True,,{},{Day},Waterproof,22.4,{Standard},False
+Aku Superalp NBK GTX,Aku,High,{},210.00,Italian,True,,{},{Backpacking},Waterproof,28.6,{Standard},False
+Aku Tribute II LTR,Aku,High,{Narrow Heel},190.00,Italian,True,,{},{Backpacking},,21.9,{Standard},False
+Vasque Coldspark UltraDry,Vasque,Mid,{Wide Toebox},140.00,,True,,{Winter},"{Day, Snow}",Waterproof,20.0,{Standard},False
+Oboz Sawtooth II Mid BDry,Oboz,Mid,{Wide Toebox},150.00,,True,2019,{},{Day},Waterproof,19.0,"{Standard, Wide}",False
+Salomon X Ultra Mid Winter CS WP,Salomon,Mid,{},160.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,18.7,{Standard},False
+La Sportiva Stream GTX,La Sportiva,Mid,{},200.00,,True,,{},{Day},Waterproof,14.4,"{Narrow, Standard}",False
+Vasque Breeze WT GTX,Vasque,Mid,{},200.00,,True,2021,{Winter},"{Day, Snow}",Waterproof,22.8,{Standard},False
+Lowa Ticam II GTX,Lowa,Mid,{},395.00,German,True,,{},{Backpacking},Waterproof,28.8,"{Standard, Wide}",False
+Meindl Litepeak GTX,Meindl,High,{},220.00,,True,2019,{},{Backpacking},Waterproof,21.2,{Standard},False
+Meindl Kapstadt GTX,Meindl,Mid,{},195.00,,True,2019,{},{Backpacking},Waterproof,17.3,{Standard},False
+Meindl Vakuum Ultra,Meindl,High,{},180.00,,True,,{},{Day},Waterproof,21.9,{Standard},False
+Merrell Moab FST Ice+ Thermo,Merrell,Mid,{},160.00,,True,2020,{Winter},"{Day, Snow}",Waterproof,31.6,{Standard},False
+Millet Bouthan GTX,Millet,Mid,{Wide Toebox},260.00,European,True,2020,{},"{Backpacking, Alpine}",Waterproof,28.0,"{Standard, Wide}",False
+Lowa Renegade LL Mid,Lowa,Mid,{},240.00,European,True,,{Summer},{Day},,20.7,{Standard},False
+Garmont Integra High WP Thermal,Garmont,High,{},180.00,,True,2020,{Winter},"{Backpacking, Snow}",Waterproof,18.3,{Standard},False
+Merrell Thermo Rogue Mid GTX,Merrell,Mid,{},200.00,,True,2019,{Winter},"{Day, Snow}",Waterproof,16.9,{Standard},False
+Eddie Bauer Lukla Pro Mid Hiker,Eddie Bauer,Mid,{},160.00,,True,,{},{Backpacking},Waterproof,16.6,{Standard},False
+Meindl Ohio 2 GTX,Meindl,Mid,{},135.00,,True,2020,{},{Day},Waterproof,21.2,{Standard},False
+Lowa Tibet Superwarm GTX,Lowa,Mid,{},435.00,German,True,,{Winter},"{Backpacking, Snow}",Waterproof,32.1,{Standard},False
+Merrell Thermo Rhea Mid Waterproof,Merrell,High,{},200.00,,True,2022,{Winter},"{Day, Snow}",Waterproof,,{Standard},False
+KEEN Karraig Mid WP,KEEN,Mid,{},250.00,European,True,2020,{},{Backpacking},Waterproof,29.3,{Standard},False
+Lowa Trident III GTX,Lowa,Mid,{},225.00,European,True,2022,{Winter},"{Day, Snow}",Waterproof,18.3,{Standard},False

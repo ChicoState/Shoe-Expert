@@ -1,0 +1,52 @@
+SHOE_NAME,Brand,Features,MSRP (USD),Randing,Release Date,Top,Waterproofing,Weight (oz)
+La Sportiva TX4,La Sportiva,"{Lightweight, Heel Brake, Breathable}",140.00,Full,2019,Low,,13.1
+Scarpa Mescalito,Scarpa,{Heel Brake},190.00,Full,2019,Low,Water Resistant,14.6
+Adidas Terrex Swift Solo,Adidas,{Cheap},100.00,Forefoot,2022,Low,,19.6
+La Sportiva TX2,La Sportiva,"{Lightweight, Breathable}",130.00,Full,2019,Low,,9.9
+Scarpa Crux,Scarpa,{Lightweight},130.00,Forefoot,2019,Low,Water Resistant,13.5
+La Sportiva Boulder X,La Sportiva,{Heel Brake},120.00,Full,2019,Low,,17.0
+Salewa Wildfire GTX,Salewa,{Heel Brake},170.00,Forefoot,2019,Low,Waterproof,
+Black Diamond Session,Black Diamond,"{Tongue Pull Loop, Lightweight, Breathable}",120.00,Forefoot,2020,Low,,10.0
+Scarpa Zen Pro,Scarpa,"{Tongue Pull Loop, Heel Brake}",180.00,Full,2019,Low,,
+Black Diamond Technician,Black Diamond,"{Tongue Pull Loop, Lightweight, Breathable}",135.00,Forefoot,2020,Low,,10.0
+Five Ten Guide Tennie,Five Ten,{},120.00,Forefoot,2019,Low,Water Resistant,
+La Sportiva TX Guide,La Sportiva,"{Lightweight, Heel Brake}",160.00,Forefoot,2020,Low,,12.3
+Salewa Wildfire,Salewa,"{Heel Brake, Breathable}",130.00,Forefoot,2019,Low,,
+La Sportiva TX4 Mid GTX,La Sportiva,{Heel Brake},190.00,Full,2019,Mid,Waterproof,16.2
+La Sportiva TX Guide Leather,La Sportiva,"{Lightweight, Heel Brake, Breathable}",170.00,Forefoot,2021,Low,,13.7
+La Sportiva TX3,La Sportiva,"{Lightweight, Heel Brake}",135.00,Full,2019,Low,,12.7
+Salewa Wildfire Edge,Salewa,{Heel Brake},170.00,Forefoot,2019,Low,,
+Salewa Wildfire Edge Mid GTX,Salewa,"{Tongue Pull Loop, Heel Brake}",220.00,Forefoot,2019,Mid,Waterproof,17.8
+Scarpa Gecko,Scarpa,{Lightweight},150.00,,2019,Low,Water Resistant,13.4
+Salewa Wildfire Edge GTX,Salewa,{Heel Brake},190.00,Forefoot,2021,Low,Waterproof,15.4
+La Sportiva TX Canyon,La Sportiva,{},189.00,Forefoot,2023,Mid,Water Resistant,15.3
+Aku Rock DFS GTX,Aku,"{Tongue Pull Loop, Heel Brake}",200.00,Full,2023,Low,Waterproof,14.1
+Evolv Rebel,Evolv,"{Cheap, Lightweight}",100.00,Forefoot,2020,Low,Water Resistant,10.0
+Evolv Cruzer Psyche,Evolv,"{Cheap, Lightweight, Breathable}",80.00,Full,2020,Low,,8.4
+Salewa Wildfire 2,Salewa,"{Lightweight, Heel Brake, Breathable}",140.00,Forefoot,2023,Low,,12.5
+Scarpa Mescalito GTX,Scarpa,{Heel Brake},180.00,Full,2019,Low,,18.0
+La Sportiva TX4 GTX,La Sportiva,{Heel Brake},175.00,Full,2019,Low,Waterproof,14.1
+Black Diamond Circuit,Black Diamond,"{Tongue Pull Loop, Cheap, Lightweight, Breathable}",100.00,Forefoot,2020,Low,,9.0
+Scarpa Rapid,Scarpa,"{Lightweight, Heel Brake, Breathable}",160.00,,2019,Low,,10.4
+Scarpa Spirit Evo,Scarpa,{},189.00,Forefoot,2023,Low,,11.6
+Arc'teryx Konseal FL 2,Arc'teryx,"{Lightweight, Heel Brake, Breathable}",145.00,Full,2022,Low,,10.9
+Five Ten Five Tennie,Five Ten,"{Tongue Pull Loop, Lightweight}",125.00,,2019,Low,,11.5
+Evolv Zender,Evolv,"{Cheap, Lightweight}",99.00,Forefoot,2020,Low,,11.0
+Arc'teryx Arakys,Arc'teryx,"{Tongue Pull Loop, Lightweight, Heel Brake, Breathable}",150.00,Forefoot,2019,Low,,9.5
+Arc'teryx Konseal LT,Arc'teryx,"{Tongue Pull Loop, Lightweight, Heel Brake, Breathable}",170.00,Forefoot,2020,Low,Water Resistant,9.5
+La Sportiva TX2 Evo,La Sportiva,"{Lightweight, Breathable}",149.00,Forefoot,2022,Low,,10.2
+Scarpa Mescalito Mid GTX,Scarpa,"{Expensive, Heel Brake}",240.00,Full,2019,Mid,,18.7
+Butora Wing,Butora,"{Tongue Pull Loop, Heel Brake}",130.00,Full,2019,Low,,17.4
+La Sportiva TX5 Low GTX,La Sportiva,{Heel Brake},150.00,Full,2021,Low,Waterproof,16.6
+La Sportiva Hyper GTX,La Sportiva,"{Tongue Pull Loop, Heel Brake}",170.00,Forefoot,2019,Low,Waterproof,15.9
+Millet Friction,Millet,{Heel Brake},130.00,Forefoot,2020,Low,,15.9
+Garmont Dragontail LT GTX,Garmont,"{Tongue Pull Loop, Heel Brake}",190.00,Full,2019,Low,,
+Millet Super Trident GTX,Millet,"{Tongue Pull Loop, Heel Brake}",180.00,Forefoot,2020,Mid,Waterproof,19.4
+Garmont Dragontail LT,Garmont,"{Tongue Pull Loop, Heel Brake}",160.00,Full,2019,Low,Water Resistant,16.4
+Mammut Hueco Low GTX,Mammut,{Lightweight},150.00,Forefoot,2020,Low,Waterproof,13.2
+Mammut Hueco Low,Mammut,{Lightweight},140.00,Forefoot,2020,Low,,12.7
+Millet Trident Guide,Millet,{Heel Brake},145.00,Forefoot,2020,Low,Water Resistant,17.8
+Garmont Vetta GTX,Garmont,{Heel Brake},220.00,Full,2019,Mid,Waterproof,21.5
+Millet Trident Guide GTX,Millet,{Heel Brake},160.00,Forefoot,2020,Low,Waterproof,18.9
+Mammut Alnasca Knit Low GTX,Mammut,"{Tongue Pull Loop, Lightweight, Heel Brake}",150.00,Forefoot,2020,Low,Waterproof,13.4
+Millet Amuri Leather,Millet,{Lightweight},110.00,Forefoot,2020,Low,,11.3

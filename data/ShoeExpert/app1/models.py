@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-def create_shoe_model(url_path = Url_Paths.RUNNING_SHOES):
+def create_shoe_model(url_path):
     attrs = {
         '__module__': __name__,
         "shoe_name": models.CharField(max_length=128, primary_key=True),
@@ -13,4 +13,5 @@ def create_shoe_model(url_path = Url_Paths.RUNNING_SHOES):
         attrs[url_path.get_column_name(col, attribute = True)] = url_path.get_column_model(col)
     globals()[url_path.name.capitalize()] = type(url_path.name.title(), (models.Model,), attrs)
 
-create_shoe_model()
+for url_path in Url_Paths:
+    create_shoe_model()

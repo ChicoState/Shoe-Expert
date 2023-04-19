@@ -1,0 +1,109 @@
+SHOE_NAME,Brand,Closure,Features,MSRP (USD),Material,Spiked,Release Date,Style,Waterproofing,Weight (oz)
+Footjoy Traditions,Footjoy,{Laces},{},140.00,{Leather},True,2022,Traditional,Waterproof,
+Footjoy Hyperflex,Footjoy,{Laces},{},130.00,{Synthetic},True,2020,Athletic,Waterproof,
+Adidas ZG21,Adidas,{Laces},{},180.00,{Synthetic},True,2021,Athletic,Waterproof,13.0
+Adidas CodeChaos 22,Adidas,{Laces},{Breathable},160.00,{Synthetic},,2022,Athletic,Waterproof,13.0
+Footjoy Pro SL,Footjoy,{Laces},{Cheap},100.00,{Leather},,2020,Athletic,Waterproof,14.1
+Footjoy Flex XP,Footjoy,{Laces},{Cheap},110.00,{Synthetic},,2020,Athletic,Waterproof,13.2
+Nike Vapor Pro,Nike,{Laces},{},130.00,{Synthetic},True,2020,Athletic,Waterproof,12.9
+Nike Air Zoom Infinity Tour NEXT%,Nike,{Laces},{Breathable},160.00,{Synthetic},True,2022,Athletic,,12.5
+Adidas CodeChaos,Adidas,{Laces},{},150.00,{Synthetic},,2020,Athletic,Waterproof,
+Footjoy Flex,Footjoy,{Laces},{Cheap},90.00,{Synthetic},,2020,Athletic,,14.1
+Nike Air Zoom Victory Tour 2,Nike,{Laces},{},180.00,{Leather},True,2021,Athletic,Waterproof,
+New Balance 574 Greens,New Balance,{Laces},{Cheap},90.00,{Synthetic},,2020,Athletic,Waterproof,13.1
+Jordan ADG 4,Jordan,{Laces},{Breathable},185.00,{Leather},,2022,Traditional,,15.0
+Footjoy Stratos,Footjoy,{Laces},{},200.00,{Leather},,2021,Athletic,Waterproof,15.0
+Nike Vapor,Nike,{Laces},{Cheap},70.00,{Synthetic},True,2020,Athletic,Water-Resistant,13.6
+Footjoy Contour Casual,Footjoy,{Laces},{},130.00,{Leather},,2022,Athletic,Waterproof,
+Footjoy Hyperflex BOA,Footjoy,{BOA},{},180.00,{Knit},True,2021,Athletic,Waterproof,12.8
+Footjoy Pro SL Carbon,Footjoy,{Laces},{},200.00,{Leather},,2020,Athletic,Waterproof,
+Air Jordan 1 Low G,Jordan,{Laces},{},140.00,{Leather},,2022,,Waterproof,
+Nike Air Max 90 G,Nike,{Laces},{},130.00,{Synthetic},,2021,Athletic,Waterproof,12.7
+Nike Roshe G,Nike,{Laces},{Cheap},80.00,{Synthetic},,2019,Athletic,,11.1
+Nike Infinity Pro 2,Nike,{Laces},{Cheap},110.00,{Synthetic},,2022,Athletic,Waterproof,
+Adidas ZG23,Adidas,{Laces},{},200.00,{Synthetic},True,2023,Athletic,Waterproof,13.8
+Footjoy Pro SL Sport,Footjoy,{Laces},{},170.00,{Synthetic},,2022,Athletic,Waterproof,12.0
+PUMA Proadapt Alphacat,PUMA,{Laces},{},160.00,{Synthetic},,2022,Athletic,Waterproof,13.0
+Footjoy HyperFlex Carbon,Footjoy,{Laces},{},200.00,"{Knit, Ortholite}",True,2023,Athletic,Waterproof,11.5
+Footjoy Premiere Series Packard,Footjoy,{Laces},{},200.00,"{Leather, Ortholite}",True,2022,Traditional,Waterproof,
+Footjoy Originals,Footjoy,{Laces},{Cheap},90.00,{Synthetic},True,2022,Traditional,Waterproof,15.2
+Nike Air Max 270 G,Nike,"{Laces, Slip-On}",{},150.00,{Synthetic},,2022,Athletic,Waterproof,
+Footjoy Fuel,Footjoy,{Laces},{},130.00,{Synthetic},,2022,,Waterproof,
+Footjoy Superlites XP,Footjoy,{Laces},{Cheap},100.00,{Synthetic},,2020,Athletic,Waterproof,12.0
+Footjoy Tour Alpha,Footjoy,{Laces},{},190.00,"{Leather, Ortholite}",True,2022,Athletic,Waterproof,
+Callaway Coronado v2,Callaway,{Laces},{},140.00,{Leather},True,2021,Athletic,Waterproof,15.3
+PUMA Ignite Fasten8,PUMA,{Laces},{},120.00,{Synthetic},,2022,Athletic,Waterproof,13.4
+Jordan ADG 3,Jordan,{Laces},{},140.00,{Leather},,2021,Athletic,Waterproof,
+Nike Air Zoom Infinity Tour,Nike,{Laces},{},160.00,{Knit},True,2020,Athletic,Waterproof,
+PUMA RS-G,PUMA,{Laces},{},130.00,{Synthetic},,2021,Athletic,Waterproof,13.4
+New Balance Striker v3,New Balance,{Laces},{Cheap},110.00,{Leather},True,2022,Athletic,Waterproof,11.6
+Footjoy DryJoys Tour,Footjoy,{Laces},{Expensive},290.00,{Leather},True,2020,Traditional,Waterproof,19.0
+ECCO BIOM C4,ECCO,{Laces},{Expensive},230.00,"{Leather, Ortholite}",,2022,Athletic,Waterproof,16.0
+ECCO Biom H4,ECCO,{},{},200.00,{},,2021,,,
+Adidas Tour360 XT,Adidas,{Laces},{},200.00,{Leather},True,2019,Athletic,Waterproof,17.1
+Nike Air Zoom Victory Tour,Nike,{Laces},{},180.00,{Leather},True,2019,Athletic,Waterproof,
+Footjoy Traditions Spikeless,Footjoy,{Laces},{},140.00,{Leather},,2023,Traditional,Waterproof,8.0
+PUMA Ignite Articulate,PUMA,{Laces},{},180.00,{Synthetic},True,2022,Athletic,Waterproof,15.5
+Footjoy Flex Coastal,Footjoy,{Laces},"{Cheap, Breathable}",100.00,{Knit},,2020,Athletic,,11.5
+NOBULL Matryx Golf Shoe,NoBull,{Laces},{Breathable},179.00,{Synthetic},,2022,Athletic,Water-Resistant,12.2
+Nike Roshe G Tour,Nike,{Laces},{Cheap},110.00,{Synthetic},True,2020,Athletic,Waterproof,14.1
+Footjoy Premiere Series Field,Footjoy,{Laces},{},200.00,"{Leather, Ortholite}",True,2022,Traditional,Waterproof,14.4
+Footjoy Premiere Series Tarlow,Footjoy,{Laces},{},200.00,"{Leather, Ortholite}",True,2022,Traditional,Waterproof,15.4
+Nike Air Max 1 G,Nike,{Laces},{},120.00,{Synthetic},,2019,Athletic,Waterproof,15.0
+Adidas Tour360 XT SL,Adidas,{Laces},{},170.00,{},,2019,Athletic,,16.0
+Footjoy Premiere Series Flint,Footjoy,{Laces},{},200.00,"{Leather, Ortholite}",,2022,Traditional,Waterproof,14.8
+Footjoy Pro SL BOA,Footjoy,{BOA},{},190.00,{Leather},,2020,Athletic,Waterproof,
+Adidas Adipure,Adidas,{Laces},{},190.00,{Knit},,2020,Athletic,Water-Resistant,
+Adidas S2G,Adidas,{Laces},{Cheap},100.00,{Knit},,2020,Athletic,Water-Resistant,10.8
+ASICS Gel Course Glide,ASICS,{Laces},{},130.00,{},,2020,Athletic,,
+Jordan Retro 6 G,Nike,{Laces},{},220.00,{Leather},True,2023,Athletic,Waterproof,
+ECCO BIOM Hybrid 3,ECCO,{Laces},{},200.00,{Leather},,2022,Athletic,,14.0
+Nike React Infinity Pro,Nike,{Laces},{},120.00,{Synthetic},True,2020,Athletic,Waterproof,
+Footjoy Pro SL Carbon BOA,Footjoy,{BOA},{Expensive},240.00,"{Leather, Ortholite}",,2022,Athletic,Waterproof,
+Nike Air Zoom Tiger Woods '20,Nike,{Laces},{},150.00,{Synthetic},True,2021,Athletic,Waterproof,
+ECCO BIOM Hybrid 3 BOA,ECCO,{BOA},{},220.00,{Leather},,2019,Athletic,Waterproof,
+PUMA Proadapt Delta,PUMA,{Laces},{},200.00,{Leather},True,2022,Athletic,Waterproof,14.2
+Footjoy eComfort,Footjoy,{Laces},{Cheap},90.00,{Synthetic},True,2022,Athletic,Waterproof,11.1
+PUMA Ignite Pwradapt Caged,PUMA,"{Laces, Slip-On}",{},150.00,{Knit},True,2021,Athletic,Waterproof,16.8
+ASICS Gel Kayano Ace,ASICS,{Laces},{},170.00,{Synthetic},,2022,Athletic,Waterproof,13.0
+Nike Victory G Lite NN,Nike,{Laces},"{Cheap, Breathable}",70.00,{Synthetic},,2022,Athletic,,
+Adidas Tour360 22,Adidas,{Laces},{},210.00,{Leather},True,2022,Athletic,Waterproof,16.9
+Footjoy Tour Alpha BOA,Footjoy,{BOA},{},220.00,"{Leather, Ortholite}",True,2022,Athletic,Waterproof,17.0
+Adidas Tech Response,Adidas,{Laces},{Cheap},70.00,{Synthetic},True,2020,Athletic,,
+ASICS Gel Course Ace,ASICS,{Laces},{},150.00,"{Knit, Ortholite}",,2021,Athletic,Water-Resistant,
+ECCO Biom H4 BOA,ECCO,{BOA},{Expensive},230.00,"{Leather, Ortholite}",,2022,Athletic,,15.0
+Under Armour HOVR Drive 2,Under Armour,{Laces},{},160.00,{Synthetic},True,2022,Athletic,Waterproof,
+Adidas CodeChaos BOA,Adidas,{BOA},{},180.00,{Knit},,2020,Athletic,Waterproof,13.1
+ECCO Biom G5,ECCO,{BOA},{Expensive},270.00,"{Leather, Ortholite}",True,2023,Athletic,Waterproof,15.0
+Adidas ZG21 BOA,Adidas,{BOA},{},190.00,{Synthetic},True,2021,Athletic,Waterproof,13.0
+ASICS Gel Course Duo BOA,ASICS,{BOA},{},180.00,{Synthetic},True,2020,Athletic,Waterproof,
+PUMA Ignite Nxt,PUMA,{Laces},{},120.00,{Synthetic},,2019,Athletic,Water-Resistant,15.0
+Nike Tiger Woods '13,Nike,{Laces},{Expensive},240.00,{Synthetic},True,2023,Athletic,,
+Callaway Coronado,Callaway,{Laces},{},130.00,{Synthetic},True,2020,,Waterproof,15.0
+Under Armour HOVR Drive,Under Armour,{Laces},{},160.00,{Synthetic},True,2020,Athletic,Waterproof,12.0
+Footjoy Traditions Shield Tip,Footjoy,{Laces},{},140.00,{Leather},True,2022,Traditional,Waterproof,
+Footjoy Fuel BOA,Footjoy,{BOA},{},159.99,{Leather},,2022,,Waterproof,
+New Balance Striker v2,New Balance,{Laces},{Cheap},100.00,{Leather},True,2022,Athletic,Waterproof,
+ECCO S-Three,ECCO,{Laces},{},200.00,{Leather},,2020,Athletic,Waterproof,15.8
+Nike Infinity G,Nike,{Laces},{Cheap},70.00,{Synthetic},,2021,Athletic,Waterproof,11.0
+Footjoy Superlites XP BOA,Footjoy,{BOA},{},130.00,{Synthetic},,2022,Athletic,Waterproof,10.0
+ECCO BIOM Hybrid 3 GTX,ECCO,{Laces},{},200.00,{Leather},,2019,Athletic,Waterproof,15.0
+Nike Air Zoom Infinity Tour 2 Shield,Nike,{Laces},{},180.00,{Synthetic},True,2023,Athletic,Waterproof,
+Nike Victory G Lite,Nike,{Laces},"{Cheap, Breathable}",70.00,{Knit},,2021,Athletic,,
+Callaway Del Mar,Callaway,{Laces},{Cheap},95.00,{Synthetic},,2020,,Waterproof,
+Jordan ADG 2,Jordan,{Laces},{},150.00,{Leather},,2020,Athletic,Waterproof,15.0
+Under Armour HOVR Tour SL,Under Armour,{Laces},{},180.00,{Knit},,2022,Athletic,Waterproof,13.3
+New Balance Fresh Foam LinksSL,New Balance,{Laces},{Cheap},100.00,{Synthetic},,2020,,Waterproof,12.0
+Skechers Go Golf Max Fairway 3,Skechers,{Laces},"{Cheap, Breathable}",100.00,"{Synthetic, Ortholite}",,2022,Athletic,,
+Jordan ADG,Jordan,{Laces},{},140.00,{Leather},,2019,Athletic,,
+Adidas Samba Golf,Adidas,{Laces},{},120.00,"{Synthetic, Ortholite}",,2022,Athletic,Water-Resistant,
+Footjoy Pro SL 2022,Footjoy,{Laces},{},215.00,{Leather},,2022,,Waterproof,
+Skechers GO GOLF Drive 4,Skechers,{Laces},{Cheap},90.00,{Leather},,2019,Athletic,Water-Resistant,
+New Balance Breeze,New Balance,{Laces},{},70.00,{Synthetic},,2020,Athletic,,11.5
+Under Armour Charged Draw RST,Under Armour,{Laces},{Cheap},110.00,{Leather},True,,Athletic,Waterproof,11.2
+Nike Air Zoom Infinity Tour Next% NRG,Nike,{Laces},{},180.00,{Synthetic},True,2023,Athletic,,
+Skechers GO GOLF Elite - Tour SL,Skechers,{Laces},{},130.00,{Leather},,2021,Athletic,Waterproof,
+Adidas Tech Response 2.0,Adidas,{Laces},"{Cheap, Breathable}",65.00,{Synthetic},True,2021,Athletic,,14.4
+Adidas Stan Smith Golf,Adidas,{Laces},{},120.00,{Synthetic},,2022,Athletic,Waterproof,14.4
+Nike Air Zoom Infinity Tour Shield,Nike,{Laces},{},180.00,{Synthetic},True,2022,,Waterproof,
+ECCO BIOM G 3,ECCO,{Laces},{Expensive},250.00,{Leather},True,2020,Athletic,Waterproof,15.2

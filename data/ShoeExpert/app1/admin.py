@@ -33,7 +33,7 @@ def get_widget_for_field(field):
 
 ### Model Resources Below ###
 
-def create_model_resource(url_path = Url_Paths.RUNNING_SHOES):
+def create_model_resource(url_path):
     attrs = {
         '__module__': __name__,
         "shoe_name": Field(attribute='shoe_name', column_name='SHOE_NAME'),
@@ -47,11 +47,9 @@ def create_model_resource(url_path = Url_Paths.RUNNING_SHOES):
     type_name = url_path.name.title() + '_Resource'
     globals()[resource_name] = type(type_name, (resources.ModelResource,), attrs)
 
-create_model_resource()
-
 ### Admin Integration/Mixins Below ###
 
-def create_admin_mixin(url_path = Url_Paths.RUNNING_SHOES):
+def create_admin_mixin(url_path):
     attrs = {
         '__module__': __name__,
         "resource_classes": [globals()[url_path.name.capitalize() + '_resource']],
@@ -60,11 +58,13 @@ def create_admin_mixin(url_path = Url_Paths.RUNNING_SHOES):
     type_name = url_path.name.title() + '_Admin'
     globals()[mixin_name] = type(type_name, (ImportMixin, admin.ModelAdmin), attrs)
 
-create_admin_mixin()
-
 ### Register Models & Mixins Below ###
 
-def register_model_and_mixin(url_path = Url_Paths.RUNNING_SHOES):
+def register_model_and_mixin(url_path):
     admin.site.register(globals()[url_path.name.capitalize()], globals()[url_path.name.capitalize() + '_admin'])
 
-register_model_and_mixin()
+### RUNNER ###
+for url_path in Url_Paths:
+    create_model_resource()
+    create_admin_mixin()
+    register_model_and_mixin()

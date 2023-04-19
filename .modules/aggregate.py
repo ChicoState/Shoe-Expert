@@ -9,6 +9,7 @@ import itertools
 import os
 import platform
 import re
+import requests
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,161 +21,87 @@ import sys
 import tempfile
 import time
 
-class ColumnSelectorEnumMeta(EnumMeta):
-    def __new__(metacls, cls, bases, classdict):
-        enum_class = super().__new__(metacls, cls, bases, classdict)
-        for _, member in enum_class.__members__.items():
-            value, available = member._value_
-            member._value_ = value
-            member.available = available
-        return enum_class
-
-class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
-    ARCH_SUPPORT = ("fact-arch-support", True)
-    ARCH_TYPE = ("fact-arch-type", True)
-    BRAND = ("fact-brand", True)
-    CLEAT_DESIGN = ("fact-cleat-design", True)
-    CLOSURE = ("fact-closure", True)
-    COLLABORATION = ("fact-collaboration", True)
-    COLLECTION = ("fact-collection", True)
-    CONDITION = ("fact-condition", True)
-    CONSTRUCTION = ("fact-construction", True)
-    CUSHIONING = ("fact-cushioning", True)
-    CUT = ("fact-cut", True)
-    DESIGNED_BY = ("fact-designed-by", True)
-    DISTANCE = ("fact-distance", True)
-    DOWNTURN = ("fact-downturn", True)
-    EMBELLISHMENT = ("fact-embellishment", True)
-    ENVIRONMENT = ("fact-environment", True)
-    EVENT = ("fact-event", True)
-    EXPERT_RATING = ("fact-expert_score", True)
-    FEATURE = ("fact-feature", True)
-    FEATURES = ("fact-features", True)
-    FIT = ("fact-fit", True)
-    FOOT_CONDITION = ("fact-foot-condition", True)
-    FOREFOOT_HEIGHT = ("fact-forefoot-height", True)
-    FLEXIBILITY = ("fact-flexibility", True)
-    GRAM_INSULATION = ("fact-gram-insulation", True)
-    HEEL_HEIGHT = ("fact-heel-height", True)
-    HEEL_TOE_DROP = ("fact-heel-to-toe-drop", True)
-    INSPIRED_FROM = ("fact-inspired-from", True)
-    LACE_TYPE = ("fact-lace-type", True)
-    LACING_SYSTEM = ("fact-lacing-system", True)
-    LAST_SHAPE = ("fact-last-shape", True)
-    LEVEL = ("fact-level", True)
-    LINING = ("fact-lining", True)
-    LOCKDOWN = ("fact-lockdown", True)
-    MSRP = ("fact-msrp_formatted", True)
-    MATERIAL = ("fact-material", True)
-    MIDSOLE = ("fact-midsole", True)
-    NUMBER_OF_REVIEWS = ("fact-number-of-reviews", True)
-    ORIGIN = ("fact-origin", True)
-    ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", True)
-    OUTSOLE = ("fact-outsole", True)
-    PACE = ("fact-pace", True)
-    PRINT = ("fact-print", True)
-    PRONATION = ("fact-pronation", True)
-    PROTECTION = ("fact-protection", True)
-    RANDING = ("fact-randing", True)
-    RELEASE_DATE = ("fact-release-date", True)
-    REVIEW_TYPE = ("fact-review-type", True)
-    RIGIDITY = ("fact-rigidity", True)
-    SALES_PRICE = ("fact-price", True)
-    SCORE = ("fact-score", True)
-    SEASON = ("fact-season", True)
-    SENSITIVITY = ("fact-sensitivity", True)
-    SHOE_TYPE = ("fact-shoe-type", True)
-    SIGNATURE = ("fact-signature", True)
-    SPIKE_SIZE = ("fact-spike-size", True)
-    SPIKE_TYPE = ("fact-spike-type", True)
-    STIFFNESS = ("fact-stiffness", True)
-    STRETCH = ("fact-stretch", True)
-    STRIKE_PATTERN = ("fact-strike-pattern", True)
-    STUD_TYPE = ("fact-stud-type", True)
-    STYLE = ("fact-style", True)
-    SUMMER = ("fact-summer", True)
-    SURFACE = ("fact-surface", True)
-    SUPPORT = ("fact-support", True)
-    TERRAIN = ("fact-terrain", True)
-    TECHNOLOGY = ("fact-technology", True)
-    THICKNESS = ("fact-thickness", True)
-    TOEBOX = ("fact-toebox", True)
-    TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", True)
-    TOP = ("fact-top", True)
-    TYPE = ("fact-type", True)
-    ULTRA_RUNNING = ("fact-ultra-running", True)
-    USE = ("fact-use", True)
-    USER_RATING = ("fact-users_score", True)
-    WATERPROOFING = ("fact-waterproofing", True)
-    WEIGHT = ("fact-weight", True)
-    WIDTH = ("fact-width", True)
-    WORN_BY = ("fact-worn-by", True)
-    ZERO_DROP = ("fact-zero-drop", True)
-
-    @classmethod
-    def _reset_availability(cls, val=True):
-        if not isinstance(val, bool):
-            raise TypeError(f"Expected bool for val, but received {type(val)}")
-        for member in cls:
-            member.available = val
-
-    # set availability to false for all enumeration members except those in include list
-    @classmethod
-    def includeOnly(cls, include):
-        if not isinstance(include, list):
-            raise TypeError(f"Expected include to be a list, but recieved {type(include)}")
-        cls._reset_availability(val=False)
-        for member in include:
-            if isinstance(member, cls):
-                member.available = True
-
-    @classmethod
-    def get_full_list(cls, exclude=None):
-        if exclude is None:
-            exclude = []
-        return [member.name for member in cls if member not in exclude and member.available]
-
-    @classmethod
-    def get_empty_list(cls, include=None):
-        if include is None:
-            include = []
-        return [member.name for member in include if isinstance(member, cls) and member.available]
-
-    @classmethod
-    def get_full_menu_selector_list(cls, exclude=None):
-        if exclude is None:
-            exclude = []
-        return [column_selector.get_menu_selector() for column_selector in cls if column_selector not in exclude and column_selector.available]
-
-    @classmethod
-    def get_empty_menu_selector_list(cls, include=None):
-        if include is None:
-            include = []
-        return [column_selector.get_menu_selector() for column_selector in include if isinstance(column_selector, cls) and column_selector.available]
-
-    @classmethod
-    def get_default_map(cls):
-        default_map = {}
-        for member in cls:
-            if member.available:
-                default_map[member] = True
-        if cls.MSRP.available:
-            default_map[cls.MSRP] = False
-        return default_map
-
-    @classmethod
-    def get_true_map(cls):
-        false_map = cls.get_default_map()
-        if cls.MSRP.available:
-            false_map[cls.MSRP] = True
-        return false_map
-
-    @classmethod
-    def get_false_map(cls):
-        true_map = cls.get_true_map()
-        for key in true_map:
-            true_map[key] = False
-        return true_map
+class ColumnSelector(Enum):
+    ARCH_SUPPORT = "fact-arch-support"
+    ARCH_TYPE = "fact-arch-type"
+    BRAND = "fact-brand"
+    CLEAT_DESIGN = "fact-cleat-design"
+    CLOSURE = "fact-closure"
+    COLLABORATION = "fact-collaboration"
+    COLLECTION = "fact-collection"
+    CONDITION = "fact-condition"
+    CONSTRUCTION = "fact-construction"
+    CUSHIONING = "fact-cushioning"
+    CUT = "fact-cut"
+    DESIGNED_BY = "fact-designed-by"
+    DISTANCE = "fact-distance"
+    DOWNTURN = "fact-downturn"
+    EMBELLISHMENT = "fact-embellishment"
+    ENVIRONMENT = "fact-environment"
+    EVENT = "fact-event"
+    EXPERT_RATING = "fact-expert_score"
+    FEATURE = "fact-feature"
+    FEATURES = "fact-features"
+    FIT = "fact-fit"
+    FOOT_CONDITION = "fact-foot-condition"
+    FOREFOOT_HEIGHT = "fact-forefoot-height"
+    FLEXIBILITY = "fact-flexibility"
+    GRAM_INSULATION = "fact-gram-insulation"
+    HEEL_HEIGHT = "fact-heel-height"
+    HEEL_TOE_DROP = "fact-heel-to-toe-drop"
+    INSPIRED_FROM = "fact-inspired-from"
+    LACE_TYPE = "fact-lace-type"
+    LACING_SYSTEM = "fact-lacing-system"
+    LAST_SHAPE = "fact-last-shape"
+    LEVEL = "fact-level"
+    LINING = "fact-lining"
+    LOCKDOWN = "fact-lockdown"
+    MSRP = "fact-msrp_formatted"
+    MATERIAL = "fact-material"
+    MIDSOLE = "fact-midsole"
+    NUMBER_OF_REVIEWS = "fact-number-of-reviews"
+    ORIGIN = "fact-origin"
+    ORTHOTIC_FRIENDLY = "fact-orthotic-friendly"
+    OUTSOLE = "fact-outsole"
+    PACE = "fact-pace"
+    PRINT = "fact-print"
+    PRONATION = "fact-pronation"
+    PROTECTION = "fact-protection"
+    RANDING = "fact-randing"
+    RELEASE_DATE = "fact-release-date"
+    REVIEW_TYPE = "fact-review-type"
+    RIGIDITY = "fact-rigidity"
+    SALES_PRICE = "fact-price"
+    SCORE = "fact-score"
+    SEASON = "fact-season"
+    SENSITIVITY = "fact-sensitivity"
+    SHOE_TYPE = "fact-shoe-type"
+    SIGNATURE = "fact-signature"
+    SPIKE_SIZE = "fact-spike-size"
+    SPIKE_TYPE = "fact-spike-type"
+    STIFFNESS = "fact-stiffness"
+    STRETCH = "fact-stretch"
+    STRIKE_PATTERN = "fact-strike-pattern"
+    STUD_TYPE = "fact-stud-type"
+    STYLE = "fact-style"
+    SUMMER = "fact-summer"
+    SURFACE = "fact-surface"
+    SUPPORT = "fact-support"
+    TERRAIN = "fact-terrain"
+    TECHNOLOGY = "fact-technology"
+    THICKNESS = "fact-thickness"
+    TOEBOX = "fact-toebox"
+    TONGUE_PULL_LOOP = "fact-tongue-pull-loop"
+    TOP = "fact-top"
+    TYPE = "fact-type"
+    ULTRA_RUNNING = "fact-ultra-running"
+    USE = "fact-use"
+    USER_RATING = "fact-users_score"
+    WATERPROOFING = "fact-waterproofing"
+    WEIGHT = "fact-weight"
+    WIDTH = "fact-width"
+    WORN_BY = "fact-worn-by"
+    ZERO_DROP = "fact-zero-drop"
 
     def get_menu_selector(self):
         return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
@@ -312,6 +239,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
             ColumnSelector.WATERPROOFING: {
+                "name": "Waterproofing",
+                "units": None,
                 "django_model": models.CharField(max_length=32, choices=(('waterproof', "Waterproof"), ('water resistant', "Water Resistant")), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Waterproof' if 'waterproof' in s.lower() else 'Water Resistant' if re.search(r'water\s*resistant', s.lower()) else None
             },
@@ -545,7 +474,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Stretch",
                 "units": None,
                 "django_model": models.BooleanField(blank=True, null=True),
-                "lambda_serializer": lambda s: True if re.search(r'size\s*stretch' in s.lower()) else False if re.search(r'no\s*stretch', s.lower()) else None
+                "lambda_serializer": lambda s: True if re.search(r'size\s*stretch', s.lower()) else False if re.search(r'no\s*stretch', s.lower()) else None
             },
             ColumnSelector.TECHNOLOGY: {
                 "name": "Technology",
@@ -557,7 +486,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Thickness",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.TONGUE_PULL_LOOP: {
                 "name": "Tongue Pull Loop",
@@ -624,17 +553,23 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
+            ColumnSelector.FOREFOOT_HEIGHT: {
+                "name": "Forefoot Height",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MSRP: {
                 "name": "MSRP",
@@ -695,6 +630,12 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "units": "oz",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            },
+            ColumnSelector.WIDTH: {
+                "name": "Widths Available",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(("narrow", "Narrow"), ("standard", "Standard"), ("wide", "Wide"), ("extra wide", "Extra Wide"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Narrow' if 'narrow' in s.lower() else None, 'Standard' if 'normal' in s.lower() else None, 'Wide' if re.search(r'(?<!\-)wide', s.lower()) else None, 'Extra Wide' if 'x-wide' in s.lower() else None])).rstrip(', ') + '}'
             }
         }
     )
@@ -925,7 +866,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Closure",
                 "units": None,
                 "django_model": ArrayField(models.CharField(max_length=16, choices=(('laces', "Laces"), ('slip-on', "Slip-On"), ('BOA', "BOA"))), blank=True, null=True),
-                "lambda_serializer": lambda s: '{' + ', '.join(format(None, ['Laces' if 'laces' in s.lower() else None, 'Slip-On' if 'slip-on' in s.lower() else None, 'BOA' if 'boa' in s.lower() else None])).rstrip(', ') + '}'
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Laces' if 'laces' in s.lower() else None, 'Slip-On' if 'slip-on' in s.lower() else None, 'BOA' if 'boa' in s.lower() else None])).rstrip(', ') + '}'
             },
             ColumnSelector.COLLECTION: {
                 "name": "Collection",
@@ -943,7 +884,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Features",
                 "units": None,
                 "django_model": ArrayField(models.CharField(max_length=16, choices=(('cheap', "Cheap"), ('breathable', "Breathable"), ('expensive', "Expensive"))), blank=True, null=True),
-                "lambda_serializer": lambda s: '{' + ', '.join(format(None, ['Cheap' if 'cheap' in s.lower() else None, 'Breathable' if 'breathable' in s.lower() else None, 'Expensive' if 'expensive' in s.lower() else None])).rstrip(', ') + '}'
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Cheap' if 'cheap' in s.lower() else None, 'Breathable' if 'breathable' in s.lower() else None, 'Expensive' if 'expensive' in s.lower() else None])).rstrip(', ') + '}'
             },
             ColumnSelector.MSRP: {
                 "name": "MSRP",
@@ -955,7 +896,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Material",
                 "units": None,
                 "django_model": ArrayField(models.CharField(max_length=16, choices=(('leather', "Leather"), ('synthetic', "Synthetic"), ('knit', "Knit"), ('ortholite', "Ortholite"))), blank=True, null=True),
-                "lambda_serializer": lambda s: '{' + ', '.join(format(None, ['Leather' if 'leather' in s.lower() else None, 'Synthetic' if 'synthetic' in s.lower() else None, 'Knit' if 'knit' in s.lower() else None, 'Ortholite' if 'ortholite' in s.lower() else None])).rstrip(', ') + '}'
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Leather' if 'leather' in s.lower() else None, 'Synthetic' if 'synthetic' in s.lower() else None, 'Knit' if 'knit' in s.lower() else None, 'Ortholite' if 'ortholite' in s.lower() else None])).rstrip(', ') + '}'
             },
             ColumnSelector.OUTSOLE: {
                 "name": "Spiked",
@@ -1103,8 +1044,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.ORIGIN: {
                 "name": "Origin",
                 "units": None,
-                "django_model": models.CharField(max_length=16, choices=(('USA', "USA"), ('European', "European"), ('Italian', "Italian"), ('German', "German")), blank=True, null=True),
-                "lambda_serializer": lambda s: 'USA' if 'usa' in s.lower() else 'European' if 'european' in s.lower() else 'Italian' if 'italian' in s.lower() else 'German' if 'german' in s.lower() else None
+                "django_model": models.CharField(max_length=16, choices=(('USA', "USA"), ('European', "European"), ('Italian', "Italian"), ('German', "German"), ('Asian', "Asian")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'USA' if 'usa' in s.lower() else 'European' if 'european' in s.lower() else 'Italian' if 'italian' in s.lower() else 'German' if 'german' in s.lower() else 'Asian' if 'asian' in s.lower() else None
             },
             ColumnSelector.ORTHOTIC_FRIENDLY: {
                 "name": "Orthotic Friendly",
@@ -1383,8 +1324,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.ARCH_SUPPORT: {
                 "name": "Arch Support",
                 "units": None,
-                "django_model": None, # FIXME: models.CharField(max_length=16, choices=(("stability", "Stability"), ("neutral", "Neutral"), ("motion control", "Motion control")), blank=True, null=True))
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "django_model": models.CharField(max_length=16, choices=(("stability", "Stability"), ("neutral", "Neutral"), ("motion control", "Motion control")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Stability' if 'stability' in s.lower() else 'Neutral' if 'neutral' in s.lower() else 'Motion control' if re.search(r'motion\s*control', s.lower()) else None
             },
             ColumnSelector.ARCH_TYPE: {
                 "name": "Arch Type",
@@ -1431,8 +1372,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.FLEXIBILITY: {
                 "name": "Flexibility",
                 "units": None,
-                "django_model": models.CharField(max_length=24, choices=(('rigid', "Very stiff"), ('semi-rigid', "Stiff"), ('balanced', "Moderate"), ('semi-flexible', "Flexible"), ('flexible', "Very flexible")), blank=True, null=True),
-                "lambda_serializer": lambda s: 'Very stiff' if 'very stiff' in s.lower() else 'Stiff' if 'stiff' in s.lower() else 'Moderate' if 'moderate' in s.lower() else 'Flexible' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(very\s*)?(flexible)', s.lower())) else 'Very flexible' if re.search(r'very\s*flexible', s.lower()) else None
+                "django_model": models.CharField(max_length=24, choices=(('rigid', "Rigid"), ('semi-rigid', "Semi-Rigid"), ('balanced', "Balanced"), ('semi-flexible', "Semi-Flexible"), ('flexible', "Flexible")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Rigid' if 'very stiff' in s.lower() else 'Semi-Rigid' if 'stiff' in s.lower() else 'Balanced' if 'moderate' in s.lower() else 'Semi-Flexible' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(very\s*)?(flexible)', s.lower())) else 'Flexible' if re.search(r'very\s*flexible', s.lower()) else None
             },
             ColumnSelector.FOOT_CONDITION: {
                 "name": "Foot Condition",
@@ -1444,19 +1385,710 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "name": "Forefoot Height",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
                 "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda x: (round(sum(map(float, x.rstrip("mm").split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.MATERIAL: {
+                "name": "Material",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.NUMBER_OF_REVIEWS: {
+                "name": "Number of Reviews",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.PACE: {
+                "name": "Pace",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.PRONATION: {
+                "name": "Pronation",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('supination', 'Supination'), ('underpronation', 'Underpronation'), ('neutral', 'Neutral'), ('overpronation', 'Overpronation'), ('severe overpronation', 'Severe Overpronation'))), blank=True, null=True),
+                "lambda_serializer": lambda x: '{' + ', '.join(filter(None, ['Supination' if 'supination' in x.lower() else None, 'Underpronation' if 'underpronation' in x.lower() else None, 'Neutral' if 'neutral' in x.lower() else None, 'Overpronation' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(severe\s*)?(overpronation)', x.lower())) else None, 'Severe Overpronation' if re.search(r'severe\s*overpronation', x.lower()) else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SEASON: {
+                "name": "Season",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.STRIKE_PATTERN: {
+                "name": "Strike Pattern",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=10, choices=(('forefoot', "Forefoot"), ('midfoot', "Midfoot"), ('heel', "Heel"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Forefoot' if 'forefoot' in s.lower() else None, 'Midfoot' if 'midfoot' in s.lower() else None, 'Heel' if 'heel' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.SUMMER: {
+                "name": "Summer",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.TECHNOLOGY: {
+                "name": "Technology",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.TERRAIN: {
+                "name": "Terrain",
+                "units": None,
+                "django_model": models.CharField(max_length=5, choices=(('road', "Road"), ('trail', "Trail")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Road' if 'road' in s.lower() else 'Trail' if 'trail' in s.lower() else None
+            },
+            ColumnSelector.TOEBOX: {
+                "name": "Toebox",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('narrow', "Narrow"), ('medium', "Medium"), ('wide', "Wide"), ('extra wide', "Extra Wide")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Narrow' if 'narrow' in s.lower() else 'Wide' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(extra\s*)?(wide)', s.lower())) else 'Extra Wide' if re.search(r'extra\s*wide', s.lower()) else 'Medium' if 'medium' in s.lower() else None
+            },
+            ColumnSelector.TYPE: {
+                "name": "Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.ULTRA_RUNNING: {
+                "name": "Ultra Running",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.USE: {
+                "name": "Use",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.WATERPROOFING: {
+                "name": "Waterproofing",
+                "units": None,
+                "django_model": models.CharField(choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Water Repellent' if 'repellent' in s.lower() else 'Waterproof' if 'waterproof' in s.lower() else None
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            },
+            ColumnSelector.WIDTH: {
+                "name": "Widths Available",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(("narrow", "Narrow"), ("standard", "Standard"), ("wide", "Wide"), ("extra wide", "Extra Wide"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Narrow' if 'narrow' in s.lower() else None, 'Standard' if 'normal' in s.lower() else None, 'Wide' if re.search(r'(?<!\-)wide', s.lower()) else None, 'Extra Wide' if 'x-wide' in s.lower() else None])).rstrip(', ') + '}'
+            }
+        }
+    )
+    SNEAKERS = (
+        "sneakers",
+        {
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.CLOSURE: {
+                "name": "Closure",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('pull toggle', "Pull Toggle"), ('buckle', "Buckle"), ('zipper', "Zipper"), ('velcro', "Velcro"), ('laces', "Laces"), ('slip-on', "Slip-On"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Pull Toggle' if re.search(r'pull\s*toggle', s.lower()) else None, 'Buckle' if 'buckle' in s.lower() else None, 'Zipper' if 'zipper' in s.lower() else None, 'Velcro' if 'velcro' in s.lower() else None, 'Laces' if 'laces' in s.lower() else None, 'Slip-On' if 'slip-on' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.COLLABORATION: {
+                "name": "Collaboration",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.DESIGNED_BY: {
+                "name": "Designed By",
+                "units": None,
+                "django_model": models.CharField(max_length=128, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.EMBELLISHMENT: {
+                "name": "Embellishment",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('rhinestone', "Rhinestone"), ('sequin', "Sequin"), ('spikes', "Spikes"), ('embroidered', "Embroidered"), ('crystal', "Crystal"), ('glitter', "Glitter")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Rhinestone' if 'rhinestone' in s.lower() else 'Sequin' if 'sequin' in s.lower() else 'Spikes' if 'spikes' in s.lower() else 'Embroidered' if 'embroidered' in s.lower() else 'Crystal' if 'crystal' in s.lower() else 'Glitter' if 'glitter' in s.lower() else None
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Features",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.INSPIRED_FROM: {
+                "name": "Inspired From",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('running', "Running"), ('casual', "Casual"), ('skate', "Skate"), ('basketball', "Basketball"), ('hiking', "Hiking"), ('tennis', "Tennis"), ('training', "Training"), ('football', "Football"), ('soccer', "Soccer"), ('boat', "Boat")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Running' if 'running' in s.lower() else 'Casual' if 'casual' in s.lower() else 'Skate' if 'skate' in s.lower() else 'Basketball' if 'basketball' in s.lower() else 'Hiking' if 'hiking' in s.lower() else 'Tennis' if 'tennis' in s.lower() else 'Training' if 'training' in s.lower() else 'Football' if 'football' in s.lower() else 'Soccer' if 'soccer' in s.lower() else 'Boat' if 'boat' in s.lower() else None
+            },
+            ColumnSelector.LACE_TYPE: {
+                "name": "Lace Type",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('self-lacing', "Self-Lacing"), ('cotton lace', "Cotton Lace"), ('round lace', "Round Lace"), ('synthetic lace', "Synthetic Lace"), ('no lace', "No Lace"), ('leather lace', "Leather Lace"), ('elastic lace', "Elastic Lace"), ('flat lace', "Flat Lace"), ('toggle lace', "Toggle Lace"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Self-Lacing' if 'self-lacing' in s.lower() else None, 'Cotton Lace' if re.search(r'cotton\s*lace', s.lower()) else None, 'Round Lace' if re.search(r'round\s*lace', s.lower()) else None, 'Synthetic Lace' if re.search(r'synthetic\s*lace', s.lower()) else None, 'No Lace' if re.search(r'no\s*lace', s.lower()) else None, 'Leather Lace' if re.search(r'leather\s*lace', s.lower()) else None, 'Elastic Lace' if re.search(r'elastic\s*lace', s.lower()) else None, 'Flat Lace' if re.search(r'flat\s*lace', s.lower()) else None, 'Toggle Lace' if re.search(r'toggle\s*lace', s.lower()) else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.MATERIAL: {
+                "name": "Material",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.NUMBER_OF_REVIEWS: {
+                "name": "Number of Reviews",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.ORIGIN: {
+                "name": "Origin",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('USA', "USA"), ('European', "European"), ('Italian', "Italian"), ('German', "German"), ('Asian', "Asian")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'USA' if 'usa' in s.lower() else 'European' if 'european' in s.lower() else 'Italian' if 'italian' in s.lower() else 'German' if 'german' in s.lower() else 'Asian' if 'asian' in s.lower() else None
+            },
+            ColumnSelector.PRINT: {
+                "name": "Print",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('snakeskin', "Snakeskin"), ('leopard', "Leopard"), ('camouflage', "Camouflage"), ('floral', "Floral"), ('tiger', "Tiger"), ('striped', "Striped"), ('rainbow', "Rainbow"), ('tie dye', "Tie Dye"), ('cheetah', "Cheetah"), ('zebra', "Zebra"), ('flame', "Flame"), ('checkered', "Checkered"), ('animal', "Animal"), ('graphic', "Graphic"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Snakeskin' if 'snakeskin' in s.lower() else None, 'Leopard' if 'leopard' in s.lower() else None, 'Camouflage' if 'camouflage' in s.lower() else None, 'Floral' if 'floral' in s.lower() else None, 'Tiger' if 'tiger' in s.lower() else None, 'Striped' if 'striped' in s.lower() else None, 'Rainbow' if 'rainbow' in s.lower() else None, 'Tie Dye' if re.search(r'tie\s*dye', s.lower()) else None, 'Cheetah' if 'cheetah' in s.lower() else None, 'Zebra' if 'zebra' in s.lower() else None, 'Flame' if 'flame' in s.lower() else None, 'Checkered' if 'checkered' in s.lower() else None, 'Animal' if 'animal' in s.lower() else None, 'Graphic' if 'graphic' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SEASON: {
+                "name": "Season",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=8, choices=(('spring', "Spring"), ('summer', "Summer"), ('fall', "Fall"), ('winter', "Winter"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Spring' if 'spring' in s.lower() else None, 'Summer' if 'summer' in s.lower() else None, 'Fall' if 'fall' in s.lower() else None, 'Winter' if 'winter' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.STYLE: {
+                "name": "Style",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('retro', "Retro"), ('classic', "Classic"), ('Dad', "Dad"), ('sporty', "Sporty"), ('minimalist', "Minimalist"), ('platform', "Platform"), ('sock', "Sock"), ('futuristic', "Futuristic"), ('dressy', "Dressy"), ('chunky', "Chunky"), ('sneakerboots', "Sneakerboots"), ('mule', "Mule"), ('wedge', "Wedge"), ('deconstructed', "Deconstructed"), ('clogs', "Clogs"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Retro' if 'retro' in s.lower() else None, 'Classic' if 'classic' in s.lower() else None, 'Dad' if 'dad' in s.lower() else None, 'Sporty' if 'sporty' in s.lower() else None, 'Minimalist' if 'minimalist' in s.lower() else None, 'Platform' if 'platform' in s.lower() else None, 'Sock' if 'sock' in s.lower() else None, 'Futuristic' if 'futuristic' in s.lower() else None, 'Dressy' if 'dressy' in s.lower() else None, 'Chunky' if 'chunky' in s.lower() else None, 'Sneakerboots' if 'sneakerboots' in s.lower() else None, 'Mule' if 'mule' in s.lower() else None, 'Wedge' if 'wedge' in s.lower() else None, 'Deconstructed' if 'deconstructed' in s.lower() else None, 'Clogs' if 'clogs' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.TECHNOLOGY: {
+                "name": "Technology",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.TOP: {
+                "name": "Top",
+                "units": None,
+                "django_model": models.CharField(max_length=8, choices=(('low', "Low"), ('mid', "Mid"), ('high', "High")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Low' if 'low' in s.lower() else 'Mid' if 'mid' in s.lower() else 'High' if 'high' in s.lower() else None
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            }
+        }
+    )
+    SOCCER_CLEATS = (
+        "soccer-cleats",
+        {
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.LACING_SYSTEM: {
+                "name": "Lacing System",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('ghost lacing', "Ghost Lacing"), ('laced', "Laced"), ('laceless', "Laceless")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Ghost Lacing' if re.search(r'ghost\s*lacing', s.lower()) else 'Laced' if 'laced' in s.lower() else 'Laceless' if 'laceless' in s.lower() else None
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.NUMBER_OF_REVIEWS: {
+                "name": "Number of Reviews",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Price Tier",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('cheap', "Cheap"), ('expensive', "Expensive")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Cheap' if 'cheap' in s.lower() else 'Expensive' if 'expensive' in s.lower() else None
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SIGNATURE: {
+                "name": "Signature",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SURFACE: {
+                "name": "Surface",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('flexible ground', "Flexible Ground"), ('soft ground', "Soft Ground"), ('indoor', "Indoor"), ('turf', "Turf"), ('firm ground', "Firm Ground"), ('street', "Street")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Flexible Ground' if re.search(r'flexible\s*ground', s.lower()) else 'Soft Ground' if re.search(r'soft\s*ground', s.lower()) else 'Indoor' if 'indoor' in s.lower() else 'Turf' if 'turf' in s.lower() else 'Firm Ground' if re.search(r'firm\s*ground', s.lower()) else 'Street' if 'street' in s.lower() else None
+            },
+            ColumnSelector.TOP: {
+                "name": "Top",
+                "units": None,
+                "django_model": models.CharField(max_length=8, choices=(('low', "Low"), ('mid', "Mid"), ('high', "High")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Low' if 'low' in s.lower() else 'Mid' if 'mid' in s.lower() else 'High' if 'high' in s.lower() else None
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            }
+        }
+    )
+    TENNIS_SHOES = (
+        "tennis-shoes",
+        {
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLABORATION: {
+                "name": "Collaboration",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.CONSTRUCTION: {
+                "name": "Construction",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('speed', "Speed"), ('stability', "Stability"), ('cushioned', "Cushioned")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Speed' if 'speed' in s.lower() else 'Stability' if 'stability' in s.lower() else 'Cushioned' if 'cushioned' in s.lower() else None
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURE: {
+                "name": "Feature",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Features",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.MATERIAL: {
+                "name": "Material",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SHOE_TYPE: {
+                "name": "Surface",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=8, choices=(('clay', "Clay"), ('hard', "Hard"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Clay' if 'clay' in s.lower() or 'all' in s.lower() else None, 'Hard' if 'hard' in s.lower() or 'all' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.TECHNOLOGY: {
+                "name": "Technology",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            }
+        }
+    )
+    TRACK_SHOES = (
+        "track-and-field-shoes",
+        {
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.CLOSURE: {
+                "name": "Closure",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('slip-on', "Slip-On"), ('hook & loop', "Hook & Loop"), ('lace-up', "Lace-Up"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Slip-On' if 'slip-on' in s.lower() else None, 'Hook & Loop' if re.search(r'hook\s*and\s*loop', s.lower()) else None, 'Lace-Up' if 'lace-up' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.EVENT: {
+                "name": "Event",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('running', "Running"), ('throwing', "Throwing"), ('jumping', "Jumping")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Running' if 'running' in s.lower() else 'Throwing' if 'throwing' in s.lower() else 'Jumping' if 'jumping' in s.lower() else None
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURE: {
+                "name": "Feature",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Features",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SPIKE_SIZE: {
+                "name": "Spike Size",
+                "units": "inches",
+                "django_model": models.DecimalField(max_digits=4, decimal_places=4, blank=True, null=True),
+                "lambda_serializer": lambda s: 0.375 if '3/8' in s.lower() else 0.3125 if '5/16' in s.lower() else 0.25 if '1/4' in s.lower() else 0.1875 if '3/16' in s.lower() else 0.125 if '1/8' in s.lower() else None
+            },
+            ColumnSelector.SPIKE_TYPE: {
+                "name": "Spike Type",
+                "units": None,
+                "django_model": models.CharField(max_length=8, choices=(('pyramid', "Pyrimad"), ('blank', "Blank"), ('tree', "Tree")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Pyramid' if 'pyramid' in s.lower() else 'Blank' if 'blank' in s.lower() else 'Tree' if 'tree' in s.lower() else None
+            },
+            ColumnSelector.SURFACE: {
+                "name": "Surface",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('indoor', "Indoor"), ('asphalt', "Asphalt"), ('grass', "Grass"), ('dirt', "Dirt"), ('wood', "Wood"), ('rubber', "Rubber"), ('all-weather', "All-Weather"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Indoor' if 'indoor' in s.lower() else None, 'Asphalt' if 'asphalt' in s.lower() else None, 'Grass' if 'grass' in s.lower() else None, 'Dirt' if 'dirt' in s.lower() else None, 'Wood' if 'wood' in s.lower() else None, 'Rubber' if 'rubber' in s.lower() else None, 'All-Weather' if 'all-weather' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.USE: {
+                "name": "Use",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('shot put', "Shot Put"), ('mid distance', "Mid Distance"), ('sprints', "Sprints"), ('long distance', "Long Distance"), ('high jump', "High Jump"), ('pole vault', "Pole Vault"), ('long jump', "Long Jump"), ('cross country', "Cross Country"), ('triple jump', "Triple Jump"), ('discus', "Discus"), ('hurdles', "Hurdles"), ('hammer throw', "Hammer Throw"), ('javelin', "Javelin"), ('relays', "Relays"), ('steeplechase', "Steeplechase"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Shot Put' if re.search(r'shot\s*put', s.lower()) else None, 'Mid Distance' if re.search(r'mid\s*distance', s.lower()) else None, 'Sprints' if 'sprints' in s.lower() else None, 'Long Distance' if re.search(r'long\s*distance', s.lower()) else None, 'High Jump' if re.search(r'high\s*jump', s.lower()) else None, 'Pole Vault' if re.search(r'pole\s*vault', s.lower()) else None, 'Long Jump' if re.search(r'long\s*jump', s.lower()) else None, 'Cross Country' if re.search(r'cross\s*country', s.lower()) else None, 'Triple Jump' if re.search(r'triple\s*jump', s.lower()) else None, 'Discus' if 'discus' in s.lower() else None, 'Hurdles' if 'hurdles' in s.lower() else None, 'Hammer Throw' if re.search(r'hammer\s*throw', s.lower()) else None, 'Javelin' if 'javelin' in s.lower() else None, 'Relays' if 'relays' in s.lower() else None, 'Steeplechase' if 'steeplechase' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            }
+        }
+    )
+    TRAIL_SHOES = (
+        "trail-running-shoes",
+        {
+            ColumnSelector.ARCH_SUPPORT: {
+                "name": "Arch Support",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(("stability", "Stability"), ("neutral", "Neutral"), ("motion control", "Motion control")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Stability' if 'stability' in s.lower() else 'Neutral' if 'neutral' in s.lower() else 'Motion control' if re.search(r'motion\s*control', s.lower()) else None
+            },
+            ColumnSelector.ARCH_TYPE: {
+                "name": "Arch Type",
+                "units": None,
+                "django_model": models.CharField(max_length=5, choices=(("low", "Low"), ("high", "High")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'High' if s == 'High arch' else 'Low' if s == 'Low arch' else None
+            },
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.CUSHIONING: {
+                "name": "Cushioning",
+                "units": None,
+                "django_model": models.CharField(max_length=10, choices=(('firm', "Firm"), ('balanced', "Balanced"), ('plush', "Plush")), blank=True, null=True),
+                "lambda_serializer": lambda s: "Firm" if "firm" in s.lower() else "Balanced" if "balanced" in s.lower() else "Plush" if "plush" in s.lower() else None
+            },
+            ColumnSelector.DISTANCE: {
+                "name": "Distance",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Features",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FLEXIBILITY: {
+                "name": "Flexibility",
+                "units": None,
+                "django_model": models.CharField(max_length=24, choices=(('rigid', "Rigid"), ('semi-rigid', "Semi-Rigid"), ('balanced', "Balanced"), ('semi-flexible', "Semi-Flexible"), ('flexible', "Flexible")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Rigid' if 'very stiff' in s.lower() else 'Semi-Rigid' if 'stiff' in s.lower() else 'Balanced' if 'moderate' in s.lower() else 'Semi-Flexible' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(very\s*)?(flexible)', s.lower())) else 'Flexible' if re.search(r'very\s*flexible', s.lower()) else None
+            },
+            ColumnSelector.FOOT_CONDITION: {
+                "name": "Foot Condition",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FOREFOOT_HEIGHT: {
+                "name": "Forefoot Height",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.HEEL_HEIGHT: {
+                "name": "Heel Height",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.HEEL_TOE_DROP: {
+                "name": "Heel to Toe Drop",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MATERIAL: {
                 "name": "Material",
@@ -1539,14 +2171,14 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.TERRAIN: {
                 "name": "Terrain",
                 "units": None,
-                "django_model": models.CharField(max_length=5, choices=(('road', "Road"), ('trail', "Trail")), blank=True, null=True),
-                "lambda_serializer": lambda s: 'Road' if 'road' in s.lower() else 'Trail' if 'trail' in s.lower() else None
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
             ColumnSelector.TOEBOX: {
                 "name": "Toebox",
                 "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "django_model": models.CharField(max_length=16, choices=(('narrow', "Narrow"), ('medium', "Medium"), ('wide', "Wide"), ('extra wide', "Extra Wide")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Narrow' if 'narrow' in s.lower() else 'Wide' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(extra\s*)?(wide)', s.lower())) else 'Extra Wide' if re.search(r'extra\s*wide', s.lower()) else 'Medium' if 'medium' in s.lower() else None
             },
             ColumnSelector.TYPE: {
                 "name": "Type",
@@ -1575,6 +2207,119 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WATERPROOFING: {
                 "name": "Waterproofing",
                 "units": None,
+                "django_model": models.CharField(choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Water Repellent' if 'repellent' in s.lower() else 'Waterproof' if 'waterproof' in s.lower() else None
+            },
+            ColumnSelector.WEIGHT: {
+                "name": "Weight",
+                "units": "oz",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
+            },
+            ColumnSelector.WIDTH: {
+                "name": "Widths Available",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(("narrow", "Narrow"), ("standard", "Standard"), ("wide", "Wide"), ("extra wide", "Extra Wide"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Narrow' if 'narrow' in s.lower() else None, 'Standard' if 'normal' in s.lower() else None, 'Wide' if re.search(r'(?<!\-)wide', s.lower()) else None, 'Extra Wide' if 'x-wide' in s.lower() else None])).rstrip(', ') + '}'
+            }
+        }
+    )
+    TRAINING_SHOES = (
+        "training-shoes",
+        {
+            ColumnSelector.BRAND: {
+                "name": "Brand",
+                "units": None,
+                "django_model": models.CharField(max_length=32, blank=True, null=True),
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.COLLECTION: {
+                "name": "Collection",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.EXPERT_RATING: {
+                "name": "Expert Rating",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.FEATURES: {
+                "name": "Features",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('expensive', "Expensive"), ('high drop', "High Drop"), ('slip-on', "Slip-On"), ('minimalist', "Minimalist"), ('cheap', "Cheap"), ('low drop', "Low Drop"), ('lightweight', "Lightweight"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Expensive' if 'expensive' in s.lower() else None, 'High Drop' if re.search(r'high\s*drop', s.lower()) else None, 'Slip-On' if 'slip-on' in s.lower() else None, 'Minimalist' if 'minimalist' in s.lower() else None, 'Cheap' if 'cheap' in s.lower() else None, 'Low Drop' if re.search(r'low\s*drop', s.lower()) else None, 'Lightweight' if 'lightweight' in s.lower() else None])).rstrip(', ') + '}'
+            },
+            ColumnSelector.FOREFOOT_HEIGHT: {
+                "name": "Forefoot Height",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.HEEL_HEIGHT: {
+                "name": "Heel Height",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.HEEL_TOE_DROP: {
+                "name": "Heel to Toe Drop",
+                "units": "mm",
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
+            },
+            ColumnSelector.MSRP: {
+                "name": "MSRP",
+                "units": "USD",
+                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
+            },
+            ColumnSelector.NUMBER_OF_REVIEWS: {
+                "name": "Number of Reviews",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.RELEASE_DATE: {
+                "name": "Release Date",
+                "units": None,
+                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
+                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
+            },
+            ColumnSelector.REVIEW_TYPE: {
+                "name": "Review Type",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SALES_PRICE: {
+                "name": "Sales Price",
+                "units": "USD",
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.SCORE: {
+                "name": "Score",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.TOEBOX: {
+                "name": "Toebox",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('narrow', "Narrow"), ('medium', "Medium"), ('wide', "Wide"), ('extra wide', "Extra Wide")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Narrow' if 'narrow' in s.lower() else 'Wide' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(extra\s*)?(wide)', s.lower())) else 'Extra Wide' if re.search(r'extra\s*wide', s.lower()) else 'Medium' if 'medium' in s.lower() else None
+            },
+            ColumnSelector.USE: {
+                "name": "Use",
+                "units": None,
+                "django_model": None,
+                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+            },
+            ColumnSelector.USER_RATING: {
+                "name": "User Rating",
+                "units": None,
                 "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
@@ -1592,9 +2337,15 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             }
         }
     )
-    SNEAKERS = (
-        "sneakers",
+    WALKING_SHOES = (
+        "walking-shoes",
         {
+            ColumnSelector.ARCH_SUPPORT: {
+                "name": "Arch Support",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(("stability", "Stability"), ("neutral", "Neutral"), ("motion control", "Motion control")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Stability' if 'stability' in s.lower() else 'Neutral' if 'neutral' in s.lower() else 'Motion control' if re.search(r'motion\s*control', s.lower()) else None
+            },
             ColumnSelector.BRAND: {
                 "name": "Brand",
                 "units": None,
@@ -1604,14 +2355,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.CLOSURE: {
                 "name": "Closure",
                 "units": None,
-                "django_model": ArrayField(models.CharField(max_length=16, choices=(('pull toggle', "Pull Toggle"), ('buckle', "Buckle"), ('zipper', "Zipper"), ('velcro', "Velcro"), ('laces', "Laces"), ('slip-on', "Slip-On"))), blank=True, null=True),
-                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Pull Toggle' if re.search(r'pull\s*toggle', s.lower()) else None, 'Buckle' if 'buckle' in s.lower() else None, 'Zipper' if 'zipper' in s.lower() else None, 'Velcro' if 'velcro' in s.lower() else None, 'Laces' if 'laces' in s.lower() else None, 'Slip-On' if 'slip-on' in s.lower() else None])).rstrip(', ') + '}'
-            },
-            ColumnSelector.COLLABORATION: {
-                "name": "Collaboration",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "django_model": ArrayField(models.CharField(max_length=8, choices=(('bungee', "Bungee"), ('velcro', "Velcro"), ('lace-up', "Lace-Up"), ('slip-on', "Slip-On"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Bungee' if 'bungee' in s.lower() else None, 'Velcro' if 'velcro' in s.lower() else None, 'Lace-Up' if 'lace-up' in s.lower() else None, 'Slip-On' if 'slip-on' in s.lower() else None])).rstrip(', ') + '}'
             },
             ColumnSelector.COLLECTION: {
                 "name": "Collection",
@@ -1619,17 +2364,11 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
-            ColumnSelector.DESIGNED_BY: {
-                "name": "Designed By",
+            ColumnSelector.CONDITION: {
+                "name": "Condition",
                 "units": None,
-                "django_model": models.CharField(max_length=128, blank=True, null=True),
+                "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EMBELLISHMENT: {
-                "name": "Embellishment",
-                "units": None,
-                "django_model": models.CharField(max_length=16, choices=(('rhinestone', "Rhinestone"), ('sequin', "Sequin"), ('spikes', "Spikes"), ('embroidered', "Embroidered"), ('crystal', "Crystal"), ('glitter', "Glitter")), blank=True, null=True),
-                "lambda_serializer": lambda s: 'Rhinestone' if 'rhinestone' in s.lower() else 'Sequin' if 'sequin' in s.lower() else 'Spikes' if 'spikes' in s.lower() else 'Embroidered' if 'embroidered' in s.lower() else 'Crystal' if 'crystal' in s.lower() else 'Glitter' if 'glitter' in s.lower() else None
             },
             ColumnSelector.EXPERT_RATING: {
                 "name": "Expert Rating",
@@ -1643,672 +2382,11 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
-            ColumnSelector.INSPIRED_FROM: {
-                "name": "Inspired From",
-                "units": None,
-                "django_model": models.CharField(max_length=16, choices=(('running', "Running"), ('casual', "Casual"), ('skate', "Skate"), ('basketball', "Basketball"), ('hiking', "Hiking"), ('tennis', "Tennis"), ('training', "Training"), ('football', "Football"), ('soccer', "Soccer"), ('boat', "Boat")), blank=True, null=True),
-                "lambda_serializer": lambda s: 'Running' if 'running' in s.lower() else 'Casual' if 'casual' in s.lower() else 'Skate' if 'skate' in s.lower() else 'Basketball' if 'basketball' in s.lower() else 'Hiking' if 'hiking' in s.lower() else 'Tennis' if 'tennis' in s.lower() else 'Training' if 'training' in s.lower() else 'Football' if 'football' in s.lower() else 'Soccer' if 'soccer' in s.lower() else 'Boat' if 'boat' in s.lower() else None
-            },
-            # TODO: Continue from here
-            ColumnSelector.LACE_TYPE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
             ColumnSelector.MATERIAL: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.NUMBER_OF_REVIEWS: {
-                "name": "Number of Reviews",
+                "name": "Material",
                 "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.ORIGIN: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.PRINT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SEASON: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.STYLE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TECHNOLOGY: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TOP: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            }
-        }
-    )
-    SOCCER_CLEATS = (
-        "soccer-cleats",
-        {
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.LACING_SYSTEM: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.NUMBER_OF_REVIEWS: {
-                "name": "Number of Reviews",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "name": "Price Tier",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SIGNATURE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SURFACE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TOP: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            }
-        }
-    )
-    TENNIS_SHOES = (
-        "tennis-shoes",
-        {
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLABORATION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.CONSTRUCTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MATERIAL: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SHOE_TYPE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TECHNOLOGY: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            }
-        }
-    )
-    TRACK_SHOES = (
-        "track-and-field-shoes",
-        {
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.CLOSURE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EVENT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SPIKE_SIZE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SPIKE_TYPE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SURFACE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            }
-        }
-    )
-    TRAINING_SHOES = (
-        "training-shoes",
-        {
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FOREFOOT_HEIGHT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.HEEL_HEIGHT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.HEEL_TOE_DROP: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.NUMBER_OF_REVIEWS: {
-                "name": "Number of Reviews",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TOEBOX: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            },
-            ColumnSelector.WIDTH: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            }
-        }
-    )
-    TRAIL_SHOES = (
-        "trail-running-shoes",
-        {
-            ColumnSelector.ARCH_SUPPORT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.ARCH_TYPE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.CUSHIONING: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.DISTANCE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FLEXIBILITY: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FOOT_CONDITION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FOREFOOT_HEIGHT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.HEEL_HEIGHT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.HEEL_TOE_DROP: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MATERIAL: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MSRP: {
-                "name": "MSRP",
-                "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
-                "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
-            },
-            ColumnSelector.NUMBER_OF_REVIEWS: {
-                "name": "Number of Reviews",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.PACE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.PRONATION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.RELEASE_DATE: {
-                "name": "Release Date",
-                "units": None,
-                "django_model": models.PositiveIntegerField(validators=[MinValueValidator(1970), MaxValueValidator(date.today().year + 1)], blank=True, null=True),
-                "lambda_serializer": lambda s: date.today().year if "New" in s else next((int(x) for x in s.split(', ') if x.isdigit() and int(x) > 1970), None)
-            },
-            ColumnSelector.REVIEW_TYPE: {
-                "name": "Review Type",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SALES_PRICE: {
-                "name": "Sales Price",
-                "units": "USD",
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SCORE: {
-                "name": "Score",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SEASON: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.STRIKE_PATTERN: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.SUMMER: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TECHNOLOGY: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TERRAIN: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TOEBOX: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.TYPE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.ULTRA_RUNNING: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.USER_RATING: {
-                "name": "User Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WATERPROOFING: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.WEIGHT: {
-                "name": "Weight",
-                "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
-            },
-            ColumnSelector.WIDTH: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            }
-        }
-    )
-    WALKING_SHOES = (
-        "walking-shoes",
-        {
-            ColumnSelector.ARCH_SUPPORT: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.BRAND: {
-                "name": "Brand",
-                "units": None,
-                "django_model": models.CharField(max_length=32, blank=True, null=True),
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.CLOSURE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.COLLECTION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.CONDITION: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.EXPERT_RATING: {
-                "name": "Expert Rating",
-                "units": None,
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.FEATURES: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
-            },
-            ColumnSelector.MATERIAL: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "django_model": models.CharField(max_length=16, choices=(('wool', "Wool"), ('suede', "Suede"), ('mesh', "Mesh"), ('knit', "Knit"), ('synthetic', "Synthetic"), ('canvas', "Canvas"), ('leather', "Leather")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Wool' if 'wool' in s.lower() else 'Suede' if 'suede' in s.lower() else 'Mesh' if 'mesh' in s.lower() else 'Knit' if 'knit' in s.lower() else 'Synthetic' if 'synthetic' in s.lower() else 'Canvas' if 'canvas' in s.lower() else 'Leather' if 'leather' in s.lower() else None
             },
             ColumnSelector.MSRP: {
                 "name": "MSRP",
@@ -2341,14 +2419,20 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
             ColumnSelector.SURFACE: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "name": "Surface",
+                "units": None,
+                "django_model": ArrayField(models.CharField(max_length=16, choices=(('cobblestone', "Cobblestone"), ('trail', "Trail"), ('concrete', "Concrete"))), blank=True, null=True),
+                "lambda_serializer": lambda s: '{' + ', '.join(filter(None, ['Cobblestone' if 'cobblestone' in s.lower() else None, 'Trail' if 'trail' in s.lower() else None, 'Concrete' if 'concrete' in s.lower() else None])).rstrip(', ') + '}'
             },
             ColumnSelector.TOEBOX: {
-                "django_model": None,
-                "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
+                "name": "Toebox",
+                "units": None,
+                "django_model": models.CharField(max_length=16, choices=(('narrow', "Narrow"), ('medium', "Medium"), ('wide', "Wide"), ('extra wide', "Extra Wide")), blank=True, null=True),
+                "lambda_serializer": lambda s: 'Narrow' if 'narrow' in s.lower() else 'Wide' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(extra\s*)?(wide)', s.lower())) else 'Extra Wide' if re.search(r'extra\s*wide', s.lower()) else 'Medium' if 'medium' in s.lower() else None
             },
             ColumnSelector.USE: {
+                "name": "Use",
+                "units": None,
                 "django_model": None,
                 "lambda_serializer": lambda s: None if 'n/a' in s.lower() else s
             },
@@ -2375,7 +2459,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             elif display:
                 units = self.get_column_units(column)
                 if units is not None:
-                    name += f" ({units}))"
+                    name += f" ({units})"
             return name
         else:
             raise TypeError("column must be a ColumnSelector")
@@ -2399,7 +2483,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             raise TypeError("column must be a ColumnSelector")
 
     def get_available_columns(self):
-        return self.filterdict.keys()
+        return list(self.filterdict.keys())
 
     def get_django_available_columns(self):
         retlist = []
@@ -2407,13 +2491,6 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             if obj["django_model"] is not None:
                 retlist.append(column)
         return retlist
-
-    @classmethod
-    def get_include_dict(cls):
-        include = {}
-        for member in cls:
-            include[member] = member.get_available_columns()
-        return include
 
     def get_url_path(self, gender=Gender.NONE):
         prefix = "/catalog/"
@@ -2426,23 +2503,52 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         else:
             raise TypeError("gender must be an enumeration member of Gender")
 
-    def setColumnSelectorAvailability(self):
-        ColumnSelector.includeOnly(include=self.get_available_columns())
+    def get_default_dict(self):
+        avail_list = self.get_available_columns()
+        ret = {}
+        for column in avail_list:
+            if column != ColumnSelector.MSRP:
+                ret[column] = True
+            else:
+                ret[column] = False
+        return ret
+
+    def get_truth_dict(self):
+        avail_list = self.get_available_columns()
+        ret = {}
+        for column in avail_list:
+            ret[column] = True
+        return ret
+
+    def get_false_dict(self):
+        avail_list = self.get_available_columns()
+        ret = {}
+        for column in avail_list:
+            ret[column] = False
+        return ret
 
 class ScraperSingleton:
     _browser = None
-    _chromium_location = "/usr/bin/chromium"
+    _chromium_location = "/usr/bin/chromium"    # SHOULD NOT BE MODIFIED
     _column_filter_dict = None
-    _domain = "runrepeat.com"
-    _driver_path = "/usr/bin/chromedriver"
-    _sleep = 0.5
-    _timeout = 10
+    _domain = "runrepeat.com"                   # SHOULD NOT BE MODIFIED
+    _driver_path = "/usr/bin/chromedriver"      # SHOULD NOT BE MODIFIED
+    _sleep = 0.01
+    _timeout = 1
     _url = f"https://{_domain}"
 
     @classmethod
     def _cleanup(cls):
         if cls._browser is not None:
             cls._browser.quit()
+            cls._browser = None
+
+    @classmethod
+    def _resetClassVariables(cls):
+        cls._column_filter_dict = None
+        cls._sleep = 0.01
+        cls._timeout = 1
+        cls._url = f"https://{cls._domain}"
 
     @classmethod
     def _getShoeNames(cls):
@@ -2464,16 +2570,16 @@ class ScraperSingleton:
         cls._scroll_and_click(selector=(By.CSS_SELECTOR, "button.buy_now_button.edit-columns__button"))
 
     @classmethod
-    def _getColumnFilterDict(cls):
+    def _getColumnFilterDict(cls, url_path):
         if cls._column_filter_dict is None:
-            cls._column_filter_dict = ColumnSelector.get_default_map()
+            cls._column_filter_dict = url_path.get_default_dict()
         return cls._column_filter_dict
 
     @classmethod
-    def _getEmptyView(cls):
+    def _getEmptyView(cls, url_path):
         checkboxes = None
-        filter_dict = cls._getColumnFilterDict()
-        if not filter_dict == ColumnSelector.get_false_map():
+        filter_dict = cls._getColumnFilterDict(url_path=url_path)
+        if filter_dict != url_path.get_false_dict():
             for key, value in filter_dict.items():
                 if value:
                     if checkboxes is None:
@@ -2485,40 +2591,43 @@ class ScraperSingleton:
                     try:
                         cls._scroll_and_click(selector=selector)
                     except TimeoutException:
-                        raise TimeoutException(msg=f"Timeout exceeded for selector {selector}")
+                        print(f"Timeout exceeded for selector {selector}", file=sys.stderr)
+                        # FIXME: raise TimeoutException(msg=f"Timeout exceeded for selector {selector}")
                 cls._applyColumns()
-            cls._setColumnFilterDict(ColumnSelector.get_false_map())
+            cls._setColumnFilterDict(url_path=url_path, dict=url_path.get_false_dict())
 
     @classmethod
-    def _getSingleColumnView(cls, column):
+    def _getSingleColumnView(cls, column, url_path):
         if not isinstance(column, ColumnSelector):
             raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(column)}")
-        cls._getEmptyView()
+        cls._getEmptyView(url_path)
         cls._editColumns()
         try:
             cls._scroll_and_click(selector=column.get_menu_selector())
         except TimeoutException:
-            raise TimeoutException(msg=f"Timeout exceeded for selector {column.get_menu_selector()}")
+            print(f"Timeout exceeded for selector {column.get_menu_selector()}", file=sys.stderr)
+            # FIXME: raise TimeoutException(msg=f"Timeout exceeded for selector {column.get_menu_selector()}")
         cls._applyColumns()
-        map = ColumnSelector.get_false_map()
+        map = url_path.get_false_dict()
         map[column] = True
-        cls._setColumnFilterDict(map)
+        cls._setColumnFilterDict(url_path=url_path, dict=map)
 
     @classmethod
-    def _setColumnFilterDict(cls, dict):
+    def _setColumnFilterDict(cls, url_path, dict = None):
         if cls._column_filter_dict is None:
-            cls._column_filter_dict = ColumnSelector.get_default_map()
-        for key, value in dict.items():
-            if isinstance(key, ColumnSelector):
-                if isinstance(value, bool):
-                    cls._column_filter_dict[key] = value
+            cls._column_filter_dict = url_path.get_default_dict()
+        if dict is not None:
+            for key, value in dict.items():
+                if isinstance(key, ColumnSelector):
+                    if isinstance(value, bool):
+                        cls._column_filter_dict[key] = value
+                    else:
+                        raise TypeError(f"Expected bool, but received {type(value)}")
                 else:
-                    raise TypeError(f"Expected bool, but received {type(value)}")
-            else:
-                raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
+                    raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(key)}")
 
     @classmethod
-    def _getColumnData(cls, column_list, url_path, pages=range(1, 1)):
+    def _getColumnData(cls, url_path, pages=range(1, 1)):
         if not isinstance(pages, range):
             raise TypeError(f"Expected range for pages, but received {type(pages)}")
         if pages.start < 1:
@@ -2527,52 +2636,60 @@ class ScraperSingleton:
             pages = itertools.count(start=pages.start)
         outer_list = None
         names_list = None
+        columnlist = url_path.get_django_available_columns();
         for page in pages:
-            try:
-                tmp_outer_list = None
-                tmp_names_list = None
-                cls._browser.get(cls._url + "?page=" + str(page))
-                cls._setColumnFilterDict(ColumnSelector.get_default_map())
-                if tmp_names_list is None:
-                    tmp_names_list = []
-                for name in cls._getShoeNames():
-                    tmp_names_list.append(name)
-                for column in column_list:
-                    inner_list = []
-                    if not isinstance(column, ColumnSelector):
-                        raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(column)}")
-                    cls._getSingleColumnView(column)
-                    elements = cls._browser.find_elements(*column.get_data_selector())
-                    if len(elements) < 1:
-                        return (names_list, outer_list)
-                    if tmp_outer_list is None:
-                        tmp_outer_list = []
-                    for element in elements:
-                        inner_list.append(url_path.get_column_lambda(column)(element.text))
-                    tmp_outer_list.append(inner_list)
-                if names_list is None:
-                    names_list = []
-                names_list.extend(tmp_names_list)
-                if outer_list is None:
-                    outer_list = [[] for _ in range(len(tmp_outer_list))]
-                outer_list_idx = 0
-                for nested_list in tmp_outer_list:
-                    outer_list[outer_list_idx].extend(nested_list)
-                    outer_list_idx += 1
-            except TimeoutException as e:
-                print(e.msg, file=sys.stderr)
-                print(f"Skipping Page {page}", file=sys.stderr)
+            # try:
+            tmp_outer_list = None
+            tmp_names_list = None
+            url = cls._url + "?page=" + str(page)
+            if requests.get(url).status_code >= 400:
+                return (names_list, outer_list)
+            cls._browser.get(url)
+            cls._setColumnFilterDict(url_path=url_path, dict=url_path.get_default_dict())
+            if tmp_names_list is None:
+                tmp_names_list = []
+            page_name_list = cls._getShoeNames()
+            if page_name_list is None:
+                return (names_list, outer_list)
+            else:
+                tmp_names_list.extend(page_name_list)
+            for column in columnlist:
+                inner_list = []
+                if not isinstance(column, ColumnSelector):
+                    raise TypeError(f"Expected ColumnSelector enumeration member, but received {type(column)}")
+                cls._getSingleColumnView(column, url_path)
+                elements = cls._browser.find_elements(*column.get_data_selector())
+                if elements is None or len(elements) < 1:
+                    elements = [type('_WebElementPlaceholder', (object,), {'text': 'N/A'})() for _ in page_name_list]
+                if tmp_outer_list is None:
+                    tmp_outer_list = []
+                for element in elements:
+                    inner_list.append(url_path.get_column_lambda(column)(element.text))
+                tmp_outer_list.append(inner_list)
+            if names_list is None:
+                names_list = []
+            names_list.extend(tmp_names_list)
+            if outer_list is None:
+                outer_list = [[] for _ in range(len(tmp_outer_list))]
+            outer_list_idx = 0
+            for nested_list in tmp_outer_list:
+                outer_list[outer_list_idx].extend(nested_list)
+                outer_list_idx += 1
+            # except TimeoutException as e:
+                # print(e.msg, file=sys.stderr)
+                # print(f"Skipping Page {page} from {url_path}", file=sys.stderr)
         return (names_list, outer_list)
 
     @classmethod
-    def _getCsvStructure(cls, columnlist, url_path, pages=None):
+    def _getCsvStructure(cls, url_path, pages=None):
         csv_data = []
         if pages is None:
-            shoe_names, data_list = cls._getColumnData(column_list=columnlist, url_path=url_path)
+            shoe_names, data_list = cls._getColumnData(url_path=url_path)
         else:
-            shoe_names, data_list = cls._getColumnData(column_list=columnlist, pages=pages, url_path=url_path)
+            shoe_names, data_list = cls._getColumnData(pages=pages, url_path=url_path)
         for name in shoe_names:
             csv_data.append({"SHOE_NAME": name})
+        columnlist = url_path.get_django_available_columns()
         columnlist_idx = 0
         for inner_list in data_list:
             if len(inner_list) != len(shoe_names):
@@ -2587,8 +2704,8 @@ class ScraperSingleton:
         return csv_data
 
     @classmethod
-    def _writeCSV(cls, filename, columnlist, pages, url_path):
-        filedata = cls._getCsvStructure(columnlist=columnlist, pages=pages, url_path=url_path)
+    def _writeCSV(cls, filename, pages, url_path):
+        filedata = cls._getCsvStructure(pages=pages, url_path=url_path)
         directory = os.path.dirname(filename)
         if directory:
             os.makedirs(directory, exist_ok=True)
@@ -2617,16 +2734,6 @@ class ScraperSingleton:
         if cookie is None or cookie["value"] != "slim" or cookie["expiry"] < time.time():
             cls._scroll_and_click(selector=(By.CSS_SELECTOR, "svg.slim-view-icon.catalog__list-tab-icon"))
 
-    @staticmethod
-    def _validateUserColumnList(columnlist):
-        if not isinstance(columnlist, list):
-            raise TypeError(f"Expected list, but received {type(columnlist)}")
-        for member in columnlist:
-            if not isinstance(member, ColumnSelector):
-                raise TypeError(f"Expected ColumnSelector enumeration member in list, but received {type(member)}")
-            if not member.available:
-                raise ValueError(f"Column {member.name} not available for the current shoe-type")
-
     @classmethod
     def _setTimeout(cls, timeout):
         if not isinstance(timeout, (int, float)):
@@ -2650,27 +2757,22 @@ class ScraperSingleton:
         if not isinstance(gender, Gender):
             raise TypeError("url_path must be an enumeration member of type Gender")
         cls._url += url_path.get_url_path(gender=gender)
-        url_path.setColumnSelectorAvailability()
 
     # PUBLIC INTERFACE METHOD
     @classmethod
-    def scrape(cls, filename, columnlist=None, url_path=Url_Paths.RUNNING_SHOES, gender=Gender.NONE, pages=None, sleep=None, timeout=None):
+    def scrape(cls, filename, url_path=Url_Paths.RUNNING_SHOES, gender=Gender.NONE, pages=None, sleep=None, timeout=None):
         if not isinstance(filename, str):
             raise TypeError("filename must be a string")
         if not re.match(r'^(/[\w\s./-]+)*\/?[\w]+\.(csv)$', filename):
             raise ValueError("filename must be a full or relative path to a csv file (existing csv files will be overwritten)")
-        if columnlist is None:
-            columnlist = url_path.get_django_available_columns()
-        if url_path == Url_Paths.SOCCER_CLEATS and ColumnSelector.FEATURES in columnlist:
-            print("INFO: FEATURES column for SOCCER_CLEATS contains Price-Tier data")
         cls._setUrl(url_path=url_path, gender=gender)
         if sleep is not None:
             cls._setSleep(sleep)
         if timeout is not None:
             cls._setTimeout(timeout)
-        cls._validateUserColumnList(columnlist)
         cls._getSlimListView()
-        cls._writeCSV(filename=filename, columnlist=columnlist, pages=pages, url_path=url_path)
+        cls._writeCSV(filename=filename, pages=pages, url_path=url_path)
+        cls._resetClassVariables()
 
     def __init__(self):
         pass
@@ -2679,6 +2781,7 @@ class ScraperSingleton:
     @classmethod
     def _getChromiumOptions(cls):
         chromium_options = Options()
+# FIXME: Ensure the following is uncommented, do not commit or approve any PR with the next line commented out
         chromium_options.add_argument("--headless")
         chromium_options.add_argument("--no-sandbox")
         # /dev/shm is generally a tmpfs directory

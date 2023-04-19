@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1 import views as app1_views
+from aggregate import Url_Paths
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +26,6 @@ urlpatterns = [
     path('login/', app1_views.user_login),
     path('logout/', app1_views.user_logout),
 ]
+
+for url_path in Url_Paths:
+    urlpatterns.append(path(url_path.name.lower() + '/', app1_views.generic_shoe, {'url_path': url_path}))
