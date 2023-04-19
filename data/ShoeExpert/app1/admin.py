@@ -65,6 +65,6 @@ def register_model_and_mixin(url_path):
 
 ### RUNNER ###
 for url_path in Url_Paths:
-    create_model_resource()
-    create_admin_mixin()
-    register_model_and_mixin()
+    create_model_resource(url_path)
+    create_admin_mixin(url_path)
+    register_model_and_mixin(url_path)

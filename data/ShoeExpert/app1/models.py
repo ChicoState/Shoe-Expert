@@ -14,4 +14,4 @@ def create_shoe_model(url_path):
     globals()[url_path.name.capitalize()] = type(url_path.name.title(), (models.Model,), attrs)
 
 for url_path in Url_Paths:
-    create_shoe_model()
+    create_shoe_model(url_path)

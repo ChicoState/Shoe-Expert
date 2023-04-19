@@ -1,0 +1,105 @@
+{% load getattribute %}
+<html>
+
+{% include "app1/head.html" %}
+
+<body>
+	<div class="container-fluid" style="height: 90%; overflow-y: scroll;">
+		<div class="card" style="background-color: rgba(150, 165, 210, 0.8);">
+			<div class="card-body">
+
+				<form id="page_size_form" class="float-right" method="get">
+					<label for="id_page_size">Shoes per page:</label>
+					<select id="id_page_size" name="shoes_per_page" class="form-control form-control-sm"
+						onchange="this.form.submit()">
+						{% for size in page_sizes %}
+						<option value="{{ size }}" {% if size==shoes_per_page %}selected{% endif %}>{{ size }}</option>
+						{% endfor %}
+					</select>
+				</form>
+
+				<h1 class="card-title"> {{title}} </h1>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Shoe Name</th>
+								{% for header in headers %}
+								<th scope="col">{{header}}</th>
+								{% endfor %}
+							</tr>
+						</thead>
+						<tbody>
+							{% for value in shoes %}
+							<tr>
+								<td>{{value.shoe_name}}</td>
+								{% for field in fields %}
+								<td>{{ value|getattribute:field }}</td>
+								{% endfor %}
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Add Bootstrap pagination links -->
+				<div class="d-flex justify-content-center mt-4">
+					<nav>
+						<ul class="pagination">
+							{% if shoes.has_previous %}
+							<li class="page-item">
+								<a class="btn btn-outline-dark" href="?page=1&amp;shoes_per_page={{ shoes_per_page }}">&laquo; first</a>
+							</li>
+							<li class="page-item">
+								<a class="btn btn-outline-dark"
+									href="?page={{ shoes.previous_page_number }}&amp;shoes_per_page={{ shoes_per_page }}">previous</a>
+							</li>
+							{% else %}
+							<li class="page-item disabled">
+								<span class="btn btn-outline-dark disabled" aria-disabled="true">&laquo; first</span>
+							</li>
+							<li class="page-item disabled">
+								<span class="btn btn-outline-dark disabled" aria-disabled="true">previous</span>
+							</li>
+							{% endif %}
+
+							{% for i in shoes.paginator.page_range %}
+							{% if i == shoes.number %}
+							<li class="page-item active">
+								<span class="btn btn-outline-dark active" aria-pressed="true">{{ i }} <span
+										class="sr-only">(current)</span></span>
+							</li>
+							{% elif i > shoes.number|add:-3 and i < shoes.number|add:3 %} <li class="page-item">
+								<a class="btn btn-outline-dark" href="?page={{ i }}&amp;shoes_per_page={{ shoes_per_page }}">{{ i }}</a>
+								</li>
+								{% endif %}
+								{% endfor %}
+
+								{% if shoes.has_next %}
+								<li class="page-item">
+									<a class="btn btn-outline-dark"
+										href="?page={{ shoes.next_page_number }}&amp;shoes_per_page={{ shoes_per_page }}">next</a>
+								</li>
+								<li class="page-item">
+									<a class="btn btn-outline-dark"
+										href="?page={{ shoes.paginator.num_pages }}&amp;shoes_per_page={{ shoes_per_page }}">last
+										&raquo;</a>
+								</li>
+								{% else %}
+								<li class="page-item disabled">
+									<span class="btn btn-outline-dark disabled" aria-disabled="true">next</span>
+								</li>
+								<li class="page-item disabled">
+									<span class="btn btn-outline-dark disabled" aria-disabled="true">last &raquo;</span>
+								</li>
+								{% endif %}
+						</ul>
+					</nav>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
