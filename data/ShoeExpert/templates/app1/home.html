@@ -1,127 +1,264 @@
 <html>
 
-{% include "app1/head.html" %}
+	{% include "app1/head.html" %}
 
-<body>
-	<div class="container">
-		<h1> Running Shoes </h1>
-		<div class="card" style="background-color: rgba(255, 255, 255, 0.4);">
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col">Shoe Name</th>
-								<th scope="col">Arch Type</th>
-								<th scope="col">Brand</th>
-								<th scope="col">Cushioning</th>
-								<th scope="col">Distance</th>
-								<th scope="col">Features</th>
-								<th scope="col">Flexibility</th>
-								<th scope="col">Forefoot Height</th>
-								<th scope="col">Heel Height</th>
-								<th scope="col">Heel Toe Drop</th>
-								<th scope="col">MSRP</th>
-								<th scope="col">Pronation</th>
-								<th scope="col">Release Date</th>
-								<th scope="col">Strike Pattern</th>
-								<th scope="col">Technology</th>
-								<th scope="col">Terrain</th>
-								<th scope="col">Toebox</th>
-								<th scope="col">Use</th>
-								<th scope="col">Waterproofing</th>
-								<th scope="col">Weight</th>
-								<th scope="col">Width</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% block content %}
-							{% for value in shoes %}
-							<tr>
-								<th scope="row">{{forloop.counter}}</th>
-								<td>{{value.shoe_name}}</td>
-								<td>{{value.arch_type}}</td>
-								<td>{{value.brand}}</td>
-								<td>{{value.cushioning}}</td>
-								<td>{{value.distance}}</td>
-								<td>{{value.features}}</td>
-								<td>{{value.flexibility}}</td>
-								<td>{{value.forefoot_height}}</td>
-								<td>{{value.heel_height}}</td>
-								<td>{{value.heel_toe_drop}}</td>
-								<td>{{value.msrp}}</td>
-								<td>{{value.pronation}}</td>
-								<td>{{value.release_date}}</td>
-								<td>{{value.strike_pattern}}</td>
-								<td>{{value.technology}}</td>
-								<td>{{value.terrain}}</td>
-								<td>{{value.toebox}}</td>
-								<td>{{value.use}}</td>
-								<td>{{value.waterproofing}}</td>
-								<td>{{value.weight}}</td>
-								<td>{{value.width}}</td>
-							</tr>
-							{% endfor %}
-							{% endblock %}
-						</tbody>
-					</table>
-				</div>
+	<body>
+		<div class="container">
+			<h1> Running Shoes </h1>
+			<div class="card" style="background-color: rgba(255, 255, 255, 0.4);">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">Shoe Name
 
-				<!-- Add Bootstrap pagination links -->
-				<div class="d-flex justify-content-center mt-4">
-					<nav>
-						<ul class="pagination">
-							{% if shoes.has_previous %}
+									</th>
+									<th scope="col">
+
+										<!-- Button trigger modal -->
+										<button type="button" size=sm class="btn btn-link" data-toggle="modal" data-target="#arch">
+											Arch Type
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="arch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">What is arch type?</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														Height of Arch
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</th>
+									<th scope="col">Brand
+									</th>
+									<th scope="col">
+										<!-- Button trigger modal -->
+										<button type="button" size=sm class="btn btn-link" data-toggle="modal" data-target="#cushioning">
+											Cushioning
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="cushioning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">What is cushioning?</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														Plush means the shoe is meant to feel soft when running. Balanced means the shoe is more responsive and provides greater energy return.
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</th>
+									<th scope="col">Distance</th>
+									<th scope="col">Features</th>
+									<th scope="col">
+										<!-- Button trigger modal -->
+										<button type="button" size=sm class="btn btn-link" data-toggle="modal" data-target="#flexibility">
+											Flexibility
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="flexibility" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">What is flexibility?</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														Ability of the sole to bend
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</th>
+
+									<th scope="col">Forefoot Height
+
+										<th scope="col">Heel Height</th>
+										<th scope="col">
+
+											<!-- Button trigger modal -->
+											<button type="button" size=sm class="btn btn-link" data-toggle="modal" data-target="#heeltoedrop">
+												Heel Toe Drop
+											</button>
+
+											<!-- Modal -->
+											<div class="modal fade" id="heeltoedrop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">What is heel toe drop?</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															Difference between forefoot height and heel height. A shoe with a lower value will be closer to flat and feel more like running barefoot.
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</th>
+										<th scope="col">MSRP</th>
+										<th scope="col">Pronation</th>
+										<th scope="col">Release Date</th>
+										<th scope="col">
+
+
+											<!-- Button trigger modal -->
+											<button type="button" size=sm class="btn btn-link" data-toggle="modal" data-target="#strikepattern">
+												Strike Pattern
+											</button>
+
+											<!-- Modal -->
+											<div class="modal fade" id="strikepattern" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">What is strike pattern?</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															Strike pattern describes the where the foot hits the ground during a run. Different shoes provide different support for different kinds of strike patterns
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</th>
+										<th scope="col">Technology</th>
+										<th scope="col">Terrain</th>
+										<th scope="col">Toebox</th>
+										<th scope="col">Use</th>
+										<th scope="col">Waterproofing</th>
+										<th scope="col">Weight</th>
+										<th scope="col">Width</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% block content %}
+								{% for value in shoes %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>{{value.shoe_name}}</td>
+									<td>{{value.arch_type}}</td>
+									<td>{{value.brand}}</td>
+									<td>{{value.cushioning}}</td>
+									<td>{{value.distance}}</td>
+									<td>{{value.features}}</td>
+									<td>{{value.flexibility}}</td>
+									<td>{{value.forefoot_height}}</td>
+									<td>{{value.heel_height}}</td>
+									<td>{{value.heel_toe_drop}}</td>
+									<td>{{value.msrp}}</td>
+									<td>{{value.pronation}}</td>
+									<td>{{value.release_date}}</td>
+									<td>{{value.strike_pattern}}</td>
+									<td>{{value.technology}}</td>
+									<td>{{value.terrain}}</td>
+									<td>{{value.toebox}}</td>
+									<td>{{value.use}}</td>
+									<td>{{value.waterproofing}}</td>
+									<td>{{value.weight}}</td>
+									<td>{{value.width}}</td>
+								</tr>
+								{% endfor %}
+								{% endblock %}
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Add Bootstrap pagination links -->
+					<div class="d-flex justify-content-center mt-4">
+						<nav>
+							<ul class="pagination">
+								{% if shoes.has_previous %}
 								<li class="page-item">
 									<a class="btn btn-outline-dark" href="?page=1">&laquo; first</a>
 								</li>
 								<li class="page-item">
 									<a class="btn btn-outline-dark" href="?page={{ shoes.previous_page_number }}">previous</a>
 								</li>
-							{% else %}
+								{% else %}
 								<li class="page-item disabled">
 									<span class="btn btn-outline-dark disabled" aria-disabled="true">&laquo; first</span>
 								</li>
 								<li class="page-item disabled">
 									<span class="btn btn-outline-dark disabled" aria-disabled="true">previous</span>
 								</li>
-							{% endif %}
-
-							{% for i in shoes.paginator.page_range %}
-								{% if shoes.number == i %}
-									<li class="page-item active">
-										<span class="btn btn-outline-dark active" aria-pressed="true">{{ i }} <span class="sr-only">(current)</span></span>
-									</li>
-								{% else %}
-									<li class="page-item">
-										<a class="btn btn-outline-dark" href="?page={{ i }}">{{ i }}</a>
-									</li>
 								{% endif %}
-							{% endfor %}
 
-							{% if shoes.has_next %}
+								{% for i in shoes.paginator.page_range %}
+								{% if shoes.number == i %}
+								<li class="page-item active">
+									<span class="btn btn-outline-dark active" aria-pressed="true">{{ i }} <span class="sr-only">(current)</span></span>
+								</li>
+								{% else %}
+								<li class="page-item">
+									<a class="btn btn-outline-dark" href="?page={{ i }}">{{ i }}</a>
+								</li>
+								{% endif %}
+								{% endfor %}
+
+								{% if shoes.has_next %}
 								<li class="page-item">
 									<a class="btn btn-outline-dark" href="?page={{ shoes.next_page_number }}">next</a>
 								</li>
 								<li class="page-item">
 									<a class="btn btn-outline-dark" href="?page={{ shoes.paginator.num_pages }}">last &raquo;</a>
 								</li>
-							{% else %}
+								{% else %}
 								<li class="page-item disabled">
 									<span class="btn btn-outline-dark disabled" aria-disabled="true">next</span>
 								</li>
 								<li class="page-item disabled">
 									<span class="btn btn-outline-dark disabled" aria-disabled="true">last &raquo;</span>
 								</li>
-							{% endif %}
-					</ul>
-					</nav>
-				</div>
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
+
 
 </html>
+
+
