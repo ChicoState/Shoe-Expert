@@ -1,0 +1,46 @@
+SHOE_NAME,Brand,Forefoot Height (mm),Heel Height (mm),Heel to Toe Drop (mm),MSRP (USD),Release Date,Toebox,Weight (oz),Widths Available
+Nike Metcon 8,Nike,,,4.0,130.00,2022,,12.4,{Standard}
+Nike Metcon 4,Nike,,,4.0,130.00,,Wide,12.0,{Standard}
+Nike Metcon 7,Nike,,,7.0,130.00,2021,Medium,12.5,{Standard}
+Nike Metcon 6,Nike,,,4.0,130.00,2020,Wide,12.8,{Standard}
+Reebok Nano X2,Reebok,,,7.0,140.00,2022,,10.2,{Standard}
+Nike Zoom Metcon Turbo 2,Nike,,,4.0,150.00,2022,,12.6,{Standard}
+Nike Metcon 3,Nike,,,4.0,130.00,,,11.5,{Standard}
+Inov-8 F-Lite G 300,Inov-8,8.0,14.0,6.0,150.00,2020,Extra Wide,10.6,"{Standard, Wide}"
+New Balance Minimus TR,New Balance,,,0.0,120.00,2022,Narrow,7.9,"{Standard, Wide}"
+Nike Metcon 5,Nike,,,4.0,130.00,2019,Medium,13.2,{Standard}
+Nike SuperRep Go 2,Nike,,,,100.00,2021,Medium,12.0,"{Narrow, Standard}"
+Reebok Nano X1 Froning,Reebok,,,7.0,150.00,2021,Extra Wide,11.4,{Standard}
+Nike Free x Metcon,Nike,,,5.0,120.00,,Wide,11.2,{Standard}
+NOBULL Trainer+,NoBull,,,4.0,139.00,2022,Medium,12.9,{Standard}
+Under Armour TriBase Reign 4,Under Armour,,,2.0,120.00,2022,,13.0,{Standard}
+Nike React Metcon Turbo,Nike,,,4.0,150.00,2021,Medium,9.0,{Standard}
+Inov-8 Bare-XF 210 v3,Inov-8,,,0.0,120.00,2021,Medium,7.4,"{Standard, Wide}"
+Reebok Speed TR,Reebok,,,,90.00,2020,Medium,8.5,{Standard}
+Nike React Metcon,Nike,,,,150.00,2020,Medium,13.2,{Standard}
+Xero Shoes 360,Xero Shoes,,,0.0,120.00,2022,,,{Standard}
+Under Armour TriBase Reign 3,Under Armour,,,2.0,120.00,2021,,10.9,{Standard}
+Reebok CrossFit Nano 7,Reebok,,,4.0,130.00,,Medium,13.0,{Standard}
+Under Armour TriBase Reign 2,Under Armour,,,2.0,120.00,2020,Medium,10.8,{Standard}
+Under Armour TriBase Reign 5,Under Armour,,,2.0,130.00,2023,,12.6,{Standard}
+Reebok CrossFit Nano 2.0,Reebok,,,,110.00,,Wide,,{Standard}
+New Balance Minimus Prevail,New Balance,,,4.0,120.00,2019,Wide,10.0,"{Standard, Wide, Extra Wide}"
+Reebok CrossFit Nano 8 Flexweave,Reebok,,,4.0,130.00,,Extra Wide,10.0,{Standard}
+Reebok CrossFit Nano 6.0,Reebok,,,4.0,130.00,2019,Wide,,{Standard}
+Reebok CrossFit Nano 4.0,Reebok,,,,120.00,,Wide,9.9,{Standard}
+Under Armour TriBase Reign,Under Armour,,,2.0,120.00,2019,Medium,10.3,{Standard}
+Inov-8 F-Lite 235 v3,Inov-8,7.0,11.0,4.0,130.00,2019,Extra Wide,8.3,"{Standard, Wide}"
+Reebok CrossFit Nano 5.0,Reebok,,,3.0,130.00,2019,,9.5,{Standard}
+Inov-8 F-Lite 260 Knit,Inov-8,6.0,14.0,8.0,140.00,,,9.2,{Standard}
+NOBULL Court Trainer,NoBull,,,4.0,140.00,2022,,12.5,{Standard}
+Inov-8 F-Lite 230,Inov-8,,,3.0,125.00,,,8.1,{Standard}
+Nike Free x Metcon 2,Nike,,,5.0,120.00,2019,Medium,11.5,{Standard}
+Reebok CrossFit Lite TR,Reebok,,,,90.00,,,10.0,{Standard}
+Reebok Nano X Unknown,Reebok,,,,150.00,2021,,11.0,{Standard}
+Under Armour HOVR Apex 2,Under Armour,,,8.0,140.00,2020,Medium,14.0,{Standard}
+Reebok CrossFit Nano 9,Reebok,,,4.0,130.00,2019,Extra Wide,12.0,"{Standard, Wide}"
+Reebok Nano X1,Reebok,,,7.0,130.00,2021,Wide,12.0,{Standard}
+Reebok Nano X,Reebok,,,4.0,130.00,2020,Medium,14.1,{Standard}
+Reebok Nano X3,Reebok,,7.0,,140.00,2023,,13.5,{Standard}
+Reebok Nano 6000,Reebok,,,,135.00,2022,,,{Standard}
+NOBULL Trainer,NoBull,,,4.0,129.00,,Medium,10.0,{Standard}

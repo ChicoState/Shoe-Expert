@@ -1,10 +1,28 @@
+version: '3'
+
 services:
+  db:
+    image: postgres:15
+    volumes:
+      # - ./data/postgresql:/var/lib/postgresql/data
+      - ./.postgres-init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      # This is for development only
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
+      POSTGRES_DB: ShoeExpert
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U docker -d ShoeExpert -h db" ]
+      interval: 5s
+      retries: 5
   web:
-    build:
-      context: .
+    build: .
     ports:
       - '8000:8000'
-    # This Is for development only so you dont have to rebuild the image every time you make a change
+    # This Is for development only
     volumes:
-      - ./data:/home/docker/data
+      - ./data/ShoeExpert:/home/docker/data/ShoeExpert
     working_dir: /home/docker/data/ShoeExpert
+    depends_on:
+      db:
+        condition: service_healthy

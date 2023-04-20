@@ -1,0 +1,272 @@
+SHOE_NAME,Brand,Features,Lockdown,MSRP (USD),Release Date,Signature,Top,Weight (oz)
+Nike Zoom Freak 4,Nike,{},{Laces},130.00,2022,Giannis Antetokounmpo,Low,11.0
+Nike KD 15,Nike,{},{Laces},150.00,2022,Kevin Durant,Low,12.6
+Jordan Luka 1,Jordan,{},{Laces},110.00,2022,Luka Doncic,Low,12.1
+Nike Lebron 20,Nike,{Expensive},{Laces},200.00,2022,LeBron James,Low,
+Nike Cosmic Unity 2,Nike,{Outdoor},{Laces},160.00,2022,,Low,12.1
+Adidas Dame 8,Adidas,{Ankle Support},{Laces},120.00,2022,Damian Lillard,Mid,12.7
+Reebok Question Mid,Reebok,{Ankle Support},{Laces},175.00,,Allen Iverson,Mid,
+Air Jordan XXXVII,Jordan,"{Ankle Support, Outdoor}",{Laces},185.00,2022,Michael Jordan,Mid,12.7
+Nike Lebron 19,Nike,"{Expensive, Ankle Support}",{Laces},200.00,2021,LeBron James,High,18.0
+Nike Kyrie Infinity,Nike,{Ankle Support},{Laces},130.00,2023,Kyrie Irving,Mid,12.2
+Nike Lebron Witness 6,Nike,"{Ankle Support, Outdoor, Cheap}",{},100.00,2021,LeBron James,Mid,13.1
+Adidas Harden Vol. 6,Adidas,{Outdoor},{Laces},140.00,2022,James Harden,Low,15.0
+PUMA Rise Nitro,PUMA,{},{Laces},125.00,2022,,Low,12.6
+Jordan Zion 2,Jordan,"{Ankle Support, Outdoor}",{},120.00,2022,Zion Williamson,Mid,13.3
+Nike Cosmic Unity,Nike,{Outdoor},{},150.00,2021,,Low,13.3
+Air Jordan 6,Jordan,"{Retro, Ankle Support}",{Laces},190.00,,Michael Jordan,Mid,18.0
+Nike Giannis Immortality,Nike,{Cheap},{Laces},80.00,2021,Giannis Antetokounmpo,Low,10.4
+Nike KD 14,Nike,{Ankle Support},"{Laces, Strap}",150.00,2021,Kevin Durant,Mid,12.5
+PUMA RS-Dreamer,PUMA,{Outdoor},{Laces},125.00,2019,,Low,16.0
+Nike PG 6,Nike,{},{Laces},120.00,2022,Paul George,Low,12.2
+Nike Giannis Immortality 2,Nike,"{Outdoor, Cheap}",{Laces},85.00,2022,Giannis Antetokounmpo,Low,10.4
+Nike Zoom Freak 3,Nike,{},"{Laces, Strap}",120.00,2021,,Low,
+PUMA Clyde All-Pro,PUMA,"{Retro, Outdoor}",{},130.00,2021,Clyde Frazier,Low,11.9
+Adidas Dame 7,Adidas,"{Ankle Support, Outdoor}",{Laces},110.00,2019,Damian Lillard,Mid,
+Adidas Pro Model 2G,Adidas,"{Retro, Ankle Support, Cheap}",{Laces},100.00,2019,,Mid,
+Nike Lebron Witness 7,Nike,"{Ankle Support, Outdoor}",{Laces},115.00,2022,LeBron James,Mid,
+Nike PG 5,Nike,{},{Laces},110.00,2021,Paul George,Low,
+Nike Kyrie Low 5,Nike,{},{Laces},110.00,2022,Kyrie Irving,Low,11.0
+Fila Grant Hill 2,Fila,{Ankle Support},{Laces},120.00,,Grant Hill,Mid,
+Nike Air More Uptempo,Nike,"{Retro, Ankle Support}",{Laces},160.00,,,Mid,17.0
+Adidas Trae Young 1,Adidas,{},"{Laces, Slip-On}",140.00,2021,Trae Young,Low,13.9
+Adidas D.O.N. Issue #4,Adidas,{Outdoor},{Laces},120.00,2022,Donovan Mitchell,Low,13.4
+Nike Lebron 18,Nike,"{Expensive, Ankle Support}",{Laces},200.00,2019,LeBron James,Mid,15.7
+Nike Precision 6,Nike,{Cheap},{Laces},75.00,2022,,Low,10.2
+Jordan Zion 1,Jordan,{},{Laces},120.00,2021,Zion Williamson,Low,12.1
+Nike Renew Elevate 3,Nike,{Cheap},{Laces},80.00,2022,,Low,10.4
+Nike Air Zoom G.T. Jump,Nike,"{Expensive, Ankle Support}",{Laces},200.00,2022,,High,17.6
+Adidas Harden Stepback 3,Adidas,{Cheap},{Laces},80.00,2022,James Harden,Low,
+Nike Lebron 19 Low,Nike,{},{Laces},160.00,2022,LeBron James,Low,14.0
+Jordan One Take 4,Jordan,"{Outdoor, Cheap}",{Laces},100.00,2022,Russell Westbrook,Low,10.8
+Air Jordan 36 Low,Jordan,{},{Laces},165.00,2022,Michael Jordan,Low,11.8
+Reebok Shaq Attaq,Reebok,{Ankle Support},{Laces},160.00,,Shaquille O'Neal,High,
+Reebok Answer IV,Reebok,{Ankle Support},"{Zipper, Strap}",150.00,,Allen Iverson,Mid,14.0
+Adidas D.O.N. Issue #3,Adidas,{},{Laces},110.00,2021,Donovan Mitchell,Low,12.2
+PUMA Court Rider,PUMA,{Cheap},{Laces},100.00,2021,,Low,13.6
+Nike Precision 5,Nike,{Cheap},{Laces},70.00,2021,,Low,9.9
+Nike Air Max Impact 4,Nike,"{Outdoor, Cheap}",{Laces},90.00,2022,,Low,
+New Balance TWO WXY V3,New Balance,{Ankle Support},{Laces},120.00,2022,,Mid,11.7
+Nike Kyrie 7,Nike,"{Ankle Support, Outdoor}",{Laces},130.00,2019,Kyrie Irving,Mid,12.0
+Adidas Exhibit B,Adidas,{Ankle Support},{Laces},120.00,2022,Candace Parker,Mid,
+Nike Kyrie 6,Nike,"{Ankle Support, Outdoor}","{Laces, Strap}",130.00,,Kyrie Irving,Mid,13.8
+Nike Air Max Impact 3,Nike,"{Ankle Support, Outdoor, Cheap}",{Laces},75.00,2022,,Mid,12.3
+Nike Lebron Witness 5,Nike,"{Ankle Support, Cheap}",{},100.00,2021,LeBron James,Mid,12.1
+Adidas Harden Vol. 4,Adidas,{},{Laces},130.00,,James Harden,Low,14.0
+PUMA Clyde Hardwood,PUMA,{},{Laces},120.00,2019,,Low,
+Air Jordan XXXVI,Jordan,{Ankle Support},{Laces},185.00,2021,Michael Jordan,Mid,11.8
+Adidas D.O.N. Issue #2,Adidas,{Cheap},{Laces},100.00,2019,Donovan Mitchell,Low,
+Adidas Exhibit A,Adidas,{},{Laces},110.00,2021,,Low,12.1
+Adidas Crazy 1,Adidas,{Ankle Support},{Laces},125.00,,Kobe Bryant,Mid,14.4
+Adidas N3xt L3v3l,Adidas,{Ankle Support},{Slip-On},180.00,,,Mid,
+New Balance TWO WXY,New Balance,{Ankle Support},{Laces},140.00,2021,,Mid,12.2
+Adidas Dame 6,Adidas,{Outdoor},{Laces},110.00,2019,Damian Lillard,Low,13.9
+Under Armour Curry 9,Under Armour,{Ankle Support},{Laces},160.00,2021,Stephen Curry,Mid,10.4
+Nike PG 4,Nike,{Outdoor},"{Zipper, Laces}",110.00,2019,Paul George,Low,13.7
+Nike Air Zoom BB NXT,Nike,{},{Laces},180.00,2019,,Low,
+Nike LeBron 7,Nike,"{Expensive, Ankle Support}",{Laces},200.00,2019,LeBron James,Mid,15.4
+Adidas Dame 5,Adidas,{Ankle Support},{Laces},115.00,,Damian Lillard,Mid,
+Nike Zoom Freak 2,Nike,{Outdoor},{Laces},120.00,2019,Giannis Antetokounmpo,Low,
+Adidas Harden Vol. 7,Adidas,{},{Laces},160.00,2023,James Harden,Mid,15.1
+Adidas Dame Certified,Adidas,"{Outdoor, Cheap}",{Laces},95.00,2023,Damian Lillard,Low,12.6
+Nike KD Trey 5 X,Nike,"{Ankle Support, Cheap}",{Laces},95.00,2022,Kevin Durant,Mid,10.9
+New Balance Kawhi,New Balance,"{Ankle Support, Outdoor}",{Laces},160.00,2019,Kawhi Leonard,Mid,
+Nike Kyrie Flytrap 5,Nike,"{Ankle Support, Cheap}",{Laces},90.00,2021,Kyrie Irving,Mid,10.6
+Under Armour Lockdown 5,Under Armour,"{Ankle Support, Outdoor, Cheap}",{Laces},70.00,2021,,Mid,
+Nike LeBron 17,Nike,"{Expensive, Ankle Support}",{Laces},200.00,,LeBron James,High,16.2
+Nike Kyrie Flytrap 4,Nike,{Cheap},{Laces},90.00,2021,Kyrie Irving,Low,10.4
+Nike Air Zoom G.T. Cut 2,Nike,{},{Laces},130.00,2022,,Low,12.5
+Jordan Westbrook One Take,Jordan,"{Ankle Support, Cheap}",{Laces},100.00,2019,Russell Westbrook,Mid,
+Jordan Max Aura,Jordan,{Ankle Support},{Laces},120.00,,,Mid,
+Nike Lebron 18 Low,Nike,{},{Laces},160.00,2021,LeBron James,Low,13.5
+Jordan React Elevation,Jordan,{Ankle Support},{Laces},120.00,2019,,Mid,
+Jordan Why Not? Zer0.5,Jordan,"{Ankle Support, Outdoor}",{Laces},130.00,2022,Russell Westbrook,Mid,11.7
+Adidas Marquee Boost,Adidas,{Ankle Support},{Laces},130.00,,,Mid,
+AND 1 Tai Chi,AND 1,"{Ankle Support, Cheap}",{Laces},90.00,,,Mid,
+Under Armour Lockdown 6,Under Armour,"{Ankle Support, Cheap}",{Laces},70.00,2022,,Mid,
+Air Jordan 37 Low,Jordan,{},{Laces},175.00,2023,Michael Jordan,Low,12.2
+Nike Renew Elevate 2,Nike,"{Ankle Support, Cheap}",{Laces},80.00,2021,,Mid,
+Jordan One Take 3,Jordan,"{Outdoor, Cheap}",{Laces},100.00,2021,Russell Westbrook,Low,10.3
+Adidas D Rose 11,Adidas,{Ankle Support},{Laces},120.00,2021,Derrick Rose,Mid,14.8
+Jordan Legacy 312 Low,Jordan,{},"{Laces, Strap}",130.00,,Michael Jordan,Low,
+PUMA TRC Blaze Court,PUMA,{},{Laces},120.00,2022,,Low,11.4
+PUMA Ralph Sampson Mid,PUMA,"{Retro, Ankle Support, Cheap}",{Laces},90.00,,Ralph Sampson,Mid,
+PUMA Palace Guard,PUMA,{Cheap},{Laces},90.00,,,Low,
+Jordan Zoom Separate,Jordan,{Outdoor},{Laces},120.00,2022,Luka Doncic,Low,
+Reebok Solution Mid,Reebok,"{Ankle Support, Cheap}",{Laces},90.00,2022,Allen Iverson,Mid,
+Reebok Question Low,Reebok,{},{Laces},115.00,,Allen Iverson,Low,
+Adidas D.O.N. Issue #1,Adidas,{Cheap},{Laces},100.00,,Donovan Mitchell,Low,15.0
+Adidas T-Mac 1,Adidas,"{Retro, Ankle Support, Outdoor}",{Laces},130.00,2022,Tracy McGrady,Mid,
+New Balance TWO WXY V2,New Balance,{},{Laces},130.00,2022,,Low,10.8
+Under Armour Curry 8,Under Armour,{},"{Laces, Slip-On}",160.00,2021,Stephen Curry,Low,12.2
+Nike Kyrie Flytrap,Nike,{Cheap},{Laces},80.00,,Kyrie Irving,Low,11.1
+Nike Kyrie Flytrap 6,Nike,"{Outdoor, Cheap}",{Laces},95.00,2022,Kyrie Irving,Low,12.0
+Adidas Marquee Boost Low,Adidas,{},{Laces},120.00,,,Low,
+Nike Adapt BB,Nike,{Expensive},{Laces},350.00,,,Low,
+PUMA Court Rider 2,PUMA,{},{Laces},110.00,2022,,Low,
+PUMA MB.01,PUMA,{Ankle Support},{Laces},125.00,2022,LaMelo Ball,Mid,13.8
+Nike KD Trey 5 VIII,Nike,"{Ankle Support, Cheap}",{Laces},90.00,2019,Kevin Durant,Mid,
+Nike KD Trey 5 IX,Nike,"{Ankle Support, Cheap}",{Laces},90.00,2021,Kevin Durant,Mid,10.7
+Adidas Harden Vol 3,Adidas,{},{Laces},140.00,,James Harden,Low,13.8
+PUMA Legacy,PUMA,{Ankle Support},{Laces},110.00,2019,,High,
+Nike Precision 4,Nike,{Cheap},{Laces},70.00,2019,,Low,
+PUMA Uproar,PUMA,"{Ankle Support, Cheap}",{Laces},90.00,,,Mid,
+Nike Zoom Freak 1,Nike,"{Ankle Support, Outdoor}",{Laces},120.00,,Giannis Antetokounmpo,Mid,12.0
+Adidas Pro Model 2G Low,Adidas,"{Retro, Outdoor, Cheap}",{Laces},85.00,2021,,Low,
+Nike Air Deldon,Nike,{Ankle Support},"{Laces, Strap}",120.00,2022,Elena Delle Donne,Mid,12.0
+Adidas Pro Bounce 2018,Adidas,{Ankle Support},{Laces},120.00,,,High,
+Nike KD 13,Nike,{Ankle Support},{Laces},150.00,2019,Kevin Durant,Mid,12.1
+Nike AlphaDunk,Nike,{Ankle Support},{Laces},180.00,,,High,
+Adidas D Rose Son Of Chi,Adidas,"{Ankle Support, Outdoor, Cheap}",{Laces},100.00,2021,Derrick Rose,Mid,12.7
+Adidas Harden Stepback,Adidas,"{Ankle Support, Cheap}",{Laces},80.00,2019,James Harden,Mid,
+Adidas Pro Vision,Adidas,"{Ankle Support, Cheap}",{Laces},100.00,,,Mid,11.9
+Nike LeBron 16,Nike,"{Expensive, Ankle Support, Outdoor}",{Laces},200.00,,LeBron James,Mid,15.6
+Nike LeBron Soldier 14,Nike,{Ankle Support},{Laces},140.00,2019,LeBron James,Mid,12.3
+Nike Air Zoom G.T. Run,Nike,{Ankle Support},{Laces},175.00,2021,,Mid,11.6
+Adidas Trae Young 2,Adidas,{Ankle Support},{Laces},140.00,2022,,Mid,13.5
+Converse All Star BB Shift,Converse,{Outdoor},{Laces},120.00,2022,,Low,
+Reebok Mobius,Reebok,{Ankle Support},{Laces},140.00,,,High,
+Nike Zoom Rize,Nike,"{Ankle Support, Outdoor}",{Laces},140.00,,,High,
+PUMA MB.02,PUMA,"{Ankle Support, Outdoor}",{Laces},130.00,2022,LaMelo Ball,Mid,13.1
+Nike Kyrie Low 4,Nike,{},{Laces},110.00,2021,Kyrie Irving,Low,11.9
+Adidas Crazy Explosive,Adidas,{Ankle Support},{Laces},130.00,,,High,17.5
+Reebok Shaqnosis,Reebok,"{Ankle Support, Outdoor}",{Laces},150.00,,Shaquille O'Neal,High,
+Adidas Crazy Explosive 2017,Adidas,{Ankle Support},{Laces},130.00,,,Mid,15.1
+Nike Zoom Rize 2,Nike,{},{Laces},160.00,2021,,Low,13.5
+Adidas Crazy BYW X,Adidas,"{Expensive, Ankle Support}","{Laces, Slip-On}",200.00,,,High,13.1
+Adidas Pro Boost Low,Adidas,{Outdoor},{Laces},110.00,2019,,Low,
+Nike Fly.By Mid 3,Nike,"{Outdoor, Cheap}",{Laces},65.00,2022,,Low,10.2
+Adidas Crazy 8,Adidas,"{Retro, Ankle Support}",{Laces},150.00,,Kobe Bryant,Mid,13.5
+Under Armour Jet '21,Under Armour,{Cheap},{},55.00,2022,,,
+Adidas Crazy 97,Adidas,{Ankle Support},{Laces},130.00,,Kobe Bryant,Mid,12.7
+Reebok Answer DMX,Reebok,{Ankle Support},{Laces},165.00,,Allen Iverson,High,
+Nike Zoom Rookie,Nike,"{Expensive, Ankle Support}",{Laces},210.00,,,Mid,
+Air Jordan Legacy 312,Jordan,{Ankle Support},{Laces},150.00,,Michael Jordan,High,
+Adidas Pro Bounce 2019 Low,Adidas,{},{Laces},110.00,2019,,Low,
+PUMA Fusion Nitro Spectra,PUMA,{},{Laces},130.00,2021,,Low,13.3
+Nike Air Force Max,Nike,"{Ankle Support, Outdoor}","{Laces, Strap}",160.00,2019,,High,
+Converse G4,Converse,{},{Laces},110.00,2019,,Low,
+Nike Hyperdunk X,Nike,{Ankle Support},{Laces},130.00,,,Mid,
+Converse All Star BB Prototype CX,Converse,{Outdoor},{Laces},120.00,2023,,Mid,13.3
+Nike Hyperdunk 2014,Nike,{Ankle Support},{Laces},140.00,,,High,11.4
+Adidas Harden Vol. 1,Adidas,{},{Laces},140.00,,James Harden,Low,15.1
+Nike Precision 3,Nike,{Cheap},{Laces},70.00,,,Low,
+Adidas Harden Vol. 2,Adidas,{},{Laces},140.00,,James Harden,Low,14.6
+New Balance Fresh Foam BB,New Balance,{},{Laces},130.00,2023,,Mid,11.2
+Nike Lebron 17 Low,Nike,{},{Laces},160.00,2019,LeBron James,Low,13.6
+Adidas Harden Stepback 2,Adidas,"{Outdoor, Cheap}",{Laces},70.00,2021,James Harden,Low,13.2
+Air Jordan XXXV,Jordan,{Ankle Support},{Laces},180.00,2019,Michael Jordan,Mid,
+Nike LeBron Soldier 12,Nike,{Ankle Support},"{Strap, Slip-On}",140.00,,LeBron James,High,
+Nike Kyrie 5,Nike,"{Ankle Support, Outdoor}",{Laces},130.00,,Kyrie Irving,Mid,13.1
+Nike Renew Elevate,Nike,{Outdoor},{Laces},80.00,2019,,Low,10.6
+New Balance Kawhi 2,New Balance,"{Ankle Support, Outdoor}",{Laces},160.00,2022,Kawhi Leonard,Mid,11.5
+Air Jordan 34,Jordan,{Ankle Support},{Laces},180.00,,Michael Jordan,Mid,13.1
+Air Jordan XXXII,Jordan,{Ankle Support},{Laces},185.00,,Michael Jordan,Mid,16.0
+Jordan Ultra.Fly 2,Jordan,{Ankle Support},{Laces},125.00,,,High,14.0
+Air Jordan 33,Jordan,{Ankle Support},"{Laces, Slip-On}",175.00,,Michael Jordan,Mid,15.6
+Nike Kybrid S2,Nike,"{Ankle Support, Outdoor}",{Laces},140.00,2019,Kyrie Irving,Mid,12.9
+Air Jordan 11 IE Low,Jordan,{},{Laces},170.00,,Michael Jordan,Low,
+Under Armour Spawn 4,Under Armour,{Cheap},{Laces},100.00,2022,,Low,11.6
+Under Armour Flow FUTR X,Under Armour,{},{Laces},120.00,2022,,Low,10.5
+Nike Air Flightposite,Nike,"{Expensive, Ankle Support}","{Zipper, Laces}",200.00,,,Mid,16.6
+Nike LeBron Witness 4,Nike,{Ankle Support},{Laces},100.00,2019,LeBron James,Mid,13.1
+PUMA Dreamer 2,PUMA,"{Expensive, Ankle Support}",{Laces},200.00,2021,,Mid,
+Under Armour Curry 7,Under Armour,{Outdoor},{Laces},140.00,,Stephen Curry,Low,13.2
+Nike Air Zoom Generation,Nike,{Ankle Support},{Laces},175.00,,LeBron James,Mid,16.0
+Nike Fly.By Mid 2,Nike,"{Ankle Support, Cheap}",{Laces},65.00,2021,,Mid,
+Nike PG2,Nike,{},{Laces},110.00,,Paul George,Low,13.0
+Nike KD 9,Nike,{},"{Laces, Slip-On}",150.00,,Kevin Durant,Low,12.0
+Jordan Flyknit Elevation 23,Jordan,{Ankle Support},{Laces},170.00,,,High,
+Jordan Big Fund,Jordan,{Ankle Support},{Laces},125.00,,,Mid,
+Air Jordan 29,Jordan,"{Expensive, Ankle Support}",{Laces},225.00,,Michael Jordan,High,12.7
+Air Jordan 20,Jordan,"{Expensive, Ankle Support}","{Laces, Strap}",220.00,,Michael Jordan,High,14.0
+Nike Mamba Focus,Nike,{},{Laces},100.00,,Kobe Bryant,Low,16.6
+Nike KD 12,Nike,"{Ankle Support, Outdoor}",{Laces},150.00,,Kevin Durant,Mid,12.3
+Converse All Star Pro BB,Converse,{Ankle Support},{Laces},140.00,2019,,High,
+Under Armour Curry 3Z5,Under Armour,"{Ankle Support, Cheap}",{Laces},80.00,2021,Stephen Curry,Mid,12.2
+Adidas T-Mac 2.0 Restomod,Adidas,"{Retro, Ankle Support}",{Laces},130.00,2021,Tracy McGrady,Mid,
+Nike Air Max Penny 1,Nike,"{Ankle Support, Outdoor}",{Laces},160.00,,Penny Hardaway,Mid,12.4
+Nike Air Darwin,Nike,{Ankle Support},{Laces},130.00,,,Mid,
+Nike Air Zoom G.T. Cut,Nike,{Outdoor},{Laces},170.00,2021,,Low,13.2
+Nike Kobe A.D. NXT,Nike,{Expensive},{Slip-On},200.00,,Kobe Bryant,Low,13.0
+Nike LeBron 15,Nike,"{Ankle Support, Outdoor}","{Laces, Slip-On}",185.00,,LeBron James,High,15.0
+Nike KD 11,Nike,{Ankle Support},"{Laces, Slip-On}",150.00,,Kevin Durant,Mid,
+Nike Mamba Fury,Nike,{},{Laces},100.00,2019,Kobe Bryant,Low,
+New Balance OMN1S,New Balance,{Ankle Support},{Laces},140.00,2019,Kawhi Leonard,High,
+Under Armour Curry 6,Under Armour,{},"{Laces, Slip-On}",130.00,,Stephen Curry,Low,12.0
+Nike Kobe 6 Protro,Nike,{Retro},{Laces},180.00,2021,Kobe Bryant,Low,
+Under Armour Curry 4,Under Armour,{Ankle Support},{Laces},130.00,,Stephen Curry,High,12.0
+Nike Hyperdunk X Low,Nike,{},{Laces},120.00,,,Low,11.1
+Nike KD 8,Nike,{},{Laces},180.00,2019,Kevin Durant,Low,12.0
+Under Armour Curry 1,Under Armour,{Ankle Support},{Laces},160.00,,Stephen Curry,Mid,
+Nike Air Max Impact,Nike,"{Ankle Support, Cheap}",{Laces},90.00,2019,,Mid,
+Jordan Jumpman Hustle,Jordan,{},"{Zipper, Laces}",110.00,,,Low,15.6
+Nike Kyrie Low,Nike,{},"{Laces, Strap}",120.00,,Kyrie Irving,Low,11.8
+Nike Adapt BB 2.0,Nike,"{Expensive, Ankle Support}",{FitAdapt},400.00,2019,,Mid,19.6
+Jordan Jumpman Pro Quick,Jordan,{Ankle Support},{Laces},130.00,,Michael Jordan,Mid,
+Under Armour Curry 3,Under Armour,{Ankle Support},{Laces},140.00,,Stephen Curry,Mid,14.0
+Nike PG1,Nike,{},"{Laces, Strap}",110.00,,Paul George,Low,13.1
+Nike Kobe 5 Protro,Nike,{},{Laces},180.00,2019,Kobe Bryant,Low,10.7
+Air Jordan 2009,Jordan,{Ankle Support},{Laces},190.00,,Michael Jordan,Mid,
+Adidas Own The Game,Adidas,"{Ankle Support, Cheap}",{Laces},65.00,,,Mid,13.0
+Under Armour Flow FUTR X 2,Under Armour,{Outdoor},{Laces},120.00,2022,,Low,10.5
+Nike Air Force Max CB,Nike,{},{Laces},150.00,,Charles Barkley,,
+Nike KD 6,Nike,{},{Laces},130.00,,Kevin Durant,Low,10.6
+Nike Kyrie 4,Nike,{Ankle Support},{Laces},120.00,,Kyrie Irving,Mid,13.1
+Under Armour Spawn 3,Under Armour,{Outdoor},{Laces},100.00,2021,,Low,11.2
+Nike LeBron Soldier 13,Nike,{Ankle Support},{Strap},140.00,,LeBron James,High,14.1
+Nike Air Max Impact 2,Nike,{Ankle Support},{Laces},90.00,2021,,Mid,
+Nike Mamba Rage,Nike,{},{Laces},100.00,,Kobe Bryant,Low,
+Nike PG3,Nike,{},{Laces},120.00,,Paul George,Low,
+Fila Spaghetti,Fila,"{Ankle Support, Cheap}",{Laces},90.00,,,Mid,
+Air Jordan 22,Jordan,"{Ankle Support, Outdoor}",{Laces},165.00,,Michael Jordan,Mid,
+Nike Kyrie 3,Nike,{Ankle Support},{Laces},120.00,,Kyrie Irving,Mid,13.1
+Adidas Harden Vol. 5,Adidas,{},{Laces},130.00,2021,James Harden,Low,16.2
+Adidas Dame 4,Adidas,{Ankle Support},{Laces},115.00,,Damian Lillard,Mid,12.1
+Nike KD 4,Nike,{},"{Laces, Strap}",140.00,,Kevin Durant,Low,
+Nike Lebron 13,Nike,"{Expensive, Ankle Support}","{Laces, Slip-On}",200.00,,LeBron James,High,16.0
+Nike LeBron 10,Nike,{Ankle Support},{Laces},180.00,2019,LeBron James,High,14.1
+Under Armour Curry 10,Under Armour,{},{Laces},160.00,2022,Stephen Curry,Low,11.1
+Air Jordan XXX,Jordan,"{Expensive, Ankle Support}",{Laces},200.00,,Michael Jordan,Mid,14.0
+Nike Air Precision,Nike,"{Ankle Support, Outdoor}",{Laces},60.00,,,Mid,
+Adidas Son Of Chi 2,Adidas,"{Ankle Support, Outdoor}",{Laces},160.00,2022,Derrick Rose,Mid,
+Air Jordan XX8,Jordan,"{Expensive, Ankle Support}","{Zipper, Laces}",250.00,,Michael Jordan,High,13.3
+Nike Kyrie Low 3,Nike,{},{Laces},110.00,2019,Kyrie Irving,Low,12.5
+Jordan B. Fly,Jordan,{Ankle Support},{Laces},110.00,,Michael Jordan,Mid,11.4
+Nike Kobe A.D.,Nike,{},{Laces},160.00,,Kobe Bryant,Low,12.1
+Jordan Super.Fly 4,Jordan,{Ankle Support},{Laces},150.00,,,Mid,
+Air Jordan 2011,Jordan,{Ankle Support},{Laces},170.00,,Michael Jordan,Mid,
+Nike Kyrie 2,Nike,{Ankle Support},{Laces},120.00,,Kyrie Irving,Mid,13.1
+Reebok Blast,Reebok,{Ankle Support},{Laces},120.00,,,Mid,
+PUMA Clyde Court Disrupt,PUMA,{Ankle Support},{Laces},120.00,,Clyde Frazier,Mid,16.0
+Nike Kobe 9 Elite,Nike,"{Expensive, Ankle Support}",{Laces},225.00,,Kobe Bryant,High,14.2
+Nike Kyrie Flytrap III,Nike,{Ankle Support},"{Laces, Strap}",80.00,2019,Kyrie Irving,Mid,11.6
+Air Jordan 19,Jordan,{Ankle Support},{Laces},165.00,,Michael Jordan,Mid,16.0
+Nike Kyrie 8,Nike,{Outdoor},{Laces},140.00,2023,Kyrie Irving,Low,
+Jordan One Take II,Jordan,{},{Laces},100.00,2021,Russell Westbrook,Low,11.3
+Nike Air Ring Leader Low,Nike,{},{Laces},65.00,2019,,Low,
+Nike Fly.by Mid,Nike,{Ankle Support},{Laces},65.00,2019,,Mid,
+Under Armour Anatomix Spawn 2,Under Armour,{Ankle Support},{Laces},110.00,,,Mid,12.0
+Air Jordan XXXI,Jordan,{Ankle Support},{Laces},185.00,,Michael Jordan,High,16.0
+Nike Kobe 10,Nike,{},{Laces},180.00,,Kobe Bryant,Low,13.4
+Nike Air Force 180,Nike,{Ankle Support},{Laces},140.00,,,High,
+Under Armour HOVR Havoc,Under Armour,{Ankle Support},{Laces},115.00,,,High,15.3
+Reebok Royal BB4500 Low,Reebok,{},{Laces},125.00,,,Low,
+Nike Zoom Live 2,Nike,{Cheap},{Laces},100.00,,,Low,13.0
+Jordan Ultra.Fly 3,Jordan,{},{Laces},125.00,,,Low,
+Nike Zoom Kobe 5,Nike,{Expensive},{Laces},200.00,,Kobe Bryant,Low,10.6
+Jordan Jumpman 2020,Jordan,{},{},110.00,2019,,Low,
+Nike Kobe 11 Elite Low,Nike,{Expensive},{Laces},200.00,,Kobe Bryant,Low,12.1
+Air Jordan 21,Jordan,{Ankle Support},{Laces},175.00,,Michael Jordan,Mid,
+Jordan Why Not Zer0.4,Jordan,{Ankle Support},{},130.00,2021,Russell Westbrook,Mid,11.8
+Nike Kobe AD NXT 360,Nike,{Expensive},{Laces},200.00,,Kobe Bryant,Low,
+Nike HyperRev 2016,Nike,{Ankle Support},"{Laces, Strap}",110.00,,,High,14.0
+Adidas Yeezy BSKTBL Knit,Adidas,"{Expensive, Ankle Support, Outdoor}",{Laces},300.00,2022,,High,
+Air Jordan 2010,Jordan,{Ankle Support},{Laces},170.00,,Michael Jordan,Mid,
+Nike Kyrie 1,Nike,{Ankle Support},{Laces},110.00,,Kyrie Irving,Mid,12.0
+Nike Lebron 3 Retro,Nike,"{Expensive, Retro, Ankle Support}",{Laces},450.00,,LeBron James,Mid,
+Jordan Ultra.Fly,Jordan,{Ankle Support},{Laces},125.00,,,Mid,13.0
+Nike Chuck Posite,Nike,"{Expensive, Ankle Support}",{Laces},230.00,,Charles Barkley,Mid,
+Jordan CP3 12,Jordan,{Ankle Support},{Laces},100.00,,Chris Paul,Mid,
+Adidas Adizero Rose 1 Retro,Adidas,"{Retro, Ankle Support}",{Laces},140.00,2019,Derrick Rose,High,
+Under Armour SC 3Zer0 III,Under Armour,{Cheap},{Laces},90.00,2019,Stephen Curry,Low,12.0

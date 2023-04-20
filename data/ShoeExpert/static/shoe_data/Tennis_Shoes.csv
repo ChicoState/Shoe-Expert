@@ -1,0 +1,68 @@
+SHOE_NAME,Brand,Collaboration,Construction,MSRP (USD),Release Date,Surface,Weight (oz)
+Adidas Barricade,Adidas,,Stability,140.00,2021,"{Clay, Hard}",14.6
+ASICS Gel Resolution 8,ASICS,,Stability,140.00,2020,"{Clay, Hard}",14.6
+ASICS Gel Resolution 9,ASICS,,Stability,150.00,2023,"{Clay, Hard}",15.0
+Adidas Solematch Control,Adidas,,Cushioned,120.00,2023,"{Clay, Hard}",
+Adidas Adizero Ubersonic 4,Adidas,,Speed,130.00,2021,{Hard},13.5
+ASICS Gel Challenger 13,ASICS,,Stability,140.00,2021,"{Clay, Hard}",13.2
+K-Swiss Hypercourt Express 2,K-Swiss,,Cushioned,105.00,2020,"{Clay, Hard}",13.4
+ASICS Solution Speed FF 2,ASICS,,Speed,120.00,2021,{Hard},
+Adidas CourtJam Control,Adidas,,Stability,90.00,2023,{Hard},10.5
+NikeCourt Air Zoom Vapor Pro,Nike,,Speed,120.00,2021,{Hard},12.1
+ASICS Gel Dedicate 7,ASICS,,Stability,70.00,2022,{Hard},11.9
+New Balance Fresh Foam Lav,New Balance,,Stability,150.00,2019,{Hard},14.5
+ASICS Court FF 2,ASICS,Novak Djokovic,Speed,170.00,2019,{Clay},14.8
+ASICS Gel Resolution 7,ASICS,,Stability,140.00,2019,"{Clay, Hard}",13.4
+Wilson Rush Pro 3.0,Wilson,,Stability,129.00,2020,"{Clay, Hard}",12.7
+K-Swiss Ultrashot 3,K-Swiss,,Stability,145.00,2021,"{Clay, Hard}",15.3
+NikeCourt Air Zoom Vapor Pro 2,Nike,,Speed,120.00,2023,{Hard},14.3
+NikeCourt React Vapor NXT,Nike,,Cushioned,160.00,2021,"{Clay, Hard}",15.9
+NikeCourt Vapor Lite,Nike,,Speed,80.00,2021,{Hard},
+ASICS Gel Game 8,ASICS,,Speed,80.00,2021,"{Clay, Hard}",10.1
+K-Swiss Hypercourt Supreme,K-Swiss,,Cushioned,120.00,2020,"{Clay, Hard}",12.9
+Wilson Rush Pro 3.5,Wilson,,Stability,130.00,2021,"{Clay, Hard}",12.0
+NikeCourt Air Zoom Vapor Cage 4,Nike,Rafael Nadal,Stability,150.00,2020,{Hard},15.7
+NikeCourt Zoom NXT,Nike,,Stability,140.00,2022,"{Clay, Hard}",15.0
+New Balance 806,New Balance,,Stability,115.00,2020,"{Clay, Hard}",15.5
+New Balance 1006,New Balance,,Cushioned,115.00,2019,"{Clay, Hard}",13.1
+ASICS Solution Speed FF,ASICS,,Speed,130.00,2019,{Hard},12.3
+ASICS Gel Challenger 12,ASICS,,Stability,100.00,2019,"{Clay, Hard}",12.5
+Lacoste AG-LT 21,Lacoste,,Cushioned,135.00,2023,"{Clay, Hard}",13.4
+NikeCourt Air Zoom Vapor 11,Nike,,Stability,160.00,2023,{Hard},15.5
+New Balance Fresh Foam X Lav V2,New Balance,,Stability,150.00,2022,"{Clay, Hard}",13.8
+Adidas SoleMatch Bounce,Adidas,,Stability,120.00,2020,"{Clay, Hard}",12.0
+Adidas Stycon,Adidas,,Stability,140.00,2020,{Hard},16.2
+Adidas Defiant Generation,Adidas,,Cushioned,100.00,2023,"{Clay, Hard}",14.2
+New Balance 696 v4,New Balance,,Cushioned,65.00,2020,"{Clay, Hard}",10.9
+NikeCourt Zoom Lite 3,Nike,,Stability,70.00,2022,{Hard},12.9
+Fila Axilus 2 Energized,Fila,,Stability,90.00,2020,"{Clay, Hard}",12.7
+Wilson Kaos Swift,Wilson,,Speed,129.00,2023,"{Clay, Hard}",
+K-Swiss Ultrashot,K-Swiss,,Cushioned,135.00,2019,"{Clay, Hard}",15.9
+Prince T22,Prince,,Stability,89.00,2020,"{Clay, Hard}",16.8
+ASICS Gel Resolution 8 Clay,ASICS,,Speed,140.00,2020,{Clay},15.0
+K-Swiss Hypercourt Express,K-Swiss,,Stability,110.00,2019,"{Clay, Hard}",14.1
+Adidas GameCourt,Adidas,,Cushioned,65.00,2019,"{Clay, Hard}",13.4
+NikeCourt Air Zoom GP Turbo,Nike,,Cushioned,140.00,2020,{Hard},16.2
+Babolat Propulse Fury All Court,Babolat,,Stability,130.00,2020,"{Clay, Hard}",15.7
+Adidas Adizero Ubersonic,Adidas,,Speed,100.00,2019,"{Clay, Hard}",13.4
+New Balance Coco CG1,New Balance,Coco Gauff,Speed,170.00,2022,{Hard},
+Adidas CourtJam Bounce,Adidas,,Cushioned,85.00,2019,"{Clay, Hard}",13.6
+Babolat SFX3 All Court,Babolat,,Cushioned,100.00,2020,"{Clay, Hard}",14.5
+Prince Warrior,Prince,,Stability,109.00,2020,"{Clay, Hard}",10.6
+Wilson Rush Pro 2.5,Wilson,,Stability,99.00,2020,"{Clay, Hard}",13.1
+ASICS Gel Court Speed,ASICS,,Speed,110.00,2019,"{Clay, Hard}",12.3
+ASICS Court Speed FF,ASICS,,Speed,110.00,2020,"{Clay, Hard}",12.0
+Prince T22 Lite,Prince,,Stability,99.00,2020,"{Clay, Hard}",15.5
+ASICS Gel Dedicate 6,ASICS,,Cushioned,70.00,2020,"{Clay, Hard}",12.3
+New Balance FuelCell 996 v4,New Balance,,Cushioned,130.00,2020,"{Clay, Hard}",12.5
+Babolat Propulse Blast All Court,Babolat,,Cushioned,110.00,2020,"{Clay, Hard}",13.4
+HEAD Sprint SF,HEAD,,Speed,170.00,2020,"{Clay, Hard}",12.9
+ASICS Gel Game 7,ASICS,,Stability,80.00,2019,"{Clay, Hard}",13.1
+On The Roger Pro,On,Roger Federer,Speed,200.00,2023,{Hard},13.4
+ASICS Gel Challenger 12 Clay,ASICS,,Speed,100.00,2019,{Clay},12.7
+Mizuno Wave Exceed Tour 4 AC,Mizuno,,Speed,140.00,2020,"{Clay, Hard}",12.3
+Diadora B.Icon AG,Diadora,,Speed,150.00,2022,"{Clay, Hard}",12.3
+HEAD Revolt Pro 3.0 Clay,HEAD,,Speed,119.95,2020,{Clay},13.2
+ASICS Gel Resolution 7 Clay,ASICS,,Speed,140.00,2019,{Clay},14.3
+HEAD Sprint Pro 3.0 Clay,HEAD,,Speed,180.00,2020,{Clay},12.5
+K-Swiss Hypercourt Express Leather,K-Swiss,,Stability,105.00,2020,"{Clay, Hard}",12.0
