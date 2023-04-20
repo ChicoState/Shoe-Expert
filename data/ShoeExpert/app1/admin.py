@@ -64,6 +64,7 @@ def register_model_and_mixin(url_path):
     admin.site.register(globals()[url_path.name.capitalize()], globals()[url_path.name.capitalize() + '_admin'])
 
 ### RUNNER ###
+
 for url_path in Url_Paths:
     create_model_resource(url_path)
     create_admin_mixin(url_path)

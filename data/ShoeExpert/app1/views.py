@@ -60,18 +60,19 @@ def join(request):
 
 @login_required(login_url='/login/')
 def home(request):
-    context_dict = {}
+    context_list = []
     for url_path in Url_Paths:
-        context_dict[url_path.name] = {}
-        context_dict[url_path.name]['shoes'] = globals()[url_path.name.capitalize()].objects.all().order_by('?')[:3]
-        context_dict[url_path.name]['title'] = url_path.name.replace('_', ' ').title()
-        context_dict[url_path.name]['redirect'] = url_path.name.lower()
-        context_dict[url_path.name]['headers'] = []
-        context_dict[url_path.name]['fields'] = []
+        tmp_dict = {}
+        tmp_dict['shoes'] = globals()[url_path.name.capitalize()].objects.all().order_by('?')[:3]
+        tmp_dict['title'] = url_path.name.replace('_', ' ').title()
+        tmp_dict['redirect'] = url_path.name.lower()
+        tmp_dict['headers'] = []
+        tmp_dict['fields'] = []
         for column in url_path.get_django_available_columns():
-            context_dict[url_path.name]['headers'].append(url_path.get_column_name(column, display = True))
-            context_dict[url_path.name]['fields'].append(url_path.get_column_name(column, attribute = True))
-    return render(request, 'app1/home.html', { 'context_dict': context_dict })
+            tmp_dict['headers'].append(url_path.get_column_name(column, display = True))
+            tmp_dict['fields'].append(url_path.get_column_name(column, attribute = True))
+        context_list.append(tmp_dict)
+    return render(request, 'app1/home.html', { 'context_list': context_list })
 
 @login_required(login_url='/login/')
 def generic_shoe(request, url_path):

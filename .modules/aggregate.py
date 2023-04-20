@@ -1157,7 +1157,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.CLOSURE: {
                 "name": "Closure",
                 "units": None,
-                "django_model": models.CharField(max_length=5, choices=(('laces', "Laces"), ('slip on', "Slip On")), blank=True, null=True),
+                "django_model": models.CharField(max_length=8, choices=(('laces', "Laces"), ('slip on', "Slip On")), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Laces' if 'lace up' in s.lower() else 'Slip On' if 'slip on' in s.lower() else None
             },
             ColumnSelector.COLLECTION: {
@@ -1175,7 +1175,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.CUT: {
                 "name": "Cut",
                 "units": None,
-                "django_model": models.CharField(max_length=5, choices=(('low', "Low"), ('mid', "Mid")), blank=True, null=True),
+                "django_model": models.CharField(max_length=8, choices=(('low', "Low"), ('mid', "Mid")), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Low' if 'low' in s.lower() else 'Mid' if 'mid' in s.lower() else None
             },
             ColumnSelector.EXPERT_RATING: {
@@ -1235,7 +1235,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.PRONATION: {
                 "name": "Pronation",
                 "units": None,
-                "django_model": ArrayField(models.CharField(max_length=32, choices=(('supination', 'Supination'), ('underpronation', 'Underpronation'), ('neutral', 'Neutral'), ('overpronation', 'Overpronation'), ('severe overpronation'), ('Severe Overpronation'))), blank=True, null=True),
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('supination', 'Supination'), ('underpronation', 'Underpronation'), ('neutral', 'Neutral'), ('overpronation', 'Overpronation'), ('severe overpronation', 'Severe Overpronation'))), blank=True, null=True),
                 "lambda_serializer": lambda x: '{' + ', '.join(filter(None, ['Supination' if 'supination' in x.lower() else None, 'Underpronation' if 'underpronation' in x.lower() else None, 'Neutral' if 'neutral' in x.lower() else None, 'Overpronation' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(severe\s*)?(overpronation)', x.lower())) else None, 'Severe Overpronation' if re.search(r'severe\s*overpronation', x.lower()) else None])).rstrip(', ') + '}'
             },
             ColumnSelector.PROTECTION: {
@@ -2117,7 +2117,7 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.PRONATION: {
                 "name": "Pronation",
                 "units": None,
-                "django_model": ArrayField(models.CharField(max_length=32, choices=(('supination', 'Supination'), ('underpronation', 'Underpronation'), ('neutral', 'Neutral'), ('overpronation', 'Overpronation'), ('severe overpronation'), ('Severe Overpronation'))), blank=True, null=True),
+                "django_model": ArrayField(models.CharField(max_length=32, choices=(('supination', 'Supination'), ('underpronation', 'Underpronation'), ('neutral', 'Neutral'), ('overpronation', 'Overpronation'), ('severe overpronation', 'Severe Overpronation'))), blank=True, null=True),
                 "lambda_serializer": lambda x: '{' + ', '.join(filter(None, ['Supination' if 'supination' in x.lower() else None, 'Underpronation' if 'underpronation' in x.lower() else None, 'Neutral' if 'neutral' in x.lower() else None, 'Overpronation' if any(match.group(2) and not match.group(1) for match in re.finditer(r'(severe\s*)?(overpronation)', x.lower())) else None, 'Severe Overpronation' if re.search(r'severe\s*overpronation', x.lower()) else None])).rstrip(', ') + '}'
             },
             ColumnSelector.RELEASE_DATE: {

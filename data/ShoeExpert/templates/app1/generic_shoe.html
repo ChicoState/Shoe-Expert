@@ -13,7 +13,7 @@
 					<select id="id_page_size" name="shoes_per_page" class="form-control form-control-sm"
 						onchange="this.form.submit()">
 						{% for size in page_sizes %}
-						<option value="{{ size }}" {% if size==shoes_per_page %}selected{% endif %}>{{ size }}</option>
+						<option value="{{ size }}" {% if size == shoes_per_page %}selected{% endif %}>{{ size }}</option>
 						{% endfor %}
 					</select>
 				</form>

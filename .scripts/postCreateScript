@@ -19,6 +19,6 @@ else
     python manage.py makemigrations --noinput
     python manage.py migrate --noinput
     python manage.py collectstatic --noinput -c -l -v 0 # prereq for django-import-export
-    # FIXME: importStaticShoes static/shoe_data/running_shoes.csv
+    importStaticShoes
     cd $LOCAL_DIR
 fi
