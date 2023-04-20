@@ -41,7 +41,7 @@ def create_model_resource(url_path):
     }
     for col in url_path.get_django_available_columns():
         attr_name = url_path.get_column_name(col, attribute = True)
-        display_name = url_path.get_column_name(col, display = True)
+        display_name = url_path.get_column_name(col)
         attrs[attr_name] = Field(attribute=attr_name, column_name=display_name, widget=get_widget_for_field(url_path.get_column_model(col)))
     resource_name = url_path.name.capitalize() + '_resource'
     type_name = url_path.name.title() + '_Resource'

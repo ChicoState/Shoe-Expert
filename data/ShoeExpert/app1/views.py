@@ -69,7 +69,7 @@ def home(request):
         tmp_dict['headers'] = []
         tmp_dict['fields'] = []
         for column in url_path.get_django_available_columns():
-            tmp_dict['headers'].append(url_path.get_column_name(column, display = True))
+            tmp_dict['headers'].append(url_path.get_column_name(column))
             tmp_dict['fields'].append(url_path.get_column_name(column, attribute = True))
         context_list.append(tmp_dict)
     return render(request, 'app1/home.html', { 'context_list': context_list })
@@ -85,7 +85,13 @@ def generic_shoe(request, url_path):
     headers = []
     fields = []
     for column in url_path.get_django_available_columns():
-        headers.append(url_path.get_column_name(column, display = True))
+        headers.append({
+            'has_modal': column.has_modal(),
+            'modal_body': column.get_modal_body(),
+            'modal_title': url_path.get_column_name(column, display_units = False),
+            'modal_id': url_path.get_column_name(column, attribute = True),
+            'column_title': url_path.get_column_name(column)
+        })
         fields.append(url_path.get_column_name(column, attribute = True))
     return render(request, 'app1/generic_shoe.html', {
         'shoes': shoes,

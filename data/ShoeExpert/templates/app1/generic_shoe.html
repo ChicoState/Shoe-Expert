@@ -13,7 +13,11 @@
 					<select id="id_page_size" name="shoes_per_page" class="form-control form-control-sm"
 						onchange="this.form.submit()">
 						{% for size in page_sizes %}
-						<option value="{{ size }}" {% if size == shoes_per_page %}selected{% endif %}>{{ size }}</option>
+						{% if size == shoes_per_page %}
+						<option value="{{ size }}" selected>{{ size }}</option>
+						{% else %}
+						<option value="{{ size }}">{{ size }}</option>
+						{% endif %}
 						{% endfor %}
 					</select>
 				</form>
@@ -25,7 +29,13 @@
 							<tr>
 								<th scope="col">Shoe Name</th>
 								{% for header in headers %}
-								<th scope="col">{{header}}</th>
+								<th scope="col">
+									{% if header.has_modal %}
+									{% include "app1/modal.html" with data=header %}
+									{% else %}
+									{{ header.column_title }}
+									{% endif %}
+								</th>
 								{% endfor %}
 							</tr>
 						</thead>

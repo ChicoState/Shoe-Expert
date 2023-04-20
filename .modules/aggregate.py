@@ -21,87 +21,111 @@ import sys
 import tempfile
 import time
 
-class ColumnSelector(Enum):
-    ARCH_SUPPORT = "fact-arch-support"
-    ARCH_TYPE = "fact-arch-type"
-    BRAND = "fact-brand"
-    CLEAT_DESIGN = "fact-cleat-design"
-    CLOSURE = "fact-closure"
-    COLLABORATION = "fact-collaboration"
-    COLLECTION = "fact-collection"
-    CONDITION = "fact-condition"
-    CONSTRUCTION = "fact-construction"
-    CUSHIONING = "fact-cushioning"
-    CUT = "fact-cut"
-    DESIGNED_BY = "fact-designed-by"
-    DISTANCE = "fact-distance"
-    DOWNTURN = "fact-downturn"
-    EMBELLISHMENT = "fact-embellishment"
-    ENVIRONMENT = "fact-environment"
-    EVENT = "fact-event"
-    EXPERT_RATING = "fact-expert_score"
-    FEATURE = "fact-feature"
-    FEATURES = "fact-features"
-    FIT = "fact-fit"
-    FOOT_CONDITION = "fact-foot-condition"
-    FOREFOOT_HEIGHT = "fact-forefoot-height"
-    FLEXIBILITY = "fact-flexibility"
-    GRAM_INSULATION = "fact-gram-insulation"
-    HEEL_HEIGHT = "fact-heel-height"
-    HEEL_TOE_DROP = "fact-heel-to-toe-drop"
-    INSPIRED_FROM = "fact-inspired-from"
-    LACE_TYPE = "fact-lace-type"
-    LACING_SYSTEM = "fact-lacing-system"
-    LAST_SHAPE = "fact-last-shape"
-    LEVEL = "fact-level"
-    LINING = "fact-lining"
-    LOCKDOWN = "fact-lockdown"
-    MSRP = "fact-msrp_formatted"
-    MATERIAL = "fact-material"
-    MIDSOLE = "fact-midsole"
-    NUMBER_OF_REVIEWS = "fact-number-of-reviews"
-    ORIGIN = "fact-origin"
-    ORTHOTIC_FRIENDLY = "fact-orthotic-friendly"
-    OUTSOLE = "fact-outsole"
-    PACE = "fact-pace"
-    PRINT = "fact-print"
-    PRONATION = "fact-pronation"
-    PROTECTION = "fact-protection"
-    RANDING = "fact-randing"
-    RELEASE_DATE = "fact-release-date"
-    REVIEW_TYPE = "fact-review-type"
-    RIGIDITY = "fact-rigidity"
-    SALES_PRICE = "fact-price"
-    SCORE = "fact-score"
-    SEASON = "fact-season"
-    SENSITIVITY = "fact-sensitivity"
-    SHOE_TYPE = "fact-shoe-type"
-    SIGNATURE = "fact-signature"
-    SPIKE_SIZE = "fact-spike-size"
-    SPIKE_TYPE = "fact-spike-type"
-    STIFFNESS = "fact-stiffness"
-    STRETCH = "fact-stretch"
-    STRIKE_PATTERN = "fact-strike-pattern"
-    STUD_TYPE = "fact-stud-type"
-    STYLE = "fact-style"
-    SUMMER = "fact-summer"
-    SURFACE = "fact-surface"
-    SUPPORT = "fact-support"
-    TERRAIN = "fact-terrain"
-    TECHNOLOGY = "fact-technology"
-    THICKNESS = "fact-thickness"
-    TOEBOX = "fact-toebox"
-    TONGUE_PULL_LOOP = "fact-tongue-pull-loop"
-    TOP = "fact-top"
-    TYPE = "fact-type"
-    ULTRA_RUNNING = "fact-ultra-running"
-    USE = "fact-use"
-    USER_RATING = "fact-users_score"
-    WATERPROOFING = "fact-waterproofing"
-    WEIGHT = "fact-weight"
-    WIDTH = "fact-width"
-    WORN_BY = "fact-worn-by"
-    ZERO_DROP = "fact-zero-drop"
+class ColumnSelectorEnumMeta(EnumMeta):
+    def __new__(metacls, cls, bases, classdict):
+        enum_class = super().__new__(metacls, cls, bases, classdict)
+        for _, member in enum_class.__members__.items():
+            value, modaldict = member._value_
+            member._value_ = value
+            member.modaldict = modaldict
+        return enum_class
+
+class ColumnSelector(Enum, metaclass=ColumnSelectorEnumMeta):
+    ARCH_SUPPORT = ("fact-arch-support", { 'has_modal': False })
+    ARCH_TYPE = ("fact-arch-type", {
+        'has_modal': True,
+        'modal_body': 'Height of Arch'
+    })
+    BRAND = ("fact-brand", { 'has_modal': False })
+    CLEAT_DESIGN = ("fact-cleat-design", { 'has_modal': False })
+    CLOSURE = ("fact-closure", { 'has_modal': False })
+    COLLABORATION = ("fact-collaboration", { 'has_modal': False })
+    COLLECTION = ("fact-collection", { 'has_modal': False })
+    CONDITION = ("fact-condition", { 'has_modal': False })
+    CONSTRUCTION = ("fact-construction", { 'has_modal': False })
+    CUSHIONING = ("fact-cushioning", {
+        'has_modal': True,
+        'modal_body': "Plush means the shoe is meant to feel soft when running. Balanced means the shoe is more responsive and provides greater energy return."
+    })
+    CUT = ("fact-cut", { 'has_modal': False })
+    DESIGNED_BY = ("fact-designed-by", { 'has_modal': False })
+    DISTANCE = ("fact-distance", { 'has_modal': False })
+    DOWNTURN = ("fact-downturn", { 'has_modal': False })
+    EMBELLISHMENT = ("fact-embellishment", { 'has_modal': False })
+    ENVIRONMENT = ("fact-environment", { 'has_modal': False })
+    EVENT = ("fact-event", { 'has_modal': False })
+    EXPERT_RATING = ("fact-expert_score", { 'has_modal': False })
+    FEATURE = ("fact-feature", { 'has_modal': False })
+    FEATURES = ("fact-features", { 'has_modal': False })
+    FIT = ("fact-fit", { 'has_modal': False })
+    FOOT_CONDITION = ("fact-foot-condition", { 'has_modal': False })
+    FOREFOOT_HEIGHT = ("fact-forefoot-height", { 'has_modal': False })
+    FLEXIBILITY = ("fact-flexibility", {
+        'has_modal': True,
+        'modal_body': "Ability of the sole to bend and flex. A more flexible shoe will allow the foot to move more naturally. A more rigid shoe will provide more support and stability."
+    })
+    GRAM_INSULATION = ("fact-gram-insulation", { 'has_modal': False })
+    HEEL_HEIGHT = ("fact-heel-height", { 'has_modal': False })
+    HEEL_TOE_DROP = ("fact-heel-to-toe-drop", {
+        'has_modal': True,
+        'modal_body': "The difference in height between the heel and the forefoot. A higher heel-to-toe drop will provide more stability and support. A lower heel-to-toe drop will provide more flexibility and a more natural feel."
+    })
+    INSPIRED_FROM = ("fact-inspired-from", { 'has_modal': False })
+    LACE_TYPE = ("fact-lace-type", { 'has_modal': False })
+    LACING_SYSTEM = ("fact-lacing-system", { 'has_modal': False })
+    LAST_SHAPE = ("fact-last-shape", { 'has_modal': False })
+    LEVEL = ("fact-level", { 'has_modal': False })
+    LINING = ("fact-lining", { 'has_modal': False })
+    LOCKDOWN = ("fact-lockdown", { 'has_modal': False })
+    MSRP = ("fact-msrp_formatted", { 'has_modal': False })
+    MATERIAL = ("fact-material", { 'has_modal': False })
+    MIDSOLE = ("fact-midsole", { 'has_modal': False })
+    NUMBER_OF_REVIEWS = ("fact-number-of-reviews", { 'has_modal': False })
+    ORIGIN = ("fact-origin", { 'has_modal': False })
+    ORTHOTIC_FRIENDLY = ("fact-orthotic-friendly", { 'has_modal': False })
+    OUTSOLE = ("fact-outsole", { 'has_modal': False })
+    PACE = ("fact-pace", { 'has_modal': False })
+    PRINT = ("fact-print", { 'has_modal': False })
+    PRONATION = ("fact-pronation", { 'has_modal': False })
+    PROTECTION = ("fact-protection", { 'has_modal': False })
+    RANDING = ("fact-randing", { 'has_modal': False })
+    RELEASE_DATE = ("fact-release-date", { 'has_modal': False })
+    REVIEW_TYPE = ("fact-review-type", { 'has_modal': False })
+    RIGIDITY = ("fact-rigidity", { 'has_modal': False })
+    SALES_PRICE = ("fact-price", { 'has_modal': False })
+    SCORE = ("fact-score", { 'has_modal': False })
+    SEASON = ("fact-season", { 'has_modal': False })
+    SENSITIVITY = ("fact-sensitivity", { 'has_modal': False })
+    SHOE_TYPE = ("fact-shoe-type", { 'has_modal': False })
+    SIGNATURE = ("fact-signature", { 'has_modal': False })
+    SPIKE_SIZE = ("fact-spike-size", { 'has_modal': False })
+    SPIKE_TYPE = ("fact-spike-type", { 'has_modal': False })
+    STIFFNESS = ("fact-stiffness", { 'has_modal': False })
+    STRETCH = ("fact-stretch", { 'has_modal': False })
+    STRIKE_PATTERN = ("fact-strike-pattern", {
+        'has_modal': True,
+        'modal_body': "Strike pattern describes the where the foot hits the ground during a run. Different shoes provide different support for different kinds of strike patterns"
+    })
+    STUD_TYPE = ("fact-stud-type", { 'has_modal': False })
+    STYLE = ("fact-style", { 'has_modal': False })
+    SUMMER = ("fact-summer", { 'has_modal': False })
+    SURFACE = ("fact-surface", { 'has_modal': False })
+    SUPPORT = ("fact-support", { 'has_modal': False })
+    TERRAIN = ("fact-terrain", { 'has_modal': False })
+    TECHNOLOGY = ("fact-technology", { 'has_modal': False })
+    THICKNESS = ("fact-thickness", { 'has_modal': False })
+    TOEBOX = ("fact-toebox", { 'has_modal': False })
+    TONGUE_PULL_LOOP = ("fact-tongue-pull-loop", { 'has_modal': False })
+    TOP = ("fact-top", { 'has_modal': False })
+    TYPE = ("fact-type", { 'has_modal': False })
+    ULTRA_RUNNING = ("fact-ultra-running", { 'has_modal': False })
+    USE = ("fact-use", { 'has_modal': False })
+    USER_RATING = ("fact-users_score", { 'has_modal': False })
+    WATERPROOFING = ("fact-waterproofing", { 'has_modal': False })
+    WEIGHT = ("fact-weight", { 'has_modal': False })
+    WIDTH = ("fact-width", { 'has_modal': False })
+    WORN_BY = ("fact-worn-by", { 'has_modal': False })
+    ZERO_DROP = ("fact-zero-drop", { 'has_modal': False })
 
     def get_menu_selector(self):
         return (By.CSS_SELECTOR, f"input[type='checkbox'][id='{self.value}'] + span.checkbox")
@@ -111,6 +135,15 @@ class ColumnSelector(Enum):
             return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values.corescore__values div.corescore div.corescore__score.score_green")
         else:
             return (By.CSS_SELECTOR, "div.catalog-list-slim__facts__column div.catalog-list-slim__shoes-fact__values span")
+
+    def has_modal(self):
+        return self.modaldict['has_modal']
+
+    def get_modal_body(self):
+        if self.has_modal():
+            return self.modaldict['modal_body']
+        else:
+            return None
 
 class Gender(Enum):
     MEN = ()
@@ -2451,12 +2484,12 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
         }
     )
 
-    def get_column_name(self, column, attribute = False, display = False):
+    def get_column_name(self, column, attribute = False, display_units = True):
         if isinstance(column, ColumnSelector):
             name = self.filterdict[column]["name"]
             if attribute:
                 name = name.lower().replace(' ', '_')
-            elif display:
+            elif display_units:
                 units = self.get_column_units(column)
                 if units is not None:
                     name += f" ({units})"
