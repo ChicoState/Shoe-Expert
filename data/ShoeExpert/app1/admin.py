@@ -37,14 +37,15 @@ def create_model_resource(url_path):
     attrs = {
         '__module__': __name__,
         "shoe_name": Field(attribute='shoe_name', column_name='SHOE_NAME'),
+        "gender": Field(attribute='gender', column_name='Gender'),
         'Meta': type('Meta', (object,), {'model': globals()[url_path.name.capitalize()], 'skip_unchanged': True, 'use_transactions': True, 'exclude': ('id'), 'import_id_fields': ('shoe_name',)}),
     }
     for col in url_path.get_django_available_columns():
         attr_name = url_path.get_column_name(col, attribute = True)
         display_name = url_path.get_column_name(col)
         attrs[attr_name] = Field(attribute=attr_name, column_name=display_name, widget=get_widget_for_field(url_path.get_column_model(col)))
-    resource_name = url_path.name.capitalize() + '_resource'
-    type_name = url_path.name.title() + '_Resource'
+    resource_name = f"{url_path.name.capitalize()}_resource"
+    type_name = f"{url_path.name.title()}_Resource"
     globals()[resource_name] = type(type_name, (resources.ModelResource,), attrs)
 
 ### Admin Integration/Mixins Below ###
@@ -52,16 +53,16 @@ def create_model_resource(url_path):
 def create_admin_mixin(url_path):
     attrs = {
         '__module__': __name__,
-        "resource_classes": [globals()[url_path.name.capitalize() + '_resource']],
+        "resource_classes": [globals()[f"{url_path.name.capitalize()}_resource"]],
     }
-    mixin_name = url_path.name.capitalize() + '_admin'
-    type_name = url_path.name.title() + '_Admin'
+    mixin_name = f"{url_path.name.capitalize()}_admin"
+    type_name = f"{url_path.name.title()}_Admin"
     globals()[mixin_name] = type(type_name, (ImportMixin, admin.ModelAdmin), attrs)
 
 ### Register Models & Mixins Below ###
 
 def register_model_and_mixin(url_path):
-    admin.site.register(globals()[url_path.name.capitalize()], globals()[url_path.name.capitalize() + '_admin'])
+    admin.site.register(globals()[url_path.name.capitalize()], globals()[f"{url_path.name.capitalize()}_admin"])
 
 ### RUNNER ###
 
