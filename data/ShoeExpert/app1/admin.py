@@ -36,9 +36,9 @@ def get_widget_for_field(field):
 def create_model_resource(url_path):
     attrs = {
         '__module__': __name__,
-        "shoe_name": Field(attribute='shoe_name', column_name='SHOE_NAME'),
-        "gender": Field(attribute='gender', column_name='Gender'),
-        'Meta': type('Meta', (object,), {'model': globals()[url_path.name.capitalize()], 'skip_unchanged': True, 'use_transactions': True, 'exclude': ('id'), 'import_id_fields': ('shoe_name',)}),
+        "shoe_name": Field(attribute='shoe_name', column_name='SHOE_NAME', widget=widgets.CharWidget()),
+        "gender": Field(attribute='gender', column_name='Gender', widget=widgets.CharWidget()),
+        'Meta': type('Meta', (object,), {'model': globals()[url_path.name.capitalize()], 'skip_unchanged': True, 'use_transactions': True, 'exclude': ('id'), 'import_id_fields': ('shoe_name',)})
     }
     for col in url_path.get_django_available_columns():
         attr_name = url_path.get_column_name(col, attribute = True)
@@ -53,7 +53,7 @@ def create_model_resource(url_path):
 def create_admin_mixin(url_path):
     attrs = {
         '__module__': __name__,
-        "resource_classes": [globals()[f"{url_path.name.capitalize()}_resource"]],
+        "resource_classes": [globals()[f"{url_path.name.capitalize()}_resource"]]
     }
     mixin_name = f"{url_path.name.capitalize()}_admin"
     type_name = f"{url_path.name.title()}_Admin"

@@ -8,7 +8,7 @@ def create_shoe_model(url_path):
         '__module__': __name__,
         "shoe_name": models.CharField(max_length=128, primary_key=True),
         "gender": models.CharField(max_length=8, choices=(('m', "Men"), ('f', "Female"), ('a', "All")), default="All"),
-        "__str__": lambda self: self.shoe_name,
+        "__str__": lambda self: self.shoe_name
     }
     for col in url_path.get_django_available_columns():
         attrs[url_path.get_column_name(col, attribute = True)] = url_path.get_column_model(col)
