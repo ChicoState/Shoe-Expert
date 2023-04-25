@@ -1,0 +1,196 @@
+SHOE_NAME,Brand,Closure,Cut,MSRP (USD),Pronation,Release Date,Season,Use,Waterproofing,Weight (oz),Widths Available
+Merrell Moab 3,Merrell,Laces,Low,110.00,"{Supination, Neutral, Overpronation}",2022,{Summer},{Day},,16.2,"{Standard, Wide}"
+Merrell Hydro Moc,Merrell,Slip On,Low,50.00,{},2020,{Summer},{Water},,7.2,{Standard}
+Chaco Ramble Puff,Chaco,Laces,Mid,85.00,{},2022,{},"{Snow, Light}",,7.0,{Standard}
+Merrell Moab 2 Waterproof,Merrell,Laces,Low,120.00,{},,{},{Day},Waterproof,16.6,"{Standard, Wide}"
+Merrell Moab Speed,Merrell,Laces,Low,120.00,{},2021,{Summer},"{Speed, Day}",,11.3,"{Standard, Wide}"
+KEEN Targhee II,KEEN,Laces,Low,130.00,{Neutral},2020,{Summer},{Day},Waterproof,15.4,"{Standard, Wide}"
+Columbia Plateau,Columbia,Laces,Low,90.00,{},2022,{Summer},{Speed},,12.2,"{Standard, Wide}"
+Merrell Moab 3 Waterproof,Merrell,Laces,Low,135.00,{},2022,{},{Day},Waterproof,16.0,"{Standard, Wide}"
+Salomon X Ultra 4,Salomon,Laces,Low,120.00,{},2021,{Summer},"{Speed, Day}",,12.7,{Standard}
+Merrell Moab 2 GTX,Merrell,Laces,Low,145.00,{},,{},{Day},Waterproof,14.9,"{Standard, Wide}"
+Hoka Anacapa Low GTX,Hoka,Laces,Low,170.00,{Neutral},2021,{},{Day},Waterproof,14.0,{Standard}
+Adidas Terrex Swift R3 GTX,Adidas,Laces,Low,150.00,{},2021,{},{Speed},Waterproof,15.0,{Standard}
+Salomon X Ultra 4 GTX,Salomon,Laces,Low,150.00,"{Supination, Neutral}",2021,{Winter},"{Speed, Day}",Waterproof,13.3,"{Standard, Wide}"
+Salomon Outpulse GTX,Salomon,Laces,Low,140.00,{Neutral},2022,{},{Day},Waterproof,12.1,{Standard}
+Adidas Terrex Trailmaker,Adidas,Laces,Low,110.00,{},2020,{},{Light},,8.8,{Standard}
+Salomon X Ultra 3 GTX,Salomon,Laces,Low,150.00,{},,{},{Day},Waterproof,13.4,"{Standard, Wide}"
+Teva ReEMBER Terrain,Teva,Slip On,Low,90.00,{},2023,{},"{Snow, Light}",,10.2,{Standard}
+Adidas Terrex Free Hiker Cold.RDY,Adidas,Slip On,Mid,250.00,{},2021,{Winter},"{Snow, Day}",Waterproof,,{Standard}
+Adidas Terrex Swift R2 GTX,Adidas,Laces,Low,140.00,{},,{},{Day},Waterproof,12.3,{Standard}
+Merrell Alverstone,Merrell,Laces,Low,80.00,{},2019,{Summer},{Day},,13.5,"{Standard, Wide}"
+Chaco Chillos,Chaco,Laces,Low,65.00,{},2022,{Summer},{Light},,5.6,{Standard}
+Danner Trail 2650,Danner,Laces,Low,150.00,{},2019,{Summer},"{Speed, Day}",,12.0,"{Standard, Wide}"
+Adidas Terrex Swift R3,Adidas,Laces,Low,130.00,{},2021,{},{Speed},,15.0,{Standard}
+Salomon Outpulse,Salomon,Laces,Low,120.00,{},2022,{Summer},"{Speed, Day}",,11.5,{Standard}
+KEEN Voyageur,KEEN,Laces,Low,115.00,{},,{Summer},{Desert},,15.6,{Standard}
+Merrell Moab Speed GTX,Merrell,Laces,Low,125.00,{},2021,{},"{Speed, Day}",Waterproof,10.2,{Standard}
+Adidas Terrex AX3,Adidas,Laces,Low,80.00,{},2019,{Summer},{Speed},,12.5,"{Standard, Wide}"
+Columbia Crestwood,Columbia,Laces,Low,80.00,{Neutral},2020,{},{Day},,,"{Standard, Wide}"
+Columbia Flow Centre,Columbia,Laces,Mid,100.00,{},2022,{Summer},"{Urban, Day}",,13.5,{Standard}
+Merrell Moab 2 Ventilator,Merrell,Laces,Low,100.00,{Overpronation},,{Summer},{Day},,15.7,"{Standard, Wide}"
+Vasque Juxt,Vasque,Laces,Low,120.00,{},,{},"{Backpacking, Day}",,14.5,"{Standard, Wide}"
+Oboz Sawtooth II Low,Oboz,Laces,Low,110.00,{},2019,{Summer},{Day},,15.6,"{Standard, Wide}"
+Merrell Speed Solo,Merrell,Laces,Low,110.00,{},2023,{},{Day},Waterproof,12.2,{Standard}
+The North Face Vectiv Taraval,The North Face,Laces,Low,125.00,{},2022,{Summer},"{Speed, Day}",,12.4,"{Narrow, Standard}"
+KEEN Targhee Vent,KEEN,Laces,Low,155.00,{},,{Summer},{Day},,14.8,{Standard}
+Salomon Outbound Prism,Salomon,Laces,Low,80.00,{Neutral},2021,{Summer},"{Light, Urban}",,9.5,{Standard}
+Chaco Ramble Puff Clog,Chaco,Slip On,Low,75.00,{},2023,{},{Light},,7.0,{Standard}
+Adidas Terrex AX4 GTX,Adidas,Laces,Low,130.00,{Neutral},2022,{},{Day},Waterproof,15.2,{Standard}
+Salomon X Ultra Pioneer,Salomon,Laces,Low,110.00,{},2022,{Summer},{Day},,13.8,{Standard}
+Merrell Yokota 2,Merrell,Laces,Low,90.00,{},2019,{Summer},{Day},,13.3,"{Standard, Wide}"
+Danner Trail 2650 GTX,Danner,Laces,Low,170.00,{},2019,{},"{Speed, Day}",Waterproof,13.5,"{Standard, Wide}"
+Columbia Trailstorm Waterproof,Columbia,Laces,Low,100.00,{},2021,{},"{Urban, Day}",Waterproof,11.2,"{Standard, Wide}"
+Salomon OUTline GTX,Salomon,Laces,Low,130.00,{},,{},"{Speed, Urban, Day}",Waterproof,12.3,"{Standard, Wide}"
+Skechers Terrabite,Skechers,Laces,Low,85.00,{},2022,{Winter},"{Snow, Light, Urban, Day}",,,"{Standard, Wide}"
+Danner Jag Low,Danner,Laces,Low,130.00,{Neutral},2019,{Summer},"{Urban, Day}",,14.5,{Standard}
+Lems Trailhead,Lems,Laces,Low,140.00,{},2023,{Summer},"{Urban, Day}",,11.7,{Standard}
+Lowa Innox Pro GTX Lo,Lowa,Laces,Low,195.00,{Neutral},2020,{},"{Speed, Day}",Waterproof,12.7,{Standard}
+Merrell Alverstone Waterproof,Merrell,Laces,Low,100.00,{},2019,{},{Day},Waterproof,14.0,"{Standard, Wide}"
+Columbia Fairbanks Low,Columbia,Laces,Low,90.00,{},2019,{Summer},"{Urban, Day}",,11.0,{Standard}
+Merrell Forestbound,Merrell,Laces,Low,100.00,{Neutral},2020,{Summer},{Day},,11.3,{Standard}
+KEEN Targhee III Waterproof,KEEN,Laces,Low,135.00,{},,{},{Day},Waterproof,15.4,"{Narrow, Standard, Wide}"
+Oboz Arete Low,Oboz,Laces,Low,125.00,{Neutral},2020,{Summer},"{Speed, Day}",,14.8,{Standard}
+La Sportiva Spire GTX,La Sportiva,Laces,Low,190.00,{},,{},"{Backpacking, Day}",Waterproof,15.5,{Standard}
+The North Face Vectiv Exploris Futurelight,The North Face,Laces,Low,159.00,{},2022,{},"{Speed, Day}",Waterproof,13.2,"{Narrow, Standard}"
+Scarpa Rush GTX,Scarpa,Laces,Low,169.00,{},2021,{},"{Speed, Day}",Waterproof,14.1,{Standard}
+Merrell Oakcreek,Merrell,Laces,Low,100.00,{},2022,{Summer},{Day},,12.0,"{Standard, Wide}"
+Columbia Crestwood Waterproof,Columbia,Laces,Low,80.00,{},2020,{},{Day},Waterproof,,"{Standard, Wide}"
+Salewa Mountain Trainer 2,Salewa,Laces,Low,150.00,{Neutral},2020,{Summer},"{Backpacking, Day}",,15.4,{Standard}
+Adidas Terrex Skychaser 2.0,Adidas,Laces,Low,130.00,{},2021,{Summer},{Speed},,9.8,{Standard}
+Adidas Terrex Hikster,Adidas,Laces,Low,130.00,{},2021,{},"{Urban, Day}",,,{Standard}
+Salomon X Crest,Salomon,Laces,Low,100.00,{Neutral},2020,{Summer},{Day},,11.9,{Standard}
+Lems Primal 2,Lems,Laces,Low,105.00,{},2021,{Summer},{Light},,7.2,{Standard}
+Adidas Terrex Skychaser 2.0 GTX,Adidas,Laces,Low,160.00,{},2022,{},{Day},Waterproof,16.7,{Standard}
+Chaco Ramble Puff Cinch,Chaco,Laces,Low,80.00,{},2022,{},"{Snow, Light}",,6.2,{Standard}
+ECCO Track 25 Low,ECCO,Laces,Low,230.00,{},2022,{},"{Urban, Day}",Waterproof,,{Standard}
+Garmont Dragontail,Garmont,Laces,Low,135.00,{},2022,{},"{Light, Speed, Urban}",,14.3,{Standard}
+Salomon Outbound Prism GTX,Salomon,Laces,Low,100.00,{Neutral},2021,{Winter},"{Snow, Light, Urban}",Waterproof,10.4,{Standard}
+Salewa Dropline,Salewa,Laces,Low,140.00,{Neutral},2020,{Summer},{Speed},,12.9,{Standard}
+Merrell Chameleon 8 Stretch,Merrell,Laces,Low,120.00,{Neutral},2020,{Summer},{Day},,15.2,{Standard}
+Merrell MQM Flex 2,Merrell,Laces,Low,110.00,{Neutral},2020,{Summer},{Speed},,12.3,{Standard}
+KEEN Steens Vent,KEEN,Laces,Low,100.00,{Neutral},2020,{Summer},{Desert},,,{Standard}
+Merrell Altalight,Merrell,Laces,Low,120.00,{Neutral},2020,{Summer},{Day},,12.3,{Standard}
+Salewa Alp Trainer 2 GTX,Salewa,Laces,Low,180.00,{},2023,{},"{Backpacking, Day}",Waterproof,16.6,{Standard}
+Columbia Flow District,Columbia,Laces,Low,90.00,{},2021,{Summer},"{Urban, Day}",,11.4,{Standard}
+Merrell All Out Blaze Aero Sport,Merrell,Laces,Low,110.00,{Neutral},2020,{Summer},{Speed},,11.3,{Standard}
+Asolo Space GV,Asolo,Laces,Low,150.00,{Neutral},2020,{},"{Speed, Day}",Waterproof,12.0,"{Narrow, Standard}"
+Skechers Skech-Air Envoy,Skechers,Laces,Low,90.00,{},2022,{},"{Speed, Day}",,15.0,"{Standard, Wide}"
+Salomon Amphib Bold 2,Salomon,Laces,Low,100.00,{},2021,{Summer},"{Water, Light, Speed}",,7.4,{Standard}
+Altra LP Alpine,Altra,Laces,Low,140.00,{},2021,{},"{Urban, Day}",,11.4,{Standard}
+Salomon Patrol,Salomon,Laces,Low,80.00,{},2022,{Summer},"{Light, Urban}",,9.5,{Standard}
+Xero Shoes Aqua X Sport,Xero Shoes,Laces,Low,130.00,{},2022,{Summer},"{Water, Urban}",,7.2,{Standard}
+Salomon X Crest GTX,Salomon,Laces,Low,120.00,{Neutral},2020,{},{Day},Waterproof,14.0,{Standard}
+Nike ACG Air Nasu 2,Nike,Laces,Low,120.00,{},2021,{Summer},"{Urban, Day}",,13.7,{Standard}
+Columbia Vitesse OutDry,Columbia,Laces,Low,110.00,{Neutral},2020,{},"{Light, Speed, Urban}",Waterproof,12.5,{Standard}
+The North Face Hedgehog Futurelight,The North Face,Laces,Low,129.00,{},2021,{},{Day},Waterproof,14.1,{Standard}
+Salomon X Ultra 3,Salomon,Laces,Low,120.00,{},,{Summer},{Day},,12.9,{Standard}
+KEEN Targhee III Oxford,KEEN,Laces,Low,125.00,{},2020,{Summer},"{Urban, Day}",,15.6,"{Narrow, Standard, Wide}"
+KEEN Targhee III Slip-On,KEEN,Slip On,Low,115.00,{},2020,{Summer},"{Light, Urban}",,14.2,{Standard}
+Salomon X Ultra,Salomon,Laces,Low,130.00,{Neutral},2020,{Summer},"{Speed, Day}",,12.9,{Standard}
+Merrell Chameleon 7,Merrell,Laces,Low,130.00,{},2019,{Summer},{Day},,15.7,{Standard}
+Lowa Renegade GTX Lo,Lowa,,Low,220.00,{},,{},"{Urban, Day}",Waterproof,18.2,"{Narrow, Standard, Wide}"
+Danner Trail 2650 Campo,Danner,Laces,Low,140.00,{},2021,{Summer},{Desert},,11.0,"{Standard, Wide}"
+Scarpa Rush Trail GTX,Scarpa,Laces,Low,219.00,{},2022,{},"{Speed, Day}",Waterproof,16.0,{Standard}
+Adidas Terrex AX3 GTX,Adidas,Laces,Low,120.00,{},2019,{},{Day},Waterproof,13.9,{Standard}
+Salomon OUTline,Salomon,Laces,Low,110.00,{},,{Summer},"{Speed, Urban, Day}",,12.0,{Standard}
+Timberland Field Trekker Low,Timberland,Laces,Low,110.00,{Neutral},2020,{},"{Urban, Day}",,12.0,{Standard}
+Danner Trailcomber,Danner,Laces,Low,140.00,{Neutral},2020,{Summer},{Day},,9.5,"{Standard, Wide}"
+Danner Mountain Overlook,Danner,Laces,Low,190.00,{},,{},"{Urban, Day}",,14.5,{Standard}
+Merrell Moab Edge 2,Merrell,Laces,Low,90.00,{},2019,{Summer},{Day},,14.3,"{Standard, Wide}"
+Merrell Chameleon 8 Stretch Waterproof,Merrell,Laces,Low,140.00,{Neutral},2020,{},{Day},Waterproof,15.4,{Standard}
+Merrell Zion,Merrell,Laces,Low,120.00,{Neutral},2019,{Summer},{Speed},,13.2,{Standard}
+Teva Gateway Low,Teva,Laces,Low,100.00,{},2021,{Summer},"{Light, Urban, Day}",,9.0,"{Narrow, Standard}"
+Hoka Kaha Low GTX,Hoka,Laces,Low,200.00,{},2021,{},{Day},Waterproof,15.8,{Standard}
+Salomon Tech Amphib 4,Salomon,Laces,Low,100.00,{},2020,{Summer},{Water},,10.1,{Standard}
+Adidas Terrex AX4 Primegreen,Adidas,Laces,Low,90.00,{},2022,{Summer},{Day},,,"{Standard, Wide}"
+Adidas Terrex AX4,Adidas,Laces,Low,100.00,{Neutral},2022,{Summer},{Day},,13.4,{Standard}
+Chaco Ramble Fluff,Chaco,Slip On,Low,85.00,{},2022,{},"{Snow, Light}",,,{Standard}
+Scarpa Mojito Trail GTX,Scarpa,Laces,Low,145.00,{Neutral},2020,{},"{Speed, Urban}",Waterproof,15.9,"{Narrow, Standard, Wide}"
+The North Face Vectiv Fastpack Futurelight,The North Face,Laces,Low,139.00,{},2023,{},"{Light, Speed}",Waterproof,11.4,"{Narrow, Standard}"
+Lems Mesa,Lems,Laces,Low,125.00,{},2019,{Summer},"{Urban, Day}",,9.8,{Standard}
+Columbia Redmond III,Columbia,Laces,Low,80.00,{},2021,{Summer},{Day},,12.3,"{Standard, Wide}"
+Hoka Kaha 2 Low GTX,Hoka,Laces,Low,220.00,{},2023,{},{Day},Waterproof,16.8,{Standard}
+Merrell Hydro Runner,Merrell,Slip On,Low,80.00,{},2023,{Summer},{Water},,8.5,{Standard}
+KEEN NXIS Evo WP,KEEN,Laces,Low,180.00,{},2022,{},{Speed},Waterproof,13.4,{Standard}
+Salewa Mountain Trainer Lite Mid GTX,Salewa,Laces,Mid,200.00,{Neutral},2020,{},{Backpacking},Waterproof,19.9,{Standard}
+Salewa Mountain Trainer Lite,Salewa,Laces,Low,130.00,{Neutral},2020,{Summer},"{Speed, Day}",,14.7,"{Narrow, Standard}"
+Vasque Satoru Trail LT Low,Vasque,Laces,Low,150.00,{},2021,{Summer},"{Speed, Day}",,10.2,{Standard}
+Merrell Moab 2 Prime,Merrell,Laces,Low,120.00,{Neutral},2020,{},{Day},,16.4,"{Standard, Wide}"
+Chaco Ramble Puff Linear,Chaco,Slip On,Mid,85.00,{},2022,{},"{Snow, Light}",,13.0,{Standard}
+Merrell Accentor,Merrell,Laces,Low,90.00,{Neutral},2020,{Summer},{Day},,13.1,{Standard}
+Merrell Accentor 2 Vent,Merrell,Laces,Low,90.00,{Neutral},2020,{Summer},{Day},,15.0,{Standard}
+Salomon Crossamphibian Swift 2,Salomon,Laces,Low,90.00,{},2019,{Summer},{Water},,7.4,{Standard}
+Adidas Terrex Eastrail,Adidas,Laces,Low,70.00,{Neutral},2019,{Summer},{Day},,12.3,{Standard}
+KEEN Targhee Exp WP,KEEN,Laces,Low,135.00,{Neutral},2020,{},{Day},Waterproof,16.0,{Standard}
+Mammut Ducan Mid GTX,Mammut,Laces,Mid,209.00,{},2020,{},{Day},Waterproof,18.0,{Standard}
+Salewa Dropline GTX,Salewa,Laces,Low,160.00,{Neutral},2020,{},{Speed},Waterproof,13.1,{Standard}
+The North Face Activist Futurelight,The North Face,Laces,Low,135.00,{Neutral},2020,{},"{Urban, Day}",Waterproof,12.3,{Standard}
+Adidas Terrex Eastrail GTX,Adidas,Laces,Low,110.00,{},2019,{},{Day},Waterproof,12.7,{Standard}
+Merrell Altalight Waterproof,Merrell,Laces,Low,140.00,{Neutral},2020,{},{Day},Waterproof,13.4,{Standard}
+Merrell Catalyst Suede,Merrell,Laces,Low,110.00,{},2022,{Summer},"{Light, Urban}",,12.5,{Standard}
+Oboz Sawtooth Low BDry,Oboz,Laces,Low,140.00,{},,{},{Day},Waterproof,16.7,"{Standard, Wide}"
+Salewa Alp Trainer 2,Salewa,Laces,Low,160.00,{},2022,{},"{Backpacking, Day}",,15.9,{Standard}
+Timberland Mt. Maddsen Slip-On,Timberland,Slip On,Low,100.00,{Neutral},2020,{},{Day},,,"{Standard, Wide}"
+On Cloudwander Waterproof,On,Laces,Low,180.00,{},,{},"{Urban, Day}",Waterproof,13.8,{Standard}
+Arc'teryx Aerios FL Mid GTX,Arc'teryx,Laces,Mid,185.00,{},2019,{},{Day},Waterproof,13.1,{Standard}
+Danner Trail 2650 Campo GTX,Danner,Laces,Low,200.00,{},2022,{},"{Desert, Day}",Waterproof,12.0,"{Standard, Wide}"
+Oboz Bridger Low BDry,Oboz,Laces,Low,140.00,{},,{},{Day},Waterproof,17.7,"{Standard, Wide}"
+KEEN Tempo Flex Waterproof,KEEN,Laces,Low,150.00,{},2021,{},{Day},Waterproof,14.0,{Standard}
+Astral TR1 Mesh,Astral,Laces,Low,125.00,{},,{Summer},"{Water, Light}",,10.6,{Standard}
+Salomon X Reveal GTX,Salomon,Laces,Low,110.00,{Neutral},2020,{},"{Light, Urban}",Waterproof,11.3,{Standard}
+Vivobarefoot Magna Trail,Vivobarefoot,Laces,Mid,210.00,{},2019,{},{Day},,11.8,"{Standard, Wide}"
+Lowa Locarno GTX Lo,Lowa,Laces,Low,195.00,{},,{},{Day},Waterproof,14.5,"{Standard, Wide}"
+Columbia Facet 45 Outdry,Columbia,Slip On,Mid,150.00,{},2020,{},"{Speed, Urban}",Waterproof,17.6,{Standard}
+Teva Ridgeview Low,Teva,Laces,Low,140.00,{},2021,{},{Backpacking},Waterproof,17.0,"{Narrow, Standard}"
+Meindl Respond GTX,Meindl,Laces,Low,120.00,{Neutral},2020,{},"{Urban, Day}",Waterproof,14.5,{Standard}
+Danner Jag Loft,Danner,Slip On,Low,150.00,{},2023,{Winter},"{Snow, Light}",,11.0,{Standard}
+Merrell Choprock,Merrell,Laces,Low,120.00,{},2019,{Summer},{Water},,13.4,{Standard}
+KEEN Explore WP,KEEN,Laces,Low,125.00,{},2019,{},{Day},Waterproof,15.1,{Standard}
+Merrell Forestbound Waterproof,Merrell,Laces,Low,120.00,{Neutral},2020,{},{Day},Waterproof,13.6,{Standard}
+Vibram Fivefingers V-Trek,Vibram FiveFingers,Laces,Mid,125.00,{Neutral},2020,{Summer},"{Water, Day}",,6.5,"{Standard, Wide}"
+Oboz Sypes Low Leather Waterproof,Oboz,Laces,Low,145.00,{},2021,{},"{Urban, Day}",Waterproof,15.7,"{Standard, Wide}"
+Mammut Ducan Low GTX,Mammut,Laces,Low,160.00,{Neutral},2020,{},{Day},Waterproof,14.8,{Standard}
+Merrell Zion Waterproof,Merrell,Laces,Low,140.00,{},2020,{},{Speed},Waterproof,,{Standard}
+Danner Rivercomber,Danner,Laces,Low,120.00,{Neutral},2020,{Summer},{Water},,11.0,"{Standard, Wide}"
+Merrell Moab Edge,Merrell,Laces,Low,90.00,{},,{Summer},{Day},,13.5,"{Standard, Wide}"
+Meindl Caracas GTX,Meindl,Laces,Low,175.00,{Neutral},2020,{},{Light},Waterproof,16.2,{Standard}
+Adidas Terrex Eastrail Mid GTX,Adidas,Laces,Mid,135.00,{Neutral},2020,{},{Light},Waterproof,13.8,{Standard}
+Salewa Speed Beat GTX,Salewa,Laces,Low,200.00,{},,{},{Speed},Waterproof,12.3,{Standard}
+Merrell Ontario,Merrell,Laces,Low,140.00,{},,{Summer},{Day},,13.2,{Standard}
+Danner Panorama Low,Danner,Laces,Low,150.00,{},2023,{},{Day},Waterproof,17.0,"{Standard, Wide}"
+Mammut Ultimate Pro Low GTX,Mammut,Laces,Low,140.00,{},2019,{},{Day},Waterproof,12.3,{Standard}
+Salewa Mountain Trainer,Salewa,Laces,Low,150.00,{Neutral},2020,{Summer},"{Backpacking, Day}",,18.2,{Standard}
+Columbia Peakfreak X2 Outdry,Columbia,Laces,Low,110.00,{},2019,{},"{Urban, Day}",Waterproof,12.1,"{Standard, Wide}"
+Meindl Caribe GTX,Meindl,Laces,Low,130.00,{Neutral},2020,{},"{Light, Urban}",Waterproof,12.0,{Standard}
+Salewa Mountain Trainer GTX,Salewa,Laces,Low,200.00,{Neutral},2019,{},{Backpacking},Waterproof,18.9,{Standard}
+Merrell Waterpro Maipo 2,Merrell,Laces,Low,100.00,{},2019,{Summer},{Water},,10.3,{Standard}
+Columbia Redmond V2 Waterproof,Columbia,Laces,Low,90.00,{},2019,{},{Day},Waterproof,22.5,"{Standard, Wide}"
+New Balance 978,New Balance,Laces,Low,155.00,{Overpronation},2020,{},{Day},Waterproof,17.8,"{Narrow, Standard}"
+Adidas Terrex Swift R2,Adidas,Laces,Low,115.00,{},,{},"{Speed, Day}",,13.6,{Standard}
+The North Face Ultra 111 WP,The North Face,Laces,Low,120.00,{},2020,{},{Day},Waterproof,7.5,{Standard}
+Columbia Vitesse,Columbia,Laces,Low,90.00,{Neutral},2020,{Summer},"{Speed, Urban}",,12.5,{Standard}
+Merrell MQM Flex GTX,Merrell,Laces,Low,140.00,{},,{},"{Speed, Day}",Waterproof,11.4,{Standard}
+Adidas Terrex Voyager,Adidas,,Low,80.00,{Neutral},2020,{Summer},{Water},,14.2,{Standard}
+KEEN Venture WP,KEEN,Laces,Low,170.00,{Neutral},2019,{},"{Speed, Day}",Waterproof,17.0,{Standard}
+Lowa Explorer GTX Lo,Lowa,Laces,Low,200.00,{},2021,{},{Backpacking},Waterproof,17.3,"{Standard, Wide}"
+KEEN Koven,KEEN,Laces,Low,90.00,{Neutral},2020,{Summer},{Day},,14.4,{Standard}
+Mammut Sapuen Low GTX,Mammut,Laces,Low,168.00,{},2022,{},"{Urban, Day}",Waterproof,16.9,{Standard}
+Mammut Saentis Low,Mammut,Laces,Low,129.00,{Neutral},2020,{Summer},"{Light, Speed}",,12.0,{Standard}
+Ariat Skyline Slip-On,Ariat,Slip On,Low,90.00,{Neutral},2020,{Summer},{Light},,14.4,{Standard}
+Oboz Sawtooth II Low BDry,Oboz,Laces,Low,140.00,{},2019,{},{Day},Waterproof,17.4,"{Standard, Wide}"
+Oboz Firebrand II Low BDry,Oboz,Laces,Low,140.00,{},,{},{Day},Waterproof,18.3,"{Standard, Wide}"
+Mammut Saentis Low GTX,Mammut,Laces,Low,110.00,{Neutral},2020,{},"{Light, Speed}",Waterproof,13.1,{Standard}
+Northside Monroe Low,Northside,Laces,Low,45.00,{},,{Summer},"{Urban, Day}",,17.0,"{Standard, Wide}"
+Harley-Davidson Chase,Harley-Davidson,,Low,94.00,{},2019,{Summer},{Day},,11.2,{Standard}
+Salomon Odyssey Advanced,Salomon,Laces,Low,190.00,{},2023,{Summer},"{Urban, Day}",,11.3,{Standard}
+Timberland Keele Ridge Waterproof,Timberland,Laces,Low,100.00,{},,{},"{Urban, Day}",Waterproof,16.0,"{Standard, Wide}"
+Vivobarefoot Magna FG,Vivobarefoot,Laces,Mid,151.00,{Neutral},2022,"{Summer, Winter}","{Snow, Water, Light, Urban}",Waterproof,12.3,"{Standard, Wide}"
+The North Face Ultra 109 WP,The North Face,Laces,Low,120.00,{Neutral},2020,{},{Day},Waterproof,13.9,"{Standard, Wide}"
+Salewa Ultra Flex Mid GTX,Salewa,Laces,Mid,190.00,{},,{},{Speed},Waterproof,13.6,{Standard}
+Mammut Sertig II Low,Mammut,Laces,Low,119.00,{},2022,{Summer},"{Light, Speed}",,,{Standard}
+Aku Tengu Low GTX,Aku,Laces,Low,170.00,{},2019,{},{Backpacking},Waterproof,15.3,{Standard}
+Haglöfs Trail Fuse GT,Haglöfs,Laces,Low,90.00,{Neutral},2020,{},"{Urban, Day}",,11.5,{Standard}
+Haglöfs Krusa Gt,Haglöfs,Laces,Low,125.00,{Neutral},2020,{},"{Urban, Day}",Waterproof,13.4,{Standard}
+Jack Wolfskin Vojo Hike 2 Texapore Low,Jack Wolfskin,Laces,Low,85.00,{},2020,{},{Day},Waterproof,15.7,{Standard}
+Lowa Gorgon GTX,Lowa,Laces,Low,210.00,{},2019,{},"{Speed, Urban}",Waterproof,13.4,{Standard}

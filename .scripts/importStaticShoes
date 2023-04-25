@@ -6,35 +6,38 @@ if ! [ -f $PROC_SCHED ] || [ "$(awk 'FNR == 1 {print $1}' "$PROC_SCHED")" != "py
     exit 1
 fi
 
-if [ -z "$1" ]; then
-    echo >&2 "needs *.csv file argument"
-    exit 2
-fi
-
 if ! cat <<EOF | python /home/docker/data/ShoeExpert/manage.py shell
 import sys
 import csv
 import tablib
-from import_export import resources
-from app1.models import RunningShoe
-from app1.admin import RunningShoeResource
+import importlib
+from aggregate import Url_Paths
 
-file_path = '$1'
-csv_file = open(file_path, 'r')
-csv_reader = csv.DictReader(csv_file)
+app1_admin_module = importlib.import_module('app1.admin')
+app1_admin_module_names = dir(app1_admin_module)
+app1_admin_module_class_names = [name for name in app1_admin_module_names if isinstance(getattr(app1_admin_module, name), type)]
+for name in app1_admin_module_class_names:
+    globals()[name] = getattr(app1_admin_module, name)
 
-data = tablib.Dataset(headers=csv_reader.fieldnames)
-for row in csv_reader:
-    data.append(row.values())
+for url_path in Url_Paths:
+    resource_name = f"{url_path.name.capitalize()}_resource"
 
-try:
-    dataset = RunningShoeResource().import_data(data, raise_errors=True)
-except Exception as e:
-    print(e, file=sys.stderr)
-    sys.exit(1)
+    file_path = f"/home/docker/data/ShoeExpert/static/shoe_data/{url_path.name.title()}.csv"
+    with open(file_path, 'r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+
+        data = tablib.Dataset(headers=csv_reader.fieldnames)
+        for row in csv_reader:
+            data.append(row.values())
+
+        try:
+            globals()[resource_name]().import_data(data, raise_errors=True)
+        except Exception as e:
+            print(e, file=sys.stderr)
+            sys.exit(1)
 EOF
 then
-    exit 3
+    exit 2
 else
     exit 0
 fi

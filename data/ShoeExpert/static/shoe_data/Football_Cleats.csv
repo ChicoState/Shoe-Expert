@@ -1,0 +1,28 @@
+SHOE_NAME,Brand,Closure,Price Tier,MSRP (USD),Release Date,Molded Studs,Top,Weight (oz),Width
+Nike Vapor Edge Pro 360,Nike,{Ghost Lacing},,120.00,2021,True,Mid,10.6,Wide
+Nike Alpha Menace Pro 3,Nike,{Laces},Cheap,100.00,2022,True,Mid,12.0,
+Adidas Adizero 8.0,Adidas,"{Laces, Slip-On}",,120.00,2019,True,Mid,,Medium
+Nike Alpha Menace Elite 2,Nike,"{Strap, Laces}",Expensive,200.00,2019,True,High,,Wide
+Nike Force Savage Elite 2,Nike,{Strap},,140.00,2019,True,High,,Wide
+Nike Vapor Edge Speed 360,Nike,{Laces},Cheap,95.00,2021,True,Low,13.4,Wide
+Nike Vapor Untouchable Pro 3,Nike,{},,120.00,2019,,Mid,11.1,Medium
+Nike Vapor Edge 360 VC,Nike,{Laces},,120.00,2022,True,Low,10.2,
+Nike Alpha Menace 3 Shark,Nike,{Laces},Cheap,45.00,2022,True,Mid,,Wide
+Under Armour Highlight MC,Under Armour,{Laces},,130.00,2019,True,High,14.0,Wide
+Adidas Freak Ultra,Adidas,"{Laces, Slip-On}",,180.00,2019,True,Mid,,Medium
+Nike Alpha Menace Pro 2 Mid,Nike,"{Strap, Laces}",Cheap,100.00,2019,True,Mid,,Wide
+Adidas Adizero 9.0,Adidas,{Laces},,120.00,2020,True,Mid,,Medium
+Adidas Adizero Scorch,Adidas,{Laces},Cheap,90.00,2022,True,Low,,
+Nike Alpha Menace Elite 3,Nike,{Ghost Lacing},Expensive,200.00,2022,True,Mid,14.2,Medium
+Jordan 1 TD Mid,Jordan,{Laces},,125.00,2019,True,Mid,,Wide
+Under Armour Spotlight MC,Under Armour,"{Laces, Slip-On}",,110.00,2019,True,Low,8.5,Wide
+Nike Vapor Edge Elite 360 Flyknit,Nike,{Ghost Lacing},Expensive,200.00,2022,True,Mid,9.4,Wide
+Adidas Adizero Primeknit,Adidas,"{Laces, Slip-On}",,150.00,2020,True,High,,
+Nike Alpha Menace Varsity 3,Nike,{Laces},Cheap,75.00,2022,True,Mid,13.3,Medium
+Nike Force Savage Pro 2,Nike,"{Strap, Laces}",,100.00,2019,True,Mid,,Wide
+Adidas Freak Carbon Low,Adidas,{Laces},Cheap,90.00,2019,True,Low,,
+Nike Vapor Edge Team,Nike,{Laces},,85.00,2022,True,Low,,Medium
+Adidas Adizero 11.0,Adidas,{Laces},,120.00,2021,True,Low,,Wide
+Nike Vapor Untouchable 3 Elite,Nike,{Laces},Expensive,200.00,2019,True,High,,Wide
+Under Armour Blur Smoke MC,Under Armour,{Laces},,110.00,2022,True,Low,8.9,Medium
+Adidas Adizero 12.0,Adidas,{Laces},,120.00,,True,Low,,Wide

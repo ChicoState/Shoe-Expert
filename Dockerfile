@@ -15,7 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update && \
     chromium-driver \
     git \
     sudo \
-    sqlite3 \
+    libpq-dev \
     bash-completion \
     tree \
     vim \
@@ -41,18 +41,22 @@ ENV DISPLAY=:99
 ENV CHROME_BIN=/usr/bin/chromium
 
 WORKDIR /home/docker/
-ADD requirements.txt /home/docker/.requirements.txt
 ENV HOME /home/docker
 ENV USER docker
 USER docker
+
+# Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
+RUN touch $HOME/.sudo_as_admin_successful
+
+ADD requirements.txt /home/docker/.requirements.txt
 ADD .scripts /home/docker/.local/bin/
 ENV PATH /home/docker/.local/bin:$PATH
 ADD .modules /home/docker/.local/custom_python_modules/
 ENV PYTHONPATH /home/docker/.local/custom_python_modules:$PYTHONPATH
 RUN sudo chown -R docker:root /home/docker/.local/ && \
-    chmod -R 775 /home/docker/.local/
-# Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
-RUN touch $HOME/.sudo_as_admin_successful
+    sudo chmod -R 775 /home/docker/.local/ && \
+    sudo chmod -R 555 /home/docker/.local/custom_python_modules/
+
 RUN pip install --user --no-cache-dir -U pip
 # Note: add any new PyPi packages to requirements.txt
 RUN pip install --user --no-cache-dir -r .requirements.txt

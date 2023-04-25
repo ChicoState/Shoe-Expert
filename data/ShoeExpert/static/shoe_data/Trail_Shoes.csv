@@ -1,0 +1,316 @@
+SHOE_NAME,Arch Support,Arch Type,Brand,Cushioning,Flexibility,Forefoot Height (mm),Heel Height (mm),Heel to Toe Drop (mm),MSRP (USD),Pronation,Release Date,Strike Pattern,Toebox,Waterproofing,Weight (oz),Widths Available
+Altra Lone Peak 6,Neutral,High,Altra,Balanced,Balanced,,,0.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Extra Wide,,9.7,{}
+Altra Olympus 4.0,Neutral,High,Altra,Plush,Balanced,,,0.0,170.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Extra Wide,,11.6,{}
+Salomon Speedcross 5,Neutral,High,Salomon,Firm,Semi-Flexible,,,10.5,130.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,,11.6,{}
+Hoka Speedgoat 5,Neutral,High,Hoka,Plush,Balanced,,,4.0,155.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,9.7,{}
+Nike Pegasus Trail 3,Neutral,High,Nike,Balanced,Semi-Flexible,,,10.0,130.00,"{Supination, Underpronation, Neutral}",2021,{Heel},Medium,,11.3,{}
+Altra Lone Peak 5.0,Neutral,High,Altra,Balanced,Semi-Flexible,,,0.0,130.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Extra Wide,,10.6,{}
+Salomon Speedcross 6,Neutral,High,Salomon,Firm,Balanced,,,10.0,140.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Narrow,,10.5,{}
+ASICS Gel Venture 8,Neutral,High,ASICS,Firm,Semi-Flexible,,,10.5,70.00,"{Supination, Underpronation, Neutral}",2021,{Heel},Narrow,,12.5,{}
+Nike React Pegasus Trail 4,Neutral,High,Nike,Balanced,Semi-Flexible,,,10.0,140.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,10.4,{}
+Merrell Nova 2,Neutral,High,Merrell,Firm,Semi-Flexible,,,8.0,110.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,9.9,{}
+Nike Wildhorse 7,Neutral,High,Nike,Firm,Semi-Rigid,,,8.0,130.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,11.0,{}
+Salomon XA Pro 3D,Stability,Low,Salomon,Firm,Balanced,,,10.0,130.00,{Overpronation},,{Heel},Medium,,14.5,{}
+Salomon Sense Ride 4,Neutral,High,Salomon,Firm,Balanced,,,8.0,120.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,10.2,{}
+Brooks Catamount,Neutral,High,Brooks,Balanced,Semi-Flexible,,,6.5,160.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Wide,,9.3,{}
+Salomon Ultra Glide,Neutral,High,Salomon,Plush,Balanced,,,6.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,10.0,{}
+Saucony Peregrine 12,Neutral,High,Saucony,Firm,Balanced,,,4.0,130.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,9.6,{}
+Saucony Xodus Ultra,Neutral,High,Saucony,Balanced,Balanced,,,6.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,10.3,{}
+Hoka Torrent 2,Neutral,High,Hoka,Plush,Semi-Flexible,,,5.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,9.7,{}
+Brooks Cascadia 16,Neutral,High,Brooks,Balanced,Semi-Flexible,,,8.0,130.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,10.5,{}
+Nike Pegasus Trail 2,Neutral,High,Nike,Plush,Balanced,,,10.0,130.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,,11.1,{}
+On Cloudventure,Neutral,High,On,Firm,Semi-Flexible,,,6.0,160.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Medium,,10.4,{}
+Altra Superior 5,Neutral,High,Altra,Balanced,Semi-Flexible,,,0.0,120.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,8.8,{}
+Altra Olympus 5,Neutral,High,Altra,Balanced,Balanced,,,0.0,180.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Extra Wide,,12.3,{}
+Merrell Moab Flight,Neutral,High,Merrell,Balanced,Balanced,,,10.0,110.00,"{Supination, Underpronation, Neutral}",2021,{Heel},Medium,,10.6,{}
+Nike Pegasus Trail 3 GTX,Neutral,High,Nike,Balanced,Balanced,,,10.0,160.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,Waterproof,10.9,{}
+Hoka Tecton X,Neutral,High,Hoka,Firm,Balanced,,,,200.00,"{Supination, Underpronation, Neutral}",2022,{},Medium,,8.9,{}
+Brooks Caldera 6,Neutral,High,Brooks,Balanced,Balanced,,,6.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.6,{}
+Altra Lone Peak 7,Neutral,High,Altra,Balanced,Semi-Flexible,,,0.0,150.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot}",Extra Wide,,11.0,{}
+Hoka Challenger 7,Neutral,High,Hoka,Plush,Semi-Rigid,,,5.0,145.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Narrow,,8.9,{}
+Salomon XT-6,Neutral,High,Salomon,Balanced,Balanced,,,,220.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,12.9,{}
+Brooks Catamount 2,Neutral,High,Brooks,Balanced,Balanced,23.0,29.0,6.0,170.00,"{Supination, Underpronation, Neutral}",2023,{},Medium,Water Repellent,9.7,{Standard}
+Saucony Peregrine 13,Neutral,,Saucony,Firm,Semi-Rigid,,,2.5,140.00,{},2023,"{Forefoot, Midfoot, Heel}",Narrow,,9.2,{}
+Saucony Peregrine 11,Neutral,High,Saucony,Balanced,Semi-Flexible,23.0,27.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,10.9,"{Standard, Wide}"
+ASICS Gel Venture 7,Neutral,High,ASICS,Balanced,Balanced,,,10.0,70.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,,10.7,"{Standard, Extra Wide}"
+Salomon Pulsar Trail Pro,Neutral,High,Salomon,Balanced,Semi-Rigid,25.0,31.0,6.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,9.5,{Standard}
+Salomon Sense Ride 5,Neutral,,Salomon,Balanced,Semi-Rigid,21.3,29.6,8.3,140.00,{},2023,"{Forefoot, Midfoot, Heel}",Narrow,,10.1,{Standard}
+Altra Outroad,Neutral,High,Altra,Balanced,Balanced,27.0,27.0,0.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,10.7,{Standard}
+Salomon XA Pro 3D V8,Stability,Low,Salomon,Firm,Semi-Rigid,17.0,28.0,11.0,130.00,{Overpronation},2020,{Heel},Medium,,12.0,"{Standard, Wide}"
+Adidas Terrex Speed Ultra,Neutral,High,Adidas,Balanced,Balanced,18.0,26.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,9.0,{Standard}
+ASICS Gel Venture 6,Neutral,High,ASICS,Plush,Semi-Flexible,10.0,20.0,10.0,70.00,"{Supination, Underpronation, Neutral}",,{Heel},Medium,,11.2,"{Standard, Wide, Extra Wide}"
+Inov-8 Terraultra G 270,Neutral,High,Inov-8,Plush,Balanced,12.0,12.0,0.0,160.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,9.5,"{Standard, Wide}"
+Salomon Speedcross 5 GTX,Neutral,High,Salomon,Plush,Semi-Flexible,20.0,30.0,10.0,150.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,Waterproof,12.0,{Standard}
+Hoka Stinson ATR 6,Neutral,High,Hoka,Plush,,34.0,39.0,5.0,160.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,11.7,{Standard}
+Nike React Pegasus Trail 4 GTX,Neutral,High,Nike,Balanced,Semi-Flexible,26.0,36.0,10.0,160.00,"{Supination, Underpronation, Neutral}",,{},Wide,Waterproof,,{Standard}
+On Cloudvista,Neutral,High,On,Balanced,Balanced,,,7.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Narrow,,9.9,{Standard}
+Salomon Speedcross 3,Neutral,High,Salomon,Firm,Balanced,9.0,20.0,11.0,130.00,"{Supination, Underpronation, Neutral}",,{Heel},Medium,,10.9,{Standard}
+Hoka Speedgoat 4,Neutral,High,Hoka,Firm,Rigid,28.0,32.0,4.0,145.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,,10.8,"{Standard, Wide}"
+Nike ZoomX Zegama Trail,Neutral,High,Nike,Balanced,Semi-Flexible,33.0,37.0,4.0,160.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,,{Standard}
+Nike Air Zoom Terra Kiger 7,Neutral,High,Nike,Firm,Semi-Flexible,,,2.5,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Narrow,,10.4,{}
+Salomon Pulsar Trail,Neutral,High,Salomon,Balanced,Balanced,26.6,32.6,6.0,130.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.0,{Standard}
+Brooks Divide 3,Neutral,High,Brooks,Firm,Balanced,22.0,30.0,8.0,100.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.1,{Standard}
+Hoka Mafate Speed 4,Neutral,High,Hoka,Firm,Balanced,29.0,33.0,4.0,185.00,"{Supination, Underpronation, Neutral}",2022,{},Medium,,10.4,{Standard}
+La Sportiva Mutant,Neutral,High,La Sportiva,Firm,Semi-Rigid,16.0,26.0,10.0,130.00,"{Supination, Underpronation, Neutral}",,{Heel},Medium,,10.7,{Standard}
+Brooks Cascadia 15,Neutral,High,Brooks,Firm,Semi-Rigid,18.0,26.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Wide,,11.0,"{Standard, Wide}"
+Merrell Trail Glove 6,Neutral,High,Merrell,Firm,Flexible,12.0,12.0,0.0,100.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,7.5,{Standard}
+Saucony Endorphin Edge,Neutral,High,Saucony,Plush,Semi-Rigid,30.0,36.0,6.0,200.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,9.1,{Standard}
+Salomon XT-Wings 2,Neutral,High,Salomon,Balanced,Balanced,12.0,22.5,10.5,160.00,"{Supination, Underpronation, Neutral}",2020,{},Wide,,11.8,{Standard}
+Adidas Terrex Soulstride,Neutral,High,Adidas,Balanced,Balanced,,,,80.00,"{Supination, Underpronation, Neutral}",2022,{},Wide,,,"{Narrow, Standard, Wide}"
+Brooks Caldera 5,Neutral,High,Brooks,Balanced,Semi-Flexible,28.0,32.0,4.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,10.8,{Standard}
+New Balance Nitrel V4,Neutral,High,New Balance,Plush,,,,8.0,70.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,10.3,"{Standard, Wide, Extra Wide}"
+Altra Timp 4,Neutral,High,Altra,Plush,Semi-Flexible,30.0,30.0,0.0,160.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,,10.6,{Standard}
+Saucony Endorphin Trail,Neutral,High,Saucony,Balanced,Semi-Rigid,32.5,36.5,4.0,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.4,{Standard}
+ASICS Novablast 3 TR,Neutral,High,ASICS,Plush,Balanced,23.0,31.0,8.0,145.00,"{Supination, Underpronation, Neutral}",2022,{},Wide,,8.9,{Standard}
+New Balance Fresh Foam Hierro v7,Neutral,High,New Balance,Balanced,Balanced,,,8.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.6,"{Standard, Wide}"
+Merrell Nova,Neutral,High,Merrell,,,26.0,34.0,8.0,110.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",,,10.9,{Standard}
+Adidas Ultraboost All Terrain,Neutral,High,Adidas,,,22.0,32.0,10.0,220.00,"{Supination, Underpronation, Neutral}",,{Heel},,Water Repellent,12.0,{Standard}
+Xero Shoes Prio,Neutral,High,Xero Shoes,,,7.0,7.0,0.0,90.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,7.4,{Standard}
+Altra Timp 3,Neutral,High,Altra,Balanced,Balanced,29.0,29.0,0.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.5,{Standard}
+Merrell Agility Peak 4,Neutral,High,Merrell,Balanced,Semi-Flexible,24.0,30.0,6.0,130.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,10.8,{Standard}
+New Balance 510 v5,Neutral,High,New Balance,Balanced,,,,,75.00,"{Supination, Underpronation, Neutral}",2022,{},Wide,,,"{Standard, Wide, Extra Wide}"
+Scarpa Ribelle Run,Neutral,High,Scarpa,Balanced,,20.5,24.5,4.0,159.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,,10.6,{Standard}
+On Cloudultra,Neutral,High,On,Firm,Semi-Rigid,20.0,28.0,8.0,180.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,10.7,{Standard}
+New Balance Fresh Foam Hierro v6,Neutral,High,New Balance,Balanced,,20.0,28.0,8.0,135.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,11.9,"{Standard, Wide}"
+ASICS Gel Excite Trail,Neutral,High,ASICS,Balanced,Balanced,,,8.0,75.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.6,{Standard}
+Hoka Zinal,Neutral,High,Hoka,Balanced,Semi-Flexible,18.0,22.0,4.0,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,8.5,{Standard}
+Inov-8 Trailfly G 270,Neutral,High,Inov-8,Balanced,Balanced,12.0,12.0,0.0,160.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Wide,,9.5,{Standard}
+Saucony Xodus Ultra 2,Neutral,,Saucony,Balanced,Semi-Rigid,26.5,32.5,6.0,150.00,{},2023,"{Forefoot, Midfoot, Heel}",Narrow,,9.2,{Standard}
+ASICS Trail Scout 2,Neutral,High,ASICS,Balanced,Semi-Rigid,,,10.0,60.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,11.6,"{Standard, Extra Wide}"
+Inov-8 TrailFly Ultra G 300 Max,Neutral,High,Inov-8,Plush,Semi-Flexible,24.0,30.0,6.0,190.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,11.9,"{Standard, Wide}"
+Altra Mont Blanc,Neutral,High,Altra,Firm,Balanced,,30.0,0.0,180.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Extra Wide,,9.9,{Standard}
+Merrell Trail Glove 5,Neutral,High,Merrell,Balanced,Flexible,12.0,12.0,0.0,100.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Wide,,6.9,{Standard}
+Salomon Ultra Glide 2,Neutral,,Salomon,Plush,Semi-Flexible,26.0,32.0,6.0,150.00,{},2023,"{Forefoot, Midfoot, Heel}",Wide,,9.2,"{Standard, Wide}"
+La Sportiva Jackal,Neutral,High,La Sportiva,Plush,Balanced,19.0,25.0,7.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,10.6,{Standard}
+Nike Wildhorse 8,Neutral,,Nike,Plush,Balanced,,,6.5,130.00,{},2023,"{Forefoot, Midfoot, Heel}",Wide,,10.5,{}
+ASICS Gel Sonoma 6,Neutral,High,ASICS,Balanced,Semi-Flexible,,,6.5,80.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,10.4,{}
+La Sportiva Karacal,Neutral,High,La Sportiva,Firm,Semi-Rigid,22.0,29.0,7.0,130.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,8.8,{Standard}
+Adidas Terrex Agravic,Neutral,High,Adidas,,,18.0,25.0,7.0,135.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,11.0,{Standard}
+Reebok Floatride Energy 4 Adventure,Neutral,High,Reebok,Firm,Balanced,,,10.5,120.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,,9.6,{}
+Hoka Torrent 3,Neutral,High,Hoka,Balanced,Balanced,18.0,23.0,5.0,130.00,"{Supination, Underpronation, Neutral}",2023,{},Medium,,8.7,{Standard}
+Brooks Divide 2,Neutral,High,Brooks,Firm,Semi-Rigid,17.0,25.0,8.0,100.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Wide,,10.3,{Standard}
+Adidas Terrex Agravic Flow 2,Neutral,High,Adidas,Firm,Semi-Rigid,20.0,28.0,8.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,Water Repellent,11.3,"{Narrow, Standard}"
+Salomon Speedcross 4,Neutral,High,Salomon,Balanced,Balanced,20.0,30.0,10.0,130.00,"{Supination, Underpronation, Neutral}",,{Heel},Narrow,,10.9,"{Standard, Wide}"
+Altra Mont Blanc BOA,Neutral,High,Altra,Firm,Balanced,30.0,30.0,0.0,210.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,,11.2,{Standard}
+La Sportiva Ultra Raptor II,Neutral,High,La Sportiva,Balanced,Semi-Rigid,19.0,28.0,9.0,155.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,12.5,"{Standard, Wide}"
+La Sportiva Akyra,Stability,Low,La Sportiva,,,16.0,25.0,9.0,140.00,{Overpronation},,{Heel},,,11.6,"{Standard, Wide}"
+Nike Zoom Terra Kiger 8,Neutral,High,Nike,Balanced,Semi-Flexible,,,6.5,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,,{}
+ASICS Fuji Lite 2,Neutral,High,ASICS,Plush,Semi-Flexible,26.0,30.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,9.3,"{Narrow, Standard}"
+Adidas Terrex Agravic Flow,Neutral,High,Adidas,Plush,Semi-Flexible,,,6.5,130.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Wide,,11.5,{}
+Altra Timp 2,Neutral,High,Altra,,,29.0,29.0,0.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,9.9,{Standard}
+New Balance Fresh Foam X More Trail v2,Neutral,High,New Balance,Plush,,29.0,33.0,4.0,165.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,11.6,"{Standard, Wide}"
+La Sportiva Bushido II,Stability,Low,La Sportiva,,,13.0,19.0,6.0,130.00,{Overpronation},2019,"{Forefoot, Midfoot, Heel}",,,10.5,{Standard}
+La Sportiva Kaptiva,Neutral,High,La Sportiva,Plush,Semi-Flexible,11.0,17.0,6.0,139.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Narrow,,9.2,{Standard}
+Adidas Terrex Agravic Ultra,Neutral,High,Adidas,Firm,Semi-Rigid,,,6.5,160.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,,11.6,{}
+Nike Pegasus Trail 2 GTX,Neutral,High,Nike,Balanced,Balanced,20.0,30.0,10.0,160.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,Waterproof,12.0,{Standard}
+On Cloudventure Waterproof,Neutral,High,On,Balanced,Balanced,20.0,26.0,6.0,170.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Medium,,10.4,{Standard}
+Brooks Caldera 4,Neutral,High,Brooks,Plush,Balanced,,,4.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,10.0,{Standard}
+Salomon XA Pro 3D GTX,Stability,Low,Salomon,Firm,Semi-Rigid,15.0,27.0,12.0,160.00,{Overpronation},,{Heel},Wide,Waterproof,14.3,"{Standard, Wide}"
+Salomon Hypulse,Neutral,High,Salomon,Balanced,Semi-Rigid,23.0,31.5,8.5,100.00,"{Supination, Underpronation, Neutral}",2023,{},Medium,,9.7,{Standard}
+ASICS Fuji Lite 3,Neutral,High,ASICS,Balanced,Semi-Flexible,14.0,18.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,,9.2,{Standard}
+Merrell Rubato,Neutral,High,Merrell,Plush,Balanced,31.5,31.5,0.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.4,{Standard}
+Brooks Divide,Neutral,High,Brooks,Plush,Semi-Flexible,,,8.0,100.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,10.3,{Standard}
+Adidas Terrex Two Ultra,Neutral,High,Adidas,Balanced,Balanced,23.0,29.0,6.0,180.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Wide,,11.3,"{Narrow, Standard}"
+Saucony Canyon TR,Neutral,High,Saucony,Balanced,Balanced,26.0,34.0,8.0,120.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,11.0,{Standard}
+Adidas Terrex Two Flow,Neutral,High,Adidas,Balanced,,,,,110.00,"{Supination, Underpronation, Neutral}",2022,{},,,,{Standard}
+Salomon XA Pro 3D V8 GTX,Stability,Low,Salomon,Plush,Balanced,,,,150.00,{Overpronation},2020,{},Narrow,,13.1,"{Standard, Wide}"
+The North Face Vectiv Eminus,Neutral,High,The North Face,Plush,Semi-Flexible,24.0,30.0,6.0,129.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,10.5,{Standard}
+Hoka Speedgoat,Neutral,High,Hoka,Balanced,Rigid,28.0,33.0,5.0,140.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Medium,,9.7,{Standard}
+Saucony Xodus 11,Neutral,High,Saucony,,Balanced,27.5,31.5,4.0,150.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,11.9,{Standard}
+Saucony Mad River TR 2,Neutral,High,Saucony,Balanced,,24.5,28.5,4.0,110.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,10.6,{Standard}
+The North Face Vectiv Infinite,,,The North Face,,,19.0,25.0,6.0,169.00,{},2021,"{Forefoot, Midfoot, Heel}",,Water Repellent,10.8,{Standard}
+La Sportiva Cyklon,Neutral,High,La Sportiva,Firm,Semi-Rigid,20.0,28.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Wide,,11.0,{Standard}
+The North Face Vectiv Enduris,Neutral,High,The North Face,Balanced,Balanced,25.0,31.0,6.0,139.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,11.1,{Standard}
+Topo Athletic Ultraventure 3,Neutral,High,Topo Athletic,Balanced,Balanced,30.0,35.0,5.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.2,"{Standard, Wide}"
+Saucony Xodus 10,Neutral,High,Saucony,Plush,Semi-Flexible,28.0,32.0,4.0,150.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,11.7,{Standard}
+Adidas Runfalcon 2.0 TR,Neutral,High,Adidas,Balanced,Balanced,,,,60.00,"{Supination, Underpronation, Neutral}",2022,{},Wide,,,{Standard}
+Brooks Cascadia 16 GTX,Neutral,High,Brooks,Balanced,Balanced,25.0,33.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2022,{},Wide,Waterproof,11.5,{Standard}
+Dynafit Alpine,Neutral,High,Dynafit,Balanced,Semi-Flexible,,,6.5,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,9.9,{}
+Inov-8 Roclite G 275,Neutral,High,Inov-8,Balanced,Semi-Flexible,,,6.5,135.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,9.7,{}
+On Cloudventure Peak,Neutral,High,On,Balanced,Balanced,19.0,25.0,6.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Medium,,9.2,{Standard}
+The North Face Flight Vectiv,Neutral,High,The North Face,Balanced,Semi-Rigid,19.0,25.0,6.0,199.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Narrow,,10.1,{Standard}
+Saucony Ride 15 TR,Neutral,High,Saucony,Balanced,Balanced,27.0,35.0,8.0,140.00,"{Supination, Underpronation, Neutral}",2023,{},,,9.2,{Standard}
+ASICS Gel Sonoma 6 GTX,Neutral,High,ASICS,Balanced,Semi-Rigid,,,8.0,90.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Narrow,,11.1,{Standard}
+Adidas Terrex Agravic Pro,Neutral,High,Adidas,Firm,Semi-Rigid,28.0,32.0,4.0,220.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Medium,,11.3,{Standard}
+Xero Shoes Mesa Trail,Neutral,High,Xero Shoes,Balanced,Flexible,,,0.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,7.6,{Standard}
+Hoka Challenger 7 GTX,Neutral,,Hoka,Balanced,Semi-Rigid,26.0,31.0,5.0,160.00,{},2023,"{Forefoot, Midfoot, Heel}",Narrow,Water Repellent,9.0,{Standard}
+Adidas Response Trail,Neutral,High,Adidas,,,20.0,30.0,10.0,140.00,"{Supination, Underpronation, Neutral}",,{Heel},,,12.0,"{Standard, Wide}"
+Scarpa Spin Ultra,Neutral,High,Scarpa,Balanced,Balanced,18.0,24.0,6.0,110.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.9,{Standard}
+Dynafit Ultra 100,Neutral,High,Dynafit,Plush,Semi-Flexible,,,6.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,11.6,{Standard}
+Salomon X-Mission 3,Neutral,High,Salomon,,,17.0,27.0,10.0,115.00,"{Supination, Underpronation, Neutral}",,{Heel},,,10.2,{Standard}
+ASICS Gel Kahana 8,Stability,Low,ASICS,,,,,10.5,85.00,{Overpronation},,{Heel},,,11.9,{}
+Merrell MTL Long Sky 2,Neutral,High,Merrell,Firm,Balanced,19.5,23.5,4.0,130.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,,9.5,{Standard}
+Topo Athletic Ultraventure 2,Neutral,High,Topo Athletic,Firm,Balanced,25.0,30.0,5.0,135.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,10.0,{Standard}
+Merrell Bare Access XTR,Neutral,High,Merrell,Balanced,Semi-Flexible,17.2,17.2,0.0,100.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,,8.5,{Standard}
+Adidas Terrex Two Ultra Parley,Neutral,High,Adidas,Plush,Semi-Flexible,,,,180.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,11.3,{Standard}
+Hoka Mafate Speed 3,Neutral,High,Hoka,Balanced,,29.0,33.0,4.0,170.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.9,{Standard}
+Nike Air Max Torch 4,Neutral,High,Nike,Plush,Semi-Rigid,,,,85.00,"{Supination, Underpronation, Neutral}",2020,{},Narrow,,10.4,{Standard}
+La Sportiva Ultra Raptor,Neutral,High,La Sportiva,,,21.0,29.0,8.0,130.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,12.1,{Standard}
+Topo Athletic Pursuit,Neutral,High,Topo Athletic,Plush,Semi-Flexible,28.0,28.0,0.0,140.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,,10.8,{Standard}
+Scott Supertrac Ultra RC,Neutral,High,Scott,Balanced,Semi-Flexible,21.0,29.0,8.0,180.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,12.0,{Standard}
+ASICS Gel FujiTrabuco 8,Neutral,High,ASICS,Plush,Balanced,,,6.5,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,13.2,{}
+New Balance Nitrel v3,Neutral,High,New Balance,Plush,Semi-Flexible,,,8.0,70.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Narrow,,10.4,"{Standard, Wide, Extra Wide}"
+Inov-8 Trailfly Ultra G 280,Neutral,High,Inov-8,Balanced,Semi-Flexible,25.0,33.0,8.0,185.00,"{Supination, Underpronation, Neutral}",2023,{Heel},Narrow,,9.9,{Standard}
+Topo Athletic Terraventure 3,Neutral,High,Topo Athletic,Firm,Balanced,22.0,25.0,3.0,125.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.2,{Standard}
+ASICS GT 2000 9 Trail,Stability,Low,ASICS,Firm,Balanced,23.0,33.0,10.0,120.00,{Overpronation},2021,{Heel},Medium,,9.9,{Standard}
+Inov-8 X-Talon 255,Neutral,High,Inov-8,Balanced,Semi-Flexible,19.0,22.0,3.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,9.0,"{Standard, Wide}"
+Under Armour Charged Bandit Trail 2,Neutral,High,Under Armour,Balanced,Semi-Rigid,,,8.0,90.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",,,,{Standard}
+Hoka TenNine,Stability,Low,Hoka,Plush,Semi-Flexible,33.0,37.0,4.0,250.00,{Overpronation},2020,"{Forefoot, Midfoot}",Medium,,12.7,{Standard}
+New Balance Fresh Foam More Trail v1,Neutral,High,New Balance,Plush,Balanced,30.0,34.0,4.0,165.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.8,"{Standard, Wide}"
+Under Armour Fat Tire,Neutral,High,Under Armour,,,23.0,33.0,10.0,150.00,"{Supination, Underpronation, Neutral}",,{Heel},,,13.0,{Standard}
+Merrell Trail Glove 4,Neutral,High,Merrell,,,11.0,11.0,0.0,100.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,8.1,{Standard}
+ASICS Frequent Trail,Neutral,High,ASICS,Balanced,Semi-Flexible,,,,60.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,,"{Standard, Extra Wide}"
+Brooks Caldera,Neutral,High,Brooks,Balanced,Balanced,21.0,25.0,4.0,140.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Medium,,9.9,{Standard}
+Saucony Xodus Ultra RunShield,Neutral,High,Saucony,Balanced,Balanced,26.5,32.5,6.0,160.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,10.3,{Standard}
+ASICS Gel Sonoma 5,Neutral,High,ASICS,Plush,Semi-Flexible,12.0,20.0,8.0,80.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,12.0,"{Standard, Extra Wide}"
+Scarpa Spin Infinity,Neutral,High,Scarpa,Firm,Semi-Rigid,31.0,35.0,4.0,159.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,10.8,"{Narrow, Standard}"
+Hoka Mafate Speed 2,Neutral,High,Hoka,,,29.0,33.0,4.0,170.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,11.6,{Standard}
+Saucony Switchback 2,Neutral,High,Saucony,Balanced,Flexible,18.0,22.0,4.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,8.8,"{Standard, Wide}"
+New Balance Shando,Neutral,High,New Balance,Firm,Balanced,,,,90.00,"{Supination, Underpronation, Neutral}",2021,{},Narrow,,11.0,"{Standard, Wide}"
+Merrell MTL Skyfire,Neutral,High,Merrell,Balanced,Balanced,18.0,24.0,6.0,100.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,8.5,{Standard}
+Altra Superior 4.5,Neutral,High,Altra,,,21.0,21.0,0.0,110.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,,8.9,{Standard}
+Hoka Challenger 6 ATR,Neutral,High,Hoka,Plush,Semi-Flexible,26.0,31.0,5.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Narrow,,9.8,"{Standard, Wide}"
+Scott Kinabalu,Neutral,High,Scott,Balanced,Semi-Flexible,21.0,29.0,8.0,140.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,11.3,{Standard}
+Scarpa Golden Gate Kima RT,Neutral,High,Scarpa,Balanced,Balanced,17.0,22.0,5.0,190.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,10.5,{Standard}
+Adidas Terrex Speed Pro,Neutral,High,Adidas,Firm,Balanced,19.0,23.0,4.0,150.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Wide,,8.3,{Standard}
+Scott Supertrac 2.0,Neutral,High,Scott,Plush,Semi-Rigid,21.0,29.0,8.0,145.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,11.3,{Standard}
+Hoka Torrent,Neutral,High,Hoka,Plush,Semi-Flexible,19.0,24.0,5.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Narrow,,9.0,{Standard}
+Saucony Peregrine 11 GTX,Neutral,High,Saucony,Balanced,,23.0,27.0,4.0,150.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,Waterproof,11.5,{Standard}
+Hoka Speedgoat Mid 2 GTX,Neutral,High,Hoka,Plush,Rigid,29.0,33.0,4.0,170.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,Waterproof,13.2,{Standard}
+La Sportiva Akasha,Neutral,High,La Sportiva,,,19.0,26.0,6.0,140.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,11.6,{Standard}
+Nike Juniper Trail,Neutral,High,Nike,Firm,Semi-Flexible,,,6.5,70.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,8.0,{}
+Scarpa Golden Gate ATR,Neutral,High,Scarpa,Firm,Semi-Rigid,24.0,28.0,,139.00,"{Supination, Underpronation, Neutral}",2022,{},Medium,,10.6,{Standard}
+Salomon Sense Ride,Neutral,High,Salomon,,,19.0,27.0,8.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,9.7,{Standard}
+Topo Athletic MTN Racer 2,Neutral,High,Topo Athletic,Balanced,Semi-Flexible,25.0,30.0,5.0,145.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,,10.4,{Standard}
+Arc'teryx Norvan LD 3,Neutral,High,Arc'teryx,Balanced,Balanced,23.0,29.0,6.0,165.00,"{Supination, Underpronation, Neutral}",2023,{Heel},Medium,Water Repellent,10.2,{Standard}
+Salomon Supercross,Neutral,High,Salomon,Plush,Semi-Flexible,19.0,29.0,10.0,110.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Narrow,,10.9,{Standard}
+ASICS Gel Scram 6,Neutral,High,ASICS,Balanced,,,,10.0,75.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,,10.1,{Standard}
+Inov-8 Trailfly G 270 v2,Neutral,,Inov-8,Balanced,Balanced,22.0,22.0,0.0,170.00,{},2023,"{Forefoot, Midfoot, Heel}",Wide,,9.5,{Standard}
+La Sportiva Akasha II,Neutral,High,La Sportiva,Balanced,Balanced,25.0,31.0,6.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,10.9,{Standard}
+Salomon Alphacross,Neutral,High,Salomon,Plush,Semi-Flexible,,,10.0,90.00,"{Supination, Underpronation, Neutral}",2019,{Heel},,,10.6,{Standard}
+Salomon Alphacross 3,Neutral,High,Salomon,Balanced,Balanced,24.3,34.3,10.0,90.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Wide,,10.6,{Standard}
+Saucony Peregrine 8,Neutral,High,Saucony,,,21.0,25.0,4.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,10.0,{Standard}
+Salomon Madcross,Neutral,High,Salomon,Balanced,Balanced,21.3,29.3,8.0,100.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,8.8,{Standard}
+Altra Timp,Neutral,High,Altra,Balanced,Semi-Flexible,29.0,29.0,0.0,130.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Wide,,10.7,{Standard}
+Salomon Wildcross,Neutral,High,Salomon,Balanced,Semi-Flexible,21.0,29.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,10.2,{Standard}
+Skechers GOrun Razor TRL,Neutral,High,Skechers,Plush,Semi-Flexible,28.0,32.0,4.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Narrow,,7.6,{Standard}
+Dynafit Feline SL,Neutral,High,Dynafit,,,,,8.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,10.2,{Standard}
+Adidas Terrex Two Parley,Neutral,High,Adidas,Balanced,Semi-Flexible,19.0,24.0,5.0,125.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,,10.6,{Standard}
+Adidas Terrex Agravic BOA,Neutral,High,Adidas,Plush,Semi-Flexible,15.0,22.0,7.0,150.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,10.0,{Standard}
+Salomon S-Lab Ultra 3,Neutral,High,Salomon,Plush,Semi-Flexible,,,8.0,180.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,10.2,{Standard}
+New Balance Summit Unknown,Neutral,High,New Balance,,,16.0,26.0,10.0,110.00,"{Supination, Underpronation, Neutral}",,{Heel},,,8.6,"{Standard, Wide}"
+Adidas Terrex Two,Neutral,High,Adidas,Plush,Balanced,22.0,28.0,6.0,100.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,10.9,{Standard}
+ASICS Trail Scout,Neutral,High,ASICS,,Semi-Rigid,,,8.0,60.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,9.6,"{Standard, Extra Wide}"
+Brooks Cascadia 14,Neutral,High,Brooks,Plush,Semi-Flexible,18.0,26.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,10.7,"{Standard, Wide}"
+Nike Air Zoom Wildhorse 6,Neutral,High,Nike,Plush,Semi-Flexible,15.0,23.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Wide,,11.4,{Standard}
+New Balance Fresh Foam Hierro,Neutral,High,New Balance,Balanced,Semi-Flexible,24.0,28.0,4.0,115.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Medium,,11.5,"{Standard, Wide}"
+ASICS Gel Scram 5,Neutral,High,ASICS,Plush,Semi-Flexible,,,,75.00,"{Supination, Underpronation, Neutral}",2019,{},Medium,,12.0,{Standard}
+Vivobarefoot ESC Tempest,Neutral,High,Vivobarefoot,,Flexible,,,0.0,280.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Wide,Water Repellent,,"{Standard, Wide}"
+Arc'teryx Norvan SL 2,Neutral,High,Arc'teryx,Firm,Flexible,12.0,19.0,7.0,160.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,6.0,{Standard}
+La Sportiva Bushido,Stability,Low,La Sportiva,,,13.0,19.0,6.0,125.00,{Overpronation},,"{Forefoot, Midfoot, Heel}",,,10.5,{Standard}
+Inov-8 Mudclaw 300,Neutral,High,Inov-8,,,22.0,28.0,6.0,125.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,10.6,"{Narrow, Standard}"
+Vibram FiveFingers V-Trail,Neutral,High,Vibram FiveFingers,,,7.0,7.0,0.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,6.4,{Standard}
+Inov-8 Trail Talon 235,Neutral,High,Inov-8,,,7.0,11.0,4.0,115.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,8.3,"{Standard, Wide}"
+Columbia FKT,Neutral,High,Columbia,Plush,Semi-Rigid,10.0,18.0,8.0,125.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,10.8,{Standard}
+Merrell MTL Long Sky,Neutral,High,Merrell,Plush,Semi-Flexible,19.0,27.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,9.9,{Standard}
+Hoka Speedgoat 4 GTX,Neutral,High,Hoka,Balanced,Rigid,28.0,32.0,4.0,160.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,Waterproof,10.2,{Standard}
+La Sportiva Blizzard GTX,Neutral,High,La Sportiva,Balanced,Semi-Flexible,12.0,18.0,6.0,199.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,Waterproof,13.1,{Standard}
+Nike Air Zoom Terra Kiger 6,Neutral,High,Nike,Firm,Semi-Flexible,11.0,15.0,4.0,130.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,10.3,{Standard}
+Saucony Peregrine 10,Neutral,High,Saucony,Plush,Balanced,18.0,22.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Narrow,,10.7,{Standard}
+Salomon Speedcross Vario 2,Neutral,High,Salomon,,,19.0,29.0,10.0,140.00,"{Supination, Underpronation, Neutral}",,{Heel},,,10.9,{Standard}
+Under Armour HOVR Machina Off Road,Neutral,High,Under Armour,Plush,Semi-Flexible,,,8.0,160.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Narrow,,10.5,{Standard}
+La Sportiva Cyklon Cross GTX,Neutral,High,La Sportiva,Firm,Balanced,20.0,28.0,8.0,245.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Narrow,Water Repellent,11.8,{Standard}
+Hoka Evo Speedgoat,Neutral,High,Hoka,Plush,Rigid,28.0,32.0,4.0,160.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Narrow,,9.3,{Standard}
+La Sportiva Wildcat 2.0 GTX,Neutral,High,La Sportiva,,,10.0,22.0,12.0,155.00,"{Supination, Underpronation, Neutral}",,{Heel},,Waterproof,14.1,{Standard}
+Salomon S-Lab Pulsar,Neutral,High,Salomon,Plush,Semi-Flexible,17.0,23.0,6.0,180.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Narrow,,6.0,"{Narrow, Standard}"
+Adidas Terrex Skychaser,Stability,Low,Adidas,,,17.0,23.0,6.0,160.00,{Overpronation},,"{Forefoot, Midfoot, Heel}",,,11.5,{Standard}
+Salomon Speedcross 4 GTX,Neutral,High,Salomon,,,20.0,30.0,10.0,160.00,"{Supination, Underpronation, Neutral}",,{Heel},,Waterproof,11.6,{Standard}
+Scott Supertrac RC 2,Neutral,High,Scott,Balanced,Balanced,18.0,23.0,5.0,160.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Wide,Water Repellent,9.5,{Standard}
+Adidas Terrex Agravic Tech Pro,Neutral,High,Adidas,Firm,Balanced,,,8.0,250.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,14.8,{Standard}
+Nike Air Zoom Pegasus 36 Trail,Neutral,High,Nike,Plush,Balanced,18.0,28.0,10.0,130.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,,9.5,{Standard}
+Inov-8 Trailroc G 280,Neutral,High,Inov-8,,,20.0,28.0,8.0,150.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",,,9.9,{Standard}
+Altra Timp 1.5,Neutral,High,Altra,Plush,Semi-Flexible,24.0,24.0,0.0,130.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Wide,,11.0,{Standard}
+New Balance 510 v3,Neutral,High,New Balance,,,,,12.0,70.00,"{Supination, Underpronation, Neutral}",,{Heel},,,12.3,"{Standard, Extra Wide}"
+Inov-8 Mudclaw G 260,Neutral,High,Inov-8,,,5.0,9.0,4.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,9.2,"{Narrow, Standard}"
+Hoka Speedgoat 3,Neutral,High,Hoka,Plush,Rigid,28.0,32.0,4.0,140.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Narrow,,10.3,{Standard}
+Hoka Challenger 6 ATR GTX,Neutral,High,Hoka,Plush,Balanced,26.0,31.0,5.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Wide,Waterproof,10.5,{Standard}
+Arc'teryx Norvan SL,Neutral,High,Arc'teryx,Balanced,Semi-Flexible,14.0,21.0,7.0,150.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,6.5,{Standard}
+Altra Olympus 3.5,Neutral,High,Altra,Plush,Semi-Flexible,,,0.0,150.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Extra Wide,,10.7,{Standard}
+New Balance Fresh Foam Hierro v6 GTX,Neutral,High,New Balance,Plush,Balanced,20.0,28.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,Water Repellent,12.2,{Standard}
+Salomon Sense Ride 3,Neutral,High,Salomon,Plush,Semi-Flexible,,,8.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,9.9,{Standard}
+Merrell Mag-9,Neutral,High,Merrell,Balanced,Semi-Flexible,16.0,20.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,,16.2,{Standard}
+The North Face Ultra 109 GTX,Stability,Low,The North Face,,,,,12.0,120.00,{Overpronation},,{Heel},,Waterproof,15.4,{Standard}
+Adidas Terrex Tracerocker,Neutral,High,Adidas,,,,,,80.00,"{Supination, Underpronation, Neutral}",,{},,,10.0,{Standard}
+The North Face Ultra Traction Futurelight,Neutral,High,The North Face,Balanced,Semi-Flexible,18.0,24.0,6.0,155.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,Waterproof,12.0,{Standard}
+Adidas Terrex Tracerocker GTX,Neutral,High,Adidas,,,,,,110.00,"{Supination, Underpronation, Neutral}",,{},,Waterproof,11.1,{Standard}
+Inov-8 X-Talon Ultra 260 V2,Neutral,,Inov-8,Balanced,Balanced,8.0,16.0,8.0,165.00,{},2023,{},Wide,,9.2,"{Standard, Wide}"
+Saucony Peregrine 12 ST,Neutral,High,Saucony,,,22.5,26.5,4.0,130.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot}",Medium,,10.2,{Standard}
+New Balance FuelCore Nitrel Trail,Neutral,High,New Balance,,,,,,75.00,"{Supination, Underpronation, Neutral}",,{},,,9.7,{Standard}
+Merrell Nova 2 GTX,Neutral,High,Merrell,Balanced,Semi-Rigid,21.5,29.5,8.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,Waterproof,9.9,{Standard}
+Saucony Excursion TR 14,Neutral,High,Saucony,Balanced,,,,8.0,70.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Narrow,,10.0,"{Standard, Wide}"
+Saucony Excursion TR 12,Neutral,High,Saucony,,,17.0,25.0,8.0,70.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,10.9,"{Standard, Wide}"
+New Balance Fresh Foam Hierro v5,Neutral,High,New Balance,Plush,Balanced,,,8.0,135.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,10.5,"{Standard, Wide}"
+Vibram FiveFingers V-Trail 2.0,Neutral,High,Vibram FiveFingers,,,5.0,5.0,0.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",,Water Repellent,6.4,"{Narrow, Standard}"
+Salomon Alphacross 3 GTX,Neutral,High,Salomon,,,25.8,35.8,10.0,110.00,"{Supination, Underpronation, Neutral}",2022,{Heel},,,11.3,{Standard}
+ASICS Alpine XT,Neutral,High,ASICS,,,12.0,18.0,6.0,100.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,11.1,{Standard}
+Altra King MT,Neutral,High,Altra,,,19.0,19.0,0.0,140.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Extra Wide,,10.2,{Standard}
+Brooks Cascadia 15 GTX,Neutral,High,Brooks,Balanced,,18.0,26.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,Waterproof,11.7,{Standard}
+Saucony Excursion TR 13,Neutral,High,Saucony,Plush,Semi-Flexible,,,6.5,60.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Wide,,10.6,{}
+Salomon Ultra Pro,Neutral,High,Salomon,,,19.0,27.0,8.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,10.3,{Standard}
+Adidas Terrex Two BOA,Neutral,High,Adidas,Plush,Semi-Flexible,,,6.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,11.3,{Standard}
+ASICS Gel Venture 5,Neutral,High,ASICS,,,21.0,31.0,10.0,65.00,"{Supination, Underpronation, Neutral}",,{Heel},,,10.7,{Standard}
+Inov-8 X-Talon G 235,Neutral,High,Inov-8,Firm,Semi-Flexible,7.0,13.0,6.0,170.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,8.3,"{Narrow, Standard}"
+Merrell Nova GTX,Neutral,High,Merrell,Balanced,Semi-Flexible,22.0,30.0,8.0,140.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,Waterproof,11.0,{Standard}
+Merrell Agility Synthesis 2,Neutral,High,Merrell,Plush,Semi-Flexible,18.0,24.0,6.0,110.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot, Heel}",Medium,,9.3,{Standard}
+ASICS Gel Torrance Trail,Neutral,High,ASICS,Plush,Semi-Flexible,,,,70.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,,{Standard}
+La Sportiva Lycan GTX,Neutral,High,La Sportiva,,,12.0,18.0,6.0,140.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",Wide,Waterproof,12.5,{Standard}
+La Sportiva Helios 3.0,Neutral,High,La Sportiva,Plush,Semi-Flexible,15.0,19.0,4.0,125.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Narrow,,7.8,{Standard}
+Salomon Alphacross GTX,Neutral,High,Salomon,Plush,Balanced,20.0,30.0,10.0,110.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,Waterproof,11.6,{Standard}
+Mizuno Wave Rider GTX,Neutral,High,Mizuno,,Balanced,,,12.0,135.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,Waterproof,10.6,"{Standard, Wide}"
+Inov-8 TerraUltra G 260,Neutral,High,Inov-8,,,9.0,9.0,0.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,9.2,"{Standard, Wide}"
+Salomon Sense Pro 4,Neutral,High,Salomon,Firm,Semi-Flexible,21.0,25.0,4.0,140.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Narrow,Water Repellent,9.0,{Standard}
+Under Armour Charged Bandit Trail,Neutral,High,Under Armour,Balanced,Semi-Flexible,,,8.0,80.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Narrow,,9.1,{Standard}
+PUMA Ember Trail,Neutral,High,PUMA,Plush,Balanced,,,12.0,75.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,,12.1,{Standard}
+La Sportiva Tempesta GTX,Neutral,High,La Sportiva,,,19.0,29.0,10.0,165.00,"{Supination, Underpronation, Neutral}",,{Heel},,Waterproof,11.3,{Standard}
+Adidas Rockadia Trail 3,Neutral,High,Adidas,,,,,,65.00,"{Supination, Underpronation, Neutral}",2020,{},,,,"{Standard, Wide}"
+Adidas Ultraboost Guard,Neutral,High,Adidas,Plush,Semi-Flexible,19.0,29.0,10.0,180.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,,11.0,{Standard}
+Vivobarefoot Primus Trail FG,Neutral,High,Vivobarefoot,,,,,0.0,150.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,7.0,"{Standard, Wide}"
+Adidas Terrex Skychaser GTX,Stability,Low,Adidas,,,17.0,23.0,6.0,200.00,{Overpronation},,"{Forefoot, Midfoot, Heel}",,Waterproof,12.5,{Standard}
+Adidas Tracerocker,Neutral,High,Adidas,,,,,10.0,120.00,"{Supination, Underpronation, Neutral}",,{Heel},,,10.2,{Standard}
+New Balance Fresh Foam Arishi Trail,Neutral,High,New Balance,,,,,8.0,75.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",,,9.0,"{Standard, Wide, Extra Wide}"
+Salomon Trailster 2,Neutral,High,Salomon,Balanced,Balanced,,,10.0,100.00,"{Supination, Underpronation, Neutral}",2020,{Heel},Medium,,10.7,{Standard}
+Merrell Antora 2 GTX,Neutral,High,Merrell,Balanced,Balanced,,,8.0,150.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,,,{Standard}
+Inov-8 X-Talon 210,Neutral,High,Inov-8,Firm,,6.0,9.0,3.0,130.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",Narrow,,7.4,"{Narrow, Standard}"
+ASICS Trabuco Max,Neutral,High,ASICS,Balanced,Semi-Rigid,23.0,28.0,5.0,140.00,"{Supination, Underpronation, Neutral}",2021,"{Forefoot, Midfoot}",Medium,,10.4,{Standard}
+Topo Athletic Runventure 3,Neutral,High,Topo Athletic,Balanced,Semi-Flexible,20.0,20.0,0.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot}",Medium,,9.5,{Standard}
+Reebok Zigwild Trail 6.0,Neutral,High,Reebok,Balanced,,,,,100.00,"{Supination, Underpronation, Neutral}",2020,{},Medium,,,{Standard}
+Topo Athletic Terraventure 2,Neutral,High,Topo Athletic,,,22.0,25.0,3.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",,,10.8,{Standard}
+Inov-8 Mudclaw 275,Neutral,High,Inov-8,,,20.0,24.0,4.0,130.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot}",,,9.7,{Standard}
+ASICS Gel Sonoma 5 GTX,Neutral,High,ASICS,Balanced,Balanced,,,8.0,100.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Narrow,Waterproof,,{Standard}
+ASICS Gel Trabuco 9,Stability,Low,ASICS,Balanced,Balanced,11.0,19.0,8.0,130.00,{Overpronation},2021,"{Forefoot, Midfoot, Heel}",Wide,,10.8,{Standard}
+Adidas Terrex Agravic Speed,Neutral,High,Adidas,,,,,6.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,9.0,{Standard}
+Inov-8 Roclite G 290,Neutral,High,Inov-8,Balanced,Semi-Flexible,7.0,11.0,4.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Narrow,,10.2,{Standard}
+La Sportiva Lycan 2.0,Neutral,High,La Sportiva,Balanced,Semi-Rigid,22.0,28.0,6.0,120.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Medium,,11.1,{Standard}
+PUMA Fast-Trac NITRO,Neutral,,PUMA,Firm,Balanced,21.0,29.0,8.0,110.00,{},2023,"{Forefoot, Midfoot, Heel}",Narrow,Water Repellent,9.6,{Standard}
+Kailas Fuga EX 2,Neutral,High,Kailas,Firm,Balanced,28.0,36.0,8.0,160.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,9.5,{Standard}
+Salomon Madcross GTX,Neutral,High,Salomon,Balanced,Flexible,22.8,30.8,8.0,80.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Wide,Waterproof,11.5,{Standard}
+Kailas Fuga EX BOA,Neutral,High,Kailas,Firm,Balanced,28.0,36.0,8.0,170.00,"{Supination, Underpronation, Neutral}",2022,"{Forefoot, Midfoot, Heel}",Medium,,9.6,{Standard}
+La Sportiva Akyra GTX,Neutral,High,La Sportiva,,,16.0,25.0,9.0,160.00,"{Supination, Underpronation, Neutral}",,{Heel},,Waterproof,13.7,"{Narrow, Standard}"
+Altra Lone Peak 4.5,Neutral,High,Altra,Balanced,Balanced,,,0.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Extra Wide,,10.4,{Standard}
+Kailas Fuga Pro 4,Neutral,High,Kailas,Firm,Balanced,22.0,32.0,10.0,230.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,9.5,{Standard}
+Columbia Caldorado III OutDry,Neutral,High,Columbia,Plush,Balanced,11.0,19.0,8.0,145.00,"{Supination, Underpronation, Neutral}",2020,"{Forefoot, Midfoot, Heel}",Wide,Waterproof,11.7,{Standard}
+Altra Superior 4.0,Neutral,High,Altra,Plush,Flexible,21.0,21.0,0.0,110.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Wide,,7.9,{Standard}
+New Balance Fresh Foam Hierro v3,Neutral,High,New Balance,,,22.0,30.0,8.0,135.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,11.6,{Wide}
+Salomon XT-6 GTX,Neutral,,Salomon,Balanced,Semi-Rigid,,,,200.00,{},2023,{},Medium,Waterproof,,{Standard}
+The North Face Ultra Endurance II,Neutral,High,The North Face,,,9.0,17.0,8.0,120.00,"{Supination, Underpronation, Neutral}",,"{Forefoot, Midfoot, Heel}",,,11.5,{Standard}
+Kailas Fuga DU,Neutral,High,Kailas,Balanced,Semi-Rigid,,36.0,8.0,200.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,,10.3,{Standard}
+Kailas Fuga YAO,Neutral,High,Kailas,Balanced,Semi-Rigid,,,,160.00,"{Supination, Underpronation, Neutral}",2023,"{Forefoot, Midfoot, Heel}",Medium,,10.1,{Standard}
+Kailas Fuga Elite 2,Neutral,High,Kailas,Balanced,Rigid,31.0,41.0,10.0,360.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,10.0,{Standard}
+Brooks Cascadia 13 GTX,Neutral,High,Brooks,,,,,10.5,160.00,"{Supination, Underpronation, Neutral}",,{Heel},,Waterproof,12.3,{}
+New Balance Fresh Foam Hierro BOA,Neutral,High,New Balance,,,,,8.0,160.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",,,11.4,{Standard}
+New Balance Fresh Foam Hierro v4,Neutral,High,New Balance,Plush,Semi-Flexible,20.0,28.0,8.0,135.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,11.4,{Standard}
+Arc’teryx Norvan LD GTX,Neutral,High,Arc'teryx,Balanced,Semi-Flexible,19.0,28.0,9.0,195.00,"{Supination, Underpronation, Neutral}",2019,{Heel},Medium,Waterproof,11.6,{Standard}
+Merrell Fiery GTX,Neutral,High,Merrell,Balanced,Balanced,27.0,35.0,8.0,130.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot, Heel}",Medium,,,{Standard}
+Scott Kinabalu RC 2.0,Neutral,High,Scott,Balanced,,18.0,21.0,3.0,120.00,"{Supination, Underpronation, Neutral}",2019,"{Forefoot, Midfoot}",Medium,,9.0,{Standard}
+Kailas Phantom 3.0,Neutral,High,Kailas,Balanced,Balanced,,,,126.00,"{Supination, Underpronation, Neutral}",2023,{Heel},Medium,,8.3,{Standard}
+Kailas Flythorn Air 2.0,Neutral,High,Kailas,Firm,Semi-Flexible,19.0,29.0,10.0,140.00,"{Supination, Underpronation, Neutral}",2022,{Heel},Medium,,10.3,{Standard}

@@ -1,0 +1,76 @@
+SHOE_NAME,Brand,Closure,Event,MSRP (USD),Release Date,Spike Size (inches),Spike Type,Surface,Use,Weight (oz)
+Nike Zoom Superfly Elite 2,Nike,{Lace-Up},Running,150.00,2021,,Pyramid,{Rubber},{Sprints},5.2
+Nike Air Zoom Victory,Nike,{Lace-Up},Running,180.00,2021,,,{Rubber},{Mid Distance},4.6
+Nike Air Zoom MaxFly,Nike,{Lace-Up},Running,180.00,2021,,Pyramid,{Rubber},"{Sprints, Hurdles}",5.7
+Nike ZoomX Dragonfly,Nike,{Lace-Up},Running,150.00,2021,,,{Rubber},{Long Distance},4.7
+Nike Zoom Victory XC 5,Nike,{Lace-Up},Running,110.00,2021,,,"{Grass, Dirt, Wood, Rubber, All-Weather}",{Cross Country},4.4
+Nike Zoom Rival S 9,Nike,{Lace-Up},Running,65.00,2019,0.25,Pyramid,{Rubber},"{Sprints, Hurdles}",6.1
+Saucony Endorphin,Saucony,{Lace-Up},Running,110.00,2020,0.25,Pyramid,{Rubber},"{Long Distance, Long Jump, Triple Jump}",2.5
+Saucony Spitfire 5,Saucony,{Lace-Up},Running,65.00,2019,0.25,Pyramid,{Rubber},{Sprints},4.3
+Adidas Sprintstar,Adidas,{Lace-Up},Running,65.00,2019,0.25,Pyramid,{Rubber},{Sprints},5.9
+Nike Zoom Rival XC 5,Nike,{Lace-Up},Running,65.00,2021,0.3125,Pyramid,"{Grass, Dirt, Wood, Rubber}",{Cross Country},6.5
+Nike Zoom Rotational 6,Nike,"{Hook & Loop, Lace-Up}",Throwing,110.00,,,,{},"{Shot Put, Discus, Hammer Throw}",12.1
+Nike Zoom SD 4,Nike,"{Hook & Loop, Lace-Up}",Throwing,80.00,2019,,Blank,{Asphalt},"{Shot Put, Discus, Hammer Throw}",11.9
+Saucony Endorphin 3,Saucony,{},Running,120.00,2020,,,{Rubber},{Long Distance},3.7
+Adidas Adizero Ambition,Adidas,{Lace-Up},Running,130.00,2021,,,{Rubber},{Mid Distance},5.8
+Nike Zoom Victory 3,Nike,{Lace-Up},Running,125.00,2019,0.25,Pyramid,{Rubber},{Long Distance},4.2
+Nike Zoom Rival SD 2,Nike,"{Hook & Loop, Lace-Up}",Throwing,65.00,2019,,Blank,{Asphalt},"{Shot Put, Discus, Hammer Throw, Javelin}",11.6
+Nike Zoom Rival M 9,Nike,{Lace-Up},Running,65.00,2019,0.25,Pyramid,"{Dirt, Rubber}","{Mid Distance, Sprints, High Jump, Long Jump, Triple Jump, Hurdles}",5.6
+Nike Spike-Flat,Nike,{Lace-Up},Running,100.00,2021,,,"{Indoor, Asphalt, Grass, Rubber}","{Long Distance, Cross Country}",
+Nike Pole Vault Elite,Nike,"{Hook & Loop, Lace-Up}",Jumping,120.00,2019,0.375,Pyramid,{Rubber},"{Pole Vault, Steeplechase}",
+Adidas Distancestar,Adidas,{Lace-Up},Running,70.00,2019,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance, Steeplechase}",6.1
+Adidas Adizero Prime SP,Adidas,{Lace-Up},Running,180.00,2019,0.25,,{Rubber},"{Sprints, Hurdles, Relays}",4.5
+Nike Zoom Rival D 10,Nike,{Lace-Up},Running,65.00,2019,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance}",5.8
+Nike Zoom Rival XC,Nike,{Lace-Up},Running,65.00,2021,,,"{Asphalt, Grass, Dirt, Wood, Rubber, All-Weather}",{Cross Country},6.4
+Saucony Showdown 5,Saucony,{Lace-Up},Running,110.00,2020,0.25,Pyramid,{Rubber},{Sprints},6.1
+Saucony Ballista MD,Saucony,{Lace-Up},Running,90.00,2020,,,{Rubber},{Mid Distance},3.8
+Nike Zoom Victory Waffle 5,Nike,{Lace-Up},Running,110.00,2021,,,"{Asphalt, Grass, Dirt, Wood, Rubber, All-Weather}",{Cross Country},4.6
+Adidas Adizero Avanti,Adidas,{Lace-Up},Running,110.00,2019,0.1875,Pyramid,{Rubber},"{Mid Distance, Long Distance}",5.0
+Saucony Vendetta 3,Saucony,{Lace-Up},Running,65.00,2020,0.25,Pyramid,"{Dirt, Rubber}","{Mid Distance, Long Distance}",5.3
+Adidas Adizero TJ/PV,Adidas,"{Hook & Loop, Lace-Up}",Jumping,110.00,2019,0.375,Pyramid,"{Dirt, Rubber}","{Pole Vault, Long Jump, Triple Jump}",7.8
+Nike Zoom Rival Waffle 5,Nike,{Lace-Up},Running,65.00,2021,,,"{Grass, Dirt, Wood, Rubber}",{Cross Country},
+Nike Zoom Superfly Elite,Nike,{Lace-Up},Running,150.00,2019,0.25,Pyramid,{Rubber},{Sprints},5.5
+Nike Zoom JA Fly 3,Nike,{Lace-Up},Running,125.00,2019,0.375,Pyramid,{Rubber},{Sprints},5.2
+Adidas Adizero LJ,Adidas,{Lace-Up},Jumping,110.00,2019,0.25,Pyramid,{Rubber},"{High Jump, Pole Vault, Long Jump, Triple Jump}",7.8
+Nike Zoom Victory Elite 2,Nike,{Lace-Up},Running,145.00,2019,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance}",4.4
+Adidas Throwstar,Adidas,{Lace-Up},Throwing,70.00,2019,,Blank,{Rubber},{Shot Put},9.7
+Saucony Kilkenny XC8,Saucony,{Lace-Up},Running,65.00,2021,,,"{Grass, Dirt, All-Weather}",{Cross Country},4.6
+Adidas Adizero Prime Finesse,Adidas,{Lace-Up},Running,110.00,2020,0.25,Tree,{Rubber},"{Sprints, Hurdles}",4.2
+Adidas Jumpstar,Adidas,"{Hook & Loop, Lace-Up}",Jumping,65.00,2020,0.25,Pyramid,"{Dirt, Rubber}","{High Jump, Pole Vault, Long Jump, Triple Jump}",7.8
+Under Armour Kick Sprint 3,Under Armour,{Lace-Up},Running,65.00,2020,0.25,Pyramid,{Rubber},{Sprints},6.5
+Adidas Adizero MD,Adidas,{Lace-Up},Running,110.00,2019,0.25,Pyramid,{Rubber},{Mid Distance},5.0
+Nike Zoom High Jump Elite,Nike,"{Hook & Loop, Lace-Up}",Jumping,125.00,2020,0.375,Tree,{Rubber},{High Jump},9.8
+Nike Zoom Mamba 5,Nike,{Lace-Up},Running,125.00,2019,0.25,Pyramid,{Rubber},{Steeplechase},3.7
+Nike Zoom D,Nike,{Lace-Up},Running,90.00,2019,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance}",4.1
+New Balance MD500 v7,New Balance,{Lace-Up},Running,70.00,2020,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance, Triple Jump, Hurdles, Steeplechase}",5.1
+New Balance MD800 v6,New Balance,{Lace-Up},Running,120.00,2019,0.25,Pyramid,{Rubber},{Mid Distance},4.4
+PUMA Evospeed Sprint 10,PUMA,{Lace-Up},Running,80.00,2020,0.25,Pyramid,{Rubber},"{Sprints, Hurdles}",5.8
+Adidas Adizero HJ,Adidas,"{Hook & Loop, Lace-Up}",Jumping,110.00,2020,0.375,Pyramid,"{Dirt, Rubber}",{High Jump},9.1
+Saucony Carrera XC4,Saucony,{Lace-Up},Running,110.00,2021,,Pyramid,"{Grass, Dirt, Rubber, All-Weather}",{Cross Country},4.1
+Saucony Spitfire,Saucony,"{Slip-On, Hook & Loop}",Running,65.00,2020,0.25,Pyramid,{Rubber},{Sprints},6.3
+New Balance XC5K v5,New Balance,{Lace-Up},Running,110.00,2021,,,"{Grass, Dirt, Rubber, All-Weather}",{Cross Country},5.0
+New Balance Sigma Aria,New Balance,{Lace-Up},Running,110.00,2020,0.25,Pyramid,{Rubber},"{Sprints, Hurdles}",5.5
+ASICS Hyper MD 7,ASICS,{Lace-Up},Running,65.00,2019,0.25,Pyramid,{Rubber},{Mid Distance},5.6
+Adidas Adizero Finesse,Adidas,{Lace-Up},Running,110.00,2019,0.25,Pyramid,{Rubber},{Sprints},5.5
+Saucony Uplift HJ 2,Saucony,"{Hook & Loop, Lace-Up}",Jumping,100.00,2019,0.375,Pyramid,{Rubber},{High Jump},10.0
+Saucony Unleash SD 2,Saucony,"{Hook & Loop, Lace-Up}",Throwing,100.00,2019,,,{Asphalt},"{Shot Put, Discus, Hammer Throw}",11.1
+Nike Zoom 400,Nike,{Lace-Up},Running,110.00,2019,0.25,Pyramid,{Rubber},{Sprints},4.5
+Saucony Endorphin 2,Saucony,{Lace-Up},Running,120.00,2019,0.25,Pyramid,{Rubber},{Long Distance},3.2
+Adidas Adizero Shotput,Adidas,"{Hook & Loop, Lace-Up}",Throwing,110.00,2020,,Blank,{Asphalt},{Shot Put},10.5
+New Balance Vazee Sigma,New Balance,{},Running,150.00,2019,0.25,Pyramid,{Rubber},{Sprints},7.1
+ASICS Hyper Throw 3,ASICS,"{Hook & Loop, Lace-Up}",Throwing,65.00,2020,,Blank,{Asphalt},"{Shot Put, Discus, Hammer Throw}",11.1
+Saucony Havok XC 3,Saucony,{Lace-Up},Running,85.00,2021,,Pyramid,"{Grass, Dirt, Wood, Rubber}",{Cross Country},5.5
+Under Armour Kick Distance,Under Armour,{Lace-Up},Running,80.00,2020,0.25,Pyramid,{Rubber},{Mid Distance},6.2
+Nike Zoom JA Fly,Nike,{Lace-Up},Running,110.00,2020,0.25,Tree,{Rubber},"{Sprints, Hurdles}",7.0
+Altra Vanish XC,Altra,{Lace-Up},Running,80.00,2020,,,"{Asphalt, Grass, Dirt, Wood}",{Cross Country},5.5
+Saucony Vendetta 2,Saucony,{Lace-Up},Running,65.00,2020,0.375,Pyramid,{Rubber},"{Mid Distance, Sprints, Long Distance}",5.3
+PUMA Evospeed Long Jump 6,PUMA,"{Hook & Loop, Lace-Up}",Jumping,125.00,2020,,Pyramid,{Rubber},{Long Jump},
+Saucony Soarin J 2,Saucony,"{Hook & Loop, Lace-Up}",Jumping,100.00,2020,0.25,Pyramid,{Rubber},"{Long Distance, Pole Vault, Triple Jump}",9.0
+Brooks QW-K v4,Brooks,{Lace-Up},Running,120.00,2020,0.25,Pyramid,{Rubber},{Sprints},4.9
+Adidas Adizero Ambition 4,Adidas,{Lace-Up},Running,90.00,2019,0.1875,Pyramid,{Rubber},{Mid Distance},4.6
+Adidas Adizero Javelin Throw,Adidas,"{Slip-On, Hook & Loop}",Throwing,110.00,2020,0.375,Pyramid,"{Grass, Rubber}",{Javelin},12.1
+Nike Air Zoom Streak LT 4,Nike,{Hook & Loop},Running,90.00,,,,"{Asphalt, Dirt, Rubber}","{Mid Distance, Cross Country}",5.5
+Brooks Wire v6,Brooks,{Lace-Up},Running,120.00,2020,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance}",3.6
+ASICS Hyper LD 6,ASICS,{Lace-Up},Running,65.00,2020,0.25,Pyramid,"{Grass, Dirt}","{Mid Distance, Long Distance}",5.7
+Brooks ELMN8 v4,Brooks,{Lace-Up},Running,120.00,2019,0.25,Pyramid,{Rubber},"{Mid Distance, Long Distance}",4.2
+PUMA Evospeed Distance 8,PUMA,{Lace-Up},Running,80.00,2020,,,{Rubber},"{Mid Distance, Long Distance, Steeplechase}",5.5

@@ -1,10 +1,17 @@
+from aggregate import Url_Paths
 from app1.forms import JoinForm, LoginForm
-from app1.models import RunningShoe
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+import importlib
+app1_models_module = importlib.import_module('app1.models')
+app1_models_module_names = dir(app1_models_module)
+app1_models_module_class_names = [name for name in app1_models_module_names if isinstance(getattr(app1_models_module, name), type)]
+for name in app1_models_module_class_names:
+    globals()[name] = getattr(app1_models_module, name)
 
 
 # Create your views here.
@@ -54,12 +61,47 @@ def join(request):
 
 @login_required(login_url='/login/')
 def home(request):
-    shoes_per_page = 5
-    queryset = RunningShoe.objects.all().order_by('shoe_name')
+    context_list = []
+    for url_path in Url_Paths:
+        tmp_dict = {}
+        tmp_dict['shoes'] = globals()[url_path.name.capitalize()].objects.all().order_by('?')[:3]
+        tmp_dict['title'] = url_path.name.replace('_', ' ').title()
+        tmp_dict['redirect'] = url_path.name.lower()
+        tmp_dict['headers'] = []
+        tmp_dict['fields'] = []
+        for column in url_path.get_django_available_columns():
+            tmp_dict['headers'].append(url_path.get_column_name(column))
+            tmp_dict['fields'].append(url_path.get_column_name(column, attribute = True))
+        context_list.append(tmp_dict)
+    return render(request, 'app1/home.html', { 'context_list': context_list })
+
+@login_required(login_url='/login/')
+def generic_shoe(request, url_path):
+    page_sizes = [5, 10, 15, 20, 30, 40, 50]
+    shoes_per_page = int(request.GET.get('shoes_per_page', page_sizes[0]))
+    queryset = globals()[url_path.name.capitalize()].objects.all().order_by('shoe_name')
     paginator = Paginator(queryset, shoes_per_page)
     page = request.GET.get('page')
     shoes = paginator.get_page(page)
-    return render(request, 'app1/home.html', {'shoes': shoes})
+    headers = []
+    fields = []
+    for column in url_path.get_django_available_columns():
+        headers.append({
+            'has_modal': column.has_modal(),
+            'modal_body': column.get_modal_body(),
+            'modal_title': url_path.get_column_name(column, display_units = False),
+            'modal_id': url_path.get_column_name(column, attribute = True),
+            'column_title': url_path.get_column_name(column)
+        })
+        fields.append(url_path.get_column_name(column, attribute = True))
+    return render(request, 'app1/generic_shoe.html', {
+        'shoes': shoes,
+        'headers': headers,
+        'fields': fields,
+        'shoes_per_page': shoes_per_page,
+        'page_sizes': page_sizes,
+        'title': url_path.name.replace('_', ' ').title()
+    })
 
 
 def about(request):
