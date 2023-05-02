@@ -3,5 +3,5 @@ python-dotenv==1.0.0
 django-bootstrap4==23.1
 django-import-export==3.2.0
 selenium==4.8.3
-psycopg==3.1.8
+psycopg==3.1.9
 requests==2.28.2
