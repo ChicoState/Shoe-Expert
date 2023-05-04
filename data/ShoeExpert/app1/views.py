@@ -113,5 +113,16 @@ def blog(request):
     return render(request, 'app1/blog.html')
 
 @login_required(login_url='/login/')
+def filter(request):
+    return(request, 'app1/filer.html')
+
+@login_required(login_url='/login/')
 def filter2(request):
-    return render(request, 'app1/filter2.html')
+    if (request.method == "POST"):
+        filter_form = FilterForm(request.POST)
+        if filter_form.is_valid():
+           userBrand = filter_form.cleaned_data["Brand"]
+           userCushion = filter_form.cleaned_data["Cushioning"]
+           return redirect(filter, userBrand, userCushion)
+    return render(request, 'app1/filter2.html', {'filter_form': FilterForm})
+
