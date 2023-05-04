@@ -113,5 +113,5 @@ def blog(request):
     return render(request, 'app1/blog.html')
 
 @login_required(login_url='/login/')
-def filter(request):
-    return render(request, 'app1/filter.html')
+def filter2(request):
+    return render(request, 'app1/filter2.html')

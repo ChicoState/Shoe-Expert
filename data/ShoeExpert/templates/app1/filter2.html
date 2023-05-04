@@ -1,0 +1,24 @@
+
+<html>
+
+{% include "app1/head.html" %}
+
+<body>
+  <div class="container">
+    <h1>Filter</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <table>
+        {{ filter_form.as_table }}
+        <tr>
+          <td>
+            <input type="submit" class="btn btn-primary" value="Search" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</body>
+
+</html>
+
