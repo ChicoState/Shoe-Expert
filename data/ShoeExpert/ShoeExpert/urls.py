@@ -27,7 +27,7 @@ urlpatterns = [
     path('logout/', app1_views.user_logout),
     path('blog/', app1_views.blog),
     path('filter2/', app1_views.filter2),
-    path('filter/', app1_views.filter)
+    path('filter/<str:userBrand>/<str:userCushion>', app1_views.filter)
 ]
 
 for url_path in Url_Paths:
