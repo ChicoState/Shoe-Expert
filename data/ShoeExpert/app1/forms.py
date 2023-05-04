@@ -16,6 +16,23 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
 
+SHOE_CHOICES= [
+    ('Running', 'Running'),
+    ('Basketball', 'Basketball'),
+    ('Approach', 'Approach'),
+    ('Climbing', 'Climbing'),
+    ('Crossfit', 'Crossfit'),
+    ('Cycling', 'Cycling'),
+    ('Football', 'Football'),
+    ]
+
+#CUSHIONING_CHOICES= [
+#    ('All', 'All'),
+#    ('Plush', 'Plush'),
+#    ('Firm', 'Firm'),
+#    ('Balanced', 'Balanced'),
+#    ]
+
 class FilterForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput())
+    Shoe = forms.CharField(widget=forms.Select(choices=SHOE_CHOICES))
+#    Cushioning = forms.CharField(widget=forms.Select(choices=CUSHIONING_CHOICES))
