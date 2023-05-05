@@ -196,7 +196,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.MATERIAL: {
@@ -280,7 +281,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -321,7 +323,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -375,7 +378,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -458,7 +462,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.MATERIAL: {
@@ -518,7 +523,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.THICKNESS: {
                 "name": "Thickness",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.TONGUE_PULL_LOOP: {
@@ -548,7 +554,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WORN_BY: {
@@ -589,25 +596,29 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.FOREFOOT_HEIGHT: {
                 "name": "Forefoot Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -661,7 +672,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -720,7 +732,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.MATERIAL: {
@@ -780,7 +793,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -827,7 +841,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.RELEASE_DATE: {
@@ -875,7 +890,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -922,7 +938,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.MATERIAL: {
@@ -988,7 +1005,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -1065,7 +1083,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -1155,13 +1174,15 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WATERPROOFING: {
                 "name": "Waterproofing",
                 "units": None,
-                "django_model": models.CharField(choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
+                # BUG FOUND HERE DUE TO UNIT TESTING
+                "django_model": models.CharField(max_length=16, choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Water Repellent' if 'repellent' in s.lower() else 'Waterproof' if 'waterproof' in s.lower() else None
             },
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -1250,7 +1271,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -1340,7 +1362,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -1417,19 +1440,22 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.FOREFOOT_HEIGHT: {
                 "name": "Forefoot Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MATERIAL: {
@@ -1441,7 +1467,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -1549,13 +1576,15 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WATERPROOFING: {
                 "name": "Waterproofing",
                 "units": None,
-                "django_model": models.CharField(choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
+                # BUG FOUND HERE DUE TO UNIT TESTING
+                "django_model": models.CharField(max_length=16, choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Water Repellent' if 'repellent' in s.lower() else 'Waterproof' if 'waterproof' in s.lower() else None
             },
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -1638,7 +1667,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -1716,7 +1746,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -1751,7 +1782,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -1817,7 +1849,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -1876,7 +1909,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.RELEASE_DATE: {
@@ -1924,7 +1958,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -1977,7 +2012,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.RELEASE_DATE: {
@@ -2006,9 +2042,10 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             },
             ColumnSelector.SPIKE_SIZE: {
                 "name": "Spike Size",
-                "units": "inches",
-                "django_model": models.DecimalField(max_digits=4, decimal_places=4, blank=True, null=True),
-                "lambda_serializer": lambda s: 0.375 if '3/8' in s.lower() else 0.3125 if '5/16' in s.lower() else 0.25 if '1/4' in s.lower() else 0.1875 if '3/16' in s.lower() else 0.125 if '1/8' in s.lower() else None
+                "units": "inch",
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.CharField(max_length=8, choices=(('3/8', "3/8"), ('5/16', "5/16"), ('1/4', "1/4"), ('3/16', "3/16"), ('1/8', "1/8")), blank=True, null=True),
+                "lambda_serializer": lambda s: '3/8' if '3/8' in s.lower() else '5/16' if '5/16' in s.lower() else '1/4' if '1/4' in s.lower() else '3/16' if '3/16' in s.lower() else '1/8' if '1/8' in s.lower() else None
             },
             ColumnSelector.SPIKE_TYPE: {
                 "name": "Spike Type",
@@ -2037,7 +2074,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -2108,19 +2146,22 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.FOREFOOT_HEIGHT: {
                 "name": "Forefoot Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MATERIAL: {
@@ -2132,7 +2173,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -2240,13 +2282,15 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WATERPROOFING: {
                 "name": "Waterproofing",
                 "units": None,
-                "django_model": models.CharField(choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
+                # BUG FOUND HERE DUE TO UNIT TESTING
+                "django_model": models.CharField(max_length=16, choices=(('waterproof', "Waterproof"), ('water repellent', 'Water Repellent')), blank=True, null=True),
                 "lambda_serializer": lambda s: 'Water Repellent' if 'repellent' in s.lower() else 'Waterproof' if 'waterproof' in s.lower() else None
             },
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -2287,25 +2331,29 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.FOREFOOT_HEIGHT: {
                 "name": "Forefoot Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_HEIGHT: {
                 "name": "Heel Height",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.HEEL_TOE_DROP: {
                 "name": "Heel to Toe Drop",
                 "units": "mm",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: (round(sum(map(float, re.sub(r'[^\d.-]', '', re.sub(r'-{2,}', '-', x.strip('-'))).split("-"))) / (2.0 if "-" in x else 1.0), 1) if 'mm' in x else None)
             },
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.NUMBER_OF_REVIEWS: {
@@ -2359,7 +2407,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             },
             ColumnSelector.WIDTH: {
@@ -2424,7 +2473,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.MSRP: {
                 "name": "MSRP",
                 "units": "USD",
-                "django_model": models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda x: None if '$' not in x.lower() else '{:.2f}'.format(float(x.strip('$')))
             },
             ColumnSelector.RELEASE_DATE: {
@@ -2478,7 +2528,8 @@ class Url_Paths(Enum, metaclass=Url_PathsEnumMeta):
             ColumnSelector.WEIGHT: {
                 "name": "Weight",
                 "units": "oz",
-                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True),
+                # BUG FOUND DUE TO UNIT TESTING
+                "django_model": models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, validators=[MinValueValidator(0)]),
                 "lambda_serializer": lambda s: None if 'oz' not in s.lower() else round(float(''.join(filter(lambda c: c.isdigit() or c == '.', s))), 1)
             }
         }
@@ -2625,7 +2676,6 @@ class ScraperSingleton:
                         cls._scroll_and_click(selector=selector)
                     except TimeoutException:
                         print(f"Timeout exceeded for selector {selector}", file=sys.stderr)
-                        # FIXME: raise TimeoutException(msg=f"Timeout exceeded for selector {selector}")
                 cls._applyColumns()
             cls._setColumnFilterDict(url_path=url_path, dict=url_path.get_false_dict())
 
@@ -2639,7 +2689,6 @@ class ScraperSingleton:
             cls._scroll_and_click(selector=column.get_menu_selector())
         except TimeoutException:
             print(f"Timeout exceeded for selector {column.get_menu_selector()}", file=sys.stderr)
-            # FIXME: raise TimeoutException(msg=f"Timeout exceeded for selector {column.get_menu_selector()}")
         cls._applyColumns()
         map = url_path.get_false_dict()
         map[column] = True
