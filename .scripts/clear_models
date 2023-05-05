@@ -8,10 +8,11 @@ fi
 
 LOCAL_DIR="$(pwd)"
 cd /home/docker/data/ShoeExpert
-find . -path "\*/migrations/\*.py" -not -name "\__init__.py" -delete
-find . -path "\*/migrations/\*.pyc" -delete
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc" -delete
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput
+runDjangoTests
 python manage.py collectstatic --noinput -c -l -v 0 # prereq for django-import-export
 importStaticShoes
 cd $LOCAL_DIR

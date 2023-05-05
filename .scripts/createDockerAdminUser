@@ -17,7 +17,7 @@ User.objects.create_superuser('docker', 'docker@docker.local', 'docker')
 EOF
 #                                ^user          ^email            ^pass
 then
-    exit 1
+    exit 2
 else
     exit 0
 fi

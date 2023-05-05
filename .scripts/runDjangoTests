@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PROC_SCHED=/proc/1/sched
+if ! [ -f $PROC_SCHED ] || [ "$(awk 'FNR == 1 {print $1}' "$PROC_SCHED")" != "python" ]; then
+  echo >&2 "Docker Container Not Detected, Exiting..."
+  exit 1
+fi
+
+if ! python /home/docker/data/ShoeExpert/manage.py test; then
+  exit 4
+else
+  exit 0
+fi
