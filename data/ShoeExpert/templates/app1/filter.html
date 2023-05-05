@@ -1,12 +1,47 @@
 
+{% load getattribute %}
 <html>
 
 {% include "app1/head.html" %}
 
 <body>
-	<div class="container">
-		<h1> Filtering Page </h1>
+	<div class="container-fluid" style="height: 90%; overflow-y: scroll;">
+
+		{% for shoe_dict in context_list %}
+		<div class="card mb-3" style="background-color: rgba(150, 165, 210, 0.8);">
+			<div class="card-body">
+				<div class="card-title">
+					<a class="btn btn-outline-dark btn-lg" href="/{{ shoe_dict.redirect }}"> {{ shoe_dict.title }} </a>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-sm">
+						<thead>
+							<tr>
+								<th scope="col">Shoe Name</th>
+								{% for header in shoe_dict.headers %}
+								<th scope="col">{{header}}</th>
+								{% endfor %}
+							</tr>
+						</thead>
+						<tbody>
+							{% for value in shoe_dict.shoes %}
+							<tr>
+								<td>{{value.shoe_name}}</td>
+								{% for field in shoe_dict.fields %}
+								<td>{{ value|getattribute:field }}</td>
+								{% endfor %}
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+
 	</div>
 </body>
 
 </html>
+
+

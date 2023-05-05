@@ -9,7 +9,7 @@
 			<div class="card-body">
 
 				<form id="page_size_form" class="float-right" method="get">
-					<label for="id_page_size">Shoes per page:</label>
+					<label for="id_page_size">shoes per page:</label>
 					<select id="id_page_size" name="shoes_per_page" class="form-control form-control-sm"
 						onchange="this.form.submit()">
 						{% for size in page_sizes %}
@@ -23,11 +23,11 @@
 				</form>
 
 				<form id="brand_form" class="float-right" method="get">
-					<label for="id_brand">Filter by Brand:</label>
+					<label for="id_brand">brand:</label>
 					<select id="id_brand" name="brand" class="form-control form-control-sm"
 						onchange="this.form.submit()">
-						{% for brand in brands %}
-						{% if brand == brands_per_page %}
+						{% for brand in userBrand %}
+						{% if brand == userBrand %}
 						<option value="{{ brand }}" selected>{{ brand }}</option>
 						{% else %}
 						<option value="{{ brand }}">{{ brand }}</option>

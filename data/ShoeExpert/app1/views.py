@@ -78,6 +78,8 @@ def home(request):
 @login_required(login_url='/login/')
 def generic_shoe(request, url_path):
     page_sizes = [5, 10, 15, 20, 30, 40, 50]
+    brands = ['All', 'Adidas', 'Nike', 'Aky']
+    brands_per_page = request.GET.get('brands_per_page', brands[0])
     shoes_per_page = int(request.GET.get('shoes_per_page', page_sizes[0]))
     queryset = globals()[url_path.name.capitalize()].objects.all().order_by('shoe_name')
     paginator = Paginator(queryset, shoes_per_page)
@@ -112,21 +114,59 @@ def about(request):
 def blog(request):
     return render(request, 'app1/blog.html')
 
+
 @login_required(login_url='/login/')
-def filter(request, userShoe, userCushion):
-   shoes_per_page = 5
-      queryset = RunningShoe.objects.filter(shoe=userShoe)
-   paginator = Paginator(queryset, shoes_per_page)
-   page = request.GET.get('page')
-   shoes = paginator.get_page(page)
-   return render(request, 'app1/filter.html', {'shoes': shoes})
+def filter3(request, url_path):
+    page_sizes = [5, 10, 15, 20, 30, 40, 50]
+    brands = [All, Adidas, Nike, Aky]
+    brands_per_page = request.GET.get('brands_per_page', brands[0])
+    shoes_per_page = int(request.GET.get('shoes_per_page', page_sizes[10]))
+    queryset = globals()[url_path.name.capitalize()].objects.all().order_by('shoe_name')
+    paginator = Paginator(queryset, shoes_per_page, brands_per_page)
+    page = request.GET.get('page')
+    shoes = paginator.get_page(page)
+    headers = []
+    fields = []
+    for column in url_path.get_django_available_columns():
+        headers.append({
+            'has_modal': column.has_modal(),
+            'modal_body': column.get_modal_body(),
+            'modal_title': url_path.get_column_name(column, display_units = False),
+            'modal_id': url_path.get_column_name(column, attribute = True),
+            'column_title': url_path.get_column_name(column)
+        })
+        fields.append(url_path.get_column_name(column, attribute = True))
+    return render(request, 'app1/filter3.html', {
+        'shoes': shoes,
+        'headers': headers,
+        'fields': fields,
+        'shoes_per_page': shoes_per_page,
+        'page_sizes': page_sizes,
+        'title': url_path.name.replace('_', ' ').title()
+    })
+
+#@login_required(login_url='/login/')
+def filter(request, userShoe):
+    context_list = []
+    for url_path in Url_Paths:
+        tmp_dict = {}
+        tmp_dict['shoes'] = globals()[url_path.name.capitalize()].objects.all().order_by('?')[:3]
+        tmp_dict['title'] = url_path.name.replace('_', ' ').title()
+        tmp_dict['redirect'] = url_path.name.lower()
+        tmp_dict['headers'] = []
+        tmp_dict['fields'] = []
+        for column in url_path.get_django_available_columns():
+            tmp_dict['headers'].append(url_path.get_column_name(column))
+            tmp_dict['fields'].append(url_path.get_column_name(column, attribute = True))
+        context_list.append(tmp_dict)
+    return render(request, 'app1/filter.html', { 'context_list': context_list })
 
 @login_required(login_url='/login/')
 def filter2(request):
     if (request.method == "POST"):
         filter_form = FilterForm(request.POST)
         if filter_form.is_valid():
-           userShoe = filter_form.cleaned_data["Brand"]
+           userShoe = filter_form.cleaned_data["Shoe"]
            return redirect(filter, userShoe)
     return render(request, 'app1/filter2.html', {'filter_form': FilterForm})
 
