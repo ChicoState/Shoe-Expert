@@ -24,7 +24,7 @@
 
 				<form id="brand_form" class="float-right" method="get">
 					<label for="id_brand">Filter by Brand:</label>
-					<select id="id_brand" name="brand" class="form-control form-control-sm"
+					<select id="id_brand" name="brands" class="form-control form-control-sm"
 						onchange="this.form.submit()">
 						{% for brand in brands %}
 						{% if brand == brands_per_page %}
