@@ -10,9 +10,6 @@
         <a class="nav-link" href="/about"> About </a>
 
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/blog"> Blog </a>
-      </li>
       {%if user.is_authenticated%}
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout ({{user.username}})</a>
