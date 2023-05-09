@@ -21,7 +21,8 @@
 						{% endfor %}
 					</select>
 				</form>
-
+				</form>
+				<h1 class="card-title"> {{title}} </h1>
 				<form id="brand_form" class="float-right" method="get">
 					<label for="id_brand">Filter by Brand:</label>
 					<select id="id_brand" name="brands" class="form-control form-control-sm"
@@ -34,9 +35,6 @@
 						{% endif %}
 						{% endfor %}
 					</select>
-				</form>
-
-				<h1 class="card-title"> {{title}} </h1>
 				<div class="table-responsive">
 					<table class="table">
 						<thead>

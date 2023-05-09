@@ -78,9 +78,8 @@ def home(request):
 @login_required(login_url='/login/')
 def generic_shoe(request, url_path):
     page_sizes = [5, 10, 15, 20, 30, 40, 50]
-    #brands = ['All', 'Adidas', 'Nike', 'Aky']
-    brands = [5, 10, 15, 20]
-    brands_per_page = int(request.GET.get('brands_per_page', brands[0]))
+    brands = ['All', 'Adidas', 'Nike', 'Aky']
+    brands_per_page = request.GET.get('brands_per_page', brands[0])
     shoes_per_page = int(request.GET.get('shoes_per_page', page_sizes[0]))
     queryset = globals()[url_path.name.capitalize()].objects.all().order_by('shoe_name')
     paginator = Paginator(queryset, shoes_per_page)
