@@ -1,6 +1,6 @@
 from aggregate import Url_Paths
-from app1.forms import JoinForm, LoginForm
-from django.contrib.auth import authenticate, login, logout
+from app1.forms import JoinForm, LoginForm, ShoePreferenceForm
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
@@ -59,9 +59,23 @@ def join(request):
     return render(request, 'app1/join.html', page_data)
 
 
+
 @login_required(login_url='/login/')
 def home(request):
     context_list = []
+    user = request.user
+    if user.is_authenticated and not user.has_logged_in_before:
+        user.has_logged_in_before = True
+        user.save()
+        form = ShoePreferenceForm(request.POST or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                request.session['user_preference'] = form.cleaned_data.get('preference')
+                # Redirect to the home page to display the updated preferences
+                return redirect('home')
+        return render(request, 'app1/shoe_pref.html', { 'form': form })
+
+    user_preference = request.session.get('user_preference', None)
     for url_path in Url_Paths:
         tmp_dict = {}
         tmp_dict['shoes'] = globals()[url_path.name.capitalize()].objects.all().order_by('?')[:3]
@@ -71,9 +85,21 @@ def home(request):
         tmp_dict['fields'] = []
         for column in url_path.get_django_available_columns():
             tmp_dict['headers'].append(url_path.get_column_name(column))
-            tmp_dict['fields'].append(url_path.get_column_name(column, attribute = True))
+            tmp_dict['fields'].append(url_path.get_column_name(column, attribute=True))
+
+        # Reorder the shoes based on user preference
+        if user_preference and user_preference in tmp_dict['fields']:
+            field_index = tmp_dict['fields'].index(user_preference)
+            shoes_with_pref = tmp_dict['shoes'].order_by('-' + user_preference)
+            shoes_without_pref = tmp_dict['shoes'].exclude(**{user_preference + '__isnull': True})
+            tmp_dict['shoes'] = list(shoes_with_pref) + list(shoes_without_pref)
+            del tmp_dict['fields'][field_index]
+            tmp_dict['fields'] = [user_preference] + tmp_dict['fields']
+
         context_list.append(tmp_dict)
+
     return render(request, 'app1/home.html', { 'context_list': context_list })
+
 
 @login_required(login_url='/login/')
 def generic_shoe(request, url_path):
@@ -111,3 +137,14 @@ def about(request):
 @login_required(login_url='/login/')
 def blog(request):
     return render(request, 'app1/blog.html')
+
+def shoe_pref(request):
+    if request.method == 'POST':
+        form = ShoePreferenceForm(request.POST)
+        if form.is_valid():
+            user_preference = form.cleaned_data.get('preference')
+            request.session['user_preference'] = user_preference
+            return redirect('home')
+    else:
+        form = ShoePreferenceForm()
+    return render(request, 'app1/shoe_pref.html', { 'form': form })
