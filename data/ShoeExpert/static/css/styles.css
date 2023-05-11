@@ -6,21 +6,3 @@ body {
   background-position: center center;
   height: 100%;
 }
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  mix-blend-mode: multiply;
-}
-
-thead,
-tr,
-td,
-table {
-  border: 1px solid black;
-}
