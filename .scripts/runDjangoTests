@@ -6,8 +6,10 @@ if ! [ -f $PROC_SCHED ] || [ "$(awk 'FNR == 1 {print $1}' "$PROC_SCHED")" != "py
   exit 1
 fi
 
-if ! python /home/docker/data/ShoeExpert/manage.py test; then
+if ! coverage run --source="/home/docker/data/ShoeExpert" manage.py test app1; then
   exit 4
+elif ! coverage report; then
+  exit 5
 else
   exit 0
 fi

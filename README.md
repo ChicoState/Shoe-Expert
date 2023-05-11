@@ -26,3 +26,19 @@
 4. The container will automatically spawn a site running on port 8000 that you can access in the browser at [localhost:8000](http://127.0.0.1:8000)
 
 If you have a more complicated docker set-up, such as using docker in rootless mode, you can refer to the discussion in pr #28 or open up an issue in this repo if this workflow is not working correctly on your system.
+
+## Post Container Creation
+
+### Exit Codes
+
+0. Success
+
+1. Docker Container Not Detected (checks that python is PID 1)
+
+2. createDockerAdminUser script failed (could not create superuser docker)
+
+3. Failed to import shoe data from csv into postgres db
+
+4. Failed to execute tests
+
+5. Failed to generate coverage report
