@@ -25,7 +25,7 @@ urlpatterns = [
     path('join/', app1_views.join),
     path('login/', app1_views.user_login),
     path('logout/', app1_views.user_logout),
-    #path('blog/', app1_views.blog)
+    path('shoe_pref/', app1_views.shoe_pref),
 ]
 
 for url_path in Url_Paths:

@@ -15,3 +15,23 @@ class JoinForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
+
+class ShoePreferenceForm(forms.Form):
+    CHOICES = [
+        ('Approach', 'Approach'),
+        ('Basketball', 'Basketball'),
+        ('Climbing', 'Climbing'),
+        ('Cross Fit', 'Cross Fit'),
+        ('Football', 'Football'),
+        ('Golf', 'Golf'),
+        ('Hiking', 'Hiking'),
+        ('Running', 'Running'),
+        ('Sneaker', 'Sneaker'),
+        ('Soccer', 'Soccer'),
+        ('Tennis', 'Tennis'),
+        ('Track', 'Track'),
+        ('Trail', 'Trail'),
+        ('Training', 'Training'),
+        ('Walking', 'Walking'),
+    ]
+    preference = forms.MultipleChoiceField(choices=CHOICES, widget=forms.CheckboxSelectMultiple)
