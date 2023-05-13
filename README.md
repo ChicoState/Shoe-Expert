@@ -42,3 +42,5 @@ If you have a more complicated docker set-up, such as using docker in rootless m
 4. Failed to execute tests
 
 5. Failed to generate coverage report
+
+6. Failed to compute McCabe's Cyclomatic Complexity of Functions in `views.py`
