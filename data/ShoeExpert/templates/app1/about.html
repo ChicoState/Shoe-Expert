@@ -12,7 +12,77 @@
 			<h1>How to Use Shoe Expert:</h1>
 			<h4>For those looking to find their new favorite shoe, use our filtering option to receive personalized recommendations.</h4>
 			<br>
+			<div class="donation-form">
+  <h2>Start your subscription</h2>
+  <form>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" min="1" step="1" required>
+
+    <label for="card-number">Card Number:</label>
+    <input type="text" id="card-number" name="card-number" required>
+
+    <label for="expiration-date">Expiration Date:</label>
+    <input type="text" id="expiration-date" name="expiration-date" required>
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" required>
+
+    <button type="submit">Start</button>
+  </form>
+
+</div>
 			<br>
+			<style>
+				.donation-form {
+					max-width: 400px;
+					margin: 0 auto;
+					padding: 20px;
+					background-color: #f7f7f7;
+					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+					border-radius: 5px;
+					text-align: center;
+				  }
+
+				  h2 {
+					margin-top: 0;
+					margin-bottom: 20px;
+					font-size: 1.5rem;
+				  }
+
+				  label {
+					display: block;
+					margin-bottom: 10px;
+					text-align: left;
+					font-size: 1rem;
+					font-weight: bold;
+				  }
+
+				  input[type="number"],
+				  input[type="text"] {
+					width: 100%;
+					padding: 10px;
+					border-radius: 5px;
+					border: none;
+					box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+					margin-bottom: 20px;
+				  }
+
+				  button[type="submit"] {
+					background-color: #333;
+					color: #fff;
+					padding: 10px 20px;
+					border: none;
+					border-radius: 5px;
+					font-size: 1rem;
+					font-weight: bold;
+					cursor: pointer;
+					transition: background-color 0.3s ease-in-out;
+				  }
+
+				  button[type="submit"]:hover {
+					background-color: #444;
+				  }
+				</style>
 			<br>
 			<br>
 			<br>
