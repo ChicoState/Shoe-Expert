@@ -1,4 +1,4 @@
-Django==4.2.1
+Django==4.2.3
 python-dotenv==1.0.0
 django-bootstrap4==23.1
 django-import-export==3.2.0
